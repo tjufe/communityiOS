@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -21,7 +21,7 @@
             </objects>
             <point key="canvasLocation" x="-217" y="204"/>
         </scene>
-        <!--登录-->
+        <!--登录2-->
         <scene sceneID="S2z-Nm-B2a">
             <objects>
                 <viewController id="lOJ-nz-sfY" customClass="LoginViewController" sceneMemberID="viewController">
@@ -54,7 +54,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="登录" id="IrJ-Cy-1nt">
+                    <navigationItem key="navigationItem" title="登录2" id="IrJ-Cy-1nt">
                         <barButtonItem key="backBarButtonItem" title="返回" id="4K9-oG-Tav"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
