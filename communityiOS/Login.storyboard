@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <scenes>
+        <!--Login Navigation Controller-->
+        <scene sceneID="nne-Pg-7kn">
+            <objects>
+                <navigationController storyboardIdentifier="loginACT" id="Dns-Bg-4I5" customClass="LoginNavigationController" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vGg-qf-vsG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="lOJ-nz-sfY" kind="relationship" relationship="rootViewController" id="ZWN-X7-x3g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cim-cv-bzW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-217" y="204"/>
+        </scene>
+        <!--登录-->
+        <scene sceneID="S2z-Nm-B2a">
+            <objects>
+                <viewController id="lOJ-nz-sfY" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U0x-ly-RYn"/>
+                        <viewControllerLayoutGuide type="bottom" id="GJf-tj-Dj8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="k7v-BH-Iol">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ZS-0I-wAD">
+                                <rect key="frame" x="274" y="518" width="30" height="30"/>
+                                <state key="normal" title="注册">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="j4W-6T-2TF" kind="push" id="BjC-bf-Hrs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEm-t4-ihU">
+                                <rect key="frame" x="16" y="518" width="60" height="30"/>
+                                <state key="normal" title="暂不登录">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="exit:" destination="lOJ-nz-sfY" eventType="touchUpInside" id="ISk-Wm-Us7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="登录" id="IrJ-Cy-1nt">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="4K9-oG-Tav"/>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="txO-9y-snX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="341" y="-53"/>
+        </scene>
+        <!--注册-->
+        <scene sceneID="YGr-iC-VAs">
+            <objects>
+                <viewController id="j4W-6T-2TF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gOJ-d1-pu7"/>
+                        <viewControllerLayoutGuide type="bottom" id="6TT-XZ-iqO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dw4-FH-0OW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="注册" id="1mD-wj-Q0L">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="v75-bU-j6m"/>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sET-y5-ZH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="892" y="204"/>
+        </scene>
+    </scenes>
+</document>

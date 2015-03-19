@@ -1,0 +1,133 @@
+PODS:
+  - AFNetworking (2.4.1):
+    - AFNetworking/NSURLConnection (= 2.4.1)
+    - AFNetworking/NSURLSession (= 2.4.1)
+    - AFNetworking/Reachability (= 2.4.1)
+    - AFNetworking/Security (= 2.4.1)
+    - AFNetworking/Serialization (= 2.4.1)
+    - AFNetworking/UIKit (= 2.4.1)
+  - AFNetworking/NSURLConnection (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - AFNetworkingLogger (0.0.17):
+    - AFNetworking
+  - DateTools (1.4.3)
+  - FLEX (1.1.1)
+  - INTULocationManager (1.2.0)
+  - iRate (1.11.3)
+  - JTObjectMapping (1.1.2)
+  - Mantle (1.5.4):
+    - Mantle/extobjc (= 1.5.4)
+  - Mantle/extobjc (1.5.4)
+  - MBProgressHUD (0.9.1)
+  - MMDrawerController (0.5.7):
+    - MMDrawerController/Core (= 0.5.7)
+    - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
+    - MMDrawerController/MMDrawerVisualStates (= 0.5.7)
+    - MMDrawerController/Subclass (= 0.5.7)
+  - MMDrawerController/Core (0.5.7)
+  - MMDrawerController/MMDrawerBarButtonItem (0.5.7):
+    - MMDrawerController/Core
+  - MMDrawerController/MMDrawerVisualStates (0.5.7):
+    - MMDrawerController/Core
+  - MMDrawerController/Subclass (0.5.7):
+    - MMDrawerController/Core
+  - NSDate-ServerDate (1.0)
+  - NSTimer-Blocks (0.0.1)
+  - NYXImagesKit (2.3)
+  - ObjectiveSugar (1.1.0)
+  - pop (1.0.7)
+  - PunchScrollView (1.1.1)
+  - PureLayout (2.0.5)
+  - Reachability (3.1.1)
+  - RSCategories (0.1)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
+  - SMPageControl (1.2)
+  - SWTableViewCell (0.3.7)
+  - TMCache (1.2.3)
+  - TPKeyboardAvoiding (1.2.6)
+  - uicontrol-blocks (1.1.0)
+  - UIImage+Additions (1.2.0)
+  - UIImage-Helpers (0.0.3)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.4.1)
+  - AFNetworkingLogger (from `https://github.com/stanislaw/AFNetworkingLogger`)
+  - DateTools (~> 1.4.3)
+  - FLEX (~> 1.1.1)
+  - INTULocationManager (~> 1.2.0)
+  - iRate (~> 1.11)
+  - JTObjectMapping (~> 1.1.2)
+  - Mantle (~> 1.5.1)
+  - MBProgressHUD (~> 0.9)
+  - MMDrawerController (~> 0.5.7)
+  - NSDate-ServerDate
+  - NSTimer-Blocks
+  - NYXImagesKit (~> 2.3)
+  - ObjectiveSugar (~> 1.1.0)
+  - pop (~> 1.0.7)
+  - PunchScrollView (~> 1.1.0)
+  - PureLayout (~> 2.0.1)
+  - Reachability (~> 3.1.1)
+  - RSCategories (~> 0.1)
+  - SDWebImage (~> 3.7.1)
+  - SMPageControl (~> 1.2)
+  - SWTableViewCell (~> 0.3.6)
+  - TMCache (~> 1.2.2)
+  - TPKeyboardAvoiding (~> 1.2.4)
+  - uicontrol-blocks (~> 1.1.0)
+  - UIImage+Additions (~> 1.2.0)
+  - UIImage-Helpers (~> 0.0.3)
+
+EXTERNAL SOURCES:
+  AFNetworkingLogger:
+    :git: https://github.com/stanislaw/AFNetworkingLogger
+
+CHECKOUT OPTIONS:
+  AFNetworkingLogger:
+    :commit: 623b31400c96f6764aeab7ee9d2528062dfa090b
+    :git: https://github.com/stanislaw/AFNetworkingLogger
+
+SPEC CHECKSUMS:
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  AFNetworkingLogger: 93bc0d08779b928370520ea5450df7d4c6568c5d
+  DateTools: 7c2d233ea2d4bda3a717d0cd5f58da926a5998d0
+  FLEX: 8e53751b915759215d77c7c72b1c7bd28665dac2
+  INTULocationManager: 596c57e35a00ca1ee9d59bf4cc2b63dc299b580e
+  iRate: 5e1978bac8b3f3f0296dbeccc0dd7b50e6e50657
+  JTObjectMapping: eb39b1ec7ecb7d1079a53595bbe46be8b2ed482b
+  Mantle: d5fbaf30fbc58031223af13812c060e15934a1fe
+  MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
+  MMDrawerController: c3ab7a318ddc7e2bcd133139c3161af08c6e1197
+  NSDate-ServerDate: 215e2545a4041a525439f7f62c73c5f04accdb2b
+  NSTimer-Blocks: 0a653b84ab33068a085f5c03c82c18be1f61eba9
+  NYXImagesKit: 1c9f228ae78fab475d267b3b3a1308e0fba11731
+  ObjectiveSugar: f48793f5902c77cfc02a4ce46d2e8ecddcad4dc2
+  pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  PunchScrollView: ecdbddae9fec8a0237f53f7cc3642bfbc1403edd
+  PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  RSCategories: 3db1a7e644ee4ff1988b3f1c36b137bfe8ce2aae
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SMPageControl: 506b0c561d3ddbe2d5df28cb33acc8e4b1f93f19
+  SWTableViewCell: 25de71898e3fcd11cf75707ef90245acf990ec03
+  TMCache: 11589ef8c40909114a5e60132711c9a559e01d97
+  TPKeyboardAvoiding: 0797ad5f2366e2435e605202b01f3b7cff5d82cd
+  uicontrol-blocks: 5a8a15c2343401d42522cd4e37df52f4632ceb34
+  UIImage+Additions: c9088e24e095113a81b4ab31271d5b656850317c
+  UIImage-Helpers: 176819cd1a4cb5beaee859f5b92470fb04be92af
+
+COCOAPODS: 0.36.0

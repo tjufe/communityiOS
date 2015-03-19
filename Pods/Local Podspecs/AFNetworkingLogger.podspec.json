@@ -1,0 +1,26 @@
+{
+  "name": "AFNetworkingLogger",
+  "version": "0.0.17",
+  "license": "MIT",
+  "summary": "AFNetworking plugin providing network logging for iOS / Mac OS X applications",
+  "homepage": "https://github.com/stanislaw/AFNetworkingLogger",
+  "authors": {
+    "Stanislaw Pankevich": "s.pankevich@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/stanislaw/AFNetworkingLogger.git",
+    "tag": "0.0.17"
+  },
+  "source_files": "AFNetworkingLogger/*.{h,m}",
+  "private_header_files": "AFNetworkingLogger/AFNetworkingLogger_Private.h",
+  "platforms": {
+    "ios": "6.0",
+    "osx": "10.8"
+  },
+  "requires_arc": true,
+  "dependencies": {
+    "AFNetworking": [
+
+    ]
+  }
+}
