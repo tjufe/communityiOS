@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FF0A000D4DE5FD2C52BD1C40"
+               BlueprintIdentifier = "7B5B24F2A393448B95A43D33"
                BuildableName = "libPods-PunchScrollView.a"
                BlueprintName = "Pods-PunchScrollView"
                ReferencedContainer = "container:Pods.xcodeproj">
