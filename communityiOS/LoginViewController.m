@@ -54,6 +54,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+    self.loimage = [UIImage imageNamed:@"ic_default_avater@2x"];
+    
+    
+    
+    
+    
     // Do any additional setup after loading the view.
     BOOL didRemeber=[[[NSUserDefaults standardUserDefaults] objectForKey:@"didRemeber" ] boolValue];
     [self.remberSwitch setOn:didRemeber];
@@ -63,6 +70,17 @@
     [self.loginButton setBackgroundColor:[UIColor grayColor]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 //    NSLog(@"^^^^%@",self.remberSwitch.on);
+}
+-(void)setLoimage:(UIImage *)loimage{
+
+    _LoginImage.image = loimage;
+    _LoginImage.layer.masksToBounds = YES ;
+    [_LoginImage.layer setCornerRadius:_LoginImage.frame.size.width/2];
+    _LoginImage.contentMode = UIViewContentModeScaleAspectFill;
+    
+//    self.loimage = [UIImage imageNamed:@"ic_default_avater@2x"];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {

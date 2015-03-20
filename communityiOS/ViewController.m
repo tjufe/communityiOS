@@ -1,3 +1,4 @@
+
 //
 //  ViewController.m
 //  communityiOS
@@ -10,8 +11,10 @@
 #import "ForumTableViewCell.h"
 #import "LoginNavigationController.h"
 #import "UIViewController+Create.h"
+#import "PostTableViewCell.h"
+#import "PostListViewController.h"
 
-@interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>{
+@interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>{
     NSMutableArray *tableData;  //表格数据
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
@@ -24,10 +27,17 @@
 
 @implementation ViewController
 
+- (void)initTableData {
+    tableData = [[NSMutableArray alloc] initWithObjects:
+                 [NSMutableArray arrayWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",nil],[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
+                 [NSMutableArray arrayWithObjects:@"icon_01",@"icon_02",@"icon_03",@"icon_04",@"icon_05",@"icon_06",@"icon_07", nil],nil];
+}
+
 - (IBAction)go2Login:(id)sender {
     //pod
     LoginNavigationController *vc=[LoginNavigationController createFromStoryboardName:@"Login" withIdentifier:@"loginACT"];
 //    [self.navigationController pushViewController:vc animated:YES];
+
     [self presentModalViewController:vc animated:YES];
 }
 
@@ -49,7 +59,7 @@
     
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
-    self.avaterImageView.contentMode=UIViewContentModeScaleAspectFill;
+    self.avaterImageView.contentMode=UIViewContentModeScaleAspectFill;//取图片的中部分
     
     // Do any additional setup after loading the view, typically from a nib.
     //    图片的宽
@@ -91,6 +101,13 @@
     self.mainScrollView.delegate = self;
     
     [self addTimer];
+}
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ( viewController == self) {
+        [navigationController setNavigationBarHidden:YES animated:YES];
+    } else{
+        [navigationController setNavigationBarHidden:NO animated:YES];
+    }
 }
 
 - (void)nextImage
@@ -149,7 +166,6 @@
 {
     [self.timer invalidate];
 }
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -169,6 +185,22 @@
     [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
     return cell;
 }
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 2;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return [tableData count];
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    ForumTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell"];
+//    if(!cell){
+//        cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
+//    }
+//    return cell;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -188,6 +220,21 @@
 ////    return headerView;
 //    return nil;
 //}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    // custom view for header. will be adjusted to default or specified header height
+//    
+//    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+//    if(section>0)
+//        headerView.backgroundColor=[UIColor redColor];
+//    else
+//        headerView.backgroundColor=[UIColor blueColor];
+//    
+////    [headerView addSubview:<#(UIView *)#>];
+//    
+//    return headerView;
+//}
+
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 
