@@ -27,6 +27,12 @@
 
 @implementation ViewController
 
+- (void)initTableData {
+    tableData = [[NSMutableArray alloc] initWithObjects:
+                 [NSMutableArray arrayWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",nil],[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
+                 [NSMutableArray arrayWithObjects:@"icon_01",@"icon_02",@"icon_03",@"icon_04",@"icon_05",@"icon_06",@"icon_07", nil],nil];
+}
+
 - (IBAction)go2Login:(id)sender {
     //pod
     LoginNavigationController *vc=[LoginNavigationController createFromStoryboardName:@"Login" withIdentifier:@"loginACT"];
@@ -38,11 +44,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.delegate=self;
+    [self initTableData];
 //    [self.navigationController setNavigationBarHidden:YES];
-    tableData = [[NSMutableArray alloc] init];
-    for (int i = 0; i< 7; i++) {
-        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
-    }
+//    tableData = [[NSMutableArray alloc] init];
+//    for (int i = 0; i< 7; i++) {
+//        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
+//    }
     
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
@@ -151,14 +158,13 @@
 {
     [self.timer invalidate];
 }
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [tableData count];
+    return [[tableData objectAtIndex:0] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -166,29 +172,49 @@
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
+    [cell setForumIconImage:[UIImage imageNamed:[[tableData objectAtIndex:2] objectAtIndex:indexPath.row]]];
+    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
+    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
     return cell;
 }
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 2;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return [tableData count];
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    ForumTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell"];
+//    if(!cell){
+//        cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
+//    }
+//    return cell;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"Main" withIdentifier:@"post"];    
+    PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+    
     [self.navigationController pushViewController:poLVC animated:YES];
     
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    // custom view for header. will be adjusted to default or specified header height
-    
-    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-    if(section>0)
-        headerView.backgroundColor=[UIColor redColor];
-    else
-        headerView.backgroundColor=[UIColor blueColor];
-    
-//    [headerView addSubview:<#(UIView *)#>];
-    
-    return headerView;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    // custom view for header. will be adjusted to default or specified header height
+//    
+//    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+//    if(section>0)
+//        headerView.backgroundColor=[UIColor redColor];
+//    else
+//        headerView.backgroundColor=[UIColor blueColor];
+//    
+////    [headerView addSubview:<#(UIView *)#>];
+//    
+//    return headerView;
+//}
 
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
