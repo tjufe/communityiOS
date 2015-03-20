@@ -41,14 +41,16 @@
     [self presentModalViewController:vc animated:YES];
 }
 
-- (void)initTableData {
-    tableData = [[NSMutableArray alloc] initWithObjects:
-                 [NSMutableArray arrayWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",nil],[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
-                      [NSMutableArray arrayWithObjects:@"icon_01",@"icon_02",@"icon_03",@"icon_04",@"icon_05",@"icon_06",@"icon_07", nil],nil];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.delegate=self;
+    [self initTableData];
+//    [self.navigationController setNavigationBarHidden:YES];
+//    tableData = [[NSMutableArray alloc] init];
+//    for (int i = 0; i< 7; i++) {
+//        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
+//    }
     
 //    tableData = [[NSMutableArray alloc] init];
 //    for (int i = 0; i< 7; i++) {
@@ -204,6 +206,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+    
+    [self.navigationController pushViewController:poLVC animated:YES];
+    
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
