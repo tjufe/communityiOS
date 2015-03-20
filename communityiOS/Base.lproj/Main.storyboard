@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -120,6 +120,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Post List View Controller-->
+        <scene sceneID="ncA-uz-QDY">
+            <objects>
+                <viewController storyboardIdentifier="post" id="Hyz-fV-Wp6" customClass="PostListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S07-56-QZd"/>
+                        <viewControllerLayoutGuide type="bottom" id="viP-Qz-GD4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NqF-sh-70G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8Q8-mf-5TC">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Hyz-fV-Wp6" id="Qir-w9-3wH"/>
+                                    <outlet property="delegate" destination="Hyz-fV-Wp6" id="WtV-QW-zNY"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8Q8-mf-5TC" firstAttribute="leading" secondItem="NqF-sh-70G" secondAttribute="leading" id="VUX-OL-20J"/>
+                            <constraint firstItem="8Q8-mf-5TC" firstAttribute="top" secondItem="S07-56-QZd" secondAttribute="bottom" id="eoV-a1-Ueb"/>
+                            <constraint firstAttribute="trailing" secondItem="8Q8-mf-5TC" secondAttribute="trailing" id="gyS-27-2rC"/>
+                            <constraint firstItem="viP-Qz-GD4" firstAttribute="top" secondItem="8Q8-mf-5TC" secondAttribute="bottom" constant="20" id="lXr-Bl-QbI"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdb-bb-Bfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="649" y="283"/>
         </scene>
     </scenes>
     <resources>

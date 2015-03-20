@@ -1,3 +1,4 @@
+
 //
 //  ViewController.m
 //  communityiOS
@@ -10,8 +11,10 @@
 #import "ForumTableViewCell.h"
 #import "LoginNavigationController.h"
 #import "UIViewController+Create.h"
+#import "PostTableViewCell.h"
+#import "PostListViewController.h"
 
-@interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>{
+@interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>{
     NSMutableArray *tableData;  //表格数据
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
@@ -28,12 +31,14 @@
     //pod
     LoginNavigationController *vc=[LoginNavigationController createFromStoryboardName:@"Login" withIdentifier:@"loginACT"];
 //    [self.navigationController pushViewController:vc animated:YES];
+
     [self presentModalViewController:vc animated:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.delegate=self;
+//    [self.navigationController setNavigationBarHidden:YES];
     tableData = [[NSMutableArray alloc] init];
     for (int i = 0; i< 7; i++) {
         [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
@@ -41,7 +46,7 @@
     
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
-    self.avaterImageView.contentMode=UIViewContentModeScaleAspectFill;
+    self.avaterImageView.contentMode=UIViewContentModeScaleAspectFill;//取图片的中部分
     
     // Do any additional setup after loading the view, typically from a nib.
     //    图片的宽
@@ -81,6 +86,13 @@
     self.mainScrollView.delegate = self;
     
     [self addTimer];
+}
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ( viewController == self) {
+        [navigationController setNavigationBarHidden:YES animated:YES];
+    } else{
+        [navigationController setNavigationBarHidden:NO animated:YES];
+    }
 }
 
 - (void)nextImage
@@ -159,6 +171,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"Main" withIdentifier:@"post"];    
+    [self.navigationController pushViewController:poLVC animated:YES];
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -174,6 +189,7 @@
     
     return headerView;
 }
+
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 

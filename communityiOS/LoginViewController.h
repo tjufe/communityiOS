@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *LoginImage;
+@property (strong, nonatomic) UIImage* loimage;
 
 @end
