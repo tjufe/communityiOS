@@ -21,7 +21,7 @@
             </objects>
             <point key="canvasLocation" x="-217" y="204"/>
         </scene>
-        <!--登录-->
+        <!--登录2-->
         <scene sceneID="S2z-Nm-B2a">
             <objects>
                 <viewController id="lOJ-nz-sfY" customClass="LoginViewController" sceneMemberID="viewController">
@@ -110,7 +110,7 @@
                             <constraint firstAttribute="centerX" secondItem="WzH-bz-7tT" secondAttribute="centerX" id="rwl-D0-yih"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="登录" id="IrJ-Cy-1nt">
+                    <navigationItem key="navigationItem" title="登录2" id="IrJ-Cy-1nt">
                         <barButtonItem key="backBarButtonItem" title="返回" id="4K9-oG-Tav"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
