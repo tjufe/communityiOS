@@ -31,13 +31,21 @@
     [self presentModalViewController:vc animated:YES];
 }
 
+- (void)initTableData {
+    tableData = [[NSMutableArray alloc] initWithObjects:
+                 [NSMutableArray arrayWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",nil],[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
+                      [NSMutableArray arrayWithObjects:@"icon_01",@"icon_02",@"icon_03",@"icon_04",@"icon_05",@"icon_06",@"icon_07", nil],nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    tableData = [[NSMutableArray alloc] init];
-    for (int i = 0; i< 7; i++) {
-        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
-    }
+//    tableData = [[NSMutableArray alloc] init];
+//    for (int i = 0; i< 7; i++) {
+//        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
+//    }
+    
+    [self initTableData];
     
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
@@ -45,7 +53,7 @@
     
     // Do any additional setup after loading the view, typically from a nib.
     //    图片的宽
-    CGFloat imageW = self.mainScrollView.frame.size.width;
+    CGFloat imageW = self.view.frame.size.width;
     //    CGFloat imageW = 300;
     //    图片高
     CGFloat imageH = self.mainScrollView.frame.size.height;
@@ -56,6 +64,8 @@
     //   1.添加5张图片
     for (int i = 0; i < totalCount; i++) {
         UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        
         //        图片X
         CGFloat imageX = i * imageW;
         //        设置frame
@@ -101,7 +111,7 @@
 // scrollview滚动的时候调用
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"滚动中");
+    //    NSLog(@"滚动中");
     //    计算页码
     //    页码 = (contentoffset.x + scrollView一半宽度)/scrollView宽度
     CGFloat scrollviewW =  scrollView.frame.size.width;
@@ -142,11 +152,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [tableData count];
+    return [[tableData objectAtIndex:0] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -154,6 +164,9 @@
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
+    [cell setForumIconImage:[UIImage imageNamed:[[tableData objectAtIndex:2] objectAtIndex:indexPath.row]]];
+    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
+    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -161,19 +174,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    // custom view for header. will be adjusted to default or specified header height
-    
-    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-    if(section>0)
-        headerView.backgroundColor=[UIColor redColor];
-    else
-        headerView.backgroundColor=[UIColor blueColor];
-    
-//    [headerView addSubview:<#(UIView *)#>];
-    
-    return headerView;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    // custom view for header. will be adjusted to default or specified header height
+//    
+////    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+////    if(section>0)
+////        headerView.backgroundColor=[UIColor redColor];
+////    else
+////        headerView.backgroundColor=[UIColor blueColor];
+////    
+//////    [headerView addSubview:<#(UIView *)#>];
+////    
+////    return headerView;
+//    return nil;
+//}
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 

@@ -8,11 +8,45 @@
 
 #import "LoginViewController.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UISwitch *remberSwitch;
+
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @end
 
 @implementation LoginViewController
+
+- (IBAction)phoneChanged:(id)sender {
+    UITextField *p=(UITextField*) sender;
+    if(p.text.length==11){
+        [self.loginButton setBackgroundColor:[UIColor redColor]];
+        [self.loginButton setEnabled:YES];
+    }else{
+        [self.loginButton setBackgroundColor:[UIColor grayColor]];
+        [self.loginButton setEnabled:NO];
+    }
+}
+
+-(void)textDidChange:(NSNotification *)notification{
+    UITextField *t=notification.object;
+    if(self.phoneTextField.text.length==11){
+        [self.loginButton setBackgroundColor:[UIColor redColor]];
+        [self.loginButton setEnabled:YES];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (IBAction)onChanged:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:self.remberSwitch.on forKey:@"didRemeber"];
+//    [[NSUserDefaults standardUserDefaults] set];
+}
 
 - (IBAction)exit:(id)sender {
      [self dismissModalViewControllerAnimated:YES];
@@ -21,6 +55,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    BOOL didRemeber=[[[NSUserDefaults standardUserDefaults] objectForKey:@"didRemeber" ] boolValue];
+    [self.remberSwitch setOn:didRemeber];
+    [self.loginButton.layer setMasksToBounds:YES];
+    [self.loginButton.layer setCornerRadius:self.loginButton.frame.size.height/2]; //设置矩形四个圆角半径
+
+    [self.loginButton setBackgroundColor:[UIColor grayColor]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
+//    NSLog(@"^^^^%@",self.remberSwitch.on);
 }
 
 - (void)didReceiveMemoryWarning {

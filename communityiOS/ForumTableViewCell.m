@@ -20,4 +20,18 @@
     // Configure the view for the selected state
 }
 
+- (void)setForumIconImage:(UIImage *)forumIconImage {
+    _forumIconImageView.image=forumIconImage;
+    _forumIconImageView.contentMode=UIViewContentModeScaleAspectFill;
+}
+
+- (void)setForumName:(NSString *)forumName {
+    _forumNameLabel.text=forumName;
+}
+
+- (void)setLastNewContent:(NSString *)lastNewContent {
+    _lastNewContentLabel.text=lastNewContent;
+}
+
+
 @end
