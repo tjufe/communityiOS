@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AF30310AEEC02AF05563D3DB"
+               BlueprintIdentifier = "534E25B5065BC6C332C6395C"
                BuildableName = "libPods-UIImage+Additions.a"
                BlueprintName = "Pods-UIImage+Additions"
                ReferencedContainer = "container:Pods.xcodeproj">

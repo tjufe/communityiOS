@@ -7,8 +7,12 @@
 //
 
 #import "LoginViewController.h"
+#include "ViewController.h"
+#import "PPRevealSideViewController.h"
+
 
 @interface LoginViewController ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UIView *uiViewLogin;
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -49,7 +53,14 @@
 }
 
 - (IBAction)exit:(id)sender {
-     [self dismissModalViewControllerAnimated:YES];
+//     [self dismissModalViewControllerAnimated:YES];
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *view = [storyboard instantiateViewControllerWithIdentifier:@"mainViewController"];
+    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:view];
+    
+    [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
+    
 }
 
 - (void)viewDidLoad {
@@ -65,10 +76,13 @@
     BOOL didRemeber=[[[NSUserDefaults standardUserDefaults] objectForKey:@"didRemeber" ] boolValue];
     [self.remberSwitch setOn:didRemeber];
     [self.loginButton.layer setMasksToBounds:YES];
-    [self.loginButton.layer setCornerRadius:self.loginButton.frame.size.height/2]; //设置矩形四个圆角半径
+//    [self.loginButton.layer setCornerRadius:self.loginButton.frame.size.height/2]; //设置矩形四个圆角半径
 
-    [self.loginButton setBackgroundColor:[UIColor grayColor]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
+    [self.loginButton.layer setCornerRadius:4];
+    [self.uiViewLogin.layer setCornerRadius:4];
+    
+//    [self.loginButton setBackgroundColor:[UIColor grayColor]];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
 //    NSLog(@"^^^^%@",self.remberSwitch.on);
 }
 -(void)setLoimage:(UIImage *)loimage{

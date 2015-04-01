@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B7E78C53D6048FAD883D3BE6"
+               BlueprintIdentifier = "D7CF65DB9AAB2AEF59DFDC9A"
                BuildableName = "libPods-uicontrol-blocks.a"
                BlueprintName = "Pods-uicontrol-blocks"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "PPRevealSideViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,7 +20,12 @@
     // Override point for customization after application launch.
     
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
-    self.window.rootViewController=nav;
+//    self.window.rootViewController=nav;
+    
+//    //新建PPRevealSideViewController,并设置根视图（主页面的导航视图）
+    PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
+    self.window.rootViewController = sideViewController;
+//
     return YES;
 }
 

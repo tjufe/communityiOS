@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--User Center Unlogged View Controller-->
+        <scene sceneID="wUV-BC-SRt">
+            <objects>
+                <viewController storyboardIdentifier="UserCenterUnlogged" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DZK-PI-er9" customClass="UserCenterUnloggedViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f0x-tv-azL"/>
+                        <viewControllerLayoutGuide type="bottom" id="DR1-KF-DzZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mXK-MG-jmV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_user_centre" translatesAutoresizingMaskIntoConstraints="NO" id="sFe-dp-jXG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_acatar_default_w" translatesAutoresizingMaskIntoConstraints="NO" id="iJI-st-AtL">
+                                <rect key="frame" x="141" y="175" width="37" height="38"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还没有登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qE4-fO-9dE">
+                                <rect key="frame" x="105" y="228" width="108" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="60I-4H-mNU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQk-ab-3ij">
+                                <rect key="frame" x="129" y="258" width="60" height="30"/>
+                                <state key="normal" title="点击登录">
+                                    <color key="titleColor" red="0.99215686274509807" green="0.22745098039215686" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="go2Login:" destination="DZK-PI-er9" eventType="touchUpInside" id="Uys-ve-dOQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qE4-fO-9dE" firstAttribute="top" secondItem="iJI-st-AtL" secondAttribute="bottom" constant="15" id="MLS-xy-Bqo"/>
+                            <constraint firstItem="sFe-dp-jXG" firstAttribute="top" secondItem="mXK-MG-jmV" secondAttribute="top" id="R3d-34-DFW"/>
+                            <constraint firstItem="sFe-dp-jXG" firstAttribute="bottom" secondItem="DR1-KF-DzZ" secondAttribute="top" id="TiL-rs-OSW"/>
+                            <constraint firstItem="qQk-ab-3ij" firstAttribute="top" secondItem="qE4-fO-9dE" secondAttribute="bottom" constant="8" symbolic="YES" id="UOM-rH-DwW"/>
+                            <constraint firstItem="iJI-st-AtL" firstAttribute="top" secondItem="f0x-tv-azL" secondAttribute="bottom" constant="155" id="VYh-iV-iv4"/>
+                            <constraint firstItem="iJI-st-AtL" firstAttribute="centerX" secondItem="qE4-fO-9dE" secondAttribute="centerX" id="d8K-QC-BQU"/>
+                            <constraint firstItem="qE4-fO-9dE" firstAttribute="centerX" secondItem="qQk-ab-3ij" secondAttribute="centerX" id="dJ5-zc-3YR"/>
+                            <constraint firstItem="sFe-dp-jXG" firstAttribute="leading" secondItem="mXK-MG-jmV" secondAttribute="leading" id="gXr-DD-8Iz"/>
+                            <constraint firstItem="qE4-fO-9dE" firstAttribute="leading" secondItem="mXK-MG-jmV" secondAttribute="leadingMargin" constant="89" id="oYf-go-Nvb"/>
+                            <constraint firstAttribute="trailing" secondItem="sFe-dp-jXG" secondAttribute="trailing" id="vZS-Ha-UEn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qiK-2i-Aob"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M8u-ta-Cow" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="44" y="182"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bg_user_centre" width="640" height="1136"/>
+        <image name="icon_acatar_default_w" width="37" height="38"/>
+    </resources>
+</document>

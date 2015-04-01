@@ -150,6 +150,18 @@
 #define COCOAPODS_VERSION_MINOR_ObjectiveSugar 1
 #define COCOAPODS_VERSION_PATCH_ObjectiveSugar 0
 
+// PPHelpMe
+#define COCOAPODS_POD_AVAILABLE_PPHelpMe
+#define COCOAPODS_VERSION_MAJOR_PPHelpMe 1
+#define COCOAPODS_VERSION_MINOR_PPHelpMe 0
+#define COCOAPODS_VERSION_PATCH_PPHelpMe 2
+
+// PPRevealSideViewController
+#define COCOAPODS_POD_AVAILABLE_PPRevealSideViewController
+#define COCOAPODS_VERSION_MAJOR_PPRevealSideViewController 1
+#define COCOAPODS_VERSION_MINOR_PPRevealSideViewController 2
+#define COCOAPODS_VERSION_PATCH_PPRevealSideViewController 0
+
 // PunchScrollView
 #define COCOAPODS_POD_AVAILABLE_PunchScrollView
 #define COCOAPODS_VERSION_MAJOR_PunchScrollView 1

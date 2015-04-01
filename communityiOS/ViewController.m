@@ -13,9 +13,17 @@
 #import "UIViewController+Create.h"
 #import "PostTableViewCell.h"
 #import "PostListViewController.h"
+#import "PPRevealSideViewController.h"
+#import "UserCenterUnloggedViewController.h"
+#import "MBProgressHUD.h"
+#import "MJRefresh.h"
+#import "APIClient.h"
+
+//NSString const *
 
 @interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>{
     NSMutableArray *tableData;  //表格数据
+    NSInteger *currentPage;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *mainPageControl;
@@ -23,9 +31,50 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avaterImageView;
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
+@property NSInteger *currentPage;
+
 @end
 
 @implementation ViewController
+
+-(void) setupRefresh {
+//    1.下拉刷新（进入刷新状态就会调用self的headerRereshing）
+    [self.mainTableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+//    自动刷新（一进入程序就下拉刷新）
+//    [self.mainTableView headerBeginRefreshing];
+//    2.上拉加载更多（进入刷新状态就会调用self的footerRereshing）
+    [self.mainTableView addFooterWithTarget:self action:@selector(footerRereshing)];
+}
+
+-(void) headerRereshing {
+    [self getData];
+    
+}
+
+-(void) footerRereshing {
+    [self loadNextPage];
+}
+
+-(void) getData {
+    //显示／隐藏等待进度条
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
+-(void) loadNextPage {
+//    @{
+//      @"pageSize":@(20),
+//      @"pageNumber":@(self.currentPage),
+//      }
+//    [[APIClient sharedClient] POST:<#(NSString *)#> parameters:<#(id)#> constructingBodyWithBlock:<#^(id<AFMultipartFormData> formData)block#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, NSError *error)failure#>]
+}
+
+- (IBAction)tapItem:(id)sender {
+//    UIStoryboard *storybaord = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+//    UITableViewController *table = [storybaord instantiateViewControllerWithIdentifier:@"CustomViewViewController"];
+    UserCenterUnloggedViewController *vc=[UserCenterUnloggedViewController createFromStoryboardName:@"UserCenterUnlogged" withIdentifier:@"UserCenterUnlogged"];
+    [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
+}
 
 - (void)initTableData {
     tableData = [[NSMutableArray alloc] initWithObjects:
@@ -103,6 +152,7 @@
     self.mainScrollView.delegate = self;
     
     [self addTimer];
+    [self setupRefresh];
 }
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ( viewController == self) {
