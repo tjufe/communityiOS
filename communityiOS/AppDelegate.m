@@ -8,10 +8,14 @@
 
 #import "AppDelegate.h"
 #import "PPRevealSideViewController.h"
+#import "PostDetailViewController.h"
+#import "UIViewController+Create.h"
+#import "NIViewController.h"
 
 @interface AppDelegate ()
 
 @end
+
 
 @implementation AppDelegate
 
@@ -25,7 +29,20 @@
 //    //新建PPRevealSideViewController,并设置根视图（主页面的导航视图）
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
-//
+    
+    
+//下拉菜单
+    
+    
+//    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]autorelease];
+//    // Override point for customization after application launch.
+//    self.window.backgroundColor = [UIColor whiteColor];
+//    [self.window makeKeyAndVisible];
+//    
+//    NIViewController *vc= [[NIViewController alloc] init];
+//    self.window.rootViewController = vc;
+    //下拉菜单-end
+    
     return YES;
 }
 

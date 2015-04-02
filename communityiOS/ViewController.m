@@ -95,6 +95,9 @@
     [super viewDidLoad];
     self.navigationController.delegate=self;
     [self initTableData];
+    UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
+    temporaryBarButtonItem.title=@"";
+     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
 //    [self.navigationController setNavigationBarHidden:YES];
 //    tableData = [[NSMutableArray alloc] init];
 //    for (int i = 0; i< 7; i++) {
