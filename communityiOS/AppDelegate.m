@@ -10,7 +10,7 @@
 #import "PPRevealSideViewController.h"
 #import "PostDetailViewController.h"
 #import "UIViewController+Create.h"
-#import "NIViewController.h"
+
 
 @interface AppDelegate ()
 

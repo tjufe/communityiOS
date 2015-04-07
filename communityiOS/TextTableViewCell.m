@@ -6,12 +6,14 @@
 //  Copyright (c) 2015年 &#20309;&#33538;&#39336;. All rights reserved.
 //
 
-#import "TextTableViewCell.h"
+#import "TextTableViewCell.h" 
+
+
+
 
 @implementation TextTableViewCell
-
 - (void)awakeFromNib {
-    
+
     // Initialization code
 }
 

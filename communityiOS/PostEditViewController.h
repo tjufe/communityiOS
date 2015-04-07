@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface PostEditViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *chain;
+
+-(NSString*)getcell;
 
 @end

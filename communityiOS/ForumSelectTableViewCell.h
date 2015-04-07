@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSCollectionview.h"
 
 @interface ForumSelectTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *fslabel;
+
+//@property (strong, nonatomic) FSCollectionview *fs;
 
 @end

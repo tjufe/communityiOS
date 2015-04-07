@@ -13,6 +13,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,6 +24,7 @@
 - (IBAction)onClick:(id)sender {
      DialogView *dg = [[DialogView alloc]initWithFrame:CGRectMake(30, 60, 260, 400)];
     [self.contentView addSubview:dg];
+    
     
 }
 

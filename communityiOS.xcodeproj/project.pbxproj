@@ -69,6 +69,7 @@
 		A07172651ACD10830032E88A /* PostImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07172611ACD10830032E88A /* PostImageTableViewCell.xib */; };
 		A07172691ACD10FF0032E88A /* PostList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07172661ACD10FF0032E88A /* PostList.storyboard */; };
 		A071726A1ACD10FF0032E88A /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07172681ACD10FF0032E88A /* PostListViewController.m */; };
+		A0CA0EAE1ACE1A79006B8862 /* FSCollectionview.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CA0EAD1ACE1A79006B8862 /* FSCollectionview.m */; };
 		F2C08D8A5D78D26F9DB7CA8F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 265117CBD0FCA383D4E565E6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -190,6 +191,8 @@
 		A07172661ACD10FF0032E88A /* PostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostList.storyboard; sourceTree = "<group>"; };
 		A07172671ACD10FF0032E88A /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
 		A07172681ACD10FF0032E88A /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
+		A0CA0EAC1ACE1A79006B8862 /* FSCollectionview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCollectionview.h; sourceTree = "<group>"; };
+		A0CA0EAD1ACE1A79006B8862 /* FSCollectionview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCollectionview.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -535,6 +538,8 @@
 				A07172551ACD106F0032E88A /* PostEdit.storyboard */,
 				A07172561ACD106F0032E88A /* PostEditViewController.h */,
 				A07172571ACD106F0032E88A /* PostEditViewController.m */,
+				A0CA0EAC1ACE1A79006B8862 /* FSCollectionview.h */,
+				A0CA0EAD1ACE1A79006B8862 /* FSCollectionview.m */,
 			);
 			name = post;
 			sourceTree = "<group>";
@@ -718,6 +723,7 @@
 				A07172621ACD10830032E88A /* PosterTableViewCell.m in Sources */,
 				13B1C2B91ACA58C4005C179C /* xxItem.m in Sources */,
 				A07172591ACD106F0032E88A /* PostDetailViewController.m in Sources */,
+				A0CA0EAE1ACE1A79006B8862 /* FSCollectionview.m in Sources */,
 				13BE56721ABA6F0E00379ACD /* UIViewController+Create.m in Sources */,
 				13B1C2E91ACB7DC5005C179C /* UIScrollView+MJExtension.m in Sources */,
 				13C58BE51AB9550600090157 /* ViewController.m in Sources */,
