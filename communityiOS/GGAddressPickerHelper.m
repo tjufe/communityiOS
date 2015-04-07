@@ -55,12 +55,12 @@ static GGAddressPickerHelper *_helper;
         _helper.blackView = [UIView new];
         _helper.pickerView.delegate = _helper;
         _helper.pickerView.dataSource = _helper;
-        _helper.pickerToolbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 36)];
+        _helper.pickerToolbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 36)];
     });
 }
 
 + (void)showPickerInView:(UIView *)view withStyle:(GGAddressPickerStyle)style province:(NSString *)province city:(NSString *)city district:(NSString *)district selectedClosure:(addressBlock)selectedClosure {
-    CGFloat width = view.width;
+    CGFloat width = 80;
     _helper.containView.frame = CGRectMake(0, 0, width, 216);
     _helper.blackView.frame = view.bounds;
     _helper.blackView.backgroundColor = [UIColor blackColor];
@@ -72,25 +72,25 @@ static GGAddressPickerHelper *_helper;
     
     [_helper setupPickerViewWithProvince:_helper.presetProvince city:_helper.presetCity district:_helper.presetDistrict];
     
-    [_helper.pickerToolbar setBackgroundColor:RGB(242, 242, 242)];
+    [_helper.pickerToolbar setBackgroundColor:[UIColor colorWithRed:242 green:242 blue:242 alpha:1]];
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 36)];
     [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
     [cancelBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    [cancelBtn setTitleColor:RGB(76, 76, 76) forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:[UIColor colorWithRed:76 green:76 blue:76 alpha:1] forState:UIControlStateNormal];
     [cancelBtn addTarget:_helper action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
     UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 36)];
     [confirmBtn setTitle:@"确认" forState:UIControlStateNormal];
     [confirmBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    [confirmBtn setTitleColor:RGB(213, 37, 51) forState:UIControlStateNormal];
+    [confirmBtn setTitleColor:[UIColor colorWithRed:213 green:37 blue:51 alpha:1] forState:UIControlStateNormal];
     [confirmBtn addTarget:_helper action:@selector(disMiss:) forControlEvents:UIControlEventTouchUpInside];
-    [_helper.pickerToolbar setWidth:width];
+//    _helper.pickerToolbar.frame.size.width = width;
     [_helper.pickerToolbar addSubview:cancelBtn];
     [_helper.pickerToolbar addSubview:confirmBtn];
     
-    [cancelBtn autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
-    [cancelBtn autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:30];
-    [confirmBtn autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
-    [confirmBtn autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:30];
+//    [cancelBtn autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+//    [cancelBtn autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:30];
+//    [confirmBtn autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+//    [confirmBtn autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:30];
     
     _helper.pickerView.frame = CGRectMake(0, 0, width, 216);
     _helper.pickerView.backgroundColor = [UIColor whiteColor];
@@ -183,10 +183,10 @@ static GGAddressPickerHelper *_helper;
 - (void)showInView:(UIView *)targetView{
     [targetView addSubview:self.blackView];
     [targetView addSubview:self.containView];
-    self.containView.top = targetView.height;
+ //   self.containView.top = targetView.height;
     self.blackView.alpha = 0;
     [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.containView.bottom = targetView.height;
+//        self.containView.bottom = targetView.height;
         self.blackView.alpha = 0.3;
         UITapGestureRecognizer *tapToSave = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelAction:)];
         [self.blackView addGestureRecognizer:tapToSave];
@@ -197,7 +197,7 @@ static GGAddressPickerHelper *_helper;
 - (void)dismissWithAniamtion{
     [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.blackView.alpha = 0;
-        self.containView.top = self.blackView.superview.height;
+//        self.containView.top = self.blackView.superview.height;
     } completion:^(BOOL finished) {
         [self.blackView removeFromSuperview];
         [self.containView removeFromSuperview];

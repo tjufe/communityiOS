@@ -18,17 +18,24 @@
 #import "FSCollectionview.h"
 
 
-@interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *addpic;
 @property (weak, nonatomic) IBOutlet UITableView *PEtableview;//IBOutlet 表示该类是在xib中展示
 @property(strong,nonatomic)FSCollectionview *fs;
 
 @property (weak,nonatomic)NSString *ns;
 @property (strong,nonatomic)UIView *addchain;
+@property (strong,nonatomic)UIView *addpush;
+@property (strong,nonatomic)UIView *addapply;
+@property (strong, nonatomic) UIPickerView *pickview;
+
 
 @end
 
 @implementation PostEditViewController
+NSArray *activities_;
+NSArray *feelings_;
+NSArray *third_;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
     
@@ -169,8 +176,73 @@
 //    
 //    [self.PEtableview addSubview:fs];
 
+/*
+ 下面代码是设置pickerview
+ 
+ */
+//返回显示的列数
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 3;
+}
 
+//返回当前列显示的行数
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    if(component==0){
+        return [activities_ count];
+    }else if(component==1){
+        return [feelings_ count];
+    }else
+        return [third_ count];
     
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    if(component==0)
+        return [activities_ objectAtIndex:row];
+    
+    else if(component==1){
+        return [feelings_ objectAtIndex:row];
+    }else
+        return [third_ objectAtIndex:row];
+    
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+{
+    
+    return 30.0;
+}
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 50.0;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+
+{
+    
+    UILabel * myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 30, 20)];
+    
+    myView.textAlignment = NSTextAlignmentCenter;
+    
+    
+    myView.text = [activities_ objectAtIndex:row];
+    
+    //  myView.font = [UIFont systemFontOfSize:16];   //用label来设置字体大小
+    
+    myView.backgroundColor = [UIColor clearColor];
+    
+    myView.textColor = [UIColor redColor];
+    
+    
+    return myView;
+    
+}
+
+
+
+
+
 
 
 - (void)viewDidLoad {
@@ -186,6 +258,15 @@
 
     //设置username输入文本框的监听
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification  object:nil];
+    
+    
+    activities_=[[NSArray alloc]initWithObjects:@"0",@"1",@"2",@"3",
+                 @"4",@"5",@"6",@"7",@"8",@"9", nil];
+    feelings_=[[NSArray alloc]initWithObjects:@"0",@"1",@"2",@"3",
+               @"4",@"5",@"6",@"7",@"8",@"9",nil];
+    third_=[[NSArray alloc]initWithObjects:@"0",@"1",@"2",@"3",
+            @"4",@"5",@"6",@"7",@"8",@"9",nil];
+
     
   
 }
@@ -207,8 +288,7 @@
     [self.PEtableview addSubview:addpic];
 }
 - (IBAction)AddChainOnClick:(id)sender {
-    self.view.userInteractionEnabled = NO;
-    
+//    self.PEtableview.userInteractionEnabled = NO;
     
     
     //实例化一个view
@@ -216,7 +296,9 @@
     self.addchain.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 300);
     self.addchain.backgroundColor = [UIColor whiteColor];
     [self.PEtableview addSubview:self.addchain];
-    self.addchain.userInteractionEnabled=YES;
+    
+    
+    
     //wailian
     UILabel *adchain = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 30)];
     adchain.text = @"添加外链";
@@ -274,10 +356,141 @@
     
 
 }
+- (IBAction)AddPushOnClick:(id)sender {
+    //实例化一个view
+    self.addpush =[[UIView alloc]init];
+    self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 300);
+    self.addpush.backgroundColor = [UIColor whiteColor];
+    [self.PEtableview addSubview:self.addpush];
+    
+    
+    
+    //tuisong
+    UILabel *adpush = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 30)];
+    adpush.text = @"推送";
+    adpush.textColor = [UIColor redColor];
+    adpush.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
+    [self.addpush addSubview:adpush];
+    //hongxian
+    UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 300, 1)];
+    [vi setBackgroundColor:[UIColor redColor]];
+    [self.addpush   addSubview:vi];
+    //wenzi
+    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 70, 130, 30)];
+    tlabel.text = @"首页轮播图推送";
+    tlabel.textColor = [UIColor grayColor];
+    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    [self.addpush addSubview:tlabel];
+    //swich
+    UISwitch *picswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(250, 70, 30, 30)];
+    [self.addpush addSubview:picswitch];
+    //
+    UIView *vi2 = [[UIView alloc]initWithFrame:CGRectMake(0, 110, 300, 1)];
+    vi2.backgroundColor = [UIColor grayColor];
+    [self.addpush addSubview:vi2];
+    //wenzi
+    UILabel *wlabel = [[UILabel alloc]initWithFrame:CGRectMake(10,130, 130, 30)];
+    wlabel.text = @"手机通知推送";
+    wlabel.textColor = [UIColor grayColor];
+    wlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    [self.addpush addSubview:wlabel];
+    //swich
+    UISwitch *notiswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(250, 130, 30, 30)];
+    [self.addpush addSubview:notiswitch];
+
+    //
+    UIView *vi3 = [[UIView alloc]initWithFrame:CGRectMake(0, 170, 300, 1)];
+    vi3.backgroundColor = [UIColor grayColor];
+    [self.addpush addSubview:vi3];
+    UIButton *bt =  [UIButton buttonWithType:UIButtonTypeCustom];
+    bt.frame = CGRectMake(125, 200, 50, 50);
+    [bt setTitle:@"确定" forState:UIControlStateNormal];
+    [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //点击进入函数
+    [bt addTarget:self action:@selector(sureb) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.addpush addSubview:bt];
+
+    
+}
+- (IBAction)AddApplyOnClick:(id)sender {
+    //实例化一个view
+    self.addapply =[[UIView alloc]init];
+    self.addapply.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-150, 300, 400);
+    self.addapply.backgroundColor = [UIColor whiteColor];
+    [self.PEtableview addSubview:self.addapply];
+    
+    
+    
+    //baoming
+    UILabel *adpush = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 30)];
+    adpush.text = @"报名";
+    adpush.textColor = [UIColor redColor];
+    adpush.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
+    [self.addapply addSubview:adpush];
+    //hongxian
+    UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 300, 1)];
+    [vi setBackgroundColor:[UIColor redColor]];
+    [self.addapply   addSubview:vi];
+    //wenzi
+    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 70, 130, 30)];
+    tlabel.text = @"开通报名";
+    tlabel.textColor = [UIColor grayColor];
+    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    [self.addapply addSubview:tlabel];
+    //swich
+    UISwitch *applyswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(250, 70, 30, 30)];
+    [self.addapply addSubview:applyswitch];
+    //
+    UIView *vi2 = [[UIView alloc]initWithFrame:CGRectMake(0, 110, 300, 1)];
+    vi2.backgroundColor = [UIColor grayColor];
+    [self.addapply addSubview:vi2];
+    //wenzi
+    UILabel *wlabel = [[UILabel alloc]initWithFrame:CGRectMake(10,180, 130, 30)];
+    wlabel.text = @"人数限制";
+    wlabel.textColor = [UIColor grayColor];
+    wlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    [self.addapply addSubview:wlabel];
+    //pick
+    self.pickview = [[UIPickerView alloc]initWithFrame:CGRectMake(170, 120, 130, 80)];
+    self.pickview.delegate = self;
+    self.pickview.dataSource = self;
+    
+    [self.addapply addSubview:self.pickview];
+    
+    
+    
+    //
+    UIView *vi3 = [[UIView alloc]initWithFrame:CGRectMake(0, 280, 300, 1)];
+    vi3.backgroundColor = [UIColor grayColor];
+    [self.addapply addSubview:vi3];
+    UIButton *bt =  [UIButton buttonWithType:UIButtonTypeCustom];
+    bt.frame = CGRectMake(125, 300, 50, 50);
+    [bt setTitle:@"确定" forState:UIControlStateNormal];
+    [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //点击进入函数
+    [bt addTarget:self action:@selector(surec) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.addapply addSubview:bt];
+
+    
+    
+}
+
 
 -(void)surea{
-    self.addchain.hidden = YES;
+    
+        self.addchain.hidden = YES;
+   
+}
+-(void)sureb{
 
+    self.addpush.hidden = YES;
+
+}
+-(void)surec{
+    
+    self.addapply.hidden = YES;
     
 }
 

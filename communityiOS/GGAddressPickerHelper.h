@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define PROVINCE_COMPONENT  0
 #define CITY_COMPONENT      1

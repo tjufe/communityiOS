@@ -10,6 +10,8 @@
 
 @interface PostEditViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *chain;
+@property (weak, nonatomic) IBOutlet UIButton *push;
+@property (weak, nonatomic) IBOutlet UIButton *apply;
 
 -(NSString*)getcell;
 

@@ -74,6 +74,9 @@
                                         <state key="normal" title="Button" image="推送">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="AddPushOnClick:" destination="CX2-fh-HnU" eventType="touchUpInside" id="rS3-EM-TC6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skZ-8q-h1I">
                                         <rect key="frame" x="200" y="11" width="40" height="40"/>
@@ -86,6 +89,9 @@
                                         <state key="normal" title="Button" image="报名">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="AddApplyOnClick:" destination="CX2-fh-HnU" eventType="touchUpInside" id="dJm-zu-hax"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -126,7 +132,9 @@
                     <connections>
                         <outlet property="PEtableview" destination="YcG-eW-rPN" id="QYK-2l-qio"/>
                         <outlet property="addpic" destination="O37-1s-lui" id="zkw-BF-qLu"/>
+                        <outlet property="apply" destination="skZ-8q-h1I" id="lFM-jP-VUt"/>
                         <outlet property="chain" destination="eRQ-pn-nk2" id="7gB-pm-N27"/>
+                        <outlet property="push" destination="1j7-cp-pYg" id="SK5-BE-iR6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Kv-FL-qCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
