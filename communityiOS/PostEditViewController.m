@@ -18,7 +18,7 @@
 #import "FSCollectionview.h"
 
 
-@interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *addpic;
 @property (weak, nonatomic) IBOutlet UITableView *PEtableview;//IBOutlet 表示该类是在xib中展示
 @property(strong,nonatomic)FSCollectionview *fs;
@@ -271,7 +271,14 @@ NSArray *third_;
   
 }
 -(void)Tonextview{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"tijiao" message:@"access" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+    alert.delegate = self;
+    [alert show];
     
+}
+-(void)alertViewCancel:(UIAlertView *)alertView
+{
+    NSLog(@"adsfasdf");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -290,12 +297,21 @@ NSArray *third_;
 - (IBAction)AddChainOnClick:(id)sender {
 //    self.PEtableview.userInteractionEnabled = NO;
     
-    
-    //实例化一个view
+    UIView *maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    maskView.backgroundColor = [UIColor blackColor];
+    maskView.alpha = 0.3;
+    [self.view addSubview:maskView];
     self.addchain =[[UIView alloc]init];
-    self.addchain.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 300);
+    self.addchain.frame = CGRectMake(self.PEtableview.center.x-150, -100, 300, 300);
+    self.addchain.alpha  = 0;
     self.addchain.backgroundColor = [UIColor whiteColor];
-    [self.PEtableview addSubview:self.addchain];
+    [self.view addSubview:self.addchain];
+    //实例化一个view
+    [UIView animateWithDuration:0.8 animations:^{
+        self.addchain.alpha = 1;
+         self.addchain.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 300);
+    }];
+   
     
     
     
