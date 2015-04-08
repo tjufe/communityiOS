@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 #import "PPRevealSideViewController.h"
 
+
+#import "DemoViewController.h"
+
+
 @interface AppDelegate ()
 
 @end
@@ -26,6 +30,10 @@
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
 //
+//    //20150402
+//    DemoViewController *demo=[[DemoViewController alloc] init];
+//    self.window.rootViewController = demo;
+    
     return YES;
 }
 

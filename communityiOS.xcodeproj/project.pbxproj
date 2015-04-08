@@ -25,7 +25,13 @@
 		13B1C2EA1ACB7DC5005C179C /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2DF1ACB7DC5005C179C /* UIScrollView+MJRefresh.m */; };
 		13B1C2EB1ACB7DC5005C179C /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2E11ACB7DC5005C179C /* UIView+MJExtension.m */; };
 		13B1C2EE1ACB8994005C179C /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2ED1ACB8994005C179C /* RegistViewController.m */; };
-		13B1C2F01ACB91EC005C179C /* UserCenterLogged.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C2EF1ACB91EC005C179C /* UserCenterLogged.storyboard */; };
+		13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2F81ACB9BF6005C179C /* UserCenterLoggedViewController.m */; };
+		13B1C2FB1ACB9C16005C179C /* UserCenterLogged.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C2FA1ACB9C16005C179C /* UserCenterLogged.storyboard */; };
+		13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C2FD1ACBB56B005C179C /* Settings.storyboard */; };
+		13B1C3011ACBBED2005C179C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3001ACBBED2005C179C /* SettingsViewController.m */; };
+		13B1C3061ACCDA92005C179C /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3041ACCDA92005C179C /* DemoViewController.m */; };
+		13B1C3071ACCDA92005C179C /* DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C3051ACCDA92005C179C /* DemoViewController.xib */; };
+		13B1C30A1ACCFE98005C179C /* GGAddressPickerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3091ACCFE98005C179C /* GGAddressPickerHelper.m */; };
 		13BE566D1ABA574700379ACD /* ForumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BE566B1ABA574700379ACD /* ForumTableViewCell.m */; };
 		13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */; };
 		13BE56721ABA6F0E00379ACD /* UIViewController+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BE56711ABA6F0E00379ACD /* UIViewController+Create.m */; };
@@ -92,7 +98,17 @@
 		13B1C2E11ACB7DC5005C179C /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		13B1C2EC1ACB8994005C179C /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		13B1C2ED1ACB8994005C179C /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
-		13B1C2EF1ACB91EC005C179C /* UserCenterLogged.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserCenterLogged.storyboard; sourceTree = "<group>"; };
+		13B1C2F71ACB9BF6005C179C /* UserCenterLoggedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterLoggedViewController.h; sourceTree = "<group>"; };
+		13B1C2F81ACB9BF6005C179C /* UserCenterLoggedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterLoggedViewController.m; sourceTree = "<group>"; };
+		13B1C2FA1ACB9C16005C179C /* UserCenterLogged.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserCenterLogged.storyboard; sourceTree = "<group>"; };
+		13B1C2FD1ACBB56B005C179C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		13B1C2FF1ACBBED2005C179C /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		13B1C3001ACBBED2005C179C /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		13B1C3031ACCDA92005C179C /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		13B1C3041ACCDA92005C179C /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		13B1C3051ACCDA92005C179C /* DemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoViewController.xib; sourceTree = "<group>"; };
+		13B1C3081ACCFE98005C179C /* GGAddressPickerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGAddressPickerHelper.h; sourceTree = "<group>"; };
+		13B1C3091ACCFE98005C179C /* GGAddressPickerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGAddressPickerHelper.m; sourceTree = "<group>"; };
 		13BE566A1ABA574700379ACD /* ForumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumTableViewCell.h; sourceTree = "<group>"; };
 		13BE566B1ABA574700379ACD /* ForumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumTableViewCell.m; sourceTree = "<group>"; };
 		13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForumTableViewCell.xib; sourceTree = "<group>"; };
@@ -162,6 +178,8 @@
 		13B1C2A61ACA4AA1005C179C /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				13B1C3021ACCDA61005C179C /* demo */,
+				13B1C2FC1ACBB527005C179C /* settings */,
 				13B1C2AC1ACA4BC4005C179C /* main */,
 				13B1C2C01ACA5FD8005C179C /* userCenter */,
 				A0DD190C1ABB1B2B00E34E8C /* post */,
@@ -182,6 +200,8 @@
 		13B1C2A81ACA4ABB005C179C /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				13B1C3081ACCFE98005C179C /* GGAddressPickerHelper.h */,
+				13B1C3091ACCFE98005C179C /* GGAddressPickerHelper.m */,
 				13B1C2CC1ACB7DC5005C179C /* MJRefresh */,
 				13B1C2BC1ACA5A27005C179C /* KZPropertyMapper.h */,
 				13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */,
@@ -297,7 +317,9 @@
 		13B1C2C11ACA6220005C179C /* userCenterLogged */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C2EF1ACB91EC005C179C /* UserCenterLogged.storyboard */,
+				13B1C2FA1ACB9C16005C179C /* UserCenterLogged.storyboard */,
+				13B1C2F71ACB9BF6005C179C /* UserCenterLoggedViewController.h */,
+				13B1C2F81ACB9BF6005C179C /* UserCenterLoggedViewController.m */,
 			);
 			name = userCenterLogged;
 			sourceTree = "<group>";
@@ -345,6 +367,26 @@
 				13B1C2CF1ACB7DC5005C179C /* AMPActivityIndicator.m */,
 			);
 			path = Indicator;
+			sourceTree = "<group>";
+		};
+		13B1C2FC1ACBB527005C179C /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				13B1C2FD1ACBB56B005C179C /* Settings.storyboard */,
+				13B1C2FF1ACBBED2005C179C /* SettingsViewController.h */,
+				13B1C3001ACBBED2005C179C /* SettingsViewController.m */,
+			);
+			name = settings;
+			sourceTree = "<group>";
+		};
+		13B1C3021ACCDA61005C179C /* demo */ = {
+			isa = PBXGroup;
+			children = (
+				13B1C3031ACCDA92005C179C /* DemoViewController.h */,
+				13B1C3041ACCDA92005C179C /* DemoViewController.m */,
+				13B1C3051ACCDA92005C179C /* DemoViewController.xib */,
+			);
+			name = demo;
 			sourceTree = "<group>";
 		};
 		13BE56731ABA6F2700379ACD /* login */ = {
@@ -529,17 +571,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B1C2F01ACB91EC005C179C /* UserCenterLogged.storyboard in Resources */,
+				13B1C2FB1ACB9C16005C179C /* UserCenterLogged.storyboard in Resources */,
 				A0C7F1071ABBF18100EAD25A /* Post.storyboard in Resources */,
 				13C58BE81AB9550600090157 /* Main.storyboard in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
 				A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */,
 				13BE567A1ABA6FD800379ACD /* Login.storyboard in Resources */,
+				13B1C3071ACCDA92005C179C /* DemoViewController.xib in Resources */,
 				13B1C2C51ACA6292005C179C /* UserCenterUnlogged.storyboard in Resources */,
 				13B1C2E31ACB7DC5005C179C /* MJRefresh.bundle in Resources */,
 				13B1C2CB1ACA6E7C005C179C /* userCenter.xcassets in Resources */,
 				13B1C2BB1ACA5956005C179C /* demo.xcassets in Resources */,
+				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,9 +641,12 @@
 				13B1C2EB1ACB7DC5005C179C /* UIView+MJExtension.m in Sources */,
 				13BE567F1ABA70D800379ACD /* UIStoryboard+Addition.m in Sources */,
 				13B1C2E71ACB7DC5005C179C /* MJRefreshFooterView.m in Sources */,
+				13B1C3061ACCDA92005C179C /* DemoViewController.m in Sources */,
 				13B1C2C91ACA690E005C179C /* UserCenterUnloggedViewController.m in Sources */,
+				13B1C30A1ACCFE98005C179C /* GGAddressPickerHelper.m in Sources */,
 				13B1C2E81ACB7DC5005C179C /* MJRefreshHeaderView.m in Sources */,
 				13B1C2B91ACA58C4005C179C /* xxItem.m in Sources */,
+				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
 				13BE56721ABA6F0E00379ACD /* UIViewController+Create.m in Sources */,
 				13B1C2E91ACB7DC5005C179C /* UIScrollView+MJExtension.m in Sources */,
 				13C58BE51AB9550600090157 /* ViewController.m in Sources */,
@@ -615,6 +662,7 @@
 				A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */,
 				A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */,
 				13B1C2E21ACB7DC5005C179C /* AMPActivityIndicator.m in Sources */,
+				13B1C3011ACBBED2005C179C /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

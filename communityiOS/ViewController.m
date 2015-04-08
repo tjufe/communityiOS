@@ -15,6 +15,7 @@
 #import "PostListViewController.h"
 #import "PPRevealSideViewController.h"
 #import "UserCenterUnloggedViewController.h"
+#import "UserCenterLoggedViewController.h"
 #import "MBProgressHUD.h"
 #import "MJRefresh.h"
 #import "APIClient.h"
@@ -25,6 +26,7 @@
     NSMutableArray *tableData;  //表格数据
     NSInteger *currentPage;
 }
+
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *mainPageControl;
 @property (nonatomic, strong) NSTimer *timer;
@@ -32,10 +34,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 @property NSInteger *currentPage;
+@property (weak, nonatomic) IBOutlet UISwitch *testSwitch;
+
 
 @end
 
 @implementation ViewController
+
 
 -(void) setupRefresh {
 //    1.下拉刷新（进入刷新状态就会调用self的headerRereshing）
@@ -72,8 +77,16 @@
 - (IBAction)tapItem:(id)sender {
 //    UIStoryboard *storybaord = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 //    UITableViewController *table = [storybaord instantiateViewControllerWithIdentifier:@"CustomViewViewController"];
-    UserCenterUnloggedViewController *vc=[UserCenterUnloggedViewController createFromStoryboardName:@"UserCenterUnlogged" withIdentifier:@"UserCenterUnlogged"];
-    [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
+    
+    if(self.testSwitch.on ==NO){
+        UserCenterUnloggedViewController *vc=[UserCenterUnloggedViewController createFromStoryboardName:@"UserCenterUnlogged" withIdentifier:@"UserCenterUnlogged"];
+        [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
+    }else{
+    UserCenterLoggedViewController *vc=[UserCenterLoggedViewController createFromStoryboardName:@"UserCenterLogged" withIdentifier:@"UserCenterLogged"];
+        [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
+    }
+    
+    
 }
 
 - (void)initTableData {
@@ -93,6 +106,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    UITapGestureRecognizer 手势
+//    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
+//    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
     [self initTableData];
 //    [self.navigationController setNavigationBarHidden:YES];

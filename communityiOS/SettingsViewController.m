@@ -7,16 +7,27 @@
 //
 
 #import "SettingsViewController.h"
+#import "PPRevealSideViewController.h"
 
 @interface SettingsViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
 
 @end
 
 @implementation SettingsViewController
 
+- (IBAction)exit:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *view = [storyboard instantiateViewControllerWithIdentifier:@"mainViewController"];
+    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:view];
+    
+    [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.logoutBtn.layer setCornerRadius:4];
 }
 
 - (void)didReceiveMemoryWarning {

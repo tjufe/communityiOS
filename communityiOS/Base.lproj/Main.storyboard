@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -56,12 +57,17 @@
                                                     <action selector="tapItem:" destination="BYZ-38-t0r" eventType="touchDragInside" id="RfH-GH-8wy"/>
                                                 </connections>
                                             </button>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYX-j2-bhl">
+                                                <rect key="frame" x="263" y="6" width="51" height="31"/>
+                                            </switch>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Bae-Pk-P1J" secondAttribute="trailing" constant="15" id="2tQ-dg-ubE"/>
                                             <constraint firstAttribute="centerY" secondItem="APu-76-OK8" secondAttribute="centerY" id="AMY-DX-wcF"/>
                                             <constraint firstItem="kuJ-V9-0JD" firstAttribute="leading" secondItem="1Xc-gW-CW1" secondAttribute="leading" id="D2z-et-MM6"/>
+                                            <constraint firstItem="gYX-j2-bhl" firstAttribute="bottom" secondItem="Cis-qB-aQZ" secondAttribute="bottom" id="Gyx-0a-zvj"/>
+                                            <constraint firstItem="gYX-j2-bhl" firstAttribute="trailing" secondItem="1Xc-gW-CW1" secondAttribute="trailingMargin" id="Hfp-fZ-ObS"/>
                                             <constraint firstAttribute="height" constant="45" id="PTv-yO-YEg"/>
                                             <constraint firstItem="Bae-Pk-P1J" firstAttribute="leading" secondItem="APu-76-OK8" secondAttribute="trailing" constant="60" id="TGi-Mj-yYR"/>
                                             <constraint firstAttribute="centerY" secondItem="Cis-qB-aQZ" secondAttribute="centerY" id="UFM-ud-eOS"/>
@@ -140,6 +146,7 @@
                         <outlet property="mainPageControl" destination="tGt-VW-ehw" id="cc9-vG-p94"/>
                         <outlet property="mainScrollView" destination="y1r-hO-j9k" id="SlV-i2-psk"/>
                         <outlet property="mainTableView" destination="9rI-Ap-6Ga" id="BDZ-Uq-lvk"/>
+                        <outlet property="testSwitch" destination="gYX-j2-bhl" id="IJp-cR-WBj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

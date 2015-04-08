@@ -127,8 +127,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="登录" id="IrJ-Cy-1nt">
-                        <barButtonItem key="backBarButtonItem" title="返回" id="1ia-jN-ls4"/>
+                        <barButtonItem key="backBarButtonItem" title="返回" id="1ia-jN-ls4">
+                            <color key="tintColor" red="0.99215686274509807" green="0.22745098039215686" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="DSL-BQ-wSE">
+                            <color key="tintColor" red="0.99215686270000003" green="0.2274509804" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="exit:" destination="lOJ-nz-sfY" id="gnK-Tv-T4E"/>
                             </connections>
@@ -334,7 +337,9 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="注册" id="1mD-wj-Q0L">
-                        <barButtonItem key="backBarButtonItem" title="返回" id="IVq-Ge-31B"/>
+                        <barButtonItem key="backBarButtonItem" title="返回" id="IVq-Ge-31B">
+                            <color key="tintColor" red="0.99215686270000003" green="0.2274509804" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

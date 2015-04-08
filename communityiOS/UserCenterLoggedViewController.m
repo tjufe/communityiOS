@@ -6,13 +6,25 @@
 //  Copyright (c) 2015年 &#20309;&#33538;&#39336;. All rights reserved.
 //
 
+
+#import "LoginNavigationController.h"
+#import "UIViewController+Create.h"
 #import "UserCenterLoggedViewController.h"
+#import "PPRevealSideViewController.h"
 
 @interface UserCenterLoggedViewController ()
 
 @end
 
 @implementation UserCenterLoggedViewController
+
+- (IBAction)go2settings:(id)sender {
+    UINavigationController *vc=[UINavigationController createFromStoryboardName:@"Settings" withIdentifier:@"Settings"];
+    
+    //    [self presentModalViewController:vc animated:YES];
+    
+    [self.revealSideViewController popViewControllerWithNewCenterController:vc animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
