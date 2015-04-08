@@ -69,7 +69,6 @@
 		13B1C3701AD4D80B005C179C /* forumSetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3641AD4D80B005C179C /* forumSetItem.m */; };
 		13B1C3711AD4D80B005C179C /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3661AD4D80B005C179C /* HttpTool.m */; };
 		13B1C3721AD4D80B005C179C /* loginItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3681AD4D80B005C179C /* loginItem.m */; };
-		13B1C3731AD4D80B005C179C /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C3691AD4D80B005C179C /* LoginStoryboard.storyboard */; };
 		13B1C3741AD4D80B005C179C /* postItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C36B1AD4D80B005C179C /* postItem.m */; };
 		13B1C3751AD4D80B005C179C /* postListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C36D1AD4D80B005C179C /* postListItem.m */; };
 		13B1C37A1AD4D817005C179C /* regItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3771AD4D817005C179C /* regItem.m */; };
@@ -209,7 +208,6 @@
 		13B1C3661AD4D80B005C179C /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
 		13B1C3671AD4D80B005C179C /* loginItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginItem.h; sourceTree = "<group>"; };
 		13B1C3681AD4D80B005C179C /* loginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginItem.m; sourceTree = "<group>"; };
-		13B1C3691AD4D80B005C179C /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
 		13B1C36A1AD4D80B005C179C /* postItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postItem.h; sourceTree = "<group>"; };
 		13B1C36B1AD4D80B005C179C /* postItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = postItem.m; sourceTree = "<group>"; };
 		13B1C36C1AD4D80B005C179C /* postListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postListItem.h; sourceTree = "<group>"; };
@@ -597,7 +595,6 @@
 				13B1C3661AD4D80B005C179C /* HttpTool.m */,
 				13B1C3671AD4D80B005C179C /* loginItem.h */,
 				13B1C3681AD4D80B005C179C /* loginItem.m */,
-				13B1C3691AD4D80B005C179C /* LoginStoryboard.storyboard */,
 				13B1C36A1AD4D80B005C179C /* postItem.h */,
 				13B1C36B1AD4D80B005C179C /* postItem.m */,
 				13B1C36C1AD4D80B005C179C /* postListItem.h */,
@@ -752,7 +749,6 @@
 				13B1C3531AD4D6ED005C179C /* PostImageTableViewCell.xib in Resources */,
 				13B1C35E1AD4D6ED005C179C /* TitleTableViewCell.xib in Resources */,
 				13B1C3541AD4D6ED005C179C /* PostList.storyboard in Resources */,
-				13B1C3731AD4D80B005C179C /* LoginStoryboard.storyboard in Resources */,
 				13B1C3141AD4D674005C179C /* ChainTableViewCell.xib in Resources */,
 				13B1C3211AD4D6B3005C179C /* FSCollectionView.storyboard in Resources */,
 				13B1C3171AD4D674005C179C /* ForumSelectTableViewCell.xib in Resources */,
