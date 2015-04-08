@@ -7,7 +7,7 @@
 //
 
 #import "ForumTableViewCell.h"
-
+#import "UIImageView+WebCache.h"
 @implementation ForumTableViewCell
 
 - (void)awakeFromNib {
@@ -20,8 +20,10 @@
     // Configure the view for the selected state
 }
 
-- (void)setForumIconImage:(UIImage *)forumIconImage {
-    _forumIconImageView.image=forumIconImage;
+- (void)setForumIconImage:(NSString *)forumIconImage {
+    [_forumIconImageView sd_setImageWithURL:[NSURL URLWithString:forumIconImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        _forumIconImageView.image = image;
+    }];
     _forumIconImageView.contentMode=UIViewContentModeScaleAspectFill;
 }
 

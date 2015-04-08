@@ -17,11 +17,14 @@
 #import "UserCenterUnloggedViewController.h"
 #import "MBProgressHUD.h"
 #import "MJRefresh.h"
-#import "APIClient.h"
+#import "LoginViewController.h"
+#import "StatusTool.h"
+#import "forumItem.h"
+
 
 //NSString const *
 
-@interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>{
+@interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,LoginViewControllerDelegate>{
     NSMutableArray *tableData;  //表格数据
     NSInteger *currentPage;
 }
@@ -30,12 +33,18 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (weak, nonatomic) IBOutlet UIImageView *avaterImageView;
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
-
+@property (nonatomic,strong)NSString *checkin_community_id;
 @property NSInteger *currentPage;
+@property (nonatomic ,strong) forumItem *forum_item;
+@property (nonatomic,strong) NSMutableArray *forumName;
+@property (nonatomic,strong) NSMutableArray *forumImage;
+
+
 
 @end
 
 @implementation ViewController
+
 
 -(void) setupRefresh {
 //    1.下拉刷新（进入刷新状态就会调用self的headerRereshing）
@@ -78,12 +87,13 @@
 
 - (void)initTableData {
     tableData = [[NSMutableArray alloc] initWithObjects:
-                 [NSMutableArray arrayWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",nil],[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
-                 [NSMutableArray arrayWithObjects:@"icon_01",@"icon_02",@"icon_03",@"icon_04",@"icon_05",@"icon_06",@"icon_07", nil],nil];
+                 self.forumName,[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
+                 self.forumImage,nil];
+    [self.mainTableView reloadData];
 }
 
 - (IBAction)go2Login:(id)sender {
-    //pod
+
     LoginNavigationController *vc=[LoginNavigationController createFromStoryboardName:@"Login" withIdentifier:@"loginACT"];
 //    [self.navigationController pushViewController:vc animated:YES];
 
@@ -92,21 +102,25 @@
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    
+    _forumName = [[NSMutableArray alloc] init];
+    _forumImage = [[NSMutableArray alloc] init];
     self.navigationController.delegate=self;
-    [self initTableData];
-//    [self.navigationController setNavigationBarHidden:YES];
-//    tableData = [[NSMutableArray alloc] init];
-//    for (int i = 0; i< 7; i++) {
-//        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
-//    }
     
-//    tableData = [[NSMutableArray alloc] init];
-//    for (int i = 0; i< 7; i++) {
-//        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
-//    }
+    [StatusTool statusToolGetForumListWithID:@"0001" Success:^(NSArray *array) {
+        for (int i = 0; i < [array count]; i++) {
+            self.forum_item = [array objectAtIndex:i];
+            if (self.forum_item.forum_name != nil)
+            [_forumName addObject:self.forum_item.forum_name];
+            if (self.forum_item.image_url != nil)
+            [_forumImage addObject:self.forum_item.image_url];
+        }
+        [self initTableData];
+        
+    } failurs:^(NSError *error) {
+         NSLog(@"%@",error);
+    }];
     
-    [self initTableData];
     
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
@@ -153,7 +167,10 @@
     
     [self addTimer];
     [self setupRefresh];
+    [super viewDidLoad];
+
 }
+
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ( viewController == self) {
         [navigationController setNavigationBarHidden:YES animated:YES];
@@ -203,28 +220,38 @@
     [self addTimer];
 }
 
-/**
- *  开启定时器
- */
+
+#pragma mark --开启定时器
 - (void)addTimer{
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
-/**
- *  关闭定时器
- */
+
+#pragma mark --关闭定时器
 - (void)removeTimer
 {
     [self.timer invalidate];
+    
 }
+
+#pragma mark --LoginViewController delegate
+
+-(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id{
+     self.checkin_community_id = login_id;
+    [self.mainTableView reloadData];
+}
+
+
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [[tableData objectAtIndex:0] count];
+    return [((NSMutableArray*)[tableData objectAtIndex:0]) count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -232,7 +259,7 @@
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
-    [cell setForumIconImage:[UIImage imageNamed:[[tableData objectAtIndex:2] objectAtIndex:indexPath.row]]];
+    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
     [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
     [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
     return cell;
@@ -271,7 +298,7 @@
 ////    else
 ////        headerView.backgroundColor=[UIColor blueColor];
 ////    
-//////    [headerView addSubview:<#(UIView *)#>];
+//////    [headerView addSubview:(UIView *)];
 ////    
 ////    return headerView;
 //    return nil;
@@ -286,7 +313,7 @@
 //    else
 //        headerView.backgroundColor=[UIColor blueColor];
 //    
-////    [headerView addSubview:<#(UIView *)#>];
+////    [headerView addSubview:(UIView *)];
 //    
 //    return headerView;
 //}

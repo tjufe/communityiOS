@@ -10,8 +10,9 @@
 
 @interface RegistViewController ()
 @property (weak, nonatomic) IBOutlet UIView *resView;
-
 @property (weak, nonatomic) IBOutlet UIButton *resBtn;
+- (IBAction)regAction:(id)sender;
+
 @end
 
 @implementation RegistViewController
@@ -38,4 +39,6 @@
 }
 */
 
+- (IBAction)regAction:(id)sender {
+}
 @end

@@ -160,7 +160,7 @@ if(!(condition)) { return pixle_NSErrorMake([NSString stringWithFormat:@"Invalid
   Class coreDataBaseClass = NSClassFromString(@"NSManagedObject");
   if (coreDataBaseClass != nil && [instance isKindOfClass:coreDataBaseClass]) {
     [instance willChangeValueForKey:mapping];
-//    objc_msgSend(instance, NSSelectorFromString(@"setPrimitiveValue:forKey:"), value, mapping);
+   objc_msgSend(instance, NSSelectorFromString(@"setPrimitiveValue:forKey:"), value, mapping);
     [instance didChangeValueForKey:mapping];
   } else {
     [instance setValue:value forKey:mapping];

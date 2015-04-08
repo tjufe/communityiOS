@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class loginItem,LoginViewController;
+@protocol LoginViewControllerDelegate <NSObject>
+@optional
+-(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id;
+@end
+
 @interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *LoginImage;
 @property (strong, nonatomic) UIImage* loimage;
-
+@property (nonatomic,assign) id<LoginViewControllerDelegate>delegate;
 @end
