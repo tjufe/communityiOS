@@ -8,8 +8,12 @@
 
 #import "PostListViewController.h"
 #import "PostTableViewCell.h"
+#import "PostDetailViewController.h"
+#import "UIViewController+Create.h"
 
 @interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
+
 
 @end
 
@@ -36,10 +40,28 @@
     return 80;
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+    [self.navigationController pushViewController:PDVC animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   //使下一页的导航栏左边没有文字
+    UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
+    temporaryBarButtonItem.title=@"";
+    self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    //本导航栏题目
+    self.navigationItem.title = @"版块名";
+    //try nav button fail
+//    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    [rightbutton setTitle:@"aaa" forState:UIControlStateNormal];
+//    UIBarButtonItem *rightItem  = [[UIBarButtonItem alloc]initWithCustomView:rightbutton];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    
+    
+
     // Do any additional setup after loading the view.
 }
 
