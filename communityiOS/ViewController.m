@@ -120,7 +120,7 @@
 //    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
 //    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
-//    [self initTableData];
+
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
      self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
@@ -134,9 +134,9 @@
     _forumImage = [[NSMutableArray alloc] init];
     self.navigationController.delegate=self;
     
-    [StatusTool statusToolGetForumListWithID:@"0001" Success:^(NSArray *array) {
-        for (int i = 0; i < [array count]; i++) {
-            self.forum_item = [array objectAtIndex:i];
+    [StatusTool statusToolGetForumListWithID:@"0001" Success:^(id object) {
+        for (int i = 0; i < [object count]; i++) {
+            self.forum_item = [object objectAtIndex:i];
             if (self.forum_item.forum_name != nil)
             [_forumName addObject:self.forum_item.forum_name];
             if (self.forum_item.image_url != nil)
