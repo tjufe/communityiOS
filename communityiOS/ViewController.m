@@ -38,11 +38,11 @@
 @property (nonatomic,strong)NSString *checkin_community_id;
 @property NSInteger *currentPage;
 @property (weak, nonatomic) IBOutlet UISwitch *testSwitch;
-@property (nonatomic ,strong) forumItem *forum_item;
-@property (nonatomic,strong) NSMutableArray *forumName;
-@property (nonatomic,strong) NSMutableArray *forumImage;
+//@property (nonatomic ,strong) forumItem *forum_item;
+//@property (nonatomic,strong) NSMutableArray *forumName;
+//@property (nonatomic,strong) NSMutableArray *forumImage;
 
-
+@property (nonatomic,strong) NSArray *listForumItem;
 
 @end
 
@@ -97,10 +97,10 @@
 }
 
 - (void)initTableData {
-    tableData = [[NSMutableArray alloc] initWithObjects:
-                 self.forumName,[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
-                 self.forumImage,nil];
-    [self.mainTableView reloadData];
+//    tableData = [[NSMutableArray alloc] initWithObjects:
+//                 self.forumName,[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
+//                 self.forumImage,nil];
+//    [self.mainTableView reloadData];
 }
 
 - (IBAction)go2Login:(id)sender {
@@ -119,7 +119,7 @@
 //    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
 //    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
-    [self initTableData];
+//    [self initTableData];
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
      self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
@@ -129,24 +129,11 @@
 //        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
 //    }
     
-    _forumName = [[NSMutableArray alloc] init];
-    _forumImage = [[NSMutableArray alloc] init];
+//    _forumName = [[NSMutableArray alloc] init];
+//    _forumImage = [[NSMutableArray alloc] init];
     self.navigationController.delegate=self;
     
-    [StatusTool statusToolGetForumListWithID:@"0001" Success:^(NSArray *array) {
-        for (int i = 0; i < [array count]; i++) {
-            self.forum_item = [array objectAtIndex:i];
-            if (self.forum_item.forum_name != nil)
-            [_forumName addObject:self.forum_item.forum_name];
-            if (self.forum_item.image_url != nil)
-            [_forumImage addObject:self.forum_item.image_url];
-        }
-        [self initTableData];
-        
-    } failurs:^(NSError *error) {
-         NSLog(@"%@",error);
-    }];
-    
+    [self reloadData];
     
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
@@ -192,8 +179,7 @@
     self.mainScrollView.delegate = self;
     
     [self addTimer];
-    [self setupRefresh];
-    [super viewDidLoad];
+//    [self setupRefresh];
 
 }
 
@@ -276,8 +262,30 @@
     return 1;
 }
 
+#pragma mark --201504081638
+
+-(void) reloadData {
+    [StatusTool statusToolGetForumListWithID:@"0001" Success:^(NSArray *array) {
+//        for (int i = 0; i < [array count]; i++) {
+//            self.forum_item = [array objectAtIndex:i];
+//            if (self.forum_item.forum_name != nil)
+//                [_forumName addObject:self.forum_item.forum_name];
+//            if (self.forum_item.image_url != nil)
+//                [_forumImage addObject:self.forum_item.image_url];
+//        }
+//        [self initTableData];
+        _listForumItem = array;
+        [self.mainTableView reloadData];
+        
+    } failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [((NSMutableArray*)[tableData objectAtIndex:0]) count];
+    return [_listForumItem count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -285,11 +293,29 @@
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
-    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
-    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
-    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+//    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
+//    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
+//    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+    forumItem *item = [_listForumItem objectAtIndex:indexPath.row];
+    [cell setForumName:item.forum_name];
+    [cell setForumIconImage:item.image_url];
     return cell;
 }
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return [((NSMutableArray*)[tableData objectAtIndex:0]) count];
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    ForumTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell"];
+//    if(!cell){
+//        cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
+//    }
+//    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
+//    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
+//    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+//    return cell;
+//}
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 //{
 //    return 2;

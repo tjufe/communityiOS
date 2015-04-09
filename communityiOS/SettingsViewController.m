@@ -23,6 +23,9 @@
     
     [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
 }
+#pragma mark --退出登录
+- (IBAction)logout:(id)sender {
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

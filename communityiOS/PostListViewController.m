@@ -11,9 +11,10 @@
 #import "PostDetailViewController.h"
 #import "UIViewController+Create.h"
 
+#import "forumItem.h"
+
 @interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
-
 
 @end
 
@@ -53,6 +54,8 @@
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
     //本导航栏题目
     self.navigationItem.title = @"版块名";
+
+    
     //try nav button fail
 //    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    [rightbutton setTitle:@"aaa" forState:UIControlStateNormal];
