@@ -37,6 +37,9 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="pltable" destination="eQ2-8r-d3z" id="RtG-mG-7Rc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WX5-zZ-gUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -23,6 +23,7 @@
 #import "forumItem.h"
 
 
+
 //NSString const *
 
 @interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,LoginViewControllerDelegate>{
@@ -39,6 +40,8 @@
 @property NSInteger *currentPage;
 @property (weak, nonatomic) IBOutlet UISwitch *testSwitch;
 @property (nonatomic ,strong) forumItem *forum_item;
+@property (nonatomic ,strong) NSMutableArray *forum_list_item;
+
 @property (nonatomic,strong) NSMutableArray *forumName;
 @property (nonatomic,strong) NSMutableArray *forumImage;
 
@@ -134,6 +137,9 @@
     self.navigationController.delegate=self;
     
     [StatusTool statusToolGetForumListWithID:@"0001" Success:^(id object) {
+        
+        self.forum_list_item=(NSMutableArray *)object ;
+        
         for (int i = 0; i < [object count]; i++) {
             self.forum_item = [object objectAtIndex:i];
             if (self.forum_item.forum_name != nil)
@@ -261,6 +267,7 @@
     
 }
 
+
 #pragma mark --LoginViewController delegate
 
 -(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id{
@@ -310,6 +317,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+    poLVC.forum_item = [self.forum_list_item objectAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:poLVC animated:YES];
     

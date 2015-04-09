@@ -286,19 +286,12 @@
 			children = (
 				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
 				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
-				13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */,
-				13B1C3301AD4D6ED005C179C /* PostDetailViewController.h */,
-				13B1C3311AD4D6ED005C179C /* PostDetailViewController.m */,
-				13B1C3321AD4D6ED005C179C /* PostEdit.storyboard */,
-				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
-				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
 				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
 				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
 				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
 				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
 				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
 				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
-				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
 				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
 				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
 				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
@@ -646,6 +639,13 @@
 		A0DD190C1ABB1B2B00E34E8C /* post */ = {
 			isa = PBXGroup;
 			children = (
+				13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */,
+				13B1C3301AD4D6ED005C179C /* PostDetailViewController.h */,
+				13B1C3311AD4D6ED005C179C /* PostDetailViewController.m */,
+				13B1C3321AD4D6ED005C179C /* PostEdit.storyboard */,
+				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
+				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
+				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
 				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
 				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 			);

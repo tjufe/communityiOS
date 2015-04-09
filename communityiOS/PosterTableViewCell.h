@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PosterTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *postDate;
 
 @end

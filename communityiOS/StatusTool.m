@@ -104,8 +104,8 @@
 +(void)statusToolGetPostListWithbfID:(NSString *)bfID  bcID:(NSString *)bcID userID:(NSString *)userID filter:(NSString *)filter Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
-    [firstDic setObject:bfID forKey:@"belong_community_id"];
-    [firstDic setValue:bcID forKey:@"belong_forum_id"];
+    [firstDic setObject:bfID forKey:@"belong_forum_id"];
+    [firstDic setValue:bcID forKey:@"belong_community_id"];
     [firstDic setValue:userID forKey:@"user_id"];
     [firstDic setValue:filter forKey:@"filter"];
     NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
