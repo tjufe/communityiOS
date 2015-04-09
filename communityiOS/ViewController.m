@@ -21,6 +21,7 @@
 #import "LoginViewController.h"
 #import "StatusTool.h"
 #import "forumItem.h"
+#import "PostEditViewController.h"
 
 
 
@@ -122,7 +123,7 @@
 //    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
 //    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
-    
+
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
      self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
@@ -354,5 +355,9 @@
 
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+- (IBAction)NewPostOnClick:(id)sender {
+    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    [self.navigationController pushViewController:PEVC animated:YES];
+}
 
 @end

@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *TitleRect;
 
 @property (weak, nonatomic) IBOutlet UIImageView *PosterImage;
+@property (strong, nonatomic) IBOutlet UIView *operlist;
 
 @property (weak, nonatomic) IBOutlet UILabel *forumlabel;
 
@@ -147,14 +148,22 @@ float cellheight;
        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+<<<<<<< HEAD
     //界面赋值
     [self.postTitle setText:self.post_item.title];
     
     NSLog(@"^^^^%d",_forum_item.forum_name.length);
     
     [self.tableview reloadData];
+=======
+    //设置导航右侧按钮
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStyleBordered  target:self action:@selector(Operation)];
+    [rightItem setImage:[UIImage imageNamed:@"菜单"] ];
+    [rightItem setTintColor:[UIColor redColor]];
+>>>>>>> 82f50d1129bfadda3373a69b763604ccff2cb1dc
     
-    // Do any additional setup after loading the view.
+    self.navigationItem.rightBarButtonItem = rightItem;
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,14 +171,54 @@ float cellheight;
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)Operation{
+    self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 150)];
+    self.operlist.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
+    self.operlist.alpha=0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 60, 100, 150);
+        self.operlist.alpha = 1;
+    }];
+    [self.view addSubview:self.operlist];
+    //编辑按钮
+    UIButton * editbutton = [[UIButton alloc]init];
+    editbutton.frame = CGRectMake(25, 0, 50, 50);
+    [editbutton setTitle:@"编辑" forState:UIControlStateNormal];
+    [self.operlist addSubview:editbutton];
+    [editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [editbutton addTarget:self action:@selector(EditPost) forControlEvents:UIControlEventTouchUpInside];
+    //删除按钮
+    UIButton * delebutton = [[UIButton alloc]init];
+    delebutton.frame = CGRectMake(25, 50, 50, 50);
+    [delebutton setTitle:@"删除" forState:UIControlStateNormal];
+    [self.operlist addSubview:delebutton];
+    [delebutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [delebutton addTarget:self action:@selector(DelePost) forControlEvents:UIControlEventTouchUpInside];
+    //删除按钮
+    UIButton * settopbutton = [[UIButton alloc]init];
+    settopbutton.frame = CGRectMake(25, 100, 50, 50);
+    
+    [settopbutton setTitle:@"置顶" forState:UIControlStateNormal];
+    [self.operlist addSubview:settopbutton];
+    [settopbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [settopbutton addTarget:self action:@selector(Settop) forControlEvents:UIControlEventTouchUpInside];
+    
+    
 }
-*/
+
+-(void)EditPost{
+    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];
+    //通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    [self.navigationController pushViewController:PEVC animated:YES];
+    [self.operlist removeFromSuperview];
+}
+-(void)DelePost{
+ [self.operlist removeFromSuperview];
+
+}
+-(void)Settop{
+    
+     [self.operlist removeFromSuperview];
+}
 
 @end

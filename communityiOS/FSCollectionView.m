@@ -11,7 +11,9 @@
 #import <UIKit/UIKit.h>
 #import "ForumSelectTableViewCell.h"
 
+
 @implementation FSCollectionview
+
 
 int i ;
 
@@ -62,6 +64,8 @@ int i ;
     NSArray *as=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
     ForumSelectTableViewCell *cell = [self.tb cellForRowAtIndexPath:self.index];
     cell.fslabel.text = [as objectAtIndex:i];
+//    [self.maskView removeFromSuperview];
+    
     
     
     
@@ -72,6 +76,7 @@ int i ;
     
     self.index = indexPath;
     self.tb = tableview;
+
     
     
 }
