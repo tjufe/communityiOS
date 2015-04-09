@@ -13,14 +13,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="请输入正文内容" translatesAutoresizingMaskIntoConstraints="NO" id="mqK-BH-sHn">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqK-BH-sHn" customClass="GCPlaceholderTextView">
                         <rect key="frame" x="30" y="0.0" width="290" height="122"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="400" id="MHP-OJ-4Zy"/>
                             <constraint firstAttribute="width" constant="320" id="Z3U-5d-Esg"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="numberPad"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -33,12 +33,12 @@
                 <constraints>
                     <constraint firstItem="mqK-BH-sHn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KUG-sE-LtW"/>
                     <constraint firstAttribute="trailing" secondItem="mqK-BH-sHn" secondAttribute="trailing" id="M3u-d0-0wC"/>
-                    <constraint firstAttribute="bottom" secondItem="mqK-BH-sHn" secondAttribute="bottom" id="Nzn-OK-WjV"/>
+                    <constraint firstAttribute="bottom" secondItem="mqK-BH-sHn" secondAttribute="bottom" constant="-1" id="Nzn-OK-WjV"/>
                     <constraint firstItem="mqK-BH-sHn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="WfQ-3p-yT8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="textview" destination="mqK-BH-sHn" id="TwY-9l-L1x"/>
+                <outlet property="textview" destination="mqK-BH-sHn" id="ZSq-p5-C2X"/>
             </connections>
             <point key="canvasLocation" x="285" y="246"/>
         </tableViewCell>

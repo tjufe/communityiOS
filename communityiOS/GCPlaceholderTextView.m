@@ -43,13 +43,12 @@
 #pragma mark -
 #pragma mark Setter/Getters
 
-- (void) setPlaceholder:(NSString *)aPlaceholder {
-    if ([self.realText isEqualToString:placeholder]) {
-        self.text = aPlaceholder;
-    }
-    
-    [placeholder release];
-    placeholder = [aPlaceholder retain];
+- (void) setPlaceholder:(NSString *)Placeholder {
+//    if ([self.realText isEqualToString:placeholder]) {
+//        self.text = aPlaceholder;
+//        
+//    }
+        Placeholder = @"asdfsadf";
     
     [self endEditing:nil];
 }
@@ -105,15 +104,15 @@
     }
 }
 
+
 #pragma mark -
 #pragma mark Dealloc
 
 - (void)dealloc {
-    [realTextColor release];
-    [placeholder release];
+   
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [super dealloc];
+   
 }
 
 @end
