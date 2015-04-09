@@ -10,31 +10,31 @@
 	<string>communityiOS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>96BA55A46BEF561C6EB008F6395F4F584B4989F5</key>
-		<string>https://github.com/sdoxinxin1990/hmx.git</string>
+		<key>E5811A8AAB1C5E0E17122A0A19866697124F914B</key>
+		<string>https://github.com/tjufe/communityiOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>communityiOS/communityiOS.xcodeproj</string>
+	<string>communityiOS.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>96BA55A46BEF561C6EB008F6395F4F584B4989F5</key>
-		<string>../../..</string>
+		<key>E5811A8AAB1C5E0E17122A0A19866697124F914B</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/sdoxinxin1990/hmx.git</string>
+	<string>https://github.com/tjufe/communityiOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>96BA55A46BEF561C6EB008F6395F4F584B4989F5</string>
+	<string>E5811A8AAB1C5E0E17122A0A19866697124F914B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>96BA55A46BEF561C6EB008F6395F4F584B4989F5</string>
+			<string>E5811A8AAB1C5E0E17122A0A19866697124F914B</string>
 			<key>IDESourceControlWCCName</key>
-			<string>hmx</string>
+			<string>communityiOS_201504081442</string>
 		</dict>
 	</array>
 </dict>

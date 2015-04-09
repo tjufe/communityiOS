@@ -10,6 +10,7 @@
 #import "PostTableViewCell.h"
 #import "PostDetailViewController.h"
 #import "UIViewController+Create.h"
+#import "PostEditViewController.h"
 
 @interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
@@ -53,11 +54,11 @@
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
     //本导航栏题目
     self.navigationItem.title = @"版块名";
-    //try nav button fail
-//    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [rightbutton setTitle:@"aaa" forState:UIControlStateNormal];
-//    UIBarButtonItem *rightItem  = [[UIBarButtonItem alloc]initWithCustomView:rightbutton];
-//    self.navigationItem.rightBarButtonItem = rightItem;
+    //设置导航右侧按钮
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStyleBordered  target:self action:@selector(NewPost)];
+    [rightItem setImage:[UIImage imageNamed:@"icon_main_add"]];
+    [rightItem setTintColor:[UIColor redColor]];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
     
     
@@ -69,15 +70,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)NewPost{
+    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    [self.navigationController pushViewController:PEVC animated:YES];
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end

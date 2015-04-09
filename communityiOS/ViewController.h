@@ -10,6 +10,7 @@
 
 
 @interface ViewController : UIViewController 
+@property (weak, nonatomic) IBOutlet UIButton *newpost;
 @property(nonatomic,strong)NSString *name;
 @end
 
