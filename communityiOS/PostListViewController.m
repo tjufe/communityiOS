@@ -10,11 +10,28 @@
 #import "PostTableViewCell.h"
 #import "PostDetailViewController.h"
 #import "UIViewController+Create.h"
+#import "StatusTool.h"
+#import "postListItem.h"
+#import "UIImageView+WebCache.h"//加载图片
+#import "PostEditViewController.h"
 
 #import "forumItem.h"
 
 @interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
+
+@end
+@interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>{
+    NSMutableArray *postTitleData;  //表格数据
+    NSMutableArray *postImageData;
+    NSMutableArray *postDateData;
+    NSMutableArray *postSetTopData;
+}
+//@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
+@property (weak, nonatomic) IBOutlet UITableView *pltable;
+@property(strong,nonatomic)postItem *pitem;
+@property(strong,nonatomic)NSMutableArray *PostListArray;
+
 
 @end
 
@@ -93,22 +110,18 @@
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
     //本导航栏题目
-    self.navigationItem.title = @"版块名";
-
-    
+    self.navigationItem.title = _forum_item.forum_name;
     //try nav button fail
 //    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    [rightbutton setTitle:@"aaa" forState:UIControlStateNormal];
 //    UIBarButtonItem *rightItem  = [[UIBarButtonItem alloc]initWithCustomView:rightbutton];
 //    self.navigationItem.rightBarButtonItem = rightItem;
-=======
     self.navigationItem.title = @"版块名";
     //设置导航右侧按钮
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStyleBordered  target:self action:@selector(NewPost)];
     [rightItem setImage:[UIImage imageNamed:@"icon_main_add"]];
     [rightItem setTintColor:[UIColor redColor]];
     self.navigationItem.rightBarButtonItem = rightItem;
->>>>>>> 82f50d1129bfadda3373a69b763604ccff2cb1dc
     
     postTitleData = [[NSMutableArray alloc]init];
     postDateData = [[NSMutableArray alloc]init];

@@ -148,19 +148,16 @@ float cellheight;
        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-<<<<<<< HEAD
     //界面赋值
     [self.postTitle setText:self.post_item.title];
     
     NSLog(@"^^^^%d",_forum_item.forum_name.length);
     
     [self.tableview reloadData];
-=======
     //设置导航右侧按钮
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStyleBordered  target:self action:@selector(Operation)];
     [rightItem setImage:[UIImage imageNamed:@"菜单"] ];
     [rightItem setTintColor:[UIColor redColor]];
->>>>>>> 82f50d1129bfadda3373a69b763604ccff2cb1dc
     
     self.navigationItem.rightBarButtonItem = rightItem;
    

@@ -339,7 +339,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
-    poLVC.forum_item = [self.forum_list_item objectAtIndex:indexPath.row];
+    poLVC.forum_item = [self.listForumItem objectAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:poLVC animated:YES];
     
