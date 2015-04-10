@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE11AD624B300658F21 /* AlterNicknameViewController.m */; };
+		13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE41AD6260400658F21 /* AlterPasswordViewController.m */; };
 		13B1C2B61ACA58B5005C179C /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2B41ACA58B5005C179C /* APIClient.m */; };
 		13B1C2BB1ACA5956005C179C /* demo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C2BA1ACA5956005C179C /* demo.xcassets */; };
 		13B1C2BE1ACA5A27005C179C /* KZPropertyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */; };
@@ -103,6 +105,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13878AE01AD624B300658F21 /* AlterNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterNicknameViewController.h; sourceTree = "<group>"; };
+		13878AE11AD624B300658F21 /* AlterNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterNicknameViewController.m; sourceTree = "<group>"; };
+		13878AE31AD6260400658F21 /* AlterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterPasswordViewController.h; sourceTree = "<group>"; };
+		13878AE41AD6260400658F21 /* AlterPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterPasswordViewController.m; sourceTree = "<group>"; };
 		13B1C2B41ACA58B5005C179C /* APIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIClient.m; sourceTree = "<group>"; };
 		13B1C2B51ACA58B5005C179C /* APIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIClient.h; sourceTree = "<group>"; };
 		13B1C2BA1ACA5956005C179C /* demo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = demo.xcassets; sourceTree = "<group>"; };
@@ -521,6 +527,10 @@
 				13B1C2FD1ACBB56B005C179C /* Settings.storyboard */,
 				13B1C2FF1ACBBED2005C179C /* SettingsViewController.h */,
 				13B1C3001ACBBED2005C179C /* SettingsViewController.m */,
+				13878AE01AD624B300658F21 /* AlterNicknameViewController.h */,
+				13878AE11AD624B300658F21 /* AlterNicknameViewController.m */,
+				13878AE31AD6260400658F21 /* AlterPasswordViewController.h */,
+				13878AE41AD6260400658F21 /* AlterPasswordViewController.m */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -819,7 +829,9 @@
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
 				13B1C3521AD4D6ED005C179C /* PostImageTableViewCell.m in Sources */,
+				13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */,
 				13B1C3241AD4D6B3005C179C /* FSViewController.m in Sources */,
+				13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */,
 				13B1C2BE1ACA5A27005C179C /* KZPropertyMapper.m in Sources */,
 				13B1C35D1AD4D6ED005C179C /* TitleTableViewCell.m in Sources */,
 				13B1C3131AD4D674005C179C /* ChainTableViewCell.m in Sources */,

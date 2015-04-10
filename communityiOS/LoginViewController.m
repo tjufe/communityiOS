@@ -11,10 +11,9 @@
 #import "PPRevealSideViewController.h"
 #import "APIClient.h"
 #import "loginItem.h"
+#import "StatusTool.h"
 
-#define UserNameKey @"name"
-#define PwdKey @"pwd"
-#define RmbPwdKey @"rmb_pwd"
+
 
 
 @interface LoginViewController ()<UITextFieldDelegate>
@@ -73,10 +72,10 @@
     [super viewDidLoad];
     self.loimage = [UIImage imageNamed:@"ic_default_avater@2x"];
     
-    //读取上次存储的数据
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.phoneTextField.text = [defaults valueForKey:UserNameKey];
-    self.passwordTextField.text = [defaults valueForKey:PwdKey];
+//    //读取上次存储的数据
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    self.phoneTextField.text = [defaults valueForKey:UserNameKey];
+//    self.passwordTextField.text = [defaults valueForKey:PwdKey];
     
     
     // Do any additional setup after loading the view.
@@ -123,45 +122,34 @@
 
 - (IBAction)loginAction {
     //存储数据
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:self.phoneTextField.text forKey:UserNameKey];
-    [defaults setObject:self.passwordTextField.text forKey:PwdKey];
-    [defaults synchronize];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:self.phoneTextField.text forKey:UserNameKey];
+//    [defaults setObject:self.passwordTextField.text forKey:PwdKey];
+//    [defaults synchronize];
     
-    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
-    [firstDic setObject:self.phoneTextField.text forKey:@"phone_number"];
-    [firstDic setObject:self.passwordTextField.text  forKey:@"login_password"];
-    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
-    [secondDic  setObject:firstDic forKey:@"Data"];
-    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
-    [thirdDic setObject:secondDic forKey:@"param"];
-    [thirdDic setObject:@"UserLogin" forKey:@"method"];
-    //   _weak_typeof(&*self)weakSelf = self ;
-    [[APIClient sharedClient] POST:@""
-                  parameters:thirdDic
-                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                           NSData *data = [[NSData alloc] initWithData:responseObject];
-                           NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                               self.loginItem = [loginItem createItemWitparametes:dic];
-                        
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                          UIAlertView *av =[[UIAlertView alloc] initWithTitle:@"Error Retrieving Login Data"
-                                             message:[NSString stringWithFormat:@"%@",error]
-                                             delegate:nil
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-                               
-                          [av show];
-                               
-      }];
-    //关闭当前视图控制器
-    [self.navigationController popViewControllerAnimated:YES];
-    //代理传值
-    if ([self.delegate respondsToSelector:@selector(addUser:didAddUser:)]) {
-        NSString * checkin_community_id= [[NSString alloc]initWithString:self.loginItem.checkin_community_id];
-        [self.delegate addUser:self didAddUser:checkin_community_id];
-    }
-    [[NSUserDefaults standardUserDefaults] setObject:self.loginItem.checkin_community_id forKey:@"userid"];
+    [StatusTool statusToolGetUserLoginWithName:self.phoneTextField.text
+                                      PassWord:self.passwordTextField.text
+                                       Success:^(id object) {
+                                           self.loginItem = object;
+                                           NSLog(@"^^^^^^^^^^%@",self.loginItem.checkin_community_id);
+                                           [[NSUserDefaults standardUserDefaults] setObject:self.loginItem.checkin_community_id forKey:@"UserID"];
+                                           
+                                           
+                                       } failurs:^(NSError *error) {
+                                           NSLog(@"%@",error);
+                                       }];
+    
+    
+    
+    
+//    //关闭当前视图控制器
+//    [self.navigationController popViewControllerAnimated:YES];
+//    //代理传值
+//    if ([self.delegate respondsToSelector:@selector(addUser:didAddUser:)]) {
+//        NSString * checkin_community_id= [[NSString alloc]initWithString:self.loginItem.checkin_community_id];
+//        [self.delegate addUser:self didAddUser:checkin_community_id];
+//    }
+    
    
 }
 

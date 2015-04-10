@@ -350,7 +350,7 @@
         <!--昵称-->
         <scene sceneID="ncR-ry-Phw">
             <objects>
-                <viewController id="pIl-Mb-hcb" sceneMemberID="viewController">
+                <viewController id="pIl-Mb-hcb" customClass="AlterNicknameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uda-rg-csx"/>
                         <viewControllerLayoutGuide type="bottom" id="eIV-d6-s7V"/>
@@ -396,9 +396,15 @@
                     <navigationItem key="navigationItem" title="昵称" id="y6v-JC-4NT">
                         <barButtonItem key="rightBarButtonItem" title="保存" id="tI1-4u-NFq">
                             <color key="tintColor" red="0.99215686274509807" green="0.22745098039215686" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="saveNickname:" destination="pIl-Mb-hcb" id="OUA-mB-P9d"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tf_Nickname" destination="70d-sv-JoX" id="Opa-yu-RVg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2wZ-ML-P7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -510,7 +516,7 @@
         <!--修改密码-->
         <scene sceneID="2hZ-pa-ygs">
             <objects>
-                <viewController id="EH1-td-SRf" sceneMemberID="viewController">
+                <viewController id="EH1-td-SRf" customClass="AlterPasswordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="INu-nc-bmJ"/>
                         <viewControllerLayoutGuide type="bottom" id="gRT-9b-QFz"/>
@@ -580,9 +586,17 @@
                     <navigationItem key="navigationItem" title="修改密码" id="Px3-Z7-Pcg">
                         <barButtonItem key="rightBarButtonItem" title="保存" id="tep-E3-2Gc">
                             <color key="tintColor" red="0.99215686270000003" green="0.2274509804" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="saveNewPassword:" destination="EH1-td-SRf" id="PbR-2E-AZ3"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tf_NewPsw" destination="zRP-NW-bRJ" id="KMt-we-mFP"/>
+                        <outlet property="tf_OldPsw" destination="naf-3U-ggn" id="yMJ-rR-cYA"/>
+                        <outlet property="tf_SecPsw" destination="YXV-SR-t4s" id="Nnz-UT-ikW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kzf-Rj-rMM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
