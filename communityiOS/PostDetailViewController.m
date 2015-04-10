@@ -12,14 +12,23 @@
 #import "PostImageTableViewCell.h"
 #import "PostEditViewController.h"
 #import "UIViewController+Create.h"
+#import "PostListViewController.h"
+#import "UIImageView+WebCache.h"//加载图片
 
-@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIButton *SendButton;
+@property (weak, nonatomic) IBOutlet UILabel *postTitle;
 
 @property (weak, nonatomic) IBOutlet UIView *TitleRect;
-@property (weak, nonatomic) IBOutlet UILabel *Ftitle;
+
 @property (weak, nonatomic) IBOutlet UIImageView *PosterImage;
+@property (strong, nonatomic) IBOutlet UIView *operlist;
+
+@property (weak, nonatomic) IBOutlet UILabel *forumlabel;
+
+@property(strong,nonatomic)postItem *post_item ;
 
 
 @end
@@ -49,6 +58,9 @@ float cellheight;
             cell= [[[NSBundle mainBundle]loadNibNamed:@"PosterTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        if(self.post_item.post_date!=nil){
+        cell.postDate.text = [self.post_item.post_date substringToIndex:16];
+        }
             return cell;
         }else if(indexPath.row == 1){
             PostTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
@@ -57,6 +69,11 @@ float cellheight;
                 cell= [[[NSBundle mainBundle]loadNibNamed:@"PostTextTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cellheight = cell.Text.frame.size.height;
+            }
+            if(self.post_item.post_text!=nil){
+                cell.Text.text = self.post_item.post_text;
+            }else{
+                cell.Text.text=@"";
             }
             return cell;
 //
@@ -67,6 +84,19 @@ float cellheight;
                 cell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
+            //加载图片
+            if(self.post_item.main_image_url!=nil){
+                
+                cell.MainImage.hidden = NO;
+                [cell.MainImage sd_setImageWithURL:self.post_item.main_image_url placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        cell.MainImage.image = image;
+                    }];
+            }else{
+                cell.MainImage.hidden = NO;
+            }
+                
+            cell.MainImage.contentMode=UIViewContentModeScaleAspectFill;
+            
             return cell;
         }
     
@@ -87,10 +117,15 @@ float cellheight;
 -(void)setTitleRect:(UIView *)TitleRect{
     TitleRect.layer.masksToBounds = YES;
     [TitleRect.layer setCornerRadius:TitleRect.frame.size.height/3];
+    
+    
 }
--(void)setFtitle:(UILabel *)Ftitle{
-    Ftitle.layer.masksToBounds = YES;
-    [Ftitle.layer setCornerRadius:Ftitle.layer.frame.size.height/3];
+-(void)setForumlabel:(UILabel *)forumlabel{
+    
+    
+    [forumlabel setText:_forum_item.forum_name];
+    forumlabel.layer.masksToBounds = YES;
+    [forumlabel.layer setCornerRadius:forumlabel.layer.frame.size.height/3];
 
 }
 -(void)setPosterImage:(UIImageView *)PosterImage{
@@ -99,16 +134,36 @@ float cellheight;
 
 }
 
+-(void)addpostItem:(postItem *)PostItem{
+    self.post_item = PostItem;
+    
+}
+
 - (void)viewDidLoad {
 //    self.scrollview.frame.size.width = self.view.frame.size.width;
-    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划线
     [super viewDidLoad];
+    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划线
+    
     self.navigationItem.title = @"话题";
        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+<<<<<<< HEAD
+    //界面赋值
+    [self.postTitle setText:self.post_item.title];
     
-    // Do any additional setup after loading the view.
+    NSLog(@"^^^^%d",_forum_item.forum_name.length);
+    
+    [self.tableview reloadData];
+=======
+    //设置导航右侧按钮
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStyleBordered  target:self action:@selector(Operation)];
+    [rightItem setImage:[UIImage imageNamed:@"菜单"] ];
+    [rightItem setTintColor:[UIColor redColor]];
+>>>>>>> 82f50d1129bfadda3373a69b763604ccff2cb1dc
+    
+    self.navigationItem.rightBarButtonItem = rightItem;
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,14 +171,54 @@ float cellheight;
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)Operation{
+    self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 150)];
+    self.operlist.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
+    self.operlist.alpha=0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 60, 100, 150);
+        self.operlist.alpha = 1;
+    }];
+    [self.view addSubview:self.operlist];
+    //编辑按钮
+    UIButton * editbutton = [[UIButton alloc]init];
+    editbutton.frame = CGRectMake(25, 0, 50, 50);
+    [editbutton setTitle:@"编辑" forState:UIControlStateNormal];
+    [self.operlist addSubview:editbutton];
+    [editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [editbutton addTarget:self action:@selector(EditPost) forControlEvents:UIControlEventTouchUpInside];
+    //删除按钮
+    UIButton * delebutton = [[UIButton alloc]init];
+    delebutton.frame = CGRectMake(25, 50, 50, 50);
+    [delebutton setTitle:@"删除" forState:UIControlStateNormal];
+    [self.operlist addSubview:delebutton];
+    [delebutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [delebutton addTarget:self action:@selector(DelePost) forControlEvents:UIControlEventTouchUpInside];
+    //删除按钮
+    UIButton * settopbutton = [[UIButton alloc]init];
+    settopbutton.frame = CGRectMake(25, 100, 50, 50);
+    
+    [settopbutton setTitle:@"置顶" forState:UIControlStateNormal];
+    [self.operlist addSubview:settopbutton];
+    [settopbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [settopbutton addTarget:self action:@selector(Settop) forControlEvents:UIControlEventTouchUpInside];
+    
+    
 }
-*/
+
+-(void)EditPost{
+    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];
+    //通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    [self.navigationController pushViewController:PEVC animated:YES];
+    [self.operlist removeFromSuperview];
+}
+-(void)DelePost{
+ [self.operlist removeFromSuperview];
+
+}
+-(void)Settop{
+    
+     [self.operlist removeFromSuperview];
+}
 
 @end

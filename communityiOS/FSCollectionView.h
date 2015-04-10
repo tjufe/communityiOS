@@ -15,6 +15,7 @@
 @property(weak,nonatomic)UITableView *tb;
 @property(weak,nonatomic)NSArray *asdf;
 
+
 -(id)getcelltext:(NSIndexPath *)indexPath:(UITableView*)tableview;
 //
 //@property(strong,nonatomic)NSString *i;

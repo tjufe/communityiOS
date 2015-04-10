@@ -16,6 +16,7 @@
 #import "ForumSelectTableViewCell.h"
 #import "DialogView.h"
 #import "FSCollectionview.h"
+#import "PostDetailViewController.h"
 
 
 @interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>
@@ -27,6 +28,8 @@
 @property (strong,nonatomic)UIView *addchain;
 @property (strong,nonatomic)UIView *addpush;
 @property (strong,nonatomic)UIView *addapply;
+@property (strong,nonatomic)UIView *maskview;
+
 @property (strong, nonatomic) UIPickerView *pickview;
 
 
@@ -55,8 +58,7 @@ NSArray *third_;
             cell= [[[NSBundle mainBundle]loadNibNamed:@"ForumSelectTableViewCell" owner:nil options:nil]objectAtIndex:0];
             
         }
-//            [FSCollectionview getname];
-//            [self performSelector:@selector(getname:) ];
+
         
         return cell;
        
@@ -70,24 +72,10 @@ NSArray *third_;
             }
         
         return cell;
-//    }else if(indexPath.row == 2){
-//        ImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        if (!cell) {
-//            cell= [[[NSBundle mainBundle]loadNibNamed:@"ImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        }
-//        return cell;
+
     }else if(indexPath.row == 2){
         TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
-        //设置自动换行，不知是否可行
-//        cell.textlabel.lineBreakMode = UILineBreakModeWordWrap;
-//        cell.textlabel.numberOfLines = 0;
-//        CGSize size = [cell.textlabel.text sizeWithFont:cell.textlabel.font constrainedToSize:self.view.bounds.size lineBreakMode:cell.textlabel.lineBreakMode];
-//        CGRect rect = cell.textlabel.frame;
-//        rect.size.height = size.height;
-//        cell.textlabel.frame = rect;
-        //
+
         
 
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -96,22 +84,7 @@ NSArray *third_;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return cell;
-//    }else if(indexPath.row == 3){
-//        ChainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        if (!cell) {
-//            cell= [[[NSBundle mainBundle]loadNibNamed:@"ChainTableViewCell" owner:nil options:nil]objectAtIndex:0];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        }
-//        return cell;
-//    }else if(indexPath.row == 4){
-//        PushTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell5"];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        if (!cell) {
-//            cell= [[[NSBundle mainBundle]loadNibNamed:@"PushTableViewCell" owner:nil options:nil]objectAtIndex:0];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        }
-//        return cell;
+
     }else {
         SaveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell6"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -144,14 +117,23 @@ NSArray *third_;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row==0){
+        //黑色背景
+//        self.maskview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//        self.maskview.backgroundColor = [UIColor blackColor];
+//        self.maskview.alpha = 0.3;
+//        [self.view addSubview:self.maskview];
+
+        //collectionview布局
         UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
         flowlayout.minimumInteritemSpacing = 0;
         flowlayout.minimumLineSpacing = 2;
         [flowlayout setItemSize:CGSizeMake(100, 40)];
         
-        
-        self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, 50, 202, 200) collectionViewLayout:flowlayout];
+        //初始化colletionview
+        self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
+        self.fs.alpha = 0;
 
+        
         self.fs.backgroundColor= [UIColor whiteColor];
        
         self.fs.dataSource = self.fs;
@@ -159,7 +141,13 @@ NSArray *third_;
         //在collectionview注册collectionviewcell；
         [self.fs  registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell11"];
 
-    [self.PEtableview addSubview:self.fs];
+        [self.PEtableview addSubview:self.fs];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            self.fs.frame= CGRectMake(self.view.frame.size.width/2 - 100, 50, 202, 200) ;
+            self.fs.alpha = 1;
+            [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
+        }];
         //定义数组
 //        NSArray *arr = [[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
         //获取点击的cell
@@ -275,10 +263,13 @@ NSArray *third_;
     alert.delegate = self;
     [alert show];
     
+    
 }
--(void)alertViewCancel:(UIAlertView *)alertView
-{
-    NSLog(@"adsfasdf");
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (buttonIndex ==0) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -290,26 +281,30 @@ NSArray *third_;
     
 }
 - (IBAction)AddPicOnClick:(id)sender {
-    UIView *addpic = [[UIView alloc]initWithFrame:CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 200)];
+    UIView *addpic = [[UIView alloc]initWithFrame:CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 220)];
     addpic.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
     [self.PEtableview addSubview:addpic];
 }
 - (IBAction)AddChainOnClick:(id)sender {
 //    self.PEtableview.userInteractionEnabled = NO;
     
-    UIView *maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    maskView.backgroundColor = [UIColor blackColor];
-    maskView.alpha = 0.3;
-    [self.view addSubview:maskView];
+    self.maskview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.maskview.backgroundColor = [UIColor blackColor];
+    self.maskview.alpha = 0.3;
+    [self.view addSubview:self.maskview];
+    
+    
     self.addchain =[[UIView alloc]init];
-    self.addchain.frame = CGRectMake(self.PEtableview.center.x-150, -100, 300, 300);
+    
+    self.addchain.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height+100, 300, 220);
     self.addchain.alpha  = 0;
     self.addchain.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.addchain];
     //实例化一个view
-    [UIView animateWithDuration:0.8 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.addchain.alpha = 1;
-         self.addchain.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 300);
+         self.addchain.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-110, 300, 220);
+        [self.addchain.layer setCornerRadius:self.addchain.frame.size.height/20];
     }];
    
     
@@ -317,50 +312,51 @@ NSArray *third_;
     
     //wailian
     UILabel *adchain = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 30)];
+    
     adchain.text = @"添加外链";
     adchain.textColor = [UIColor redColor];
-    adchain.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
+    adchain.font = [UIFont fontWithName:@"STHeitiTC-Light" size:20];
     [self.addchain addSubview:adchain];
     //hongxian
     UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 300, 1)];
     [vi setBackgroundColor:[UIColor redColor]];
     [self.addchain   addSubview:vi];
     //wenzi
-    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 30, 30)];
+    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 100, 30)];
     tlabel.text = @"文字";
     tlabel.textColor = [UIColor grayColor];
-    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     [self.addchain addSubview:tlabel];
     //qingshuru
     UITextField *ctfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 80, 200, 30)];
     ctfield.placeholder = @"请输入外联文字";
     ctfield.borderStyle = UITextBorderStyleNone;
     ctfield.textColor = [UIColor grayColor];
-    ctfield.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    ctfield.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     [self.addchain addSubview:ctfield];
     //
     UIView *vi2 = [[UIView alloc]initWithFrame:CGRectMake(0, 110, 300, 1)];
     vi2.backgroundColor = [UIColor grayColor];
     [self.addchain addSubview:vi2];
     //wenzi
-    UILabel *wlabel = [[UILabel alloc]initWithFrame:CGRectMake(10,140, 30, 30)];
+    UILabel *wlabel = [[UILabel alloc]initWithFrame:CGRectMake(10,140, 100, 30)];
     wlabel.text = @"网址";
     wlabel.textColor = [UIColor grayColor];
-    wlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    wlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     [self.addchain addSubview:wlabel];
     //qingshuru
     UITextField *wtfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 140, 200, 30)];
     wtfield.placeholder = @"请输入外联网址";
     wtfield.borderStyle = UITextBorderStyleNone;
     wtfield.textColor = [UIColor grayColor];
-    wtfield.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    wtfield.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     [self.addchain addSubview:wtfield];
     //
     UIView *vi3 = [[UIView alloc]initWithFrame:CGRectMake(0, 170, 300, 1)];
     vi3.backgroundColor = [UIColor grayColor];
     [self.addchain addSubview:vi3];
     UIButton *bt =  [UIButton buttonWithType:UIButtonTypeCustom];
-    bt.frame = CGRectMake(125, 200, 50, 50);
+    bt.frame = CGRectMake(125, 170, 50, 50);
     [bt setTitle:@"确定" forState:UIControlStateNormal];
     [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     //点击进入函数
@@ -372,12 +368,30 @@ NSArray *third_;
     
 
 }
+//点击推送按钮
 - (IBAction)AddPushOnClick:(id)sender {
+    
+    self.maskview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.maskview.backgroundColor = [UIColor blackColor];
+    self.maskview.alpha = 0.3;
+    [self.view addSubview:self.maskview];
+    
+    
+
+    
     //实例化一个view
     self.addpush =[[UIView alloc]init];
-    self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 300);
+    self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height, 300, 220);
+    self.addpush.alpha = 0;
     self.addpush.backgroundColor = [UIColor whiteColor];
-    [self.PEtableview addSubview:self.addpush];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.addpush.alpha = 1;
+        self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-110, 300, 220);
+        [self.addpush.layer setCornerRadius:self.addpush.frame.size.height/20];
+    }];
+    
+    
+    [self.view addSubview:self.addpush];
     
     
     
@@ -398,7 +412,7 @@ NSArray *third_;
     tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [self.addpush addSubview:tlabel];
     //swich
-    UISwitch *picswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(250, 70, 30, 30)];
+    UISwitch *picswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(220, 70, 30, 30)];
     [self.addpush addSubview:picswitch];
     //
     UIView *vi2 = [[UIView alloc]initWithFrame:CGRectMake(0, 110, 300, 1)];
@@ -411,7 +425,7 @@ NSArray *third_;
     wlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [self.addpush addSubview:wlabel];
     //swich
-    UISwitch *notiswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(250, 130, 30, 30)];
+    UISwitch *notiswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(220, 130, 30, 30)];
     [self.addpush addSubview:notiswitch];
 
     //
@@ -419,7 +433,7 @@ NSArray *third_;
     vi3.backgroundColor = [UIColor grayColor];
     [self.addpush addSubview:vi3];
     UIButton *bt =  [UIButton buttonWithType:UIButtonTypeCustom];
-    bt.frame = CGRectMake(125, 200, 50, 50);
+    bt.frame = CGRectMake(125, 170, 50, 50);
     [bt setTitle:@"确定" forState:UIControlStateNormal];
     [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     //点击进入函数
@@ -429,12 +443,25 @@ NSArray *third_;
 
     
 }
+
+//点击报名按钮
 - (IBAction)AddApplyOnClick:(id)sender {
     //实例化一个view
+    self.maskview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.maskview.backgroundColor = [UIColor blackColor];
+    self.maskview.alpha = 0.3;
+    [self.view addSubview:self.maskview];
+
     self.addapply =[[UIView alloc]init];
-    self.addapply.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-150, 300, 400);
+    self.addapply.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height+100, 300, 330);
+    self.addapply.alpha = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.addapply.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-165, 300, 330);
+        self.addapply.alpha = 1;
+        [self.addapply.layer setCornerRadius:self.addapply.frame.size.height/20 ];
+    }];
     self.addapply.backgroundColor = [UIColor whiteColor];
-    [self.PEtableview addSubview:self.addapply];
+    [self.view addSubview:self.addapply];
     
     
     
@@ -455,7 +482,7 @@ NSArray *third_;
     tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [self.addapply addSubview:tlabel];
     //swich
-    UISwitch *applyswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(250, 70, 30, 30)];
+    UISwitch *applyswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(220, 70, 30, 30)];
     [self.addapply addSubview:applyswitch];
     //
     UIView *vi2 = [[UIView alloc]initWithFrame:CGRectMake(0, 110, 300, 1)];
@@ -481,7 +508,7 @@ NSArray *third_;
     vi3.backgroundColor = [UIColor grayColor];
     [self.addapply addSubview:vi3];
     UIButton *bt =  [UIButton buttonWithType:UIButtonTypeCustom];
-    bt.frame = CGRectMake(125, 300, 50, 50);
+    bt.frame = CGRectMake(125, 280, 50, 50);
     [bt setTitle:@"确定" forState:UIControlStateNormal];
     [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     //点击进入函数
@@ -497,17 +524,18 @@ NSArray *third_;
 -(void)surea{
     
         self.addchain.hidden = YES;
+    [self.maskview removeFromSuperview];
    
 }
 -(void)sureb{
 
     self.addpush.hidden = YES;
-
+    [self.maskview removeFromSuperview];
 }
 -(void)surec{
     
     self.addapply.hidden = YES;
-    
+    [self.maskview removeFromSuperview];
 }
 
 /*

@@ -13,8 +13,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_01" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-yj-II5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="120.5"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image_01" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-yj-II5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
                     </imageView>
                 </subviews>
                 <constraints>

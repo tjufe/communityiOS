@@ -38,7 +38,7 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="· 日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2C-Zk-Aw1">
                         <rect key="frame" x="44" y="51" width="37" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.45194128789999999" green="0.45194128789999999" blue="0.45194128789999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -102,6 +102,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="PostLabel" destination="Uck-wG-uqy" id="wIf-Qu-tzM"/>
+                <outlet property="postDate" destination="d2C-Zk-Aw1" id="56v-uI-M4u"/>
+                <outlet property="postImg" destination="CRn-aB-vf3" id="Vyi-Hl-RBJ"/>
+                <outlet property="setTop" destination="jIg-yn-zIr" id="3AD-YG-cvT"/>
             </connections>
             <point key="canvasLocation" x="265" y="230"/>
         </tableViewCell>

@@ -21,6 +21,8 @@
 #import "LoginViewController.h"
 #import "StatusTool.h"
 #import "forumItem.h"
+#import "PostEditViewController.h"
+
 
 
 //NSString const *
@@ -247,6 +249,7 @@
     
 }
 
+
 #pragma mark --LoginViewController delegate
 
 -(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id{
@@ -336,6 +339,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+    poLVC.forum_item = [self.forum_list_item objectAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:poLVC animated:YES];
     
@@ -372,5 +376,9 @@
 
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+- (IBAction)NewPostOnClick:(id)sender {
+    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    [self.navigationController pushViewController:PEVC animated:YES];
+}
 
 @end

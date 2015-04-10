@@ -21,7 +21,7 @@
                             <constraint firstAttribute="width" constant="320" id="Z3U-5d-Esg"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="numberPad"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="MHP-OJ-4Zy"/>

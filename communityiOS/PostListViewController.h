@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "postItem.h"
+#import "forumItem.h"
+
+@protocol PostListViewControllerDelegate <NSObject>
+
+-(void)addpostItem:(postItem *)PostItem;
+
+@end
 
 @interface PostListViewController : UIViewController
-
+@property(strong,nonatomic)postItem *PostItem;
+@property(strong,nonatomic)forumItem *forum_item;
+@property (assign) id<PostListViewControllerDelegate>delegate;
 @end
