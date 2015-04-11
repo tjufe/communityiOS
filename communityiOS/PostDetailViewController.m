@@ -117,6 +117,8 @@ float cellheight;
 -(void)setTitleRect:(UIView *)TitleRect{
     TitleRect.layer.masksToBounds = YES;
     [TitleRect.layer setCornerRadius:TitleRect.frame.size.height/3];
+    
+    
 }
 -(void)setSendButton:(UIButton *)SendButton{
     SendButton.layer.masksToBounds = YES;

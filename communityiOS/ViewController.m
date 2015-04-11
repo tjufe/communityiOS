@@ -22,6 +22,10 @@
 #import "StatusTool.h"
 #import "forumItem.h"
 #import "PostEditViewController.h"
+#import "APIClient.h"
+#import "loginItem.h"
+#import "UIImageView+WebCache.h"
+
 
 
 
@@ -47,10 +51,13 @@
 @property (nonatomic,strong) NSMutableArray *forumImage;
 
 
+@property (nonatomic,strong) NSArray *listForumItem;
 
 @end
 
 @implementation ViewController
+
+//@synthesize btnNickname;
 
 
 -(void) setupRefresh {
@@ -85,26 +92,12 @@
 //    [[APIClient sharedClient] POST:<#(NSString *)#> parameters:<#(id)#> constructingBodyWithBlock:<#^(id<AFMultipartFormData> formData)block#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, NSError *error)failure#>]
 }
 
-- (IBAction)tapItem:(id)sender {
-//    UIStoryboard *storybaord = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-//    UITableViewController *table = [storybaord instantiateViewControllerWithIdentifier:@"CustomViewViewController"];
-    
-    if(self.testSwitch.on ==NO){
-        UserCenterUnloggedViewController *vc=[UserCenterUnloggedViewController createFromStoryboardName:@"UserCenterUnlogged" withIdentifier:@"UserCenterUnlogged"];
-        [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
-    }else{
-    UserCenterLoggedViewController *vc=[UserCenterLoggedViewController createFromStoryboardName:@"UserCenterLogged" withIdentifier:@"UserCenterLogged"];
-        [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
-    }
-    
-    
-}
 
 - (void)initTableData {
-    tableData = [[NSMutableArray alloc] initWithObjects:
-                 self.forumName,[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
-                 self.forumImage,nil];
-    [self.mainTableView reloadData];
+//    tableData = [[NSMutableArray alloc] initWithObjects:
+//                 self.forumName,[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
+//                 self.forumImage,nil];
+//    [self.mainTableView reloadData];
 }
 
 - (IBAction)go2Login:(id)sender {
@@ -119,11 +112,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+//    [self.btnNickname setTitle:@"lalala" forState:UIControlStateNormal];
+    
+    
 //    UITapGestureRecognizer 手势
 //    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
 //    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
-
+//    [self initTableData];
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
      self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
@@ -133,8 +130,8 @@
 //        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
 //    }
     
-    _forumName = [[NSMutableArray alloc] init];
-    _forumImage = [[NSMutableArray alloc] init];
+//    _forumName = [[NSMutableArray alloc] init];
+//    _forumImage = [[NSMutableArray alloc] init];
     self.navigationController.delegate=self;
     
     [StatusTool statusToolGetForumListWithID:@"0001" Success:^(id object) {
@@ -199,8 +196,8 @@
     self.mainScrollView.delegate = self;
     
     [self addTimer];
-    [self setupRefresh];
-    [super viewDidLoad];
+    [self autoLogin];
+//    [self setupRefresh];
 
 }
 
@@ -256,21 +253,19 @@
 
 #pragma mark --开启定时器
 - (void)addTimer{
-    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 #pragma mark --关闭定时器
-- (void)removeTimer
-{
+- (void)removeTimer{
     [self.timer invalidate];
-    
 }
 
 
 #pragma mark --LoginViewController delegate
 
+#pragma mark --LoginViewController delegate
 -(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id{
      self.checkin_community_id = login_id;
     [self.mainTableView reloadData];
@@ -284,8 +279,21 @@
     return 1;
 }
 
+#pragma mark --201504081638刷新帖子列表
+-(void) reloadData {
+    [StatusTool statusToolGetForumListWithID:@"0001" Success:^(NSArray *array) {
+        _listForumItem = array;
+        [self.mainTableView reloadData];
+        
+    } failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [((NSMutableArray*)[tableData objectAtIndex:0]) count];
+    return [_listForumItem count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -293,11 +301,29 @@
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
-    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
-    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
-    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+//    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
+//    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
+//    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+    forumItem *item = [_listForumItem objectAtIndex:indexPath.row];
+    [cell setForumName:item.forum_name];
+    [cell setForumIconImage:item.image_url];
     return cell;
 }
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return [((NSMutableArray*)[tableData objectAtIndex:0]) count];
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    ForumTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell"];
+//    if(!cell){
+//        cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
+//    }
+//    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
+//    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
+//    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+//    return cell;
+//}
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 //{
 //    return 2;
@@ -359,5 +385,107 @@
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
     [self.navigationController pushViewController:PEVC animated:YES];
 }
+
+#pragma mark --在视图间切换时，并不会再次载入viewDidLoad方法，所以如果在调入视图时，需要对数据做更新，就只能在这个方法内实现了。所以这个方法也非常常用。
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:(BOOL)animated];
+    [self reloadUserStateBarUI];//刷新用户状态栏UI
+}
+
+#pragma mark --处理自动登录
+- (void) autoLogin {
+    //读取上次存储的数据
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userID = [defaults valueForKey:@"UserID"];
+    if(userID==nil){//没有userID的情况，初次打开app，分配guid
+        userID=[self genUUID];//生成唯一编码作为userID
+        [defaults setObject:userID forKey:@"UserID"];//保存本地
+        [defaults synchronize];//保存同步
+    }else{//处理自动登录
+        NSString *phoneNumber = [defaults valueForKey:@"PhoneNumber"];
+        NSString *loginPassword = [defaults valueForKey:@"LoginPassword"];
+        if(phoneNumber!=nil){//存在历史登录记录，处理为自动登录
+            [self loginActionWithPhone:phoneNumber withPassword:loginPassword];//调用登录接口
+        }
+    }
+}
+
+#pragma mark --生成UUID
+- (NSString *) genUUID {
+    CFUUIDRef uuid_ref = CFUUIDCreate(NULL);
+    CFStringRef uuid_string_ref= CFUUIDCreateString(NULL, uuid_ref);
+    CFRelease(uuid_ref);
+    NSString *uuid = [NSString stringWithString:(__bridge NSString*)uuid_string_ref];
+    CFRelease(uuid_string_ref);
+    return uuid;
+}
+
+#pragma mark --调用登录接口
+- (IBAction) loginActionWithPhone:(NSString *)phoneNumber withPassword:(NSString *)loginPassword{
+    [StatusTool statusToolGetUserLoginWithName:[phoneNumber stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
+                                      PassWord:[loginPassword stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
+                                       Success:^(id object) {
+                                           [self checkLoginResult:object];
+                                           
+                                       } failurs:^(NSError *error) {
+                                           NSLog(@"%@",error);
+                                       }];
+}
+
+#pragma mark --检查登录结果
+- (void) checkLoginResult: (id)loginResult {
+    loginItem *loginItem=loginResult;
+    if(loginItem.LoginSucceed){
+        [self saveIntoLoc:loginItem];//保存在本地
+    }else{
+        NSLog(@"%@",loginItem.ErrorMessage);
+    }
+}
+
+#pragma mark --保存在本地
+- (void) saveIntoLoc: (loginItem *)loginItem {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:loginItem.checkin_community_id forKey:@"CommunityID"];
+    [defaults setObject:loginItem.user_id forKey:@"UserID"];
+    [defaults setObject:loginItem.user_nickname forKey:@"UserNickname"];
+    [defaults setObject:loginItem.phone_number forKey:@"PhoneNumber"];
+    [defaults setObject:loginItem.head_portrait_url forKey:@"HeadPortraitUrl"];
+    [defaults setObject:loginItem.user_permission forKey:@"UserPermission"];
+    [defaults setObject:loginItem.login_password forKey:@"LoginPassword"];
+    [defaults setBool:YES forKey:@"Logged"];
+    [defaults synchronize];  //保持同步
+}
+
+#pragma mark --刷新用户状态栏UI
+- (void) reloadUserStateBarUI {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *phoneNumber = [defaults valueForKey:@"PhoneNumber"];
+    if(phoneNumber!=nil){
+        NSString *userNickname = [defaults valueForKey:@"UserNickname"];
+        NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
+        UIImage *placeholderImage=[UIImage imageNamed:@"icon_acatar_default_r"];
+        [self.btnNickname setTitle:userNickname forState:UIControlStateNormal];
+        [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if(image!=nil){
+                self.avaterImageView.image = image;
+            }
+        }];
+    }
+}
+
+#pragma mark --点击用户状态栏
+- (IBAction)tapItem:(id)sender {
+    BOOL logged = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Logged" ] boolValue];
+    if(!logged){
+        UserCenterUnloggedViewController *vc=[UserCenterUnloggedViewController createFromStoryboardName:@"UserCenterUnlogged" withIdentifier:@"UserCenterUnlogged"];
+        [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
+    }else{
+        UserCenterLoggedViewController *vc=[UserCenterLoggedViewController createFromStoryboardName:@"UserCenterLogged" withIdentifier:@"UserCenterLogged"];
+        [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
+    }
+}
+
+
+
 
 @end

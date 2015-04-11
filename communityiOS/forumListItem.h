@@ -16,7 +16,7 @@
 @property (nonatomic,strong)NSDictionary *data;
 
 @property (nonatomic,strong)NSArray *ForumList;
-@property (nonatomic,strong)NSArray * ForumSetlist;
+@property (nonatomic,strong)NSArray *ForumSetlist;
 
 +(forumListItem *)createItemWitparametes:(NSDictionary*)dic;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -57,7 +57,7 @@
                                                     <action selector="tapItem:" destination="BYZ-38-t0r" eventType="touchDragInside" id="RfH-GH-8wy"/>
                                                 </connections>
                                             </button>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYX-j2-bhl">
+                                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYX-j2-bhl">
                                                 <rect key="frame" x="263" y="6" width="51" height="31"/>
                                             </switch>
                                         </subviews>
@@ -145,6 +145,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="avaterImageView" destination="Cis-qB-aQZ" id="E0M-va-ExL"/>
+                        <outlet property="btnNickname" destination="APu-76-OK8" id="syz-vQ-XdJ"/>
                         <outlet property="mainPageControl" destination="tGt-VW-ehw" id="cc9-vG-p94"/>
                         <outlet property="mainScrollView" destination="y1r-hO-j9k" id="SlV-i2-psk"/>
                         <outlet property="mainTableView" destination="9rI-Ap-6Ga" id="BDZ-Uq-lvk"/>

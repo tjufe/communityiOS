@@ -64,8 +64,8 @@
                      success:^(id responseObject) {
         NSData *data = [[NSData alloc] initWithData:responseObject];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        regItem *reg_item = [regItem createItemWitparametes:dic];
-        success(reg_item);
+                         loginItem *login_item = [loginItem createItemWitparametes:dic];
+                         success(login_item);
 
     } failure:^(NSError *error) {
         if (failure == nil) return;
@@ -92,8 +92,8 @@
                          NSData *data = [[NSData alloc] initWithData:responseObject];
                          NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                          
-                         loginItem *login_item = [loginItem createItemWitparametes:dic];
-                         success(login_item);
+                         regItem *reg_item = [regItem createItemWitparametes:dic];
+                         success(reg_item);
                          
                      } failure:^(NSError *error) {
                          if (failure == nil) return;

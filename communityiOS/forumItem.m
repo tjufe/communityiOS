@@ -13,6 +13,7 @@
 +(forumItem *)createItemWitparametes:(NSDictionary*)dic
 {
     forumItem *item = [forumItem new];
+//    static forumItem *_item =nil;
     [KZPropertyMapper mapValuesFrom:dic toInstance:item usingMapping:[forumItem mapDictionary]];
     return item;
 }

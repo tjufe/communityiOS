@@ -14,7 +14,7 @@
 @property (nonatomic,strong)NSString *status;
 @property (nonatomic,strong)NSString *msg;
 @property (nonatomic,strong)NSDictionary *data;
-@property (nonatomic,strong)NSString *LoginSucceed;
+@property (nonatomic)BOOL LoginSucceed;
 @property (nonatomic,strong)NSString *ErrorMessage;
 @property (nonatomic,strong)NSDictionary *userLoginInfo;
 @property (nonatomic,strong)NSString *user_id;
