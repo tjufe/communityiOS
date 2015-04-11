@@ -7,6 +7,7 @@
 //
 
 #import "AlterPasswordViewController.h"
+#import "StatusTool.h"
 
 @interface AlterPasswordViewController ()
 
@@ -26,6 +27,14 @@
 
 #pragma mark --保存修改密码
 - (IBAction)saveNewPassword:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *user_id = [defaults valueForKey:@"UserID"];
+    [StatusTool statusToolCorrectPwdWithPwd:self.tf_OldPsw.text UserID:user_id NewPwd:self.tf_NewPsw.text ConfirmPwd:self.tf_SecPsw.text Success:^(id object) {
+        
+    } failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+    }
+    
 }
 
 /*

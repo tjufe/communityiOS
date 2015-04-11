@@ -47,4 +47,10 @@ typedef void(^ForumListFailurs)(NSError * error);
 //请求帖子操作
 +(void)statusToolPostOperateWithcommunityID:(NSString *)community_id forumID:(NSString *)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Flag:(NSNumber *)flag Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
 
+//Request_ReplyContent
++(void)statusToolReplyContentWithContent:(NSString *)content Name:(NSString *)name reply_id:(NSString *)reply_id Date:(NSString *)date ID:(NSString *)ID Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
+
+//Request_PostReply
++(void)statusToolPostReplyWithReplyText:(NSString *)reply_text communityID:(NSString*)community_id forumID:(NSString*)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
+
 @end
