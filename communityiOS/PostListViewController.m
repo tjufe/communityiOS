@@ -24,15 +24,17 @@
     NSMutableArray *postImageData;
     NSMutableArray *postDateData;
     NSMutableArray *postSetTopData;
-    NSMutableArray *Poster_Nic_Array;//发帖人昵称数组
-    NSMutableArray *Poster_Img_Array;//发帖人头像url数组
-    NSMutableArray *Post_Rpply_Array;//帖子评论数
+    
 }
 //@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
 @property (weak, nonatomic) IBOutlet UITableView *pltable;
 @property(strong,nonatomic)postItem *pitem;
 @property(strong,nonatomic)NSMutableArray *PostListArray;
 @property (strong,nonatomic) postInfoItem *post_info_item;
+@property (strong,nonatomic) NSMutableArray *postinfo;
+@property (strong,nonatomic)NSMutableArray *Poster_Nic_Array;//发帖人昵称数组
+@property (strong,nonatomic)NSMutableArray *Poster_Img_Array;//发帖人头像url数组
+@property (strong,nonatomic)NSMutableArray *Post_Rpply_Array;//帖子评论数
 
 @end
 
@@ -56,6 +58,8 @@
     }
     cell.PostLabel.text = [postTitleData objectAtIndex:indexPath.row];
     cell.postDate.text = [postDateData objectAtIndex:indexPath.row];
+    postInfoItem *pt =[self.postinfo objectAtIndex:indexPath.row];
+    cell.poster_nic.text = pt.poster_nickname;
     //加载图片
     NSString* URL=[[NSString alloc]init];
     URL =[postImageData objectAtIndex:indexPath.row];
@@ -147,9 +151,10 @@
     postDateData = [[NSMutableArray alloc]init];
     postImageData = [[NSMutableArray alloc]init];
     postSetTopData = [[NSMutableArray alloc]init];
-    Poster_Nic_Array = [[NSMutableArray alloc]init];
-    Poster_Img_Array = [[NSMutableArray alloc]init];
-    Post_Rpply_Array =[[NSMutableArray alloc]init];
+    self.postinfo = [[NSMutableArray alloc]init];
+    self.Poster_Nic_Array = [[NSMutableArray alloc]init];
+    self.Poster_Img_Array = [[NSMutableArray alloc]init];
+    self.Post_Rpply_Array =[[NSMutableArray alloc]init];
     //请求数据
     [self loadData];
 
@@ -162,6 +167,30 @@
         self.PostListArray =(NSMutableArray*)object;
         for (int i = 0; i < [object count]; i++) {
             self.pitem = [object objectAtIndex:i];
+            
+            ////
+            [StatusTool statusToolGetPostRelatedInfoWithpostID:self.pitem.post_id poster_ID:self.pitem.poster_id community_ID:self.pitem.belong_community_id forum_ID:self.pitem.belong_forum_id Success:^(id object) {
+                
+                self.post_info_item = (postInfoItem *)object;
+                
+                [self.postinfo addObject:self.post_info_item];
+//                if(self.post_info_item.poster_nickname!=nil){
+//                    [self.Poster_Nic_Array addObject:self.post_info_item.poster_nickname];
+//                }else{
+//                    [self.Poster_Nic_Array addObject:@"游客"];
+//                }
+ //               [self.pltable reloadData];
+                
+            } failurs:^(NSError *error) {
+                  NSLog(@"%@",error);
+            }];
+            
+            
+            ///
+            
+            
+            
+            
             if (self.pitem.title != nil){
                 [postTitleData addObject:self.pitem.title];
             }else{
@@ -197,6 +226,7 @@
                 [postSetTopData addObject:@""];
             }
         }
+//        NSLog(@"^^^^%d",Poster_Nic_Array.count);
         [self.pltable reloadData];
         
     }failurs:^(NSError *error) {

@@ -104,6 +104,7 @@
                 <outlet property="PostLabel" destination="Uck-wG-uqy" id="wIf-Qu-tzM"/>
                 <outlet property="postDate" destination="d2C-Zk-Aw1" id="56v-uI-M4u"/>
                 <outlet property="postImg" destination="CRn-aB-vf3" id="Vyi-Hl-RBJ"/>
+                <outlet property="poster_nic" destination="3Qo-FL-jOK" id="ow3-Fn-rBK"/>
                 <outlet property="setTop" destination="jIg-yn-zIr" id="3AD-YG-cvT"/>
             </connections>
             <point key="canvasLocation" x="265" y="230"/>
