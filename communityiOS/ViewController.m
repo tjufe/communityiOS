@@ -133,23 +133,7 @@
     //    _forumName = [[NSMutableArray alloc] init];
     //    _forumImage = [[NSMutableArray alloc] init];
     self.navigationController.delegate=self;
-    
-    [StatusTool statusToolGetForumListWithID:@"0001" Success:^(id object) {
-        
-        self.forum_list_item=(NSMutableArray *)object ;
-        
-        for (int i = 0; i < [object count]; i++) {
-            self.forum_item = [object objectAtIndex:i];
-            if (self.forum_item.forum_name != nil)
-            [_forumName addObject:self.forum_item.forum_name];
-            if (self.forum_item.image_url != nil)
-            [_forumImage addObject:self.forum_item.image_url];
-        }
-        [self initTableData];
-        
-    } failurs:^(NSError *error) {
-         NSLog(@"%@",error);
-    }];
+
     
     
     
@@ -194,7 +178,9 @@
     self.mainScrollView.delegate = self;
     
     [self addTimer];
+    [self reloadData];
     [self autoLogin];
+    
     //    [self setupRefresh];
     
 }
