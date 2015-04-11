@@ -84,6 +84,8 @@
 		8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48801AD8BA3F002E70DA /* postInfoItem.m */; };
 		8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */; };
 		8EEC48871AD8BB11002E70DA /* replyInfoListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */; };
+		8EEC48921AD90B17002E70DA /* DChainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48901AD90B17002E70DA /* DChainTableViewCell.m */; };
+		8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */; };
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
@@ -243,6 +245,9 @@
 		8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = replyInfoItem.m; sourceTree = "<group>"; };
 		8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = replyInfoListItem.h; sourceTree = "<group>"; };
 		8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = replyInfoListItem.m; sourceTree = "<group>"; };
+		8EEC488F1AD90B17002E70DA /* DChainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DChainTableViewCell.h; sourceTree = "<group>"; };
+		8EEC48901AD90B17002E70DA /* DChainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DChainTableViewCell.m; sourceTree = "<group>"; };
+		8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DChainTableViewCell.xib; sourceTree = "<group>"; };
 		8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostReplyViewController.h; sourceTree = "<group>"; };
 		8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostReplyViewController.m; sourceTree = "<group>"; };
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
@@ -352,6 +357,9 @@
 				13C58BE11AB9550600090157 /* AppDelegate.m */,
 				13C58BE31AB9550600090157 /* ViewController.h */,
 				13C58BE41AB9550600090157 /* ViewController.m */,
+				8EEC488F1AD90B17002E70DA /* DChainTableViewCell.h */,
+				8EEC48901AD90B17002E70DA /* DChainTableViewCell.m */,
+				8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */,
 				13C58BE61AB9550600090157 /* Main.storyboard */,
 				13C58BEB1AB9550600090157 /* LaunchScreen.xib */,
 			);
@@ -802,6 +810,7 @@
 				13B1C2CB1ACA6E7C005C179C /* userCenter.xcassets in Resources */,
 				13B1C2BB1ACA5956005C179C /* demo.xcassets in Resources */,
 				8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */,
+				8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */,
 				13B1C3511AD4D6ED005C179C /* PosterTableViewCell.xib in Resources */,
 				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
@@ -878,6 +887,7 @@
 				13B1C2E71ACB7DC5005C179C /* MJRefreshFooterView.m in Sources */,
 				13B1C3061ACCDA92005C179C /* DemoViewController.m in Sources */,
 				13B1C3161AD4D674005C179C /* ForumSelectTableViewCell.m in Sources */,
+				8EEC48921AD90B17002E70DA /* DChainTableViewCell.m in Sources */,
 				13B1C2C91ACA690E005C179C /* UserCenterUnloggedViewController.m in Sources */,
 				13B1C3221AD4D6B3005C179C /* FSCollectionViewController.m in Sources */,
 				13B1C3551AD4D6ED005C179C /* PostTextTableViewCell.m in Sources */,
