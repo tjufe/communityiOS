@@ -370,13 +370,13 @@
     [self.navigationController pushViewController:PEVC animated:YES];
 }
 
-#pragma mark --在视图间切换时，并不会再次载入viewDidLoad方法，所以如果在调入视图时，需要对数据做更新，就只能在这个方法内实现了。所以这个方法也非常常用。
+#pragma mark --在视图间切换时，并不会再次载入viewDidLoad方法，所以如果在调入视图时，需要对数据做更新，就只能在这个方法内实现了。所以这个方法也非常常用。hmx
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(BOOL)animated];
     [self reloadUserStateBarUI];//刷新用户状态栏UI
 }
 
-#pragma mark --处理自动登录
+#pragma mark --处理自动登录hmx
 - (void) autoLogin {
     //读取上次存储的数据
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -392,7 +392,7 @@
     }
 }
 
-#pragma mark --初始化保存本地用户信息（用于app首次运行）
+#pragma mark --初始化保存本地用户信息（用于app首次运行）hmx
 - (void) initUserInfoIntoLoc {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userID=[self genUUID];//生成唯一编码作为userID
@@ -402,7 +402,7 @@
     [defaults synchronize];//保存同步
 }
 
-#pragma mark --生成UUID
+#pragma mark --生成UUIDhmx
 - (NSString *) genUUID {
     CFUUIDRef uuid_ref = CFUUIDCreate(NULL);
     CFStringRef uuid_string_ref= CFUUIDCreateString(NULL, uuid_ref);
@@ -412,7 +412,7 @@
     return uuid;
 }
 
-#pragma mark --调用登录接口
+#pragma mark --调用登录接口hmx
 - (IBAction) loginActionWithPhone:(NSString *)phoneNumber withPassword:(NSString *)loginPassword{
     [StatusTool statusToolGetUserLoginWithName:[phoneNumber stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
                                       PassWord:[loginPassword stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
@@ -424,7 +424,7 @@
                                        }];
 }
 
-#pragma mark --检查登录结果
+#pragma mark --检查登录结果hmx
 - (void) checkLoginResult: (id)loginResult {
     loginItem *loginItem=loginResult;
     if(loginItem.LoginSucceed){
@@ -435,7 +435,7 @@
     }
 }
 
-#pragma mark --清除本地保存的历史登录信息
+#pragma mark --清除本地保存的历史登录信息hmx
 - (void) reduceLoginInfoFormLoc {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:nil forKey:@"UserNickname"];
@@ -447,7 +447,7 @@
     [defaults synchronize];  //保持同步
 }
 
-#pragma mark --保存在本地
+#pragma mark --保存在本地hmx
 - (void) saveIntoLoc: (loginItem *)loginItem {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:loginItem.checkin_community_id forKey:@"CommunityID"];
@@ -461,7 +461,7 @@
     [defaults synchronize];  //保持同步
 }
 
-#pragma mark --刷新用户状态栏UI
+#pragma mark --刷新用户状态栏UIhmx
 - (void) reloadUserStateBarUI {
     [self.btnNickname setTitle:@"游客" forState:UIControlStateNormal];
     self.avaterImageView.layer.masksToBounds=YES;
@@ -483,7 +483,7 @@
     }
 }
 
-#pragma mark --点击用户状态栏
+#pragma mark --点击用户状态栏hmx
 - (IBAction)tapItem:(id)sender {
     BOOL logged = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Logged" ] boolValue];
     if(!logged){
