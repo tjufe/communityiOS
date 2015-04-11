@@ -21,3 +21,4 @@
 +(forumItem *)createItemWitparametes:(NSDictionary*)dic;
 
 @end
+//这是请求板块列表是返回的^^^^^^^板块详情^^^^^^^^的数据对象模型

@@ -79,6 +79,10 @@
 		13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BEB1AB9550600090157 /* LaunchScreen.xib */; };
 		13C58BF91AB9550700090157 /* communityiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C58BF81AB9550700090157 /* communityiOSTests.m */; };
 		8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */; };
+		8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */; };
+		8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48801AD8BA3F002E70DA /* postInfoItem.m */; };
+		8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */; };
+		8EEC48871AD8BB11002E70DA /* replyInfoListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */; };
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
@@ -226,6 +230,14 @@
 		7E639B0AA95704A9F1BEA0E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
 		8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
+		8EEC487C1AD8B9CF002E70DA /* ifApplyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ifApplyItem.h; sourceTree = "<group>"; };
+		8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ifApplyItem.m; sourceTree = "<group>"; };
+		8EEC487F1AD8BA3F002E70DA /* postInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postInfoItem.h; sourceTree = "<group>"; };
+		8EEC48801AD8BA3F002E70DA /* postInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = postInfoItem.m; sourceTree = "<group>"; };
+		8EEC48821AD8BAB9002E70DA /* replyInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = replyInfoItem.h; sourceTree = "<group>"; };
+		8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = replyInfoItem.m; sourceTree = "<group>"; };
+		8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = replyInfoListItem.h; sourceTree = "<group>"; };
+		8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = replyInfoListItem.m; sourceTree = "<group>"; };
 		8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostReplyViewController.h; sourceTree = "<group>"; };
 		8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostReplyViewController.m; sourceTree = "<group>"; };
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
@@ -271,6 +283,21 @@
 			children = (
 				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
 				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
+				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
+				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
+				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
+				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
+				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
+				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
+				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
+				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
+				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
+				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
+				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
+				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
+				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
+				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
+				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
 				13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */,
 				13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */,
 				13B1C3021ACCDA61005C179C /* demo */,
@@ -533,6 +560,14 @@
 				13B1C36B1AD4D80B005C179C /* postItem.m */,
 				13B1C36C1AD4D80B005C179C /* postListItem.h */,
 				13B1C36D1AD4D80B005C179C /* postListItem.m */,
+				8EEC487C1AD8B9CF002E70DA /* ifApplyItem.h */,
+				8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */,
+				8EEC487F1AD8BA3F002E70DA /* postInfoItem.h */,
+				8EEC48801AD8BA3F002E70DA /* postInfoItem.m */,
+				8EEC48821AD8BAB9002E70DA /* replyInfoItem.h */,
+				8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */,
+				8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */,
+				8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */,
 				13B1C3781AD4D817005C179C /* StatusTool.h */,
 				13B1C3791AD4D817005C179C /* StatusTool.m */,
 				13B1C3651AD4D80B005C179C /* HttpTool.h */,
@@ -576,15 +611,6 @@
 		8EF3F7491AD50B0200924975 /* postDetail */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
-				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
-				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
-				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
-				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
-				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
-				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
-				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
-				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
 			);
 			name = postDetail;
 			sourceTree = "<group>";
@@ -612,12 +638,6 @@
 		8EF3F74C1AD50B5000924975 /* postEdit */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
-				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
-				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
-				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
-				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
-				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
 				13B1C3101AD4D674005C179C /* ForumSelectTableViewCell.h */,
 				13B1C3111AD4D674005C179C /* ForumSelectTableViewCell.m */,
 				13B1C3121AD4D674005C179C /* ForumSelectTableViewCell.xib */,
@@ -827,6 +847,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
+				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
 				13B1C3271AD4D6BF005C179C /* UserCenterLoggedNavigationController.m in Sources */,
@@ -841,6 +862,7 @@
 				13B1C2EB1ACB7DC5005C179C /* UIView+MJExtension.m in Sources */,
 				13B1C3701AD4D80B005C179C /* forumSetItem.m in Sources */,
 				13B1C3501AD4D6ED005C179C /* PosterTableViewCell.m in Sources */,
+				8EEC48871AD8BB11002E70DA /* replyInfoListItem.m in Sources */,
 				8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */,
 				13BE567F1ABA70D800379ACD /* UIStoryboard+Addition.m in Sources */,
 				13B1C2E71ACB7DC5005C179C /* MJRefreshFooterView.m in Sources */,
@@ -873,7 +895,9 @@
 				13BE566D1ABA574700379ACD /* ForumTableViewCell.m in Sources */,
 				13B1C2E61ACB7DC5005C179C /* MJRefreshConst.m in Sources */,
 				A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */,
+				8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */,
 				A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */,
+				8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */,
 				13B1C2E21ACB7DC5005C179C /* AMPActivityIndicator.m in Sources */,
 				13B1C3011ACBBED2005C179C /* SettingsViewController.m in Sources */,
 				13B1C3711AD4D80B005C179C /* HttpTool.m in Sources */,
@@ -1004,6 +1028,10 @@
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				INFOPLIST_FILE = communityiOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1016,6 +1044,10 @@
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				INFOPLIST_FILE = communityiOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

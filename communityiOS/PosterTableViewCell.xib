@@ -54,11 +54,11 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="03-08" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nv3-ZB-JpO">
-                        <rect key="frame" x="140" y="40" width="38" height="17"/>
+                        <rect key="frame" x="140" y="40" width="166" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="PBd-9p-gg1"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="RaF-2y-hdg"/>
-                            <constraint firstAttribute="width" constant="38" id="r0E-fB-iaS"/>
+                            <constraint firstAttribute="width" constant="166" id="r0E-fB-iaS"/>
                             <constraint firstAttribute="height" constant="17" id="rYd-MP-565"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -79,6 +79,10 @@
                     <constraint firstItem="dTV-yv-jxI" firstAttribute="leading" secondItem="ASs-lb-bIJ" secondAttribute="trailing" constant="13" id="oIZ-sF-9Wf"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="postDate" destination="nv3-ZB-JpO" id="BPW-FE-VVz"/>
+                <outlet property="posterImage" destination="ASs-lb-bIJ" id="zJJ-DJ-6rH"/>
+            </connections>
             <point key="canvasLocation" x="290" y="247.5"/>
         </tableViewCell>
     </objects>

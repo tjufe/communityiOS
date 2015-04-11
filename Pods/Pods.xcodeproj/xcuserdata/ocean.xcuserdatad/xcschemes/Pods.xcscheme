@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13C58BD81AB9550600090157"
-            BuildableName = "communityiOS.app"
-            BlueprintName = "communityiOS"
-            ReferencedContainer = "container:../communityiOS.xcodeproj">
+            BlueprintIdentifier = "EFD26FDA8599175EF13CEBB4"
+            BuildableName = "libPods.a"
+            BlueprintName = "Pods"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>

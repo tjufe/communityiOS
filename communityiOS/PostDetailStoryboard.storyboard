@@ -30,14 +30,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbm-0S-qXi">
-                                        <rect key="frame" x="12" y="49" width="80" height="28"/>
+                                        <rect key="frame" x="12" y="49" width="104" height="28"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="结伴旅游" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KB9-fZ-5mw">
-                                                <rect key="frame" x="2" y="2" width="76" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aaaa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KB9-fZ-5mw">
+                                                <rect key="frame" x="2" y="2" width="100" height="24"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="Kp8-8E-N70"/>
-                                                    <constraint firstAttribute="width" constant="76" id="iwI-Th-68X"/>
+                                                    <constraint firstAttribute="width" constant="100" id="iwI-Th-68X"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" red="1" green="0.81232998899999997" blue="0.3676772418" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,7 +48,7 @@
                                         <constraints>
                                             <constraint firstItem="KB9-fZ-5mw" firstAttribute="top" secondItem="Tbm-0S-qXi" secondAttribute="top" constant="2" id="3z9-2U-BHj"/>
                                             <constraint firstItem="KB9-fZ-5mw" firstAttribute="leading" secondItem="Tbm-0S-qXi" secondAttribute="leading" constant="2" id="SiT-Gg-XvB"/>
-                                            <constraint firstAttribute="width" constant="80" id="Y2r-JR-ubt"/>
+                                            <constraint firstAttribute="width" constant="104" id="Y2r-JR-ubt"/>
                                             <constraint firstAttribute="height" constant="28" id="quK-3A-7XZ"/>
                                         </constraints>
                                     </view>
@@ -109,14 +109,6 @@
                                     <constraint firstAttribute="height" constant="60" id="9D5-eN-jtc"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nes-gG-y4a">
-                                <rect key="frame" x="0.0" y="149" width="320" height="349"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Swc-ik-nzf" id="sms-wb-SrM"/>
-                                    <outlet property="delegate" destination="Swc-ik-nzf" id="ywu-pZ-WqZ"/>
-                                </connections>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJq-38-eqg">
                                 <rect key="frame" x="0.0" y="498" width="320" height="70"/>
                                 <subviews>
@@ -142,24 +134,25 @@
                                             <constraint firstAttribute="height" constant="40" id="aE9-nE-Q1f"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="快速回复" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6pf-0t-nhP">
-                                        <rect key="frame" x="53" y="15" width="192" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-n8-4qD">
+                                        <rect key="frame" x="49" y="15" width="192" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90697995580000002" green="0.90697995580000002" blue="0.90697995580000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="mfZ-c2-8Lm" firstAttribute="top" secondItem="kJq-38-eqg" secondAttribute="top" constant="15" id="Akt-U9-MEq"/>
                                     <constraint firstAttribute="height" constant="60" id="Gzt-Nc-44P"/>
-                                    <constraint firstItem="6pf-0t-nhP" firstAttribute="leading" secondItem="mfZ-c2-8Lm" secondAttribute="trailing" constant="4" id="PzQ-5t-0ab"/>
+                                    <constraint firstItem="PPf-0j-jbo" firstAttribute="leading" secondItem="4bg-n8-4qD" secondAttribute="trailing" constant="4" id="Ouh-bZ-lgS"/>
                                     <constraint firstItem="mfZ-c2-8Lm" firstAttribute="leading" secondItem="kJq-38-eqg" secondAttribute="leading" constant="5" id="Vhz-dM-Z9H"/>
                                     <constraint firstItem="PPf-0j-jbo" firstAttribute="top" secondItem="kJq-38-eqg" secondAttribute="top" constant="15" id="agO-ZZ-IFO"/>
-                                    <constraint firstAttribute="bottom" secondItem="6pf-0t-nhP" secondAttribute="bottom" constant="15" id="g3u-64-4Tg"/>
+                                    <constraint firstAttribute="bottom" secondItem="4bg-n8-4qD" secondAttribute="bottom" constant="15" id="diy-C5-5xz"/>
                                     <constraint firstAttribute="height" constant="70" id="hAW-4p-2cG"/>
-                                    <constraint firstItem="PPf-0j-jbo" firstAttribute="leading" secondItem="6pf-0t-nhP" secondAttribute="trailing" constant="4" id="mE4-dp-5qp"/>
-                                    <constraint firstItem="6pf-0t-nhP" firstAttribute="top" secondItem="kJq-38-eqg" secondAttribute="top" constant="15" id="pR9-B4-K28"/>
                                     <constraint firstAttribute="trailing" secondItem="PPf-0j-jbo" secondAttribute="trailing" constant="5" id="pVh-9Q-i1w"/>
+                                    <constraint firstItem="4bg-n8-4qD" firstAttribute="leading" secondItem="mfZ-c2-8Lm" secondAttribute="trailing" constant="4" id="wrr-d9-fiS"/>
+                                    <constraint firstItem="4bg-n8-4qD" firstAttribute="top" secondItem="kJq-38-eqg" secondAttribute="top" constant="15" id="wvd-0g-Jbb"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -167,6 +160,14 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nes-gG-y4a">
+                                <rect key="frame" x="0.0" y="149" width="320" height="349"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Swc-ik-nzf" id="sms-wb-SrM"/>
+                                    <outlet property="delegate" destination="Swc-ik-nzf" id="ywu-pZ-WqZ"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -197,10 +198,12 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="Ftitle" destination="KB9-fZ-5mw" id="reG-Je-Gdf"/>
                         <outlet property="PDview" destination="18P-zj-67F" id="Ukh-lN-VSH"/>
                         <outlet property="SendButton" destination="PPf-0j-jbo" id="1oG-Qd-E2G"/>
                         <outlet property="TitleRect" destination="Tbm-0S-qXi" id="dax-QM-TOL"/>
+                        <outlet property="forumlabel" destination="KB9-fZ-5mw" id="Hzh-bo-67O"/>
+                        <outlet property="postTitle" destination="ATc-4W-hQG" id="vFS-gZ-YQB"/>
+                        <outlet property="reply_text" destination="4bg-n8-4qD" id="Kde-RY-dxo"/>
                         <outlet property="tableview" destination="nes-gG-y4a" id="4KF-ul-ggu"/>
                     </connections>
                 </viewController>

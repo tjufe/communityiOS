@@ -19,5 +19,13 @@
 
     // Configure the view for the selected state
 }
+-(void)setPosterImage:(UIImageView *)posterImage{
+   
+       posterImage.layer.masksToBounds = YES;
+        [posterImage.layer setCornerRadius:posterImage.layer.frame.size.height/4];
+        
+  
+
+}
 
 @end

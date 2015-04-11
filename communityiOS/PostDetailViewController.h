@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "forumItem.h"
 
 @interface PostDetailViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *PDview;
+@property(strong,nonatomic)forumItem *forum_item;
+@property (weak, nonatomic) IBOutlet UITextView *reply_text;
 
 @end

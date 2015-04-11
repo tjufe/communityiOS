@@ -12,15 +12,23 @@
 #import "PostImageTableViewCell.h"
 #import "PostEditViewController.h"
 #import "UIViewController+Create.h"
+#import "PostListViewController.h"
+#import "UIImageView+WebCache.h"//加载图片
 
-@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIButton *SendButton;
+@property (weak, nonatomic) IBOutlet UILabel *postTitle;
 
 @property (weak, nonatomic) IBOutlet UIView *TitleRect;
-@property (weak, nonatomic) IBOutlet UILabel *Ftitle;
+
 @property (weak, nonatomic) IBOutlet UIImageView *PosterImage;
 @property (strong, nonatomic) IBOutlet UIView *operlist;
+
+@property (weak, nonatomic) IBOutlet UILabel *forumlabel;
+
+@property(strong,nonatomic)postItem *post_item ;
 
 
 @end
@@ -50,14 +58,22 @@ float cellheight;
             cell= [[[NSBundle mainBundle]loadNibNamed:@"PosterTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        if(self.post_item.post_date!=nil){
+        cell.postDate.text = [self.post_item.post_date substringToIndex:16];
+        }
             return cell;
-        }else if(indexPath.row == 1){
+    }else if(indexPath.row == 1){
             PostTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!cell) {
                 cell= [[[NSBundle mainBundle]loadNibNamed:@"PostTextTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cellheight = cell.Text.frame.size.height;
+            }
+            if(self.post_item.post_text!=nil){
+                cell.Text.text = self.post_item.post_text;
+            }else{
+                cell.Text.text=@"";
             }
             return cell;
 //
@@ -68,6 +84,19 @@ float cellheight;
                 cell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
+            //加载图片
+            if(self.post_item.main_image_url!=nil){
+                
+                cell.MainImage.hidden = NO;
+                [cell.MainImage sd_setImageWithURL:self.post_item.main_image_url placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        cell.MainImage.image = image;
+                    }];
+            }else{
+                cell.MainImage.hidden = NO;
+            }
+                
+            cell.MainImage.contentMode=UIViewContentModeScaleAspectFill;
+            
             return cell;
         }
     
@@ -89,9 +118,17 @@ float cellheight;
     TitleRect.layer.masksToBounds = YES;
     [TitleRect.layer setCornerRadius:TitleRect.frame.size.height/3];
 }
--(void)setFtitle:(UILabel *)Ftitle{
-    Ftitle.layer.masksToBounds = YES;
-    [Ftitle.layer setCornerRadius:Ftitle.layer.frame.size.height/3];
+-(void)setSendButton:(UIButton *)SendButton{
+    SendButton.layer.masksToBounds = YES;
+    [SendButton.layer setCornerRadius:SendButton.frame.size.height/6];
+
+}
+-(void)setForumlabel:(UILabel *)forumlabel{
+    
+    
+    [forumlabel setText:_forum_item.forum_name];
+    forumlabel.layer.masksToBounds = YES;
+    [forumlabel.layer setCornerRadius:forumlabel.layer.frame.size.height/3];
 
 }
 -(void)setPosterImage:(UIImageView *)PosterImage{
@@ -100,20 +137,45 @@ float cellheight;
 
 }
 
+-(void)addpostItem:(postItem *)PostItem{
+    self.post_item = PostItem;
+    
+}
+
 - (void)viewDidLoad {
 //    self.scrollview.frame.size.width = self.view.frame.size.width;
-    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划线
     [super viewDidLoad];
+    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划线
+    
     self.navigationItem.title = @"话题";
        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-    //设置导航右侧按钮
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStyleBordered  target:self action:@selector(Operation)];
-    [rightItem setImage:[UIImage imageNamed:@"菜单"] ];
-    [rightItem setTintColor:[UIColor redColor]];
+
+    //界面赋值
+    [self.postTitle setText:self.post_item.title];
     
+    NSLog(@"^^^^%lu",(unsigned long)_forum_item.forum_name.length);
+    
+    [self.tableview reloadData];
+
+    //设置导航右侧按钮
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *image = [UIImage imageNamed:@"菜单"];
+    
+    button.frame = CGRectMake(self.view.frame.size.width-30, 20, 20, 5);
+    
+    // 这里需要注意：由于是想让图片右移，所以left需要设置为正，right需要设置为负。正在是相反的。
+    // 让按钮图片右移15
+//    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
+    
+    [button setImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(Operation) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = rightItem;
+    
    
 }
 
@@ -170,6 +232,10 @@ float cellheight;
 -(void)Settop{
     
      [self.operlist removeFromSuperview];
+}
+-(void)setReply_text:(UITextView *)reply_text{
+    reply_text.layer.masksToBounds = YES;
+    [reply_text.layer setCornerRadius:reply_text.layer.frame.size.height/8];
 }
 
 @end

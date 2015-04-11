@@ -39,3 +39,5 @@
 
 +(postItem *)createItemWitparametes:(NSDictionary*)dic;
 @end
+
+ //这是请求帖子列表，返回的帖子的详情信息
