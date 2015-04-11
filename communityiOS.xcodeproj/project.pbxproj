@@ -40,6 +40,7 @@
 		13B1C3221AD4D6B3005C179C /* FSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C31C1AD4D6B3005C179C /* FSCollectionViewController.m */; };
 		13B1C3231AD4D6B3005C179C /* FSCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */; };
 		13B1C3241AD4D6B3005C179C /* FSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C31F1AD4D6B3005C179C /* FSViewController.m */; };
+		13B1C3271AD4D6BF005C179C /* UserCenterLoggedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */; };
 		13B1C32B1AD4D6D1005C179C /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */; };
 		13B1C32C1AD4D6D1005C179C /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */; };
 		13B1C34B1AD4D6ED005C179C /* mypickview.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C32E1AD4D6ED005C179C /* mypickview.m */; };
@@ -158,6 +159,8 @@
 		13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSCollectionViewController.xib; sourceTree = "<group>"; };
 		13B1C31E1AD4D6B3005C179C /* FSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSViewController.h; sourceTree = "<group>"; };
 		13B1C31F1AD4D6B3005C179C /* FSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSViewController.m; sourceTree = "<group>"; };
+		13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterLoggedNavigationController.h; sourceTree = "<group>"; };
+		13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterLoggedNavigationController.m; sourceTree = "<group>"; };
 		13B1C3281AD4D6D1005C179C /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
 		13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
 		13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
@@ -274,6 +277,34 @@
 		13B1C2A61ACA4AA1005C179C /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
+				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
+				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
+				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
+				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
+				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
+				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
+				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
+				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
+				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
+				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
+				13B1C33F1AD4D6ED005C179C /* PushTableViewCell.h */,
+				13B1C3401AD4D6ED005C179C /* PushTableViewCell.m */,
+				13B1C3411AD4D6ED005C179C /* PushTableViewCell.xib */,
+				13B1C3421AD4D6ED005C179C /* SaveTableViewCell.h */,
+				13B1C3431AD4D6ED005C179C /* SaveTableViewCell.m */,
+				13B1C3441AD4D6ED005C179C /* SaveTableViewCell.xib */,
+				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
+				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
+				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
+				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
+				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
+				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
+				13B1C3281AD4D6D1005C179C /* ImageTableViewCell.h */,
+				13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */,
+				13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */,
+				13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */,
+				13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */,
 				13B1C37C1AD50B70005C179C /* post */,
 				13B1C3021ACCDA61005C179C /* demo */,
 				13B1C2FC1ACBB527005C179C /* settings */,
@@ -327,6 +358,10 @@
 		13B1C2AB1ACA4B26005C179C /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				8EF3F74C1AD50B5000924975 /* postEdit */,
+				8EF3F74B1AD50B3600924975 /* forumList */,
+				8EF3F74A1AD50B1700924975 /* postList */,
+				8EF3F7491AD50B0200924975 /* postDetail */,
 				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
 				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
 				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
@@ -591,6 +626,24 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
+				13B1C3761AD4D817005C179C /* regItem.h */,
+				13B1C3771AD4D817005C179C /* regItem.m */,
+				13B1C35F1AD4D80B005C179C /* forumItem.h */,
+				13B1C3601AD4D80B005C179C /* forumItem.m */,
+				13B1C3611AD4D80B005C179C /* forumListItem.h */,
+				13B1C3621AD4D80B005C179C /* forumListItem.m */,
+				13B1C3631AD4D80B005C179C /* forumSetItem.h */,
+				13B1C3641AD4D80B005C179C /* forumSetItem.m */,
+				13B1C3671AD4D80B005C179C /* loginItem.h */,
+				13B1C3681AD4D80B005C179C /* loginItem.m */,
+				13B1C36A1AD4D80B005C179C /* postItem.h */,
+				13B1C36B1AD4D80B005C179C /* postItem.m */,
+				13B1C36C1AD4D80B005C179C /* postListItem.h */,
+				13B1C36D1AD4D80B005C179C /* postListItem.m */,
+				13B1C3781AD4D817005C179C /* StatusTool.h */,
+				13B1C3791AD4D817005C179C /* StatusTool.m */,
+				13B1C3651AD4D80B005C179C /* HttpTool.h */,
+				13B1C3661AD4D80B005C179C /* HttpTool.m */,
 				13B1C2A51ACA4A93005C179C /* app */,
 				13B1C2B01ACA5833005C179C /* vendor */,
 				13B1C2AF1ACA57FD005C179C /* resource */,
@@ -697,8 +750,6 @@
 				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
 				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
 				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
-<<<<<<< HEAD
-=======
 				13B1C3181AD4D6B3005C179C /* FSCollectionView.h */,
 				13B1C3191AD4D6B3005C179C /* FSCollectionView.m */,
 				13B1C31A1AD4D6B3005C179C /* FSCollectionView.storyboard */,
@@ -707,7 +758,6 @@
 				13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */,
 				13B1C31E1AD4D6B3005C179C /* FSViewController.h */,
 				13B1C31F1AD4D6B3005C179C /* FSViewController.m */,
->>>>>>> 82f50d1129bfadda3373a69b763604ccff2cb1dc
 				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
 				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */,

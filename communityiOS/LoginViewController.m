@@ -159,12 +159,14 @@
     }
 }
 
+
 #pragma mark --保存在本地
 - (void) saveIntoLoc: (loginItem *)loginItem {
+
     [[NSUserDefaults standardUserDefaults] setObject:self.loginItem.checkin_community_id forKey:@"CommunityID"];
     [[NSUserDefaults standardUserDefaults] setObject:self.loginItem.user_id forKey:@"UserID"];
     [[NSUserDefaults standardUserDefaults] setObject:self.loginItem.user_nickname forKey:@"UserNickname"];
-    
+    [[NSUserDefaults standardUserDefaults] synchronize];  //保持同步
 }
 
 @end
