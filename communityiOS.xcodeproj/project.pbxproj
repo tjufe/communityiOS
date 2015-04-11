@@ -40,9 +40,6 @@
 		13B1C3221AD4D6B3005C179C /* FSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C31C1AD4D6B3005C179C /* FSCollectionViewController.m */; };
 		13B1C3231AD4D6B3005C179C /* FSCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */; };
 		13B1C3241AD4D6B3005C179C /* FSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C31F1AD4D6B3005C179C /* FSViewController.m */; };
-		13B1C3271AD4D6BF005C179C /* UserCenterLoggedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */; };
-		13B1C32B1AD4D6D1005C179C /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */; };
-		13B1C32C1AD4D6D1005C179C /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */; };
 		13B1C34B1AD4D6ED005C179C /* mypickview.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C32E1AD4D6ED005C179C /* mypickview.m */; };
 		13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */; };
 		13B1C34D1AD4D6ED005C179C /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3311AD4D6ED005C179C /* PostDetailViewController.m */; };
@@ -166,9 +163,6 @@
 		13B1C31F1AD4D6B3005C179C /* FSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSViewController.m; sourceTree = "<group>"; };
 		13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterLoggedNavigationController.h; sourceTree = "<group>"; };
 		13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterLoggedNavigationController.m; sourceTree = "<group>"; };
-		13B1C3281AD4D6D1005C179C /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
-		13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
-		13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		13B1C32D1AD4D6ED005C179C /* mypickview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mypickview.h; sourceTree = "<group>"; };
 		13B1C32E1AD4D6ED005C179C /* mypickview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mypickview.m; sourceTree = "<group>"; };
 		13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostDetailStoryboard.storyboard; sourceTree = "<group>"; };
@@ -294,21 +288,6 @@
 			children = (
 				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
 				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
-				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
-				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
-				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
-				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
-				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
-				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
-				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
-				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
-				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
-				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
-				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
-				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
-				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
-				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
-				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
 				13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */,
 				13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */,
 				13B1C37C1AD50B70005C179C /* post */,
@@ -341,10 +320,6 @@
 				13B1C2CC1ACB7DC5005C179C /* MJRefresh */,
 				13B1C2BC1ACA5A27005C179C /* KZPropertyMapper.h */,
 				13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */,
-				13B1C3781AD4D817005C179C /* StatusTool.h */,
-				13B1C3791AD4D817005C179C /* StatusTool.m */,
-				13B1C3651AD4D80B005C179C /* HttpTool.h */,
-				13B1C3661AD4D80B005C179C /* HttpTool.m */,
 				13B1C2B41ACA58B5005C179C /* APIClient.m */,
 				13B1C2B51ACA58B5005C179C /* APIClient.h */,
 			);
@@ -354,10 +329,6 @@
 		13B1C2A91ACA4ACB005C179C /* views */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
-				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
-				13B1C30E1AD4D674005C179C /* DialogView.h */,
-				13B1C30F1AD4D674005C179C /* DialogView.m */,
 				13B1C2AB1ACA4B26005C179C /* cells */,
 			);
 			name = views;
@@ -370,42 +341,6 @@
 				8EF3F74B1AD50B3600924975 /* forumList */,
 				8EF3F74A1AD50B1700924975 /* postList */,
 				8EF3F7491AD50B0200924975 /* postDetail */,
-				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
-				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
-				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
-				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
-				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
-				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
-				13B1C30B1AD4D674005C179C /* ChainTableViewCell.h */,
-				13B1C30C1AD4D674005C179C /* ChainTableViewCell.m */,
-				13B1C30D1AD4D674005C179C /* ChainTableViewCell.xib */,
-				13B1C3101AD4D674005C179C /* ForumSelectTableViewCell.h */,
-				13B1C3111AD4D674005C179C /* ForumSelectTableViewCell.m */,
-				13B1C3121AD4D674005C179C /* ForumSelectTableViewCell.xib */,
-				A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */,
-				A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */,
-				A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */,
-				13BE566A1ABA574700379ACD /* ForumTableViewCell.h */,
-				13BE566B1ABA574700379ACD /* ForumTableViewCell.m */,
-				13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */,
-				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
-				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
-				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
-				13B1C33F1AD4D6ED005C179C /* PushTableViewCell.h */,
-				13B1C3401AD4D6ED005C179C /* PushTableViewCell.m */,
-				13B1C3411AD4D6ED005C179C /* PushTableViewCell.xib */,
-				13B1C3421AD4D6ED005C179C /* SaveTableViewCell.h */,
-				13B1C3431AD4D6ED005C179C /* SaveTableViewCell.m */,
-				13B1C3441AD4D6ED005C179C /* SaveTableViewCell.xib */,
-				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
-				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
-				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
-				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
-				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
-				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
-				13B1C3281AD4D6D1005C179C /* ImageTableViewCell.h */,
-				13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */,
-				13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -462,20 +397,6 @@
 		13B1C2B11ACA5885005C179C /* API */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C3761AD4D817005C179C /* regItem.h */,
-				13B1C3771AD4D817005C179C /* regItem.m */,
-				13B1C3671AD4D80B005C179C /* loginItem.h */,
-				13B1C3681AD4D80B005C179C /* loginItem.m */,
-				13B1C35F1AD4D80B005C179C /* forumItem.h */,
-				13B1C3601AD4D80B005C179C /* forumItem.m */,
-				13B1C3611AD4D80B005C179C /* forumListItem.h */,
-				13B1C3621AD4D80B005C179C /* forumListItem.m */,
-				13B1C3631AD4D80B005C179C /* forumSetItem.h */,
-				13B1C3641AD4D80B005C179C /* forumSetItem.m */,
-				13B1C36C1AD4D80B005C179C /* postListItem.h */,
-				13B1C36D1AD4D80B005C179C /* postListItem.m */,
-				13B1C36A1AD4D80B005C179C /* postItem.h */,
-				13B1C36B1AD4D80B005C179C /* postItem.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -578,21 +499,6 @@
 		13B1C37C1AD50B70005C179C /* post */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */,
-				13B1C3301AD4D6ED005C179C /* PostDetailViewController.h */,
-				13B1C3311AD4D6ED005C179C /* PostDetailViewController.m */,
-				13B1C3321AD4D6ED005C179C /* PostEdit.storyboard */,
-				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
-				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
-				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
-				13B1C3181AD4D6B3005C179C /* FSCollectionView.h */,
-				13B1C3191AD4D6B3005C179C /* FSCollectionView.m */,
-				13B1C31A1AD4D6B3005C179C /* FSCollectionView.storyboard */,
-				13B1C31B1AD4D6B3005C179C /* FSCollectionViewController.h */,
-				13B1C31C1AD4D6B3005C179C /* FSCollectionViewController.m */,
-				13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */,
-				13B1C31E1AD4D6B3005C179C /* FSViewController.h */,
-				13B1C31F1AD4D6B3005C179C /* FSViewController.m */,
 			);
 			name = post;
 			sourceTree = "<group>";
@@ -699,6 +605,15 @@
 		8EF3F7491AD50B0200924975 /* postDetail */ = {
 			isa = PBXGroup;
 			children = (
+				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
+				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
+				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
+				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
+				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
+				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
+				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
+				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
+				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
 			);
 			name = postDetail;
 			sourceTree = "<group>";
@@ -706,9 +621,9 @@
 		8EF3F74A1AD50B1700924975 /* postList */ = {
 			isa = PBXGroup;
 			children = (
-				A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */,
-				A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */,
-				A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */,
+				13BE566A1ABA574700379ACD /* ForumTableViewCell.h */,
+				13BE566B1ABA574700379ACD /* ForumTableViewCell.m */,
+				13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */,
 			);
 			name = postList;
 			sourceTree = "<group>";
@@ -716,9 +631,9 @@
 		8EF3F74B1AD50B3600924975 /* forumList */ = {
 			isa = PBXGroup;
 			children = (
-				13BE566A1ABA574700379ACD /* ForumTableViewCell.h */,
-				13BE566B1ABA574700379ACD /* ForumTableViewCell.m */,
-				13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */,
+				A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */,
+				A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */,
+				A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */,
 			);
 			name = forumList;
 			sourceTree = "<group>";
@@ -729,6 +644,12 @@
 				13B1C3101AD4D674005C179C /* ForumSelectTableViewCell.h */,
 				13B1C3111AD4D674005C179C /* ForumSelectTableViewCell.m */,
 				13B1C3121AD4D674005C179C /* ForumSelectTableViewCell.xib */,
+				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
+				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
+				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
+				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
+				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
+				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
 			);
 			name = postEdit;
 			sourceTree = "<group>";
@@ -865,7 +786,6 @@
 				13B1C3531AD4D6ED005C179C /* PostImageTableViewCell.xib in Resources */,
 				13B1C35E1AD4D6ED005C179C /* TitleTableViewCell.xib in Resources */,
 				13B1C3541AD4D6ED005C179C /* PostList.storyboard in Resources */,
-				13B1C3141AD4D674005C179C /* ChainTableViewCell.xib in Resources */,
 				13B1C3211AD4D6B3005C179C /* FSCollectionView.storyboard in Resources */,
 				13B1C3171AD4D674005C179C /* ForumSelectTableViewCell.xib in Resources */,
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
