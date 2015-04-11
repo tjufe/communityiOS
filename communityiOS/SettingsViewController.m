@@ -25,7 +25,22 @@
 }
 #pragma mark --退出登录
 - (IBAction)logout:(id)sender {
+    [self reduceLoginInfoFormLoc];
+    [self exit:self];
 }
+
+#pragma mark --清除本地保存的历史登录信息
+- (void) reduceLoginInfoFormLoc {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"UserNickname"];
+    [defaults setObject:nil forKey:@"PhoneNumber"];
+    [defaults setObject:nil forKey:@"HeadPortraitUrl"];
+    [defaults setObject:@"" forKey:@"UserPermission"];
+    [defaults setObject:nil forKey:@"LoginPassword"];
+    [defaults setBool:NO forKey:@"Logged"];
+    [defaults synchronize];  //保持同步
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -153,7 +153,7 @@
 //    }
 }
 
-#pragma mark --检查登录结果
+#pragma mark --检查登录结果hmx
 - (void) checkLoginResult: (id)loginResult {
     loginItem *loginItem=loginResult;
     if(loginItem.LoginSucceed){
@@ -161,10 +161,23 @@
         [self doExit];//退出本页
     }else{
         [self showErrMsg:loginItem.ErrorMessage];//显示登录失败报错
+        [self reduceLoginInfoFormLoc];
     }
 }
 
-#pragma mark --保存在本地
+#pragma mark --清除本地保存的历史登录信息hmx
+- (void) reduceLoginInfoFormLoc {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"UserNickname"];
+    [defaults setObject:nil forKey:@"PhoneNumber"];
+    [defaults setObject:nil forKey:@"HeadPortraitUrl"];
+    [defaults setObject:@"" forKey:@"UserPermission"];
+    [defaults setObject:nil forKey:@"LoginPassword"];
+    [defaults setBool:NO forKey:@"Logged"];
+    [defaults synchronize];  //保持同步
+}
+
+#pragma mark --保存在本地hmx
 - (void) saveIntoLoc: (loginItem *)loginItem {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:loginItem.checkin_community_id forKey:@"CommunityID"];
@@ -178,7 +191,7 @@
     [defaults synchronize];  //保持同步
 }
 
-#pragma mark --显示登录失败报错
+#pragma mark --显示登录失败报错hmx
 - (void) showErrMsg: (NSString *)loginErrorMessage {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败" message:loginErrorMessage delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
     [alert show];

@@ -24,6 +24,8 @@
                                 <rect key="frame" x="40" y="80" width="38" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="38" id="IiV-pc-kJy"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="Ka7-Xa-OsK"/>
+                                    <constraint firstAttribute="height" constant="38" id="oJ8-Qz-Ek2"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="游客" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpH-tt-HAg">
@@ -141,6 +143,10 @@
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="imgAvatar" destination="AgG-MZ-dDL" id="eEB-YA-2IT"/>
+                        <outlet property="labelNickname" destination="MpH-tt-HAg" id="N2W-WE-O9X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6M-1e-ljy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

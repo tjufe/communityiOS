@@ -10,4 +10,7 @@
 
 @interface UserCenterLoggedViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
+
+@property (weak, nonatomic) IBOutlet UILabel *labelNickname;
 @end

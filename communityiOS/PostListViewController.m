@@ -32,6 +32,20 @@
 
 @end
 
+//@interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>{
+//    NSMutableArray *postTitleData;  //表格数据
+//    NSMutableArray *postImageData;
+//    NSMutableArray *postDateData;
+//    NSMutableArray *postSetTopData;
+//}
+////@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
+//@property (weak, nonatomic) IBOutlet UITableView *pltable;
+//@property(strong,nonatomic)postItem *pitem;
+//@property(strong,nonatomic)NSMutableArray *PostListArray;
+//
+//
+//@end
+
 
 @implementation PostListViewController
 
