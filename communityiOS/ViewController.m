@@ -57,11 +57,11 @@
 
 
 -(void) setupRefresh {
-//    1.下拉刷新（进入刷新状态就会调用self的headerRereshing）
+    //    1.下拉刷新（进入刷新状态就会调用self的headerRereshing）
     [self.mainTableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-//    自动刷新（一进入程序就下拉刷新）
-//    [self.mainTableView headerBeginRefreshing];
-//    2.上拉加载更多（进入刷新状态就会调用self的footerRereshing）
+    //    自动刷新（一进入程序就下拉刷新）
+    //    [self.mainTableView headerBeginRefreshing];
+    //    2.上拉加载更多（进入刷新状态就会调用self的footerRereshing）
     [self.mainTableView addFooterWithTarget:self action:@selector(footerRereshing)];
 }
 
@@ -77,30 +77,30 @@
 -(void) getData {
     //显示／隐藏等待进度条
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 -(void) loadNextPage {
-//    @{
-//      @"pageSize":@(20),
-//      @"pageNumber":@(self.currentPage),
-//      }
-//    [[APIClient sharedClient] POST:<#(NSString *)#> parameters:<#(id)#> constructingBodyWithBlock:<#^(id<AFMultipartFormData> formData)block#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, NSError *error)failure#>]
+    //    @{
+    //      @"pageSize":@(20),
+    //      @"pageNumber":@(self.currentPage),
+    //      }
+    //    [[APIClient sharedClient] POST:<#(NSString *)#> parameters:<#(id)#> constructingBodyWithBlock:<#^(id<AFMultipartFormData> formData)block#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, NSError *error)failure#>]
 }
 
 
 - (void)initTableData {
-//    tableData = [[NSMutableArray alloc] initWithObjects:
-//                 self.forumName,[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
-//                 self.forumImage,nil];
-//    [self.mainTableView reloadData];
+    //    tableData = [[NSMutableArray alloc] initWithObjects:
+    //                 self.forumName,[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
+    //                 self.forumImage,nil];
+    //    [self.mainTableView reloadData];
 }
 
 - (IBAction)go2Login:(id)sender {
-
+    
     LoginNavigationController *vc=[LoginNavigationController createFromStoryboardName:@"Login" withIdentifier:@"loginACT"];
-//    [self.navigationController pushViewController:vc animated:YES];
-
+    //    [self.navigationController pushViewController:vc animated:YES];
+    
     [self presentModalViewController:vc animated:YES];
 }
 
@@ -109,32 +109,30 @@
     [super viewDidLoad];
     
     
-//    [self.btnNickname setTitle:@"lalala" forState:UIControlStateNormal];
+    //    [self.btnNickname setTitle:@"lalala" forState:UIControlStateNormal];
     
     
-//    UITapGestureRecognizer 手势
-//    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
-//    TPKeyboardAvoiding 触摸收起键盘的的scollview
+    //    UITapGestureRecognizer 手势
+    //    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
+    //    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
-//    [self initTableData];
+    //    [self initTableData];
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
-     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-//    [self.navigationController setNavigationBarHidden:YES];
-//    tableData = [[NSMutableArray alloc] init];
-//    for (int i = 0; i< 7; i++) {
-//        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
-//    }
+    self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    //    [self.navigationController setNavigationBarHidden:YES];
+    //    tableData = [[NSMutableArray alloc] init];
+    //    for (int i = 0; i< 7; i++) {
+    //        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
+    //    }
     
-//    _forumName = [[NSMutableArray alloc] init];
-//    _forumImage = [[NSMutableArray alloc] init];
+    //    _forumName = [[NSMutableArray alloc] init];
+    //    _forumImage = [[NSMutableArray alloc] init];
     self.navigationController.delegate=self;
     
     [self reloadData];
     
-    self.avaterImageView.layer.masksToBounds=YES;
-    [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
-    self.avaterImageView.contentMode=UIViewContentModeScaleAspectFill;//取图片的中部分
+    
     
     // Do any additional setup after loading the view, typically from a nib.
     //    图片的宽
@@ -177,8 +175,8 @@
     
     [self addTimer];
     [self autoLogin];
-//    [self setupRefresh];
-
+    //    [self setupRefresh];
+    
 }
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -245,7 +243,7 @@
 
 #pragma mark --LoginViewController delegate
 -(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id{
-     self.checkin_community_id = login_id;
+    self.checkin_community_id = login_id;
     [self.mainTableView reloadData];
 }
 
@@ -267,7 +265,7 @@
         NSLog(@"%@",error);
     }];
     
-
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -279,9 +277,9 @@
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
-//    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
-//    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
-//    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+    //    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
+    //    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
+    //    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
     forumItem *item = [_listForumItem objectAtIndex:indexPath.row];
     [cell setForumName:item.forum_name];
     [cell setForumIconImage:item.image_url];
@@ -330,30 +328,30 @@
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    // custom view for header. will be adjusted to default or specified header height
-//    
+//
 ////    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
 ////    if(section>0)
 ////        headerView.backgroundColor=[UIColor redColor];
 ////    else
 ////        headerView.backgroundColor=[UIColor blueColor];
-////    
+////
 //////    [headerView addSubview:(UIView *)];
-////    
+////
 ////    return headerView;
 //    return nil;
 //}
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    // custom view for header. will be adjusted to default or specified header height
-//    
+//
 //    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
 //    if(section>0)
 //        headerView.backgroundColor=[UIColor redColor];
 //    else
 //        headerView.backgroundColor=[UIColor blueColor];
-//    
+//
 ////    [headerView addSubview:(UIView *)];
-//    
+//
 //    return headerView;
 //}
 
@@ -376,9 +374,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userID = [defaults valueForKey:@"UserID"];
     if(userID==nil){//没有userID的情况，初次打开app，分配guid
-        userID=[self genUUID];//生成唯一编码作为userID
-        [defaults setObject:userID forKey:@"UserID"];//保存本地
-        [defaults synchronize];//保存同步
+        [self initUserInfoIntoLoc];
     }else{//处理自动登录
         NSString *phoneNumber = [defaults valueForKey:@"PhoneNumber"];
         NSString *loginPassword = [defaults valueForKey:@"LoginPassword"];
@@ -386,6 +382,16 @@
             [self loginActionWithPhone:phoneNumber withPassword:loginPassword];//调用登录接口
         }
     }
+}
+
+#pragma mark --初始化保存本地用户信息（用于app首次运行）
+- (void) initUserInfoIntoLoc {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userID=[self genUUID];//生成唯一编码作为userID
+    [defaults setObject:userID forKey:@"UserID"];//保存本地
+    [defaults setObject:@"0001" forKey:@"CommunityID"];
+    [defaults setObject:@"" forKey:@"UserPermission"];
+    [defaults synchronize];//保存同步
 }
 
 #pragma mark --生成UUID
@@ -417,7 +423,20 @@
         [self saveIntoLoc:loginItem];//保存在本地
     }else{
         NSLog(@"%@",loginItem.ErrorMessage);
+        [self reduceLoginInfoFormLoc];//清除本地保存的历史登录信息
     }
+}
+
+#pragma mark --清除本地保存的历史登录信息
+- (void) reduceLoginInfoFormLoc {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"UserNickname"];
+    [defaults setObject:nil forKey:@"PhoneNumber"];
+    [defaults setObject:nil forKey:@"HeadPortraitUrl"];
+    [defaults setObject:@"" forKey:@"UserPermission"];
+    [defaults setObject:nil forKey:@"LoginPassword"];
+    [defaults setBool:NO forKey:@"Logged"];
+    [defaults synchronize];  //保持同步
 }
 
 #pragma mark --保存在本地
@@ -436,12 +455,17 @@
 
 #pragma mark --刷新用户状态栏UI
 - (void) reloadUserStateBarUI {
+    [self.btnNickname setTitle:@"游客" forState:UIControlStateNormal];
+    self.avaterImageView.layer.masksToBounds=YES;
+    [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
+    self.avaterImageView.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
+    UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
+    self.avaterImageView.image = placeholderImage;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *phoneNumber = [defaults valueForKey:@"PhoneNumber"];
     if(phoneNumber!=nil){
         NSString *userNickname = [defaults valueForKey:@"UserNickname"];
         NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
-        UIImage *placeholderImage=[UIImage imageNamed:@"icon_acatar_default_r"];
         [self.btnNickname setTitle:userNickname forState:UIControlStateNormal];
         [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if(image!=nil){
