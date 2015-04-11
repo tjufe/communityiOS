@@ -34,7 +34,7 @@
 @end
 
 @implementation PostDetailViewController
-
+int count=0;
 float cellheight;
 - (IBAction)SendOnClick:(id)sender {
     
@@ -187,6 +187,10 @@ float cellheight;
 }
 
 -(void)Operation{
+    if(count % 2!=0){
+        count++;
+        self.operlist.hidden = YES;
+    }else{
     self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 150)];
     self.operlist.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     self.operlist.alpha=0;
@@ -217,13 +221,19 @@ float cellheight;
     [self.operlist addSubview:settopbutton];
     [settopbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [settopbutton addTarget:self action:@selector(Settop) forControlEvents:UIControlEventTouchUpInside];
-    
+        count++;
+    }
     
 }
 
 -(void)EditPost{
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];
     //通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    //传值
+    PEVC.ED_FLAG = @"2";//编辑帖子
+    PEVC.post_item = self.post_item;//帖子详情
+    PEVC.forum_item = _forum_item;
+    
     [self.navigationController pushViewController:PEVC animated:YES];
     [self.operlist removeFromSuperview];
 }

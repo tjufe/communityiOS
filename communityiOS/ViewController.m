@@ -367,6 +367,8 @@
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 - (IBAction)NewPostOnClick:(id)sender {
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    PEVC.ED_FLAG = @"0";//直接发新帖
+    
     [self.navigationController pushViewController:PEVC animated:YES];
 }
 

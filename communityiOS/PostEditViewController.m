@@ -34,7 +34,20 @@
 @property (strong, nonatomic) TextTableViewCell *textcell;
 
 
+@property (strong,nonatomic)NSMutableArray *forumSetList;//帖子设置数组
+@property (strong,nonatomic)forumSetItem *forum_set_item;//帖子的设置
+
+@property (strong,nonatomic)NSString *ISCHAIN;
+@property (strong,nonatomic)NSString *ISAPPLY;
+@property (strong,nonatomic)NSString *ISMAINIMG;
+
+
+
 @end
+
+NSString * const site_addchain = @"是否提供外链功能";
+NSString * const site_addapply = @"是否提供报名功能";
+NSString * const site_addmainimg=@"主帖是否包含主图";
 
 @implementation PostEditViewController
 NSArray *activities_;
@@ -54,9 +67,13 @@ NSArray *third_;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         if (indexPath.row== 0 ) {
         ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
+            
         
         if (!cell) {
             cell= [[[NSBundle mainBundle]loadNibNamed:@"ForumSelectTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            if(![_ED_FLAG isEqualToString:@"0"]){
+                cell.fslabel.text = _forum_item.forum_name;
+            }
             
         }
 
@@ -70,6 +87,12 @@ NSArray *third_;
                 cell= [[[NSBundle mainBundle]loadNibNamed:@"TitleTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
+                if([_ED_FLAG isEqualToString:@"2"]){
+                    //编辑帖子
+                   cell.Title.text = _post_item.title;
+                    
+                }
+
             }
         
         return cell;
@@ -82,8 +105,14 @@ NSArray *third_;
         if (!cell) {
             cell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textview.placeholder = @"adsafadsaf";
-            NSLog(@"%@",cell.textview.placeholder);
+            //flag如果是2，表示编辑原有帖子
+            if([_ED_FLAG isEqualToString:@"2"]){
+                //编辑帖子
+                cell.textview.text = _post_item.post_text;
+                
+            }
+//            cell.textview.placeholder = @"adsafadsaf";
+//            NSLog(@"%@",cell.textview.placeholder);
         }
         return cell;
 
@@ -113,6 +142,8 @@ NSArray *third_;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row==0){
 
+        
+        if([_ED_FLAG isEqualToString:@"0"]){
 
         //collectionview布局
         UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
@@ -143,6 +174,7 @@ NSArray *third_;
 //        NSArray *arr = [[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
         //获取点击的cell
         [self.fs getcelltext:indexPath:self.PEtableview];
+        }
         
         
             
@@ -245,6 +277,44 @@ NSArray *third_;
                @"4",@"5",@"6",@"7",@"8",@"9",nil];
     third_=[[NSArray alloc]initWithObjects:@"0",@"1",@"2",@"3",
             @"4",@"5",@"6",@"7",@"8",@"9",nil];
+    //获取版块设置
+    self.ISMAINIMG = @"N";
+    self.ISAPPLY = @"N";
+    self.ISCHAIN =@"N";
+    if(![_ED_FLAG isEqualToString:@"0"]){
+        for(int i=0;i < [_forum_item.ForumSetlist count];i++){
+            self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];
+            if([self.forum_set_item.site_name isEqualToString:site_addapply]&&[self.forum_set_item.site_value isEqualToString:@"是"]){
+                self.ISAPPLY = @"Y";
+            }
+            if ([self.forum_set_item.site_name isEqualToString:site_addchain]&&[self.forum_set_item.site_value isEqualToString:@"是"]) {
+                self.ISCHAIN = @"Y";
+            }
+            if([self.forum_set_item.site_name isEqualToString:site_addmainimg]&&[self.forum_set_item.site_value isEqualToString:@"是"]){
+                self.ISMAINIMG=@"Y";
+            }
+        }
+    }
+    //设置按钮是否显示
+    if(![_ED_FLAG isEqualToString:@"0"]){
+        if(![self.ISMAINIMG isEqualToString:@"Y"]){
+            self.addpic.enabled = NO;
+            // self.addpic.hidden = YES;
+        }
+        if(![self.ISCHAIN isEqualToString:@"Y"]){
+            self.chain.enabled = NO;
+            //  self.chain.hidden = YES;
+        }
+        if(![self.ISAPPLY isEqualToString:@"Y"]){
+            self.apply.enabled = NO;
+            //   self.apply.hidden = YES;
+        }
+        
+        
+    }
+    
+    [self.PEtableview reloadData];
+
 
 
 }

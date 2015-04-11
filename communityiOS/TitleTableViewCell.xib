@@ -42,7 +42,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outletCollection property="Title" destination="fcn-8i-rU1" id="DtQ-D3-EmH"/>
+                <outlet property="Title" destination="fcn-8i-rU1" id="DeT-pS-kaA"/>
             </connections>
             <point key="canvasLocation" x="298" y="270.5"/>
         </tableViewCell>
