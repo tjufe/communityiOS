@@ -14,7 +14,7 @@
 #import "StatusTool.h"
 #import "postListItem.h"
 #import "UIImageView+WebCache.h"//加载图片
-
+#import "postInfoItem.h"
 #import "PostEditViewController.h"
 
 
@@ -24,26 +24,20 @@
     NSMutableArray *postImageData;
     NSMutableArray *postDateData;
     NSMutableArray *postSetTopData;
+    NSMutableArray *Poster_Nic_Array;//发帖人昵称数组
+    NSMutableArray *Poster_Img_Array;//发帖人头像url数组
+    NSMutableArray *Post_Rpply_Array;//帖子评论数
 }
 //@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
 @property (weak, nonatomic) IBOutlet UITableView *pltable;
 @property(strong,nonatomic)postItem *pitem;
 @property(strong,nonatomic)NSMutableArray *PostListArray;
+@property (strong,nonatomic) postInfoItem *post_info_item;
 
 @end
-@interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>{
-    NSMutableArray *postTitleData;  //表格数据
-    NSMutableArray *postImageData;
-    NSMutableArray *postDateData;
-    NSMutableArray *postSetTopData;
-}
-//@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
-@property (weak, nonatomic) IBOutlet UITableView *pltable;
-@property(strong,nonatomic)postItem *pitem;
-@property(strong,nonatomic)NSMutableArray *PostListArray;
 
 
-@end
+
 
 @implementation PostListViewController
 
@@ -153,6 +147,9 @@
     postDateData = [[NSMutableArray alloc]init];
     postImageData = [[NSMutableArray alloc]init];
     postSetTopData = [[NSMutableArray alloc]init];
+    Poster_Nic_Array = [[NSMutableArray alloc]init];
+    Poster_Img_Array = [[NSMutableArray alloc]init];
+    Post_Rpply_Array =[[NSMutableArray alloc]init];
     //请求数据
     [self loadData];
 
@@ -216,8 +213,10 @@
 }
 -(void)NewPost{
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    PEVC.forum_item = _forum_item;
+    PEVC.ED_FLAG =@"1";// 当前版块下发帖
     [self.navigationController pushViewController:PEVC animated:YES];
-
+    
 }
 
 

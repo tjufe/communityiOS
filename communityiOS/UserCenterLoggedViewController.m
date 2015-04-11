@@ -11,6 +11,7 @@
 #import "UIViewController+Create.h"
 #import "UserCenterLoggedViewController.h"
 #import "PPRevealSideViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface UserCenterLoggedViewController ()
 
@@ -29,6 +30,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initUI];
+}
+
+- (void)initUI {
+    _imgAvatar.layer.masksToBounds=YES;
+    [_imgAvatar.layer setCornerRadius:_imgAvatar.frame.size.width/2];
+    _imgAvatar.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
+    UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
+    _imgAvatar.image = placeholderImage;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *phoneNumber = [defaults valueForKey:@"PhoneNumber"];
+    if(phoneNumber!=nil){
+        NSString *userNickname = [defaults valueForKey:@"UserNickname"];
+        NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
+        _labelNickname.text = userNickname;
+        [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if(image!=nil){
+                _imgAvatar.image = image;
+            }
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

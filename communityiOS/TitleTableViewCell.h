@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TitleTableViewCell : UITableViewCell
-@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *Title;
+@property (weak, nonatomic) IBOutlet UITextField *Title;
+
 
 @end
