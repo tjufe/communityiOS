@@ -19,3 +19,5 @@
 +(forumSetItem *)createItemWitparametes:(NSDictionary*)dic;
 
 @end
+
+//这是请求板块列表时返回的板块设置的数据对象模型

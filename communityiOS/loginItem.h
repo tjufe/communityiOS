@@ -33,3 +33,6 @@
 +(loginItem *)createItemWitparametes:(NSDictionary*)dic;
 
 @end
+
+
+//这是请求登录时返回的用户相关信息的数据对象模型

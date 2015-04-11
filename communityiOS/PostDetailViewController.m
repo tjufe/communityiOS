@@ -62,7 +62,7 @@ float cellheight;
         cell.postDate.text = [self.post_item.post_date substringToIndex:16];
         }
             return cell;
-        }else if(indexPath.row == 1){
+    }else if(indexPath.row == 1){
             PostTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!cell) {
@@ -120,6 +120,11 @@ float cellheight;
     
     
 }
+-(void)setSendButton:(UIButton *)SendButton{
+    SendButton.layer.masksToBounds = YES;
+    [SendButton.layer setCornerRadius:SendButton.frame.size.height/6];
+
+}
 -(void)setForumlabel:(UILabel *)forumlabel{
     
     
@@ -148,18 +153,31 @@ float cellheight;
        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+
     //界面赋值
     [self.postTitle setText:self.post_item.title];
     
-    NSLog(@"^^^^%d",_forum_item.forum_name.length);
+    NSLog(@"^^^^%lu",(unsigned long)_forum_item.forum_name.length);
     
     [self.tableview reloadData];
+
     //设置导航右侧按钮
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStyleBordered  target:self action:@selector(Operation)];
-    [rightItem setImage:[UIImage imageNamed:@"菜单"] ];
-    [rightItem setTintColor:[UIColor redColor]];
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *image = [UIImage imageNamed:@"菜单"];
     
+    button.frame = CGRectMake(self.view.frame.size.width-30, 20, 20, 5);
+    
+    // 这里需要注意：由于是想让图片右移，所以left需要设置为正，right需要设置为负。正在是相反的。
+    // 让按钮图片右移15
+//    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
+    
+    [button setImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(Operation) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = rightItem;
+    
    
 }
 
@@ -216,6 +234,10 @@ float cellheight;
 -(void)Settop{
     
      [self.operlist removeFromSuperview];
+}
+-(void)setReply_text:(UITextView *)reply_text{
+    reply_text.layer.masksToBounds = YES;
+    [reply_text.layer setCornerRadius:reply_text.layer.frame.size.height/8];
 }
 
 @end

@@ -28,6 +28,7 @@
 
 
 
+
 //NSString const *
 
 @interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,LoginViewControllerDelegate>{
@@ -43,9 +44,12 @@
 @property (nonatomic,strong)NSString *checkin_community_id;
 @property NSInteger *currentPage;
 @property (weak, nonatomic) IBOutlet UISwitch *testSwitch;
-//@property (nonatomic ,strong) forumItem *forum_item;
-//@property (nonatomic,strong) NSMutableArray *forumName;
-//@property (nonatomic,strong) NSMutableArray *forumImage;
+@property (nonatomic ,strong) forumItem *forum_item;
+@property (nonatomic ,strong) NSMutableArray *forum_list_item;
+
+@property (nonatomic,strong) NSMutableArray *forumName;
+@property (nonatomic,strong) NSMutableArray *forumImage;
+
 
 @property (nonatomic,strong) NSArray *listForumItem;
 
@@ -130,7 +134,23 @@
     //    _forumImage = [[NSMutableArray alloc] init];
     self.navigationController.delegate=self;
     
-    [self reloadData];
+    [StatusTool statusToolGetForumListWithID:@"0001" Success:^(id object) {
+        
+        self.forum_list_item=(NSMutableArray *)object ;
+        
+        for (int i = 0; i < [object count]; i++) {
+            self.forum_item = [object objectAtIndex:i];
+            if (self.forum_item.forum_name != nil)
+            [_forumName addObject:self.forum_item.forum_name];
+            if (self.forum_item.image_url != nil)
+            [_forumImage addObject:self.forum_item.image_url];
+        }
+        [self initTableData];
+        
+    } failurs:^(NSError *error) {
+         NSLog(@"%@",error);
+    }];
+    
     
     
     
@@ -242,6 +262,8 @@
 
 
 #pragma mark --LoginViewController delegate
+
+#pragma mark --LoginViewController delegate
 -(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id{
     self.checkin_community_id = login_id;
     [self.mainTableView reloadData];
@@ -320,7 +342,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
-    poLVC.forum_item = [self.listForumItem objectAtIndex:indexPath.row];
+    poLVC.forum_item = [self.forum_list_item objectAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:poLVC animated:YES];
     

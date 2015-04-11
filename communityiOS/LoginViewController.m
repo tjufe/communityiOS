@@ -138,6 +138,12 @@
                                        } failurs:^(NSError *error) {
                                            NSLog(@"%@",error);
                                        }];
+    
+    
+    
+    
+    
+    
 //    //关闭当前视图控制器
 //    [self.navigationController popViewControllerAnimated:YES];
 //    //代理传值

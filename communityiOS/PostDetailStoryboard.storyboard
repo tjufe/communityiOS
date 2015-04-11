@@ -134,24 +134,25 @@
                                             <constraint firstAttribute="height" constant="40" id="aE9-nE-Q1f"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="快速回复" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6pf-0t-nhP">
-                                        <rect key="frame" x="53" y="15" width="192" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-n8-4qD">
+                                        <rect key="frame" x="49" y="15" width="192" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90697995580000002" green="0.90697995580000002" blue="0.90697995580000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="mfZ-c2-8Lm" firstAttribute="top" secondItem="kJq-38-eqg" secondAttribute="top" constant="15" id="Akt-U9-MEq"/>
                                     <constraint firstAttribute="height" constant="60" id="Gzt-Nc-44P"/>
-                                    <constraint firstItem="6pf-0t-nhP" firstAttribute="leading" secondItem="mfZ-c2-8Lm" secondAttribute="trailing" constant="4" id="PzQ-5t-0ab"/>
+                                    <constraint firstItem="PPf-0j-jbo" firstAttribute="leading" secondItem="4bg-n8-4qD" secondAttribute="trailing" constant="4" id="Ouh-bZ-lgS"/>
                                     <constraint firstItem="mfZ-c2-8Lm" firstAttribute="leading" secondItem="kJq-38-eqg" secondAttribute="leading" constant="5" id="Vhz-dM-Z9H"/>
                                     <constraint firstItem="PPf-0j-jbo" firstAttribute="top" secondItem="kJq-38-eqg" secondAttribute="top" constant="15" id="agO-ZZ-IFO"/>
-                                    <constraint firstAttribute="bottom" secondItem="6pf-0t-nhP" secondAttribute="bottom" constant="15" id="g3u-64-4Tg"/>
+                                    <constraint firstAttribute="bottom" secondItem="4bg-n8-4qD" secondAttribute="bottom" constant="15" id="diy-C5-5xz"/>
                                     <constraint firstAttribute="height" constant="70" id="hAW-4p-2cG"/>
-                                    <constraint firstItem="PPf-0j-jbo" firstAttribute="leading" secondItem="6pf-0t-nhP" secondAttribute="trailing" constant="4" id="mE4-dp-5qp"/>
-                                    <constraint firstItem="6pf-0t-nhP" firstAttribute="top" secondItem="kJq-38-eqg" secondAttribute="top" constant="15" id="pR9-B4-K28"/>
                                     <constraint firstAttribute="trailing" secondItem="PPf-0j-jbo" secondAttribute="trailing" constant="5" id="pVh-9Q-i1w"/>
+                                    <constraint firstItem="4bg-n8-4qD" firstAttribute="leading" secondItem="mfZ-c2-8Lm" secondAttribute="trailing" constant="4" id="wrr-d9-fiS"/>
+                                    <constraint firstItem="4bg-n8-4qD" firstAttribute="top" secondItem="kJq-38-eqg" secondAttribute="top" constant="15" id="wvd-0g-Jbb"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -202,6 +203,7 @@
                         <outlet property="TitleRect" destination="Tbm-0S-qXi" id="dax-QM-TOL"/>
                         <outlet property="forumlabel" destination="KB9-fZ-5mw" id="Hzh-bo-67O"/>
                         <outlet property="postTitle" destination="ATc-4W-hQG" id="vFS-gZ-YQB"/>
+                        <outlet property="reply_text" destination="4bg-n8-4qD" id="Kde-RY-dxo"/>
                         <outlet property="tableview" destination="nes-gG-y4a" id="4KF-ul-ggu"/>
                     </connections>
                 </viewController>

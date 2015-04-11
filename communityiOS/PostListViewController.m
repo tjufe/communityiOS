@@ -10,15 +10,25 @@
 #import "PostTableViewCell.h"
 #import "PostDetailViewController.h"
 #import "UIViewController+Create.h"
+
 #import "StatusTool.h"
 #import "postListItem.h"
 #import "UIImageView+WebCache.h"//加载图片
+
 #import "PostEditViewController.h"
 
-#import "forumItem.h"
 
-@interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
+
+@interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>{
+    NSMutableArray *postTitleData;  //表格数据
+    NSMutableArray *postImageData;
+    NSMutableArray *postDateData;
+    NSMutableArray *postSetTopData;
+}
+//@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
+@property (weak, nonatomic) IBOutlet UITableView *pltable;
+@property(strong,nonatomic)postItem *pitem;
+@property(strong,nonatomic)NSMutableArray *PostListArray;
 
 @end
 @interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>{
@@ -84,7 +94,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
     
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
@@ -110,18 +120,34 @@
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
     //本导航栏题目
+
     self.navigationItem.title = _forum_item.forum_name;
     //try nav button fail
 //    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    [rightbutton setTitle:@"aaa" forState:UIControlStateNormal];
 //    UIBarButtonItem *rightItem  = [[UIBarButtonItem alloc]initWithCustomView:rightbutton];
 //    self.navigationItem.rightBarButtonItem = rightItem;
-    self.navigationItem.title = @"版块名";
+
+//    self.navigationItem.title = @"版块名";
     //设置导航右侧按钮
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStyleBordered  target:self action:@selector(NewPost)];
-    [rightItem setImage:[UIImage imageNamed:@"icon_main_add"]];
-    [rightItem setTintColor:[UIColor redColor]];
+
+    //设置导航右侧按钮
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *image = [UIImage imageNamed:@"icon_main_add"];
+    
+    button.frame = CGRectMake(self.view.frame.size.width-30, 20, 20, 20);
+    
+    // 这里需要注意：由于是想让图片右移，所以left需要设置为正，right需要设置为负。正在是相反的。
+    // 让按钮图片右移15
+    //    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
+    
+    [button setImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(NewPost) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = rightItem;
+
     
     postTitleData = [[NSMutableArray alloc]init];
     postDateData = [[NSMutableArray alloc]init];

@@ -18,3 +18,7 @@
 +(regItem *)createItemWitparametes:(NSDictionary*)dic;
 
 @end
+
+
+
+//这是请求注册返回的数据对象模型

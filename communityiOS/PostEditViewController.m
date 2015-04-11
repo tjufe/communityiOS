@@ -19,7 +19,7 @@
 #import "PostDetailViewController.h"
 
 
-@interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>
+@interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *addpic;
 @property (weak, nonatomic) IBOutlet UITableView *PEtableview;//IBOutlet 表示该类是在xib中展示
 @property(strong,nonatomic)FSCollectionview *fs;
@@ -31,6 +31,7 @@
 @property (strong,nonatomic)UIView *maskview;
 
 @property (strong, nonatomic) UIPickerView *pickview;
+@property (strong, nonatomic) TextTableViewCell *textcell;
 
 
 @end
@@ -73,26 +74,20 @@ NSArray *third_;
         
         return cell;
 
-    }else if(indexPath.row == 2){
+    }else{
         TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
 
-        
-
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      //  cell.textview.delegate = self;
         if (!cell) {
             cell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textview.placeholder = @"adsafadsaf";
+            NSLog(@"%@",cell.textview.placeholder);
         }
         return cell;
 
-    }else {
-        SaveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell6"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (!cell) {
-            cell= [[[NSBundle mainBundle]loadNibNamed:@"SaveTableViewCell" owner:nil options:nil]objectAtIndex:0];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        return cell;}
+    }
 }
 
 
@@ -117,11 +112,7 @@ NSArray *third_;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row==0){
-        //黑色背景
-//        self.maskview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-//        self.maskview.backgroundColor = [UIColor blackColor];
-//        self.maskview.alpha = 0.3;
-//        [self.view addSubview:self.maskview];
+
 
         //collectionview布局
         UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
@@ -155,9 +146,8 @@ NSArray *third_;
         
         
             
-        }
-        
     }
+}
 
 
 //    FSCollectionview *fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(10, 10, 300, 300)];
@@ -169,6 +159,7 @@ NSArray *third_;
  
  */
 //返回显示的列数
+    
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 3;
 }
@@ -255,8 +246,7 @@ NSArray *third_;
     third_=[[NSArray alloc]initWithObjects:@"0",@"1",@"2",@"3",
             @"4",@"5",@"6",@"7",@"8",@"9",nil];
 
-    
-  
+
 }
 -(void)Tonextview{
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"tijiao" message:@"access" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
