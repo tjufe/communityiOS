@@ -65,6 +65,7 @@ int i ;
     ForumSelectTableViewCell *cell = [self.tb cellForRowAtIndexPath:self.index];
     cell.fslabel.text = [as objectAtIndex:i];
 //    [self.maskView removeFromSuperview];
+//    PostEditViewController *po = [[PostEditViewController alloc]init];
     
     
     

@@ -331,22 +331,25 @@ NSArray *third_;
 -(void)Tonextview{
     
     //wangyao0412
-    [StatusTool statusToolPostNewPostWithcom_id:self.post_item.belong_community_id forumID:self.post_item.belong_forum_id posterID:self.post_item.poster_id postTitle:self.Tcell.Title.text postText:self.textcell.textview.text Image:@"0" chainFlag:@"0" chainName:@"0" chainURL:@"0" pushMember:@"0" Success:^(id object) {
-        NSLog(@"^^^^^^^^^^^%@",object);
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"tijiao" message:@"access" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        alert.delegate = self;
-        [alert show];
-        
-        
-        
-    } failurs:^(NSError *error) {
-        NSLog(@"%@",error);
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"tijiao" message:@"错误"delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
-        alert.delegate = self;
-        [alert show];
-        
-        
-    }];
+    //edit_flag edit or new
+    if([_ED_FLAG isEqualToString:@"1"]){
+        [StatusTool statusToolPostNewPostWithcom_id:self.post_item.belong_community_id forumID:self.post_item.belong_forum_id posterID:self.post_item.poster_id postTitle:self.Tcell.Title.text postText:self.textcell.textview.text Image:@"0" chainFlag:@"0" chainName:@"0" chainURL:@"0" pushMember:@"0" Success:^(id object) {
+            NSLog(@"^^^^^^^^^^^%@",object);
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提交发布" message:@"发布成功" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            alert.delegate = self;
+            [alert show];
+            
+            
+            
+        } failurs:^(NSError *error) {
+            NSLog(@"%@",error);
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提交发布" message:@"错误"delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+            alert.delegate = self;
+            [alert show];
+            
+            
+        }];
+    }
     
     
     

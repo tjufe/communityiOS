@@ -238,7 +238,7 @@ float cellheight;
     self.cell.poster_nickname.text = postinfo.poster_nickname;
     //差一个认证用户的判断
     self.cell.checkin_user.image = [UIImage imageNamed:@"认证-2"];
-
+    [self.tableview reloadData];
 
 }
 - (void)didReceiveMemoryWarning {
