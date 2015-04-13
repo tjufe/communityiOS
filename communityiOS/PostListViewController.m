@@ -58,8 +58,8 @@
     }
     cell.PostLabel.text = [postTitleData objectAtIndex:indexPath.row];
     cell.postDate.text = [postDateData objectAtIndex:indexPath.row];
-    postInfoItem *pt =[self.postinfo objectAtIndex:indexPath.row];
-    cell.poster_nic.text = pt.poster_nickname;
+//    postInfoItem *pt =[self.postinfo objectAtIndex:indexPath.row];
+//    cell.poster_nic.text = pt.poster_nickname;
     //加载图片
     NSString* URL=[[NSString alloc]init];
     URL =[postImageData objectAtIndex:indexPath.row];
@@ -126,8 +126,6 @@
 //    UIBarButtonItem *rightItem  = [[UIBarButtonItem alloc]initWithCustomView:rightbutton];
 //    self.navigationItem.rightBarButtonItem = rightItem;
 
-//    self.navigationItem.title = @"版块名";
-    //设置导航右侧按钮
 
     //设置导航右侧按钮
     
@@ -157,33 +155,20 @@
     self.Post_Rpply_Array =[[NSMutableArray alloc]init];
     //请求数据
     [self loadData];
+   
 
     // Do any additional setup after loading the view.
 }
 
+#pragma mark-------请求加载帖子列表数据
 -(void)loadData{
     [StatusTool statusToolGetPostListWithbfID:_forum_item.forum_id bcID:_forum_item.community_id userID:@"0003" filter:@"全部" Success:^(id object) {
         
         self.PostListArray =(NSMutableArray*)object;
         for (int i = 0; i < [object count]; i++) {
             self.pitem = [object objectAtIndex:i];
-            
+            [self pst:self.pitem];
             ////
-            [StatusTool statusToolGetPostRelatedInfoWithpostID:self.pitem.post_id poster_ID:self.pitem.poster_id community_ID:self.pitem.belong_community_id forum_ID:self.pitem.belong_forum_id Success:^(id object) {
-                
-                self.post_info_item = (postInfoItem *)object;
-                
-                [self.postinfo addObject:self.post_info_item];
-//                if(self.post_info_item.poster_nickname!=nil){
-//                    [self.Poster_Nic_Array addObject:self.post_info_item.poster_nickname];
-//                }else{
-//                    [self.Poster_Nic_Array addObject:@"游客"];
-//                }
- //               [self.pltable reloadData];
-                
-            } failurs:^(NSError *error) {
-                  NSLog(@"%@",error);
-            }];
             
             
             ///
@@ -227,20 +212,48 @@
             }
         }
 //        NSLog(@"^^^^%d",Poster_Nic_Array.count);
-        [self.pltable reloadData];
-        
+//        [self.pltable reloadData];
+        int j=2;
+        [self initdata:j];
     }failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+ //   [self.pltable reloadData];
+}
+
+-(void)pst:(postItem *)l{
+    [StatusTool statusToolGetPostRelatedInfoWithpostID:l.post_id poster_ID:l.poster_id community_ID:l.belong_community_id forum_ID:l.belong_forum_id Success:^(id object) {
+        
+        self.post_info_item = (postInfoItem *)object;
+        
+        [self.postinfo addObject:self.post_info_item];
+        //                if(self.post_info_item.poster_nickname!=nil){
+        //                    [self.Poster_Nic_Array addObject:self.post_info_item.poster_nickname];
+        //                }else{
+        //                    [self.Poster_Nic_Array addObject:@"游客"];
+        //                }
+        
+        //                 NSLog(@"^^^^^%lu",(unsigned long)[self.postinfo count]);
+       // [self.pltable reloadData];
+        
+        
+    } failurs:^(NSError *error) {
         NSLog(@"%@",error);
     }];
 
 }
 
-
+-(void)initdata:(int)j{
+    if(j==2)
+    [self.pltable reloadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark------当前版块下发帖
 -(void)NewPost{
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
     PEVC.forum_item = _forum_item;

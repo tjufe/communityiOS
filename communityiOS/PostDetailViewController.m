@@ -34,8 +34,11 @@
 @end
 
 @implementation PostDetailViewController
-int count=0;
+
+int count=0;//用于菜单点击计数
 float cellheight;
+
+#pragma mark------下方快速回复
 - (IBAction)SendOnClick:(id)sender {
     
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
@@ -139,6 +142,7 @@ float cellheight;
 
 }
 
+#pragma mark------实现PostListViewControllerDelegate
 -(void)addpostItem:(postItem *)PostItem{
     self.post_item = PostItem;
     
@@ -157,7 +161,7 @@ float cellheight;
     //界面赋值
     [self.postTitle setText:self.post_item.title];
     
-    NSLog(@"^^^^%lu",(unsigned long)_forum_item.forum_name.length);
+//    NSLog(@"^^^^%lu",(unsigned long)_forum_item.forum_name.length);
     
     [self.tableview reloadData];
 
@@ -186,6 +190,8 @@ float cellheight;
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark-------右上角菜单
 -(void)Operation{
     if(count % 2!=0){
         count++;
@@ -225,7 +231,7 @@ float cellheight;
     }
     
 }
-
+#pragma mark--------菜单中编辑帖子
 -(void)EditPost{
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];
     //通过UIViewController+Create扩展方法创建FourViewController的实例对象
@@ -237,14 +243,20 @@ float cellheight;
     [self.navigationController pushViewController:PEVC animated:YES];
     [self.operlist removeFromSuperview];
 }
+
+#pragma mark------菜单中删除帖子
 -(void)DelePost{
  [self.operlist removeFromSuperview];
 
 }
+
+#pragma mark------菜单中置顶帖子
 -(void)Settop{
     
      [self.operlist removeFromSuperview];
 }
+
+
 -(void)setReply_text:(UITextView *)reply_text{
     reply_text.layer.masksToBounds = YES;
     [reply_text.layer setCornerRadius:reply_text.layer.frame.size.height/8];
