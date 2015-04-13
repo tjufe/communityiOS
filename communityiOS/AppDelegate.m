@@ -10,13 +10,14 @@
 #import "PPRevealSideViewController.h"
 #import "PostDetailViewController.h"
 #import "UIViewController+Create.h"
-
+#import "APService.h"
 
 
 #import "DemoViewController.h"
 
 
 @interface AppDelegate ()
+@property (strong, nonatomic) NSDictionary *inactiveRemoteNotificationInfo;
 
 @end
 
@@ -33,10 +34,72 @@
 //    //新建PPRevealSideViewController,并设置根视图（主页面的导航视图）
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
+    } else {
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
+    }
+#else
+    //categories 必须为nil
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)
+                                       categories:nil];
+#endif
+    // Required
+    [APService setupWithOption:launchOptions];
+
 
     
     return YES;
 }
+
+#pragma mark-
+#pragma mark-----------------------JPush------------------------------------------
+
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    
+    // IOS 7 Support Required
+    [APService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)handleActiveRemoteNotification:(NSDictionary *)userInfo shouldShowAlert:(BOOL)showAlert{
+    
+}
+
+/**
+ *  保存通知的数据、或者处理非激活状态下的数据。
+ */
+- (void)handleInactiveRemoteNotification:(NSDictionary *)userInfo{
+    self.inactiveRemoteNotificationInfo = userInfo;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    // Required
+    [APService registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+
+#pragma mark-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
