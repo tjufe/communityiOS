@@ -25,6 +25,7 @@
 #import "APIClient.h"
 #import "loginItem.h"
 #import "UIImageView+WebCache.h"
+#import "RegistViewController.h"
 
 
 
@@ -52,6 +53,11 @@
 
 
 @property (nonatomic,strong) NSArray *listForumItem;
+
+@property (strong,nonatomic) NSString *UserPermission;//当前用户身份
+@property (strong,nonatomic) NSString *UserID;//当前用户id
+@property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
+
 
 @end
 
@@ -365,11 +371,27 @@
 
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+
+#pragma mark-----直接发新帖20150413
 - (IBAction)NewPostOnClick:(id)sender {
+    //获取当前用户信息
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.UserID =[defaults objectForKey:@"UserID"];
+    self.UserPermission = [defaults objectForKey:@"UserPermission"];
+    self.AccountStatus = [defaults objectForKey:@"AccountStatus"];
+    
+    //判断用户身份来决定是否能够发帖
+    if (![self.UserPermission isEqualToString:@""]&&[self.AccountStatus isEqualToString:@"正常"]) {
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
     PEVC.ED_FLAG = @"0";//直接发新帖
     
     [self.navigationController pushViewController:PEVC animated:YES];
+    }else{
+        if([self.UserPermission isEqualToString:@""]){
+            RegistViewController *RVC = [RegistViewController createFromStoryboardName:@"Login" withIdentifier:@"regist"];
+            [self.navigationController pushViewController:RVC animated:YES];
+        }
+    }
 }
 
 #pragma mark --在视图间切换时，并不会再次载入viewDidLoad方法，所以如果在调入视图时，需要对数据做更新，就只能在这个方法内实现了。所以这个方法也非常常用。hmx
@@ -459,6 +481,8 @@
     [defaults setObject:loginItem.head_portrait_url forKey:@"HeadPortraitUrl"];
     [defaults setObject:loginItem.user_permission forKey:@"UserPermission"];
     [defaults setObject:loginItem.login_password forKey:@"LoginPassword"];
+    [defaults setObject:loginItem.account_status forKey:@"AccountStatus"];
+    [defaults setObject:loginItem.moderator_of_forum_list forKey:@"moderator_of_forum_list"];
     [defaults setBool:YES forKey:@"Logged"];
     [defaults synchronize];  //保持同步
 }

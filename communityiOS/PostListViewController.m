@@ -30,12 +30,15 @@
 @property (weak, nonatomic) IBOutlet UITableView *pltable;
 @property(strong,nonatomic)postItem *pitem;
 @property(strong,nonatomic)NSMutableArray *PostListArray;
+@property(strong,nonatomic)postListItem *post_list_item;
 @property (strong,nonatomic) postInfoItem *post_info_item;
 @property (strong,nonatomic) NSMutableArray *postinfo;
-@property (strong,nonatomic)NSMutableArray *Poster_Nic_Array;//发帖人昵称数组
-@property (strong,nonatomic)NSMutableArray *Poster_Img_Array;//发帖人头像url数组
-@property (strong,nonatomic)NSMutableArray *Post_Rpply_Array;//帖子评论数
-
+//@property (strong,nonatomic) NSMutableArray *Poster_Nic_Array;//发帖人昵称数组
+//@property (strong,nonatomic) NSMutableArray *Poster_Img_Array;//发帖人头像url数组
+//@property (strong,nonatomic) NSMutableArray *Post_Rpply_Array;//帖子评论数
+@property (strong,nonatomic) NSString *UserPermission;//当前用户身份
+@property (strong,nonatomic) NSString *UserID;//当前用户id
+@property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
 @end
 
 
@@ -56,10 +59,21 @@
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"PostTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    cell.PostLabel.text = [postTitleData objectAtIndex:indexPath.row];
-    cell.postDate.text = [postDateData objectAtIndex:indexPath.row];
-//    postInfoItem *pt =[self.postinfo objectAtIndex:indexPath.row];
-//    cell.poster_nic.text = pt.poster_nickname;
+    cell.PostLabel.text = [postTitleData objectAtIndex:indexPath.row];//title
+    cell.postDate.text = [postDateData objectAtIndex:indexPath.row];//date
+
+    cell.poster_nic.text = [self.post_list_item.poster_nickname objectAtIndex:indexPath.row];//nickname
+     
+     NSString *reply_num =[[NSString alloc]init];
+     reply_num = [self.post_list_item.reply_num objectAtIndex:indexPath.row];
+     
+     if([reply_num isKindOfClass:[NSNull class]]){
+          cell.post_reply_num.text = @"暂无";
+     }else{
+          cell.post_reply_num.text = reply_num;//reply_num
+
+     }
+     
     //加载图片
     NSString* URL=[[NSString alloc]init];
     URL =[postImageData objectAtIndex:indexPath.row];
@@ -93,10 +107,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
+     _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
     
-    PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-    PDVC.forum_item = _forum_item;
+     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+     //全局变量传值
+     PDVC.forum_item = _forum_item;
+     PDVC.poster_nickname = [self.post_list_item.poster_nickname objectAtIndex:indexPath.row];
+     PDVC.Phead_portrait_url = [self.post_list_item.Phead_portrait_url objectAtIndex:indexPath.row];
+     PDVC.reply_num = [self.post_list_item.reply_num objectAtIndex:indexPath.row];
     //协议实现页面传值
     self.delegate = PDVC;
     if ([self.delegate
@@ -113,6 +131,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     
+     //获取当前用户信息
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     self.UserID =[defaults objectForKey:@"UserID"];
+     self.UserPermission = [defaults objectForKey:@"UserPermission"];
+     self.AccountStatus = [defaults objectForKey:@"AccountStatus"];
+     
+
+     
+     
    //使下一页的导航栏左边没有文字
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
@@ -142,17 +170,25 @@
     [button addTarget:self action:@selector(NewPost) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = rightItem;
-
+     
+     //判断用户身份来决定是否显示发帖图标
+     if (![self.UserPermission isEqualToString:@""]&&[self.AccountStatus isEqualToString:@"正常"]) {
+          
     
+          self.navigationItem.rightBarButtonItem = rightItem;
+
+     }
     postTitleData = [[NSMutableArray alloc]init];
     postDateData = [[NSMutableArray alloc]init];
     postImageData = [[NSMutableArray alloc]init];
     postSetTopData = [[NSMutableArray alloc]init];
     self.postinfo = [[NSMutableArray alloc]init];
-    self.Poster_Nic_Array = [[NSMutableArray alloc]init];
-    self.Poster_Img_Array = [[NSMutableArray alloc]init];
-    self.Post_Rpply_Array =[[NSMutableArray alloc]init];
+//    self.Poster_Nic_Array = [[NSMutableArray alloc]init];
+//    self.Poster_Img_Array = [[NSMutableArray alloc]init];
+//    self.Post_Rpply_Array =[[NSMutableArray alloc]init];
+    self.PostListArray =[[NSMutableArray alloc]init];
+  
+     
     //请求数据
     [self loadData];
    
@@ -162,25 +198,23 @@
 
 #pragma mark-------请求加载帖子列表数据
 -(void)loadData{
-    [StatusTool statusToolGetPostListWithbfID:_forum_item.forum_id bcID:_forum_item.community_id userID:@"0003" filter:@"全部" Success:^(id object) {
+    [StatusTool statusToolGetPostListWithbfID:_forum_item.forum_id bcID:_forum_item.community_id userID:self.UserID filter:@"全部" Success:^(id object) {
         
-        self.PostListArray =(NSMutableArray*)object;
-        for (int i = 0; i < [object count]; i++) {
-            self.pitem = [object objectAtIndex:i];
-            [self pst:self.pitem];
-            ////
-            
-            
-            ///
-            
-            
-            
-            
+        self.post_list_item = (postListItem *)object;
+         
+         
+        for (int i = 0; i < [self.post_list_item.PostList count]; i++) {
+             self.pitem = [postItem createItemWitparametes:[self.post_list_item.PostList objectAtIndex:i]];
+             [self.PostListArray addObject:self.pitem];
+             
+             //取title
             if (self.pitem.title != nil){
                 [postTitleData addObject:self.pitem.title];
             }else{
                 [postTitleData addObject:@"default"];
             }
+             
+            //取date
             if(self.pitem.post_date!=nil){
                 //日期格式转换
 //                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -200,6 +234,8 @@
             }else{
                 [postDateData addObject:@"00:00:00"];
             }
+             
+            //取main_img_url
             if(self.pitem.main_image_url!=nil){
                 [postImageData addObject:self.pitem.main_image_url];
             }else{
@@ -211,41 +247,12 @@
                 [postSetTopData addObject:@""];
             }
         }
-//        NSLog(@"^^^^%d",Poster_Nic_Array.count);
-//        [self.pltable reloadData];
-        int j=2;
-        [self initdata:j];
-    }failurs:^(NSError *error) {
+         
+        [self.pltable reloadData];
+          }failurs:^(NSError *error) {
         NSLog(@"%@",error);
     }];
  //   [self.pltable reloadData];
-}
-
--(void)pst:(postItem *)l{
-    [StatusTool statusToolGetPostRelatedInfoWithpostID:l.post_id poster_ID:l.poster_id community_ID:l.belong_community_id forum_ID:l.belong_forum_id Success:^(id object) {
-        
-        self.post_info_item = (postInfoItem *)object;
-        
-        [self.postinfo addObject:self.post_info_item];
-        //                if(self.post_info_item.poster_nickname!=nil){
-        //                    [self.Poster_Nic_Array addObject:self.post_info_item.poster_nickname];
-        //                }else{
-        //                    [self.Poster_Nic_Array addObject:@"游客"];
-        //                }
-        
-        //                 NSLog(@"^^^^^%lu",(unsigned long)[self.postinfo count]);
-       // [self.pltable reloadData];
-        
-        
-    } failurs:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
-
-}
-
--(void)initdata:(int)j{
-    if(j==2)
-    [self.pltable reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

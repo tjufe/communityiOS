@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *postImg;
 @property (weak, nonatomic) IBOutlet UIImageView *setTop;
 @property (weak, nonatomic) IBOutlet UILabel *poster_nic;
+@property (weak, nonatomic) IBOutlet UILabel *post_reply_num;
 
 @end
