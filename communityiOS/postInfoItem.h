@@ -15,6 +15,7 @@
 @property (nonatomic,strong)NSDictionary *data;
 
 @property (nonatomic,copy)NSString *poster_nickname;
+@property (nonatomic,strong)NSString *Phead_portrait_url;
 @property (nonatomic,copy)NSString *read_num;
 @property (nonatomic,copy)NSString *reply_num;
 @property (nonatomic,copy)NSString *apply_num;

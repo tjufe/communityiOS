@@ -13,5 +13,9 @@
 @property (strong, nonatomic) IBOutlet UIView *PDview;
 @property(strong,nonatomic)forumItem *forum_item;
 @property (weak, nonatomic) IBOutlet UITextView *reply_text;
+@property (weak, nonatomic) IBOutlet UIImageView *user_head;
+@property (weak, nonatomic) IBOutlet UILabel *reply_num;
 
+
+-(void)getHeadPortraitUrl:(NSString*)url;
 @end

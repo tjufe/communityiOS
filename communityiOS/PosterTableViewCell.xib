@@ -44,7 +44,7 @@
                         <color key="textColor" red="0.45194128789999999" green="0.45194128789999999" blue="0.45194128789999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_default_avater@2x" translatesAutoresizingMaskIntoConstraints="NO" id="ASs-lb-bIJ">
+                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_default_avater@2x" translatesAutoresizingMaskIntoConstraints="NO" id="ASs-lb-bIJ">
                         <rect key="frame" x="17" y="11" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="Usd-BL-7NH"/>
@@ -80,8 +80,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="checkin_user" destination="U89-Fw-W9B" id="KCL-3y-E8T"/>
                 <outlet property="postDate" destination="nv3-ZB-JpO" id="BPW-FE-VVz"/>
                 <outlet property="posterImage" destination="ASs-lb-bIJ" id="zJJ-DJ-6rH"/>
+                <outlet property="poster_nickname" destination="dTV-yv-jxI" id="gFc-Tp-SFD"/>
             </connections>
             <point key="canvasLocation" x="290" y="247.5"/>
         </tableViewCell>

@@ -26,6 +26,8 @@
 #import "loginItem.h"
 #import "UIImageView+WebCache.h"
 
+#import "PostDetailViewController.h"
+
 
 
 
@@ -460,6 +462,9 @@
     [defaults setObject:loginItem.user_permission forKey:@"UserPermission"];
     [defaults setObject:loginItem.login_password forKey:@"LoginPassword"];
     [defaults setBool:YES forKey:@"Logged"];
+    //wangyao
+    PostDetailViewController *po = [[PostDetailViewController alloc]init];
+    [po getHeadPortraitUrl:loginItem.head_portrait_url ];
     [defaults synchronize];  //保持同步
 }
 

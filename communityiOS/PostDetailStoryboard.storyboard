@@ -203,8 +203,10 @@
                         <outlet property="TitleRect" destination="Tbm-0S-qXi" id="dax-QM-TOL"/>
                         <outlet property="forumlabel" destination="KB9-fZ-5mw" id="Hzh-bo-67O"/>
                         <outlet property="postTitle" destination="ATc-4W-hQG" id="vFS-gZ-YQB"/>
+                        <outlet property="reply_num" destination="p5r-lp-mOe" id="qel-ij-GXG"/>
                         <outlet property="reply_text" destination="4bg-n8-4qD" id="Kde-RY-dxo"/>
                         <outlet property="tableview" destination="nes-gG-y4a" id="4KF-ul-ggu"/>
+                        <outlet property="user_head" destination="mfZ-c2-8Lm" id="hvc-FB-DX1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZo-mP-qfe" userLabel="First Responder" sceneMemberID="firstResponder"/>

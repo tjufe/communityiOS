@@ -29,12 +29,18 @@
                             <constraint firstAttribute="width" constant="21" id="Qzv-Zt-QFt"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_03" translatesAutoresizingMaskIntoConstraints="NO" id="CRn-aB-vf3">
-                        <rect key="frame" x="202" y="4" width="110" height="72"/>
+                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_03" translatesAutoresizingMaskIntoConstraints="NO" id="CRn-aB-vf3">
+                        <rect key="frame" x="202" y="4" width="110" height="62"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="110" id="W3U-ma-Ynd"/>
+                            <constraint firstAttribute="height" constant="62" id="WE0-hA-hOx"/>
                             <constraint firstAttribute="height" constant="72" id="blA-Qq-GVo"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="blA-Qq-GVo"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="· 日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2C-Zk-Aw1">
                         <rect key="frame" x="44" y="51" width="37" height="17"/>
@@ -74,7 +80,7 @@
                     <constraint firstItem="CRn-aB-vf3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="IDA-KI-Da2"/>
                     <constraint firstAttribute="trailing" secondItem="CRn-aB-vf3" secondAttribute="trailing" constant="8" id="J6E-ja-Il7"/>
                     <constraint firstItem="CRn-aB-vf3" firstAttribute="leading" secondItem="Uck-wG-uqy" secondAttribute="trailing" constant="2" id="KWr-mN-iOh"/>
-                    <constraint firstAttribute="bottom" secondItem="CRn-aB-vf3" secondAttribute="bottom" constant="4" id="L1s-rf-hUA"/>
+                    <constraint firstAttribute="bottom" secondItem="CRn-aB-vf3" secondAttribute="bottom" constant="10" id="L1s-rf-hUA"/>
                     <constraint firstItem="d2C-Zk-Aw1" firstAttribute="top" secondItem="3Qo-FL-jOK" secondAttribute="top" id="Lrt-6B-11o"/>
                     <constraint firstAttribute="trailing" secondItem="CRn-aB-vf3" secondAttribute="trailing" constant="8" id="Ma7-wB-Lka"/>
                     <constraint firstItem="d2C-Zk-Aw1" firstAttribute="top" secondItem="QBc-jq-W22" secondAttribute="top" id="Yyr-RS-cFC"/>
@@ -95,6 +101,8 @@
                         <exclude reference="Gkd-2o-XFs"/>
                         <exclude reference="zJI-7J-OHC"/>
                         <exclude reference="HhB-57-l1k"/>
+                        <exclude reference="KWr-mN-iOh"/>
+                        <exclude reference="L1s-rf-hUA"/>
                         <exclude reference="Ma7-wB-Lka"/>
                         <exclude reference="wvt-gH-zK4"/>
                     </mask>

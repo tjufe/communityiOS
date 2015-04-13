@@ -233,7 +233,10 @@
     [thirdDic setObject:@"NewPost" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        // no response
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        success(dic);
+
         
     } failure:^(NSError *error) {
         if (failure == nil) return;
@@ -295,5 +298,30 @@
     }];
     
 }
+
+//wangyao
+//请求发帖人昵称，回帖人数，报名人数，阅读人数
+//+(void)statusToolPostInfoWithcommunityID:(NSString *)community_id forumID:(NSString *)forum_id postID:(NSString *)post_id poster_id:(NSString *)poster_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure{
+//    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+//    [firstDic setObject:community_id forKey:@"community_id"];
+//    [firstDic setObject:forum_id forKey:@"forum_id"];
+//    [firstDic setObject:post_id forKey:@"post_id"];
+//    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+//    [secondDic  setObject:firstDic forKey:@"Data"];
+//    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+//    [thirdDic setObject:secondDic forKey:@"param"];
+//    [thirdDic setObject:@"PostInfo" forKey:@"method"];
+//    [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
+//        // no response
+//        
+//    } failure:^(NSError *error) {
+//        if (failure == nil) return;
+//        failure(error);
+//    }];
+//
+//
+//}
+
+
 
 @end

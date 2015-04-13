@@ -24,6 +24,7 @@
              @"msg" : @"msg",
              @"data" :@{
                      @"poster_nickname":@"poster_nickname",
+                     @"Phead_portrait_url":@"Phead_portrait_url",
                      @"read_num":@"read_num",
                      @"reply_num":@"reply_num",
                      @"apply_num":@"apply_num"

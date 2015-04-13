@@ -23,6 +23,9 @@ extern NSString *const site_addmainimg;
 @property(strong,nonatomic)forumItem *forum_item;
 @property(strong,nonatomic)postItem *post_item ;
 @property(strong,nonatomic)NSString *ED_FLAG;
+
+
+
 -(NSString*)getcell;
 
 @end

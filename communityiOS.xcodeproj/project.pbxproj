@@ -357,9 +357,6 @@
 				13C58BE11AB9550600090157 /* AppDelegate.m */,
 				13C58BE31AB9550600090157 /* ViewController.h */,
 				13C58BE41AB9550600090157 /* ViewController.m */,
-				8EEC488F1AD90B17002E70DA /* DChainTableViewCell.h */,
-				8EEC48901AD90B17002E70DA /* DChainTableViewCell.m */,
-				8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */,
 				13C58BE61AB9550600090157 /* Main.storyboard */,
 				13C58BEB1AB9550600090157 /* LaunchScreen.xib */,
 			);
@@ -622,6 +619,9 @@
 				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
 				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
 				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
+				8EEC488F1AD90B17002E70DA /* DChainTableViewCell.h */,
+				8EEC48901AD90B17002E70DA /* DChainTableViewCell.m */,
+				8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */,
 			);
 			name = postDetail;
 			sourceTree = "<group>";
@@ -629,9 +629,9 @@
 		8EF3F74A1AD50B1700924975 /* postList */ = {
 			isa = PBXGroup;
 			children = (
-				13BE566A1ABA574700379ACD /* ForumTableViewCell.h */,
-				13BE566B1ABA574700379ACD /* ForumTableViewCell.m */,
-				13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */,
+				A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */,
+				A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */,
+				A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */,
 			);
 			name = postList;
 			sourceTree = "<group>";
@@ -639,9 +639,9 @@
 		8EF3F74B1AD50B3600924975 /* forumList */ = {
 			isa = PBXGroup;
 			children = (
-				A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */,
-				A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */,
-				A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */,
+				13BE566A1ABA574700379ACD /* ForumTableViewCell.h */,
+				13BE566B1ABA574700379ACD /* ForumTableViewCell.m */,
+				13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */,
 			);
 			name = forumList;
 			sourceTree = "<group>";

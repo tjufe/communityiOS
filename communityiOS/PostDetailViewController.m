@@ -14,32 +14,44 @@
 #import "UIViewController+Create.h"
 #import "PostListViewController.h"
 #import "UIImageView+WebCache.h"//加载图片
+#import "DChainTableViewCell.h"
+//wangyao0412
+#import "postInfoItem.h"
+#import "StatusTool.h"
+#import "UIImageView+WebCache.h"
 
 
 @interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIButton *SendButton;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
 
 @property (weak, nonatomic) IBOutlet UIView *TitleRect;
 
-@property (weak, nonatomic) IBOutlet UIImageView *PosterImage;
+//@property (weak, nonatomic) IBOutlet UIImageView *PosterImage;
 @property (strong, nonatomic) IBOutlet UIView *operlist;
 
 @property (weak, nonatomic) IBOutlet UILabel *forumlabel;
 
 @property(strong,nonatomic)postItem *post_item ;
+@property(strong,nonatomic)PosterTableViewCell *cell ;
+//
 
 
 @end
-
+postInfoItem *pinfo;
+NSString *url1;
 @implementation PostDetailViewController
+
+
 int count=0;
 float cellheight;
 - (IBAction)SendOnClick:(id)sender {
     
-    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
-    [self.navigationController pushViewController:PEVC animated:YES];
+//    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
+//    [self.navigationController pushViewController:PEVC animated:YES];
+    
     
     
 }
@@ -48,67 +60,82 @@ float cellheight;
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row== 0 ) {
-        PosterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        self.cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
         
-        if (!cell) {
-            cell= [[[NSBundle mainBundle]loadNibNamed:@"PosterTableViewCell" owner:nil options:nil]objectAtIndex:0];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (!self.cell) {
+            self.cell= [[[NSBundle mainBundle]loadNibNamed:@"PosterTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         if(self.post_item.post_date!=nil){
-        cell.postDate.text = [self.post_item.post_date substringToIndex:16];
+        self.cell.postDate.text = [self.post_item.post_date substringToIndex:16];
         }
-            return cell;
+            return self.cell;
     }else if(indexPath.row == 1){
-            PostTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
+        DChainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
+        
+        if (!cell) {
+            cell= [[[NSBundle mainBundle]loadNibNamed:@"DChainTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            if (!cell) {
-                cell= [[[NSBundle mainBundle]loadNibNamed:@"PostTextTableViewCell" owner:nil options:nil]objectAtIndex:0];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cellheight = cell.Text.frame.size.height;
-            }
-            if(self.post_item.post_text!=nil){
-                cell.Text.text = self.post_item.post_text;
-            }else{
-                cell.Text.text=@"";
-            }
-            return cell;
-//
+        }
+        return cell;
+           //
+    }else if(indexPath.row ==2){
+        
+        PostTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (!cell) {
+            cell= [[[NSBundle mainBundle]loadNibNamed:@"PostTextTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cellheight = cell.Text.frame.size.height;
+        }
+        if(self.post_item.post_text!=nil){
+            cell.Text.text = self.post_item.post_text;
         }else{
-            PostImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
+            cell.Text.text=@"";
+        }
+        return cell;
+    }else{
+        PostImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
+        
+        if (!cell) {
+            cell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            if (!cell) {
-                cell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
-            //加载图片
-            if(self.post_item.main_image_url!=nil){
-                
-                cell.MainImage.hidden = NO;
-                [cell.MainImage sd_setImageWithURL:self.post_item.main_image_url placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                        cell.MainImage.image = image;
-                    }];
-            }else{
-                cell.MainImage.hidden = NO;
-            }
-                
-            cell.MainImage.contentMode=UIViewContentModeScaleAspectFill;
+        }
+        //加载图片
+        if(self.post_item.main_image_url!=nil){
             
-            return cell;
+            cell.MainImage.hidden = NO;
+            [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:self.post_item.main_image_url] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                cell.MainImage.image = image;
+            }];
+        }else{
+            cell.MainImage.hidden = NO;
+        }
+        
+        cell.MainImage.contentMode=UIViewContentModeScaleAspectFill;
+        
+        return cell;
+        
+
         }
     
     
-    }
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0 ) {
         return 100;
     }else if(indexPath.row ==1){
+        return 50;
+    }else if(indexPath.row ==2){
         return cellheight;
+
     }else{
-        return 150;
+        return 250;
+        
     }
 }
 
@@ -141,8 +168,11 @@ float cellheight;
 
 -(void)addpostItem:(postItem *)PostItem{
     self.post_item = PostItem;
-    
+    PostEditViewController *po =[[PostEditViewController alloc]init];
+    po.post_item = PostItem;
 }
+
+
 
 - (void)viewDidLoad {
 //    self.scrollview.frame.size.width = self.view.frame.size.width;
@@ -177,10 +207,40 @@ float cellheight;
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
+   //请求数据
+     [self loadData];
+
+
    
 }
+-(void)loadData{
+   [StatusTool statusToolGetPostRelatedInfoWithpostID:self.post_item.post_id poster_ID:self.post_item.poster_id community_ID:self.post_item.belong_community_id forum_ID:self.post_item.belong_forum_id Success:^(id object) {
+       pinfo = object;
+       [self onload:pinfo];// 将数据载入控件中
+//    self.reply_num.text =  [NSString stringWithFormat:@"评论%@人",pinfo.reply_num];
 
+   } failurs:^(NSError *error) {
+       NSLog(@"^^^%@",error);
+   }];
+}
+
+//wangyao
+-(void)onload:(postInfoItem *)postinfo{
+    self.reply_num.text =  [NSString stringWithFormat:@"评论%@人",postinfo.reply_num];
+    //wangyao 有问题 待研究
+    UIImage *placeholder = [UIImage imageNamed:@"报名"];
+    self.cell.posterImage.image = placeholder;
+    [self.cell.posterImage sd_setImageWithURL:[NSURL URLWithString:postinfo.Phead_portrait_url ] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image!= nil) {
+            self.cell.posterImage.image = image;
+        }
+    }];
+    self.cell.poster_nickname.text = postinfo.poster_nickname;
+    //差一个认证用户的判断
+    self.cell.checkin_user.image = [UIImage imageNamed:@"认证-2"];
+
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -249,5 +309,30 @@ float cellheight;
     reply_text.layer.masksToBounds = YES;
     [reply_text.layer setCornerRadius:reply_text.layer.frame.size.height/8];
 }
+-(void)setUser_head:(UIImageView *)user_head{
+    UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
+    user_head.image = placeholderImage;
+    [user_head sd_setImageWithURL:[NSURL URLWithString:url1]
+                  placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if(image!=nil){
+            user_head.image = image;
+        }
+    }];
+    user_head.layer.masksToBounds =YES;
+    [user_head.layer setCornerRadius:user_head.frame.size.height/2];
+    
+    
+
+}
+// wangyao 0412
+//get headurl
+-(void)getHeadPortraitUrl:(NSString*)url{
+    url1 = url;
+  
+}
+//get reply_num
+
+
+
 
 @end

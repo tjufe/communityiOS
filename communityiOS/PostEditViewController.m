@@ -17,13 +17,18 @@
 #import "DialogView.h"
 #import "FSCollectionview.h"
 #import "PostDetailViewController.h"
+//wangyao0412
+#import "StatusTool.h"
+#import "PostListViewController.h"
 
 
 @interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *addpic;
 @property (weak, nonatomic) IBOutlet UITableView *PEtableview;//IBOutlet 表示该类是在xib中展示
 @property(strong,nonatomic)FSCollectionview *fs;
-
+//wangyao0412
+@property(strong,nonatomic)TitleTableViewCell  *Tcell;
+@property(weak,nonatomic)PostListViewController *PLVC;
 @property (weak,nonatomic)NSString *ns;
 @property (strong,nonatomic)UIView *addchain;
 @property (strong,nonatomic)UIView *addpush;
@@ -81,40 +86,40 @@ NSArray *third_;
         return cell;
        
       }else if (indexPath.row== 1 ) {
-        TitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        self.Tcell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
         
-            if (!cell) {
-                cell= [[[NSBundle mainBundle]loadNibNamed:@"TitleTableViewCell" owner:nil options:nil]objectAtIndex:0];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
+            if (!self.Tcell) {
+                self.Tcell= [[[NSBundle mainBundle]loadNibNamed:@"TitleTableViewCell" owner:nil options:nil]objectAtIndex:0];
+                self.Tcell.selectionStyle = UITableViewCellSelectionStyleNone;
+                self.Tcell.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
                 if([_ED_FLAG isEqualToString:@"2"]){
                     //编辑帖子
-                   cell.Title.text = _post_item.title;
+                   self.Tcell.Title.text = _post_item.title;
                     
                 }
 
             }
         
-        return cell;
+        return self.Tcell;
 
     }else{
-        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
+        self.textcell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
 
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
       //  cell.textview.delegate = self;
-        if (!cell) {
-            cell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (!self.textcell) {
+            self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
             //flag如果是2，表示编辑原有帖子
             if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
-                cell.textview.text = _post_item.post_text;
+                self.textcell.textview.text = _post_item.post_text;
                 
             }
 //            cell.textview.placeholder = @"adsafadsaf";
 //            NSLog(@"%@",cell.textview.placeholder);
         }
-        return cell;
+        return self.textcell;
 
     }
 }
@@ -258,6 +263,11 @@ NSArray *third_;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+
+
+    
+    
     self.PEtableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"发布话题";
@@ -319,9 +329,26 @@ NSArray *third_;
 
 }
 -(void)Tonextview{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"tijiao" message:@"access" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-    alert.delegate = self;
-    [alert show];
+    
+    //wangyao0412
+    [StatusTool statusToolPostNewPostWithcom_id:self.post_item.belong_community_id forumID:self.post_item.belong_forum_id posterID:self.post_item.poster_id postTitle:self.Tcell.Title.text postText:self.textcell.textview.text Image:@"0" chainFlag:@"0" chainName:@"0" chainURL:@"0" pushMember:@"0" Success:^(id object) {
+        NSLog(@"^^^^^^^^^^^%@",object);
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"tijiao" message:@"access" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        alert.delegate = self;
+        [alert show];
+        
+        
+        
+    } failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"tijiao" message:@"错误"delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+        alert.delegate = self;
+        [alert show];
+        
+        
+    }];
+    
+    
     
     
 }

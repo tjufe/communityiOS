@@ -47,4 +47,8 @@ typedef void(^ForumListFailurs)(NSError * error);
 //请求帖子操作
 +(void)statusToolPostOperateWithcommunityID:(NSString *)community_id forumID:(NSString *)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Flag:(NSNumber *)flag Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
 
+//wangyao
+//请求发帖人昵称，回帖人数，报名人数，阅读人数
+//+(void)statusToolPostInfoWithcommunityID:(NSString *)community_id forumID:(NSString *)forum_id postID:(NSString *)post_id poster_id:(NSString *)poster_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
+
 @end
