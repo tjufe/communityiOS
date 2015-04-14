@@ -352,6 +352,10 @@
                     <connections>
                         <outlet property="resBtn" destination="iQc-r7-xDJ" id="3X3-eh-HB1"/>
                         <outlet property="resView" destination="bHX-Jq-2hh" id="QX7-An-Cmw"/>
+                        <outlet property="tfNickname" destination="Ith-Fz-2Kc" id="M65-Ee-j8S"/>
+                        <outlet property="tfPassword" destination="Iaa-PW-Wan" id="v5S-Cp-4v7"/>
+                        <outlet property="tfPhoneNumber" destination="FPK-Bq-FMZ" id="rZN-Ui-6D9"/>
+                        <outlet property="tfSecondPassword" destination="FJx-CD-6uv" id="CGX-rZ-Jzs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sET-y5-ZH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
