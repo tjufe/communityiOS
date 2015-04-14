@@ -30,7 +30,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [defaults valueForKey:@"UserID"];
     [StatusTool statusToolCorrectPwdWithPwd:self.tf_OldPsw.text UserID:user_id NewPwd:self.tf_NewPsw.text ConfirmPwd:self.tf_SecPsw.text Success:^(id object) {
-        
+        //提交表单，不作处理
     } failurs:^(NSError *error) {
         NSLog(@"%@",error);
     }];

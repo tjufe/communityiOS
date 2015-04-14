@@ -167,7 +167,7 @@
         <!--个人设置-->
         <scene sceneID="J5g-FJ-f9W">
             <objects>
-                <viewController id="Jv3-oj-yNe" sceneMemberID="viewController">
+                <viewController id="Jv3-oj-yNe" customClass="FirstSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jPV-Sw-62Q"/>
                         <viewControllerLayoutGuide type="bottom" id="yya-cj-5YW"/>
@@ -216,6 +216,9 @@
                                             <color key="titleColor" red="0.070588235289999995" green="0.12941176469999999" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="setPoraitAction:" destination="Jv3-oj-yNe" eventType="touchUpInside" id="g0f-rE-RI8"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="8JB-Rb-q4z">
                                         <rect key="frame" x="303" y="31" width="5" height="10"/>
@@ -342,6 +345,10 @@
                         <barButtonItem key="backBarButtonItem" title="返回" id="xWW-Pe-Y4i"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="portraitImage" destination="unn-kt-aC2" id="jgy-cN-atC"/>
+                        <outlet property="potraitBtn" destination="fXA-gN-ZWT" id="IKu-YE-yzx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6cL-Ad-uEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -408,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2wZ-ML-P7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="832" y="647"/>
+            <point key="canvasLocation" x="771" y="803"/>
         </scene>
         <!--账号管理-->
         <scene sceneID="ZU7-fK-xsI">
@@ -600,7 +607,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kzf-Rj-rMM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="832" y="1353"/>
+            <point key="canvasLocation" x="783" y="1465"/>
         </scene>
     </scenes>
     <resources>
