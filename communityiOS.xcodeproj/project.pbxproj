@@ -100,6 +100,7 @@
 		8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */; };
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
+		A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
 		A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */; };
 		A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */; };
@@ -277,8 +278,10 @@
 		8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostReplyViewController.h; sourceTree = "<group>"; };
 		8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostReplyViewController.m; sourceTree = "<group>"; };
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
+		A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deletepostItem.h; sourceTree = "<group>"; };
+		A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deletepostItem.m; sourceTree = "<group>"; };
 		A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
-		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
+		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 5; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
 		A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
 		A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
 		A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -586,8 +589,13 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				1842ADF31ADB5FEE0022D2CB /* APService.h */,
 				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
+=======
+				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
+				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
+>>>>>>> a34ee00d146f50ed1546d1e17075352e447ee055
 				13B1C3761AD4D817005C179C /* regItem.h */,
 				13B1C3771AD4D817005C179C /* regItem.m */,
 				13B1C35F1AD4D80B005C179C /* forumItem.h */,
@@ -730,6 +738,8 @@
 				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
 				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
 				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
+				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
+				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				13B1C3181AD4D6B3005C179C /* FSCollectionView.h */,
 				13B1C3191AD4D6B3005C179C /* FSCollectionView.m */,
 				13B1C31A1AD4D6B3005C179C /* FSCollectionView.storyboard */,
@@ -738,8 +748,6 @@
 				13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */,
 				13B1C31E1AD4D6B3005C179C /* FSViewController.h */,
 				13B1C31F1AD4D6B3005C179C /* FSViewController.m */,
-				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
-				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */,
 				8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */,
 				8EF3F7501AD54F5400924975 /* PostReply.storyboard */,
@@ -916,6 +924,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
+				A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */,
 				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,

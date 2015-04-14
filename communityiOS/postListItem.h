@@ -15,6 +15,12 @@
 @property (nonatomic,strong)NSDictionary *data;
 
 @property (nonatomic,strong)NSArray *PostList;
+@property (nonatomic,strong)NSArray *apply_num;
+@property (nonatomic,strong)NSArray *reply_num;
+@property (nonatomic,strong)NSArray *read_num;
+@property (nonatomic,strong)NSArray *Phead_portrait_url;
+@property (nonatomic,strong)NSArray *poster_nickname;
+
 
 
 

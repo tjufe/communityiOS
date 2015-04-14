@@ -10,6 +10,9 @@
 
 @interface PosterTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *postDate;
-@property (weak, nonatomic) IBOutlet UIImageView *posterImage;
+
+@property (weak, nonatomic) IBOutlet UILabel *poster_nickname;
+@property (weak, nonatomic) IBOutlet UIImageView *poster_status;
+@property (weak, nonatomic) IBOutlet UIImageView *poster_img;
 
 @end
