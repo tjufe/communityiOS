@@ -7,6 +7,7 @@
 //
 
 #import "AlterNicknameViewController.h"
+#import "StatusTool.h"
 
 @interface AlterNicknameViewController ()
 
@@ -26,7 +27,16 @@
 
 #pragma mark --保存修改昵称
 - (IBAction)saveNickname:(id)sender {
-    NSString *nickname=_tf_Nickname.text;
+    //读取本地存储的ID
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *user_id = [defaults valueForKey:@"UserID"];
+    
+    [StatusTool statusToolCorrectNickNameWithNickName:self.tf_Nickname.text UserID:user_id Success:^(id object) {
+        //提交表单，不做处理
+    } failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
 }
 
 

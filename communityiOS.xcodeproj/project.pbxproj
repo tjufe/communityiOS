@@ -40,9 +40,6 @@
 		13B1C3221AD4D6B3005C179C /* FSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C31C1AD4D6B3005C179C /* FSCollectionViewController.m */; };
 		13B1C3231AD4D6B3005C179C /* FSCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */; };
 		13B1C3241AD4D6B3005C179C /* FSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C31F1AD4D6B3005C179C /* FSViewController.m */; };
-		13B1C3271AD4D6BF005C179C /* UserCenterLoggedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */; };
-		13B1C32B1AD4D6D1005C179C /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */; };
-		13B1C32C1AD4D6D1005C179C /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */; };
 		13B1C34B1AD4D6ED005C179C /* mypickview.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C32E1AD4D6ED005C179C /* mypickview.m */; };
 		13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */; };
 		13B1C34D1AD4D6ED005C179C /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C3311AD4D6ED005C179C /* PostDetailViewController.m */; };
@@ -82,13 +79,28 @@
 		13C58BEA1AB9550600090157 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BE91AB9550600090157 /* Images.xcassets */; };
 		13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BEB1AB9550600090157 /* LaunchScreen.xib */; };
 		13C58BF91AB9550700090157 /* communityiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C58BF81AB9550700090157 /* communityiOSTests.m */; };
+		1842ADE21ADB5F6F0022D2CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */; };
+		1842ADE41ADB5F7A0022D2CB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */; };
+		1842ADE61ADB5F830022D2CB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */; };
+		1842ADE81ADB5F8D0022D2CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE71ADB5F8D0022D2CB /* SystemConfiguration.framework */; };
+		1842ADEA1ADB5F960022D2CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE91ADB5F960022D2CB /* CoreGraphics.framework */; };
+		1842ADEC1ADB5FA50022D2CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADEB1ADB5FA50022D2CB /* Foundation.framework */; };
+		1842ADEE1ADB5FAE0022D2CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADED1ADB5FAE0022D2CB /* UIKit.framework */; };
+		1842ADF01ADB5FB90022D2CB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADEF1ADB5FB90022D2CB /* Security.framework */; };
+		1842ADF21ADB5FC10022D2CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF11ADB5FC10022D2CB /* libz.dylib */; };
+		1842ADF51ADB5FEE0022D2CB /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */; };
+		1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1842AE6C1ADB77290022D2CB /* PushConfig.plist */; };
+		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
 		8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */; };
 		8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */; };
 		8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48801AD8BA3F002E70DA /* postInfoItem.m */; };
 		8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */; };
 		8EEC48871AD8BB11002E70DA /* replyInfoListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */; };
+		8EEC48921AD90B17002E70DA /* DChainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48901AD90B17002E70DA /* DChainTableViewCell.m */; };
+		8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */; };
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
+		A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
 		A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */; };
 		A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */; };
@@ -166,9 +178,6 @@
 		13B1C31F1AD4D6B3005C179C /* FSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSViewController.m; sourceTree = "<group>"; };
 		13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterLoggedNavigationController.h; sourceTree = "<group>"; };
 		13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterLoggedNavigationController.m; sourceTree = "<group>"; };
-		13B1C3281AD4D6D1005C179C /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
-		13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
-		13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		13B1C32D1AD4D6ED005C179C /* mypickview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mypickview.h; sourceTree = "<group>"; };
 		13B1C32E1AD4D6ED005C179C /* mypickview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mypickview.m; sourceTree = "<group>"; };
 		13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostDetailStoryboard.storyboard; sourceTree = "<group>"; };
@@ -236,6 +245,20 @@
 		13C58BF21AB9550700090157 /* communityiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = communityiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13C58BF71AB9550700090157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13C58BF81AB9550700090157 /* communityiOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = communityiOSTests.m; sourceTree = "<group>"; };
+		1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		1842ADE71ADB5F8D0022D2CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1842ADE91ADB5F960022D2CB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1842ADEB1ADB5FA50022D2CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1842ADED1ADB5FAE0022D2CB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1842ADEF1ADB5FB90022D2CB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1842ADF11ADB5FC10022D2CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		1842ADF31ADB5FEE0022D2CB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
+		1842AE6C1ADB77290022D2CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		1892E3EB1ADBFAAD008A75B1 /* FirstSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSettingsViewController.h; sourceTree = "<group>"; };
+		1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSettingsViewController.m; sourceTree = "<group>"; };
 		265117CBD0FCA383D4E565E6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		735E3463C69F5339C7061D88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7E639B0AA95704A9F1BEA0E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -249,11 +272,16 @@
 		8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = replyInfoItem.m; sourceTree = "<group>"; };
 		8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = replyInfoListItem.h; sourceTree = "<group>"; };
 		8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = replyInfoListItem.m; sourceTree = "<group>"; };
+		8EEC488F1AD90B17002E70DA /* DChainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DChainTableViewCell.h; sourceTree = "<group>"; };
+		8EEC48901AD90B17002E70DA /* DChainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DChainTableViewCell.m; sourceTree = "<group>"; };
+		8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DChainTableViewCell.xib; sourceTree = "<group>"; };
 		8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostReplyViewController.h; sourceTree = "<group>"; };
 		8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostReplyViewController.m; sourceTree = "<group>"; };
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
+		A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deletepostItem.h; sourceTree = "<group>"; };
+		A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deletepostItem.m; sourceTree = "<group>"; };
 		A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
-		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
+		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 5; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
 		A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
 		A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
 		A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -264,6 +292,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1842ADF21ADB5FC10022D2CB /* libz.dylib in Frameworks */,
+				1842ADF01ADB5FB90022D2CB /* Security.framework in Frameworks */,
+				1842ADEE1ADB5FAE0022D2CB /* UIKit.framework in Frameworks */,
+				1842ADF51ADB5FEE0022D2CB /* libPushSDK-1.8.3.a in Frameworks */,
+				1842ADEC1ADB5FA50022D2CB /* Foundation.framework in Frameworks */,
+				1842ADEA1ADB5F960022D2CB /* CoreGraphics.framework in Frameworks */,
+				1842ADE81ADB5F8D0022D2CB /* SystemConfiguration.framework in Frameworks */,
+				1842ADE61ADB5F830022D2CB /* CoreTelephony.framework in Frameworks */,
+				1842ADE41ADB5F7A0022D2CB /* CoreFoundation.framework in Frameworks */,
+				1842ADE21ADB5F6F0022D2CB /* CFNetwork.framework in Frameworks */,
 				F2C08D8A5D78D26F9DB7CA8F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,21 +332,6 @@
 			children = (
 				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
 				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
-				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
-				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
-				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
-				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
-				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
-				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
-				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
-				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
-				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
-				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
-				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
-				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
-				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
-				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
-				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
 				13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */,
 				13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */,
 				13B1C37C1AD50B70005C179C /* post */,
@@ -341,10 +364,6 @@
 				13B1C2CC1ACB7DC5005C179C /* MJRefresh */,
 				13B1C2BC1ACA5A27005C179C /* KZPropertyMapper.h */,
 				13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */,
-				13B1C3781AD4D817005C179C /* StatusTool.h */,
-				13B1C3791AD4D817005C179C /* StatusTool.m */,
-				13B1C3651AD4D80B005C179C /* HttpTool.h */,
-				13B1C3661AD4D80B005C179C /* HttpTool.m */,
 				13B1C2B41ACA58B5005C179C /* APIClient.m */,
 				13B1C2B51ACA58B5005C179C /* APIClient.h */,
 			);
@@ -354,10 +373,6 @@
 		13B1C2A91ACA4ACB005C179C /* views */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
-				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
-				13B1C30E1AD4D674005C179C /* DialogView.h */,
-				13B1C30F1AD4D674005C179C /* DialogView.m */,
 				13B1C2AB1ACA4B26005C179C /* cells */,
 			);
 			name = views;
@@ -370,42 +385,6 @@
 				8EF3F74B1AD50B3600924975 /* forumList */,
 				8EF3F74A1AD50B1700924975 /* postList */,
 				8EF3F7491AD50B0200924975 /* postDetail */,
-				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
-				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
-				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
-				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
-				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
-				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
-				13B1C30B1AD4D674005C179C /* ChainTableViewCell.h */,
-				13B1C30C1AD4D674005C179C /* ChainTableViewCell.m */,
-				13B1C30D1AD4D674005C179C /* ChainTableViewCell.xib */,
-				13B1C3101AD4D674005C179C /* ForumSelectTableViewCell.h */,
-				13B1C3111AD4D674005C179C /* ForumSelectTableViewCell.m */,
-				13B1C3121AD4D674005C179C /* ForumSelectTableViewCell.xib */,
-				A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */,
-				A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */,
-				A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */,
-				13BE566A1ABA574700379ACD /* ForumTableViewCell.h */,
-				13BE566B1ABA574700379ACD /* ForumTableViewCell.m */,
-				13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */,
-				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
-				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
-				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
-				13B1C33F1AD4D6ED005C179C /* PushTableViewCell.h */,
-				13B1C3401AD4D6ED005C179C /* PushTableViewCell.m */,
-				13B1C3411AD4D6ED005C179C /* PushTableViewCell.xib */,
-				13B1C3421AD4D6ED005C179C /* SaveTableViewCell.h */,
-				13B1C3431AD4D6ED005C179C /* SaveTableViewCell.m */,
-				13B1C3441AD4D6ED005C179C /* SaveTableViewCell.xib */,
-				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
-				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
-				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
-				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
-				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
-				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
-				13B1C3281AD4D6D1005C179C /* ImageTableViewCell.h */,
-				13B1C3291AD4D6D1005C179C /* ImageTableViewCell.m */,
-				13B1C32A1AD4D6D1005C179C /* ImageTableViewCell.xib */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -417,6 +396,9 @@
 				13C58BE11AB9550600090157 /* AppDelegate.m */,
 				13C58BE31AB9550600090157 /* ViewController.h */,
 				13C58BE41AB9550600090157 /* ViewController.m */,
+				8EEC488F1AD90B17002E70DA /* DChainTableViewCell.h */,
+				8EEC48901AD90B17002E70DA /* DChainTableViewCell.m */,
+				8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */,
 				13C58BE61AB9550600090157 /* Main.storyboard */,
 				13C58BEB1AB9550600090157 /* LaunchScreen.xib */,
 			);
@@ -462,20 +444,6 @@
 		13B1C2B11ACA5885005C179C /* API */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C3761AD4D817005C179C /* regItem.h */,
-				13B1C3771AD4D817005C179C /* regItem.m */,
-				13B1C3671AD4D80B005C179C /* loginItem.h */,
-				13B1C3681AD4D80B005C179C /* loginItem.m */,
-				13B1C35F1AD4D80B005C179C /* forumItem.h */,
-				13B1C3601AD4D80B005C179C /* forumItem.m */,
-				13B1C3611AD4D80B005C179C /* forumListItem.h */,
-				13B1C3621AD4D80B005C179C /* forumListItem.m */,
-				13B1C3631AD4D80B005C179C /* forumSetItem.h */,
-				13B1C3641AD4D80B005C179C /* forumSetItem.m */,
-				13B1C36C1AD4D80B005C179C /* postListItem.h */,
-				13B1C36D1AD4D80B005C179C /* postListItem.m */,
-				13B1C36A1AD4D80B005C179C /* postItem.h */,
-				13B1C36B1AD4D80B005C179C /* postItem.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -555,6 +523,8 @@
 			isa = PBXGroup;
 			children = (
 				13B1C2FD1ACBB56B005C179C /* Settings.storyboard */,
+				1892E3EB1ADBFAAD008A75B1 /* FirstSettingsViewController.h */,
+				1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */,
 				13B1C2FF1ACBBED2005C179C /* SettingsViewController.h */,
 				13B1C3001ACBBED2005C179C /* SettingsViewController.m */,
 				13878AE01AD624B300658F21 /* AlterNicknameViewController.h */,
@@ -578,21 +548,6 @@
 		13B1C37C1AD50B70005C179C /* post */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */,
-				13B1C3301AD4D6ED005C179C /* PostDetailViewController.h */,
-				13B1C3311AD4D6ED005C179C /* PostDetailViewController.m */,
-				13B1C3321AD4D6ED005C179C /* PostEdit.storyboard */,
-				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
-				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
-				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
-				13B1C3181AD4D6B3005C179C /* FSCollectionView.h */,
-				13B1C3191AD4D6B3005C179C /* FSCollectionView.m */,
-				13B1C31A1AD4D6B3005C179C /* FSCollectionView.storyboard */,
-				13B1C31B1AD4D6B3005C179C /* FSCollectionViewController.h */,
-				13B1C31C1AD4D6B3005C179C /* FSCollectionViewController.m */,
-				13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */,
-				13B1C31E1AD4D6B3005C179C /* FSViewController.h */,
-				13B1C31F1AD4D6B3005C179C /* FSViewController.m */,
 			);
 			name = post;
 			sourceTree = "<group>";
@@ -634,6 +589,11 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
+				1842ADF31ADB5FEE0022D2CB /* APService.h */,
+				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
+
+				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
+				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
 				13B1C3761AD4D817005C179C /* regItem.h */,
 				13B1C3771AD4D817005C179C /* regItem.m */,
 				13B1C35F1AD4D80B005C179C /* forumItem.h */,
@@ -675,6 +635,7 @@
 			children = (
 				13C58BDD1AB9550600090157 /* Info.plist */,
 				13C58BDE1AB9550600090157 /* main.m */,
+				1842AE6C1ADB77290022D2CB /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -699,6 +660,15 @@
 		8EF3F7491AD50B0200924975 /* postDetail */ = {
 			isa = PBXGroup;
 			children = (
+				13B1C3351AD4D6ED005C179C /* PosterTableViewCell.h */,
+				13B1C3361AD4D6ED005C179C /* PosterTableViewCell.m */,
+				13B1C3371AD4D6ED005C179C /* PosterTableViewCell.xib */,
+				13B1C3381AD4D6ED005C179C /* PostImageTableViewCell.h */,
+				13B1C3391AD4D6ED005C179C /* PostImageTableViewCell.m */,
+				13B1C33A1AD4D6ED005C179C /* PostImageTableViewCell.xib */,
+				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
+				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
+				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
 			);
 			name = postDetail;
 			sourceTree = "<group>";
@@ -706,9 +676,9 @@
 		8EF3F74A1AD50B1700924975 /* postList */ = {
 			isa = PBXGroup;
 			children = (
-				A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */,
-				A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */,
-				A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */,
+				13BE566A1ABA574700379ACD /* ForumTableViewCell.h */,
+				13BE566B1ABA574700379ACD /* ForumTableViewCell.m */,
+				13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */,
 			);
 			name = postList;
 			sourceTree = "<group>";
@@ -716,9 +686,9 @@
 		8EF3F74B1AD50B3600924975 /* forumList */ = {
 			isa = PBXGroup;
 			children = (
-				13BE566A1ABA574700379ACD /* ForumTableViewCell.h */,
-				13BE566B1ABA574700379ACD /* ForumTableViewCell.m */,
-				13BE566C1ABA574700379ACD /* ForumTableViewCell.xib */,
+				A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */,
+				A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */,
+				A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */,
 			);
 			name = forumList;
 			sourceTree = "<group>";
@@ -729,6 +699,12 @@
 				13B1C3101AD4D674005C179C /* ForumSelectTableViewCell.h */,
 				13B1C3111AD4D674005C179C /* ForumSelectTableViewCell.m */,
 				13B1C3121AD4D674005C179C /* ForumSelectTableViewCell.xib */,
+				13B1C3451AD4D6ED005C179C /* TextTableViewCell.h */,
+				13B1C3461AD4D6ED005C179C /* TextTableViewCell.m */,
+				13B1C3471AD4D6ED005C179C /* TextTableViewCell.xib */,
+				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
+				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
+				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
 			);
 			name = postEdit;
 			sourceTree = "<group>";
@@ -736,6 +712,15 @@
 		9995B5493DF95E776F0C00A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1842ADF11ADB5FC10022D2CB /* libz.dylib */,
+				1842ADEF1ADB5FB90022D2CB /* Security.framework */,
+				1842ADED1ADB5FAE0022D2CB /* UIKit.framework */,
+				1842ADEB1ADB5FA50022D2CB /* Foundation.framework */,
+				1842ADE91ADB5F960022D2CB /* CoreGraphics.framework */,
+				1842ADE71ADB5F8D0022D2CB /* SystemConfiguration.framework */,
+				1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */,
+				1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */,
+				1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */,
 				265117CBD0FCA383D4E565E6 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -751,6 +736,8 @@
 				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
 				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
 				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
+				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
+				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				13B1C3181AD4D6B3005C179C /* FSCollectionView.h */,
 				13B1C3191AD4D6B3005C179C /* FSCollectionView.m */,
 				13B1C31A1AD4D6B3005C179C /* FSCollectionView.storyboard */,
@@ -759,8 +746,6 @@
 				13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */,
 				13B1C31E1AD4D6B3005C179C /* FSViewController.h */,
 				13B1C31F1AD4D6B3005C179C /* FSViewController.m */,
-				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
-				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */,
 				8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */,
 				8EF3F7501AD54F5400924975 /* PostReply.storyboard */,
@@ -865,11 +850,11 @@
 				13B1C3531AD4D6ED005C179C /* PostImageTableViewCell.xib in Resources */,
 				13B1C35E1AD4D6ED005C179C /* TitleTableViewCell.xib in Resources */,
 				13B1C3541AD4D6ED005C179C /* PostList.storyboard in Resources */,
-				13B1C3141AD4D674005C179C /* ChainTableViewCell.xib in Resources */,
 				13B1C3211AD4D6B3005C179C /* FSCollectionView.storyboard in Resources */,
 				13B1C3171AD4D674005C179C /* ForumSelectTableViewCell.xib in Resources */,
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
 				13C58BE81AB9550600090157 /* Main.storyboard in Resources */,
+				1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
 				13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
@@ -882,6 +867,7 @@
 				13B1C2CB1ACA6E7C005C179C /* userCenter.xcassets in Resources */,
 				13B1C2BB1ACA5956005C179C /* demo.xcassets in Resources */,
 				8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */,
+				8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */,
 				13B1C3511AD4D6ED005C179C /* PosterTableViewCell.xib in Resources */,
 				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
@@ -936,6 +922,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
+				A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */,
 				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
@@ -943,6 +930,7 @@
 				13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */,
 				13B1C3241AD4D6B3005C179C /* FSViewController.m in Sources */,
 				13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */,
+				1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */,
 				13B1C2BE1ACA5A27005C179C /* KZPropertyMapper.m in Sources */,
 				13B1C35D1AD4D6ED005C179C /* TitleTableViewCell.m in Sources */,
 				13B1C35B1AD4D6ED005C179C /* TextTableViewCell.m in Sources */,
@@ -958,6 +946,7 @@
 				13B1C2E71ACB7DC5005C179C /* MJRefreshFooterView.m in Sources */,
 				13B1C3061ACCDA92005C179C /* DemoViewController.m in Sources */,
 				13B1C3161AD4D674005C179C /* ForumSelectTableViewCell.m in Sources */,
+				8EEC48921AD90B17002E70DA /* DChainTableViewCell.m in Sources */,
 				13B1C2C91ACA690E005C179C /* UserCenterUnloggedViewController.m in Sources */,
 				13B1C3221AD4D6B3005C179C /* FSCollectionViewController.m in Sources */,
 				13B1C3551AD4D6ED005C179C /* PostTextTableViewCell.m in Sources */,
@@ -1121,6 +1110,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1137,6 +1127,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
