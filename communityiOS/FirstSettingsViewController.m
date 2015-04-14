@@ -22,6 +22,14 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)initPortraitWithImage:(UIImage *)image{
+    
+    self.portraitImage.layer.masksToBounds = YES;
+    [self.portraitImage.layer setCornerRadius:self.portraitImage.frame.size.width/2];
+    self.portraitImage.contentMode = UIViewContentModeScaleAspectFill;
+    self.portraitImage.image = image;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -72,7 +80,7 @@
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
     UIImage *chosenImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    self.portraitImage.image = chosenImage;
+    [self initPortraitWithImage:chosenImage];
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
