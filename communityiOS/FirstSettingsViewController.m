@@ -17,6 +17,7 @@
 - (IBAction)setPoraitAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *portraitImage;
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
+@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 
 @end
 
@@ -25,8 +26,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+   
     
 
+}
+
+//刷新昵称
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.nickNameLabel.text = [defaults valueForKey:@"UserNickname"];
 }
 
 
@@ -68,6 +77,7 @@
 }
 
 #pragma mark--------从用户相册获取活动图片
+
 - (void)pickImageFromAlbum{
       self.imagePicker = [[UIImagePickerController alloc] init];
      self.imagePicker.delegate = self;
@@ -79,6 +89,7 @@
    }
 
 #pragma mark--------从摄像头获取活动图片
+
 - (void)pickImageFromCamera{
         self.imagePicker = [[UIImagePickerController alloc] init];
         self.imagePicker.delegate = self;
@@ -112,6 +123,7 @@
     [self uploadPersonImginitWithImage:chosenImage];
     
 }
+#pragma mark--------------UIImagePickerViewController  delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
@@ -125,7 +137,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark 保存图片到document
+#pragma mark---------------保存图片到document
 - (void)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName{
         NSData* imageData = UIImageJPEGRepresentation(tempImage,0.2);
         NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -136,7 +148,7 @@
         [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
-//将头像切割成圆形
+#pragma mark---------------将头像切割成圆形
 -(void)initPortraitWithImage:(UIImage *)image{
     
     self.portraitImage.layer.masksToBounds = YES;
@@ -146,7 +158,7 @@
 }
 
 
-//上传头像图片
+#pragma mark--------------    上传头像图片
 -(void)uploadPersonImginitWithImage:(UIImage *)image{
 
      NSURL *baseUrl = [NSURL URLWithString:@"http://192.168.1.109/sq/upload.php"];
@@ -174,7 +186,7 @@
     }];
     
 }
-
+#pragma  mark-------------------刷新数据库
 -(void)refreshDB:(id)object{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];

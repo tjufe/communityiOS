@@ -30,13 +30,14 @@
     //读取本地存储的ID
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [defaults valueForKey:@"UserID"];
+    [defaults setObject:self.tf_Nickname.text forKey:@"UserNickname"];
     
     [StatusTool statusToolCorrectNickNameWithNickName:self.tf_Nickname.text UserID:user_id Success:^(id object) {
         //提交表单，不做处理
     } failurs:^(NSError *error) {
         NSLog(@"%@",error);
     }];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
