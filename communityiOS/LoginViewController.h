@@ -17,5 +17,6 @@
 @interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *LoginImage;
 @property (strong, nonatomic) UIImage* loimage;
+- (IBAction)View_TouchDown:(id)sender;
 @property (nonatomic,assign) id<LoginViewControllerDelegate>delegate;
 @end

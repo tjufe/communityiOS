@@ -18,6 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange) name:UITextFieldTextDidChangeNotification object:self.tf_Nickname];
+}
+
+-(void)textChange{
+    self.saveBtn.enabled = (self.tf_Nickname.text.length);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,4 +57,8 @@
 }
 */
 
+- (IBAction)View_TouchDown:(id)sender {
+    
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
 @end

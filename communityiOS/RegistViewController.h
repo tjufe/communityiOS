@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfNickname;
 @property (weak, nonatomic) IBOutlet UITextField *tfPassword;
 @property (weak, nonatomic) IBOutlet UITextField *tfSecondPassword;
+- (IBAction)View_TouchDown:(id)sender;
 
 @end
