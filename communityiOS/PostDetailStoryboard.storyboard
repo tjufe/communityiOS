@@ -119,7 +119,7 @@
                                             <constraint firstAttribute="height" constant="40" id="xgm-ke-dGB"/>
                                             <constraint firstAttribute="width" constant="70" id="zRi-EP-mmH"/>
                                         </constraints>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" title="查看回复">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -127,18 +127,22 @@
                                             <action selector="SendOnClick:" destination="Swc-ik-nzf" eventType="touchUpInside" id="V8e-eX-d4r"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_01" translatesAutoresizingMaskIntoConstraints="NO" id="mfZ-c2-8Lm">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="默认小头像" translatesAutoresizingMaskIntoConstraints="NO" id="mfZ-c2-8Lm">
                                         <rect key="frame" x="5" y="15" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="PpB-UJ-mlF"/>
                                             <constraint firstAttribute="height" constant="40" id="aE9-nE-Q1f"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-n8-4qD">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="回复" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-n8-4qD">
                                         <rect key="frame" x="49" y="15" width="192" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Swc-ik-nzf" id="Bxk-6x-rGV"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90697995580000002" green="0.90697995580000002" blue="0.90697995580000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,14 +203,14 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="PDview" destination="18P-zj-67F" id="Ukh-lN-VSH"/>
-                        <outlet property="SendButton" destination="PPf-0j-jbo" id="1oG-Qd-E2G"/>
+                        <outlet property="SendButton" destination="PPf-0j-jbo" id="8lB-Hw-wuL"/>
                         <outlet property="TitleRect" destination="Tbm-0S-qXi" id="dax-QM-TOL"/>
                         <outlet property="forumlabel" destination="KB9-fZ-5mw" id="Hzh-bo-67O"/>
                         <outlet property="postTitle" destination="ATc-4W-hQG" id="vFS-gZ-YQB"/>
-                        <outlet property="reply_num" destination="p5r-lp-mOe" id="qel-ij-GXG"/>
-                        <outlet property="reply_text" destination="4bg-n8-4qD" id="Kde-RY-dxo"/>
+                        <outlet property="post_reply_num" destination="p5r-lp-mOe" id="Djq-hS-IuC"/>
+                        <outlet property="reply_text" destination="4bg-n8-4qD" id="jxw-Oh-9Lt"/>
                         <outlet property="tableview" destination="nes-gG-y4a" id="4KF-ul-ggu"/>
-                        <outlet property="user_head" destination="mfZ-c2-8Lm" id="hvc-FB-DX1"/>
+                        <outlet property="user_img" destination="mfZ-c2-8Lm" id="UM5-GB-hCv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZo-mP-qfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -215,6 +219,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_01" width="47" height="47"/>
+        <image name="默认小头像" width="57" height="55"/>
     </resources>
 </document>

@@ -187,6 +187,8 @@
     [defaults setObject:loginItem.head_portrait_url forKey:@"HeadPortraitUrl"];
     [defaults setObject:loginItem.user_permission forKey:@"UserPermission"];
     [defaults setObject:loginItem.login_password forKey:@"LoginPassword"];
+    [defaults setObject:loginItem.account_status forKey:@"AccountStatus"];
+    [defaults setObject:loginItem.moderator_of_forum_list forKey:@"moderator_of_forum_list"];
     [defaults setBool:YES forKey:@"Logged"];
     [defaults synchronize];  //保持同步
 }

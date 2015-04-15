@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="83" id="KGk-i7-Jjw" customClass="ReplyitemTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="398" height="83"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_default_avater@2x" translatesAutoresizingMaskIntoConstraints="NO" id="SiU-Bf-YS5">
+                        <rect key="frame" x="8" y="11" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="5CK-j5-bXJ"/>
+                            <constraint firstAttribute="width" constant="60" id="mkS-V2-O3M"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EY-XI-jJh">
+                        <rect key="frame" x="82" y="11" width="60" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="Vep-gG-NKK"/>
+                            <constraint firstAttribute="height" constant="21" id="sBQ-XT-5hL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.031372549019607843" green="0.42745098039215684" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回复时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMP-Ww-avD">
+                        <rect key="frame" x="82" y="40" width="60" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="73Q-2t-V5J"/>
+                            <constraint firstAttribute="width" constant="60" id="Qpd-lC-vtF"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.5670967487373737" green="0.5670967487373737" blue="0.5670967487373737" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回复内容达萨发达发生的发生大发的撒放到是否撒的发生地发的撒发生大发的撒发呆发呆撒风" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEE-j6-YpW">
+                        <rect key="frame" x="152" y="8" width="200" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="Pqg-VQ-Ymh"/>
+                            <constraint firstAttribute="height" constant="60" id="wZg-Zp-JbW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="uMP-Ww-avD" firstAttribute="top" secondItem="1EY-XI-jJh" secondAttribute="bottom" constant="8" id="0IU-Ak-Uto"/>
+                    <constraint firstItem="EEE-j6-YpW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="0MS-JI-Qoh"/>
+                    <constraint firstItem="uMP-Ww-avD" firstAttribute="leading" secondItem="SiU-Bf-YS5" secondAttribute="trailing" constant="14" id="93B-h3-WGX"/>
+                    <constraint firstItem="1EY-XI-jJh" firstAttribute="leading" secondItem="SiU-Bf-YS5" secondAttribute="trailing" constant="14" id="PbW-c5-HRC"/>
+                    <constraint firstItem="SiU-Bf-YS5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="XEa-Bd-ZbT"/>
+                    <constraint firstItem="EEE-j6-YpW" firstAttribute="leading" secondItem="uMP-Ww-avD" secondAttribute="trailing" constant="10" id="hNu-Sg-BZI"/>
+                    <constraint firstItem="SiU-Bf-YS5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="puf-Pk-VIr"/>
+                    <constraint firstItem="1EY-XI-jJh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="y6B-g0-anc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="Rdate" destination="uMP-Ww-avD" id="O7w-ph-B0l"/>
+                <outlet property="Rnickname" destination="1EY-XI-jJh" id="Pan-tw-25c"/>
+                <outlet property="Rtext" destination="EEE-j6-YpW" id="fPa-b8-Zaw"/>
+                <outlet property="reply_head" destination="SiU-Bf-YS5" id="vuL-TX-IhJ"/>
+            </connections>
+            <point key="canvasLocation" x="387" y="316.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_default_avater@2x" width="30" height="30"/>
+    </resources>
+</document>

@@ -15,6 +15,8 @@
 #import "postItem.h"
 #import "postListItem.h"
 #import "postInfoItem.h"
+#import "deletepostItem.h"
+#import "replyInfoListItem.h"
 
 @implementation StatusTool
 
@@ -120,12 +122,12 @@
                          NSData *data = [[NSData alloc] initWithData:responseObject];
                          NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                          postListItem *post_list_item = [postListItem createItemWitparametes:dic];
-                         NSMutableArray *ListArray = [NSMutableArray array];
-                         
-                         for(NSDictionary *dic in post_list_item.PostList){
-                             [ListArray addObject:[postItem createItemWitparametes:dic]];
-                         }
-                         success(ListArray);
+//                         NSMutableArray *ListArray = [NSMutableArray array];
+//                         
+//                         for(NSDictionary *dic in post_list_item.PostList){
+//                             [ListArray addObject:[postItem createItemWitparametes:dic]];
+//                         }
+                         success(post_list_item);
                          
                      } failure:^(NSError *error) {
                          if (failure == nil) return;
@@ -155,7 +157,7 @@
                      } failure:^(NSError *error) {
                          if (failure == nil) return;
                          failure(error);
-                     }];
+                    }];
     
 }
 
@@ -213,7 +215,7 @@
 }
 
 //请求发送新帖
-+(void)statusToolPostNewPostWithcom_id:(NSString *)community_id  forumID:(NSString *)forum_id posterID:(NSString *)poster_id postTitle:(NSString *)post_title postText:(NSString *)post_text Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure{
++(void)statusToolPostNewPostWithcom_id:(NSString *)community_id  forumID:(NSString *)forum_id posterID:(NSString *)poster_id postTitle:(NSString *)post_title postText:(NSString *)post_text Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member LimitAppNum:(NSString *)limit_apply_num  Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
     [firstDic setObject:community_id forKey:@"community_id"];
@@ -233,9 +235,8 @@
     [thirdDic setObject:@"NewPost" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        NSData *data = [[NSData alloc] initWithData:responseObject];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        success(dic);
+        // no response
+        success(responseObject);
 
         
     } failure:^(NSError *error) {
@@ -244,7 +245,7 @@
     }];
 }
 //请求编辑帖子
-+(void)statusToolPostEditWithcomID:(NSString *)community_id forumID:(NSString *)forum_id postTitle:(NSString *)post_title Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushFlag:(NSString*)push_flag userID:(NSString *)user_id postText:(NSString *)post_text editFlag:(NSString *)edit_flag posterID:(NSString *)poster_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure{
++(void)statusToolPostEditWithcomID:(NSString *)community_id forumID:(NSString *)forum_id postTitle:(NSString *)post_title Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member userID:(NSString *)user_id postText:(NSString *)post_text  posterID:(NSString *)poster_id LimitAppNum:(NSString *)limit_apply_num  Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
     [firstDic setObject:community_id forKey:@"community_id"];
@@ -254,10 +255,10 @@
     [firstDic setObject:chain_flag forKey:@"chain_flag"];
     [firstDic setObject:chain_name forKey:@"chain_name"];
     [firstDic setObject:chain_url forKey:@"chain_url"];
-    [firstDic setObject:push_flag forKey:@"push_flag"];
+    [firstDic setObject:push_member forKey:@"push_member"];
     [firstDic setObject:user_id forKey:@"user_id"];
     [firstDic setObject:post_text forKey:@"post_text"];
-    [firstDic setObject:edit_flag forKey:@"edit_flag"];
+
     [firstDic setObject:poster_id forKey:@"poster_id"];
     NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
     [secondDic  setObject:firstDic forKey:@"Data"];
@@ -267,7 +268,7 @@
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
         // no response
-        
+          success(responseObject);
     } failure:^(NSError *error) {
         if (failure == nil) return;
         failure(error);
@@ -301,6 +302,92 @@
 
 
 
+//删除帖子操作
++(void)statusToolDeletePostWithpostID:(NSString *)post_id deleteUserID:
+(NSString *)delete_user_id communityID:(NSString *)community_id fourmID:
+(NSString *)forum_id Success:(ForumListSuccess)success failurs:
+(ForumListFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:post_id forKey:@"post_id"];
+    [firstDic setObject:delete_user_id forKey:@"delete_user_id"];
+    [firstDic setObject:community_id forKey:@"community_id"];
+    [firstDic setObject:forum_id forKey:@"forum_id"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    
+    [thirdDic setObject:@"DeletePost" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic
+                     success:^(id responseObject) {
+                         NSData *data = [[NSData alloc] initWithData:responseObject];
+                         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                         deletepostItem  *delete_post_item = [deletepostItem createItemWitparametes:dic];
+                         success(delete_post_item);
+                         
+                     } failure:^(NSError *error) {
+                         if (failure == nil) return;
+                         failure(error);
+                     }];
+    
+    
+}
+
+
+
+//Request_ReplyContent
++(void)statusToolReplyContentWithID:(NSString *)ID Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    
+    [firstDic setObject:ID forKey:@"id"];
+    
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"ReplyContent" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        replyInfoListItem *reply_list_item = [replyInfoListItem createItemWitparametes:dic];
+        success(reply_list_item);
+    } failure:^(NSError *error) {
+        if (failure == nil) return;
+        failure(error);
+    }];
+}
+
+//Request_PostReply
++(void)statusToolPostReplyWithReplyText:(NSString *)reply_text communityID:(NSString*)community_id forumID:(NSString*)forum_id postID:(NSString*)post_id userID:(NSString *)user_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:reply_text forKey:@"reply_text"];
+    [firstDic setObject:community_id forKey:@"community_id"];
+    [firstDic setObject:forum_id forKey:@"forum_id"];
+    [firstDic setObject:post_id forKey:@"post_id"];
+
+    [firstDic setObject:user_id forKey:@"post_reply_man_id"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"PostReply" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
+        // no response
+        NSLog(@"1");
+        success(responseObject);
+    } failure:^(NSError *error) {
+        if (failure == nil) return;
+        failure(error);
+    }];
+    
+}
 
 
 @end
+

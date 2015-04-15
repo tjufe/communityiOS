@@ -79,8 +79,16 @@
 		13C58BEA1AB9550600090157 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BE91AB9550600090157 /* Images.xcassets */; };
 		13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BEB1AB9550600090157 /* LaunchScreen.xib */; };
 		13C58BF91AB9550700090157 /* communityiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C58BF81AB9550700090157 /* communityiOSTests.m */; };
+		8E3654461ADC9CF80059D21A /* ReplyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3654451ADC9CF80059D21A /* ReplyListViewController.m */; };
+		8E3654481ADC9D2B0059D21A /* ReplyList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E3654471ADC9D2B0059D21A /* ReplyList.storyboard */; };
+		8E36544C1ADC9D7D0059D21A /* ReplyitemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36544A1ADC9D7D0059D21A /* ReplyitemTableViewCell.m */; };
+		8E36544D1ADC9D7D0059D21A /* ReplyitemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E36544B1ADC9D7D0059D21A /* ReplyitemTableViewCell.xib */; };
 		8E5853101ADB893F003D5D22 /* EChainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E58530E1ADB893F003D5D22 /* EChainTableViewCell.m */; };
 		8E5853111ADB893F003D5D22 /* EChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E58530F1ADB893F003D5D22 /* EChainTableViewCell.xib */; };
+		8E5853151ADBF4FD003D5D22 /* EImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5853131ADBF4FD003D5D22 /* EImageTableViewCell.m */; };
+		8E5853161ADBF4FD003D5D22 /* EImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5853141ADBF4FD003D5D22 /* EImageTableViewCell.xib */; };
+		8E58531A1ADBFE49003D5D22 /* LApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5853181ADBFE49003D5D22 /* LApplyTableViewCell.m */; };
+		8E58531B1ADBFE49003D5D22 /* LApplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5853191ADBFE49003D5D22 /* LApplyTableViewCell.xib */; };
 		8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */; };
 		8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */; };
 		8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48801AD8BA3F002E70DA /* postInfoItem.m */; };
@@ -90,6 +98,7 @@
 		8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */; };
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
+		A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
 		A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */; };
 		A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */; };
@@ -237,9 +246,21 @@
 		265117CBD0FCA383D4E565E6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		735E3463C69F5339C7061D88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7E639B0AA95704A9F1BEA0E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8E3654441ADC9CF80059D21A /* ReplyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyListViewController.h; sourceTree = "<group>"; };
+		8E3654451ADC9CF80059D21A /* ReplyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyListViewController.m; sourceTree = "<group>"; };
+		8E3654471ADC9D2B0059D21A /* ReplyList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReplyList.storyboard; sourceTree = "<group>"; };
+		8E3654491ADC9D7D0059D21A /* ReplyitemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyitemTableViewCell.h; sourceTree = "<group>"; };
+		8E36544A1ADC9D7D0059D21A /* ReplyitemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyitemTableViewCell.m; sourceTree = "<group>"; };
+		8E36544B1ADC9D7D0059D21A /* ReplyitemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyitemTableViewCell.xib; sourceTree = "<group>"; };
 		8E58530D1ADB893F003D5D22 /* EChainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EChainTableViewCell.h; sourceTree = "<group>"; };
 		8E58530E1ADB893F003D5D22 /* EChainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EChainTableViewCell.m; sourceTree = "<group>"; };
 		8E58530F1ADB893F003D5D22 /* EChainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EChainTableViewCell.xib; sourceTree = "<group>"; };
+		8E5853121ADBF4FD003D5D22 /* EImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EImageTableViewCell.h; sourceTree = "<group>"; };
+		8E5853131ADBF4FD003D5D22 /* EImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EImageTableViewCell.m; sourceTree = "<group>"; };
+		8E5853141ADBF4FD003D5D22 /* EImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EImageTableViewCell.xib; sourceTree = "<group>"; };
+		8E5853171ADBFE49003D5D22 /* LApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LApplyTableViewCell.h; sourceTree = "<group>"; };
+		8E5853181ADBFE49003D5D22 /* LApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LApplyTableViewCell.m; sourceTree = "<group>"; };
+		8E5853191ADBFE49003D5D22 /* LApplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LApplyTableViewCell.xib; sourceTree = "<group>"; };
 		8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
 		8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		8EEC487C1AD8B9CF002E70DA /* ifApplyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ifApplyItem.h; sourceTree = "<group>"; };
@@ -256,8 +277,10 @@
 		8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostReplyViewController.h; sourceTree = "<group>"; };
 		8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostReplyViewController.m; sourceTree = "<group>"; };
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
+		A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deletepostItem.h; sourceTree = "<group>"; };
+		A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deletepostItem.m; sourceTree = "<group>"; };
 		A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
-		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
+		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 5; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
 		A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
 		A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
 		A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -347,6 +370,7 @@
 		13B1C2AB1ACA4B26005C179C /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				8E3654431ADC9C750059D21A /* ReplyList */,
 				8EF3F74C1AD50B5000924975 /* postEdit */,
 				8EF3F74B1AD50B3600924975 /* forumList */,
 				8EF3F74A1AD50B1700924975 /* postList */,
@@ -550,6 +574,8 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
+				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
+				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
 				13B1C3761AD4D817005C179C /* regItem.h */,
 				13B1C3771AD4D817005C179C /* regItem.m */,
 				13B1C35F1AD4D80B005C179C /* forumItem.h */,
@@ -612,6 +638,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8E3654431ADC9C750059D21A /* ReplyList */ = {
+			isa = PBXGroup;
+			children = (
+				8E3654441ADC9CF80059D21A /* ReplyListViewController.h */,
+				8E3654451ADC9CF80059D21A /* ReplyListViewController.m */,
+				8E3654471ADC9D2B0059D21A /* ReplyList.storyboard */,
+				8E3654491ADC9D7D0059D21A /* ReplyitemTableViewCell.h */,
+				8E36544A1ADC9D7D0059D21A /* ReplyitemTableViewCell.m */,
+				8E36544B1ADC9D7D0059D21A /* ReplyitemTableViewCell.xib */,
+			);
+			name = ReplyList;
+			sourceTree = "<group>";
+		};
 		8EF3F7491AD50B0200924975 /* postDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,6 +705,12 @@
 				8E58530D1ADB893F003D5D22 /* EChainTableViewCell.h */,
 				8E58530E1ADB893F003D5D22 /* EChainTableViewCell.m */,
 				8E58530F1ADB893F003D5D22 /* EChainTableViewCell.xib */,
+				8E5853121ADBF4FD003D5D22 /* EImageTableViewCell.h */,
+				8E5853131ADBF4FD003D5D22 /* EImageTableViewCell.m */,
+				8E5853141ADBF4FD003D5D22 /* EImageTableViewCell.xib */,
+				8E5853171ADBFE49003D5D22 /* LApplyTableViewCell.h */,
+				8E5853181ADBFE49003D5D22 /* LApplyTableViewCell.m */,
+				8E5853191ADBFE49003D5D22 /* LApplyTableViewCell.xib */,
 			);
 			name = postEdit;
 			sourceTree = "<group>";
@@ -688,6 +733,8 @@
 				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
 				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
 				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
+				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
+				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				13B1C3181AD4D6B3005C179C /* FSCollectionView.h */,
 				13B1C3191AD4D6B3005C179C /* FSCollectionView.m */,
 				13B1C31A1AD4D6B3005C179C /* FSCollectionView.storyboard */,
@@ -696,8 +743,6 @@
 				13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */,
 				13B1C31E1AD4D6B3005C179C /* FSViewController.h */,
 				13B1C31F1AD4D6B3005C179C /* FSViewController.m */,
-				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
-				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */,
 				8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */,
 				8EF3F7501AD54F5400924975 /* PostReply.storyboard */,
@@ -797,16 +842,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B1C2FB1ACB9C16005C179C /* UserCenterLogged.storyboard in Resources */,
+				8E36544D1ADC9D7D0059D21A /* ReplyitemTableViewCell.xib in Resources */,
 				13B1C3231AD4D6B3005C179C /* FSCollectionViewController.xib in Resources */,
 				13B1C34E1AD4D6ED005C179C /* PostEdit.storyboard in Resources */,
+				8E5853161ADBF4FD003D5D22 /* EImageTableViewCell.xib in Resources */,
 				13B1C3531AD4D6ED005C179C /* PostImageTableViewCell.xib in Resources */,
 				13B1C35E1AD4D6ED005C179C /* TitleTableViewCell.xib in Resources */,
 				13B1C3541AD4D6ED005C179C /* PostList.storyboard in Resources */,
 				13B1C3211AD4D6B3005C179C /* FSCollectionView.storyboard in Resources */,
 				13B1C3171AD4D674005C179C /* ForumSelectTableViewCell.xib in Resources */,
+				8E58531B1ADBFE49003D5D22 /* LApplyTableViewCell.xib in Resources */,
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
 				13C58BE81AB9550600090157 /* Main.storyboard in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
+				8E3654481ADC9D2B0059D21A /* ReplyList.storyboard in Resources */,
 				13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
 				A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */,
@@ -874,11 +923,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
+				A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */,
 				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
 				13B1C3521AD4D6ED005C179C /* PostImageTableViewCell.m in Sources */,
 				8E5853101ADB893F003D5D22 /* EChainTableViewCell.m in Sources */,
+				8E36544C1ADC9D7D0059D21A /* ReplyitemTableViewCell.m in Sources */,
 				13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */,
 				13B1C3241AD4D6B3005C179C /* FSViewController.m in Sources */,
 				13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */,
@@ -903,6 +954,7 @@
 				13B1C3551AD4D6ED005C179C /* PostTextTableViewCell.m in Sources */,
 				13B1C34B1AD4D6ED005C179C /* mypickview.m in Sources */,
 				13B1C30A1ACCFE98005C179C /* GGAddressPickerHelper.m in Sources */,
+				8E3654461ADC9CF80059D21A /* ReplyListViewController.m in Sources */,
 				13B1C2E81ACB7DC5005C179C /* MJRefreshHeaderView.m in Sources */,
 				13B1C3201AD4D6B3005C179C /* FSCollectionView.m in Sources */,
 				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
@@ -927,9 +979,11 @@
 				A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */,
 				8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */,
 				A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */,
+				8E5853151ADBF4FD003D5D22 /* EImageTableViewCell.m in Sources */,
 				8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */,
 				13B1C2E21ACB7DC5005C179C /* AMPActivityIndicator.m in Sources */,
 				13B1C3011ACBBED2005C179C /* SettingsViewController.m in Sources */,
+				8E58531A1ADBFE49003D5D22 /* LApplyTableViewCell.m in Sources */,
 				13B1C3711AD4D80B005C179C /* HttpTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,6 +20,10 @@
 //wangyao0412
 #import "StatusTool.h"
 #import "PostListViewController.h"
+#import "EChainTableViewCell.h"
+#import "EImageTableViewCell.h"
+#import "UIImageView+WebCache.h"//加载图片
+#import "LApplyTableViewCell.h"
 
 
 @interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,UITextViewDelegate>
@@ -29,6 +33,15 @@
 //wangyao0412
 @property(strong,nonatomic)TitleTableViewCell  *Tcell;
 @property(weak,nonatomic)PostListViewController *PLVC;
+@property(strong,nonatomic)LApplyTableViewCell  *LAcell;
+@property(strong,nonatomic)EChainTableViewCell  *ECcell;
+@property (strong,nonatomic)UILabel *myview;
+@property (strong,nonatomic) NSString *HeadPortraitUrl;//当前用户头像
+@property (strong,nonatomic) NSString *UserPermission;//当前用户身份
+@property (strong,nonatomic) NSString *UserID;//当前用户id
+@property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
+@property (strong,nonatomic) NSArray *moderator_of_forum_list;//版块版主信息
+
 @property (weak,nonatomic)NSString *ns;
 @property (strong,nonatomic)UIView *addchain;
 @property (strong,nonatomic)UIView *addpush;
@@ -49,6 +62,18 @@
 
 
 @end
+//wangyao
+UITextField *ctfield;
+UITextField *wtfield;
+double cellheight;
+//不能刷新行高，暂时作废
+NSString *chain_flag = @"0";//用来判断是否显示外链cell
+NSString *la_flag = @"0";//用来判断是否显示限制报名cell
+NSString *mi_flag = @"0";//用来判断是否显示主图cell
+ //
+NSInteger *row_0;
+NSInteger *row_1;
+NSInteger *row_2;
 
 NSString * const site_addchain = @"是否提供外链功能";
 NSString * const site_addapply = @"是否提供报名功能";
@@ -64,14 +89,15 @@ NSArray *third_;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 6;
     
 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         if (indexPath.row== 0 ) {
-        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
+            ForumSelectTableViewCell *cell;
+//        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
             
         
         if (!cell) {
@@ -86,7 +112,7 @@ NSArray *third_;
         return cell;
        
       }else if (indexPath.row== 1 ) {
-        self.Tcell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+//        self.Tcell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
         
             if (!self.Tcell) {
                 self.Tcell= [[[NSBundle mainBundle]loadNibNamed:@"TitleTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -100,28 +126,105 @@ NSArray *third_;
 
             }
         
-        return self.Tcell;
+          return self.Tcell;
+          
+      }else if (indexPath.row == 2){
+//          self.textcell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
+          
+          //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+          //  cell.textview.delegate = self;
+          if (!self.textcell) {
+              self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
+              self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
+              //flag如果是2，表示编辑原有帖子
+              if([_ED_FLAG isEqualToString:@"2"]){
+                  //编辑帖子
+                  self.textcell.textview.text = _post_item.post_text;
+                  
+              }//判断行高是否小于50,失效。。。
+              if (self.textcell.textview.frame.size.height< 2000) {
+                  cellheight = 200;
+              }else{
+                  cellheight = self.textcell.textview.frame.size.height;
+              }
+          }
+          return self.textcell;
+    }else if (indexPath.row == 3){
+        EImageTableViewCell *cell;
+//        EImageTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell5"];
+        if (!cell) {
+            cell= [[[NSBundle mainBundle]loadNibNamed:@"EImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            //判断该板块是否有主图，如果有主图，默认必须添加主图，main url不能是空
+            if ([self.ISMAINIMG isEqualToString:@"Y"]) {
+                //flag如果是2，表示编辑原有帖子
+                if([_ED_FLAG isEqualToString:@"2"]){
+                    //编辑帖子
+                    [cell.image sd_setImageWithURL:[NSURL URLWithString:self.post_item.main_image_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        cell.image.image = image;
+                        
+                    }];
+                    mi_flag = @"1";
+                }else{
+                    mi_flag = @"1";
+                }
 
-    }else{
-        self.textcell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
-
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-      //  cell.textview.delegate = self;
-        if (!self.textcell) {
-            self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
-            self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
-            //flag如果是2，表示编辑原有帖子
+            }else{
+                    mi_flag = @"0";
+                cell.hidden = YES;
+            }
+            
+        }
+        return cell;
+    }else if (indexPath.row ==4){
+//        self.ECcell =[tableView dequeueReusableCellWithIdentifier:@"cell2"];
+        if (!self.ECcell) {
+            self.ECcell= [[[NSBundle mainBundle]loadNibNamed:@"EChainTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            self.ECcell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
-                self.textcell.textview.text = _post_item.post_text;
+                if ([self.post_item.chain isEqualToString:@"是"]) {
+                    [self.ECcell.chain_url setText:self.post_item.chain_url];
+                    //                      cell.chain_name.text = self.post_item.chain_name;
+                    //                      cell.chain_url.text = self.post_item.chain_url;
+                    [self.ECcell.chain_name setText:self.post_item.chain_name];
+                    chain_flag = @"1";
+                }else{
+                    
+                    chain_flag = @"0";
+                }
                 
+            }else if([_ED_FLAG isEqualToString:@"1"]){
+                //在设置行高上进行判断chain_flag 是否为1
+                self.ECcell.hidden = YES;
             }
-//            cell.textview.placeholder = @"adsafadsaf";
-//            NSLog(@"%@",cell.textview.placeholder);
+            
         }
-        return self.textcell;
+        return self.ECcell;
 
+    }else {
+//        self.LAcell =[tableView dequeueReusableCellWithIdentifier:@"cell3"];
+        if (!self.LAcell) {
+            self.LAcell= [[[NSBundle mainBundle]loadNibNamed:@"LApplyTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            self.LAcell.selectionStyle = UITableViewCellSelectionStyleNone;
+            //判断该板块是否可以报名
+            if ([self.ISAPPLY isEqualToString:@"Y"]) {
+                //flag如果是2，表示编辑原有帖子
+                if([_ED_FLAG isEqualToString:@"2"]){
+                    
+                    
+                    self.LAcell.limit_apply_num.text = self.post_item.limit_apply_num;
+                    la_flag = @"1";
+                }else{ self.LAcell.hidden = YES;}//flag = 1 设置在行高中
+            }
+            
+            
+            
+        }
+        return self.LAcell;
     }
+
 }
 
 
@@ -131,14 +234,32 @@ NSArray *third_;
     }else if(indexPath.row ==1){
         return 50;
     }else if(indexPath.row ==2){
-        return self.PEtableview.frame.size.height - 160;
+        
+        return cellheight;
+        
+
     }else if(indexPath.row ==3){
-        return 50;
+       
+        return 200;
+//        if ([mi_flag  isEqual: @"1"]) {
+//            return  50;
+//        }else{
+//            return 0;
+//        }
     }else if(indexPath.row ==4){
         return 50;
-    }else if(indexPath.row ==5){
-        return 50;
-    }else{
+//        if ([chain_flag  isEqual: @"1"]) {
+//            return  50;
+//        }else{
+//            return 0;
+//        }
+        
+    }else {
+//        if ([la_flag  isEqual: @"1"]) {
+//            return  50;
+//        }else{
+//            return 0;
+//        }
         return 50;
     }
 }
@@ -237,21 +358,25 @@ NSArray *third_;
 
 {
     
-    UILabel * myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 30, 20)];
+    self.myview = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 30, 20)];
     
-    myView.textAlignment = NSTextAlignmentCenter;
+    self.myview .textAlignment = NSTextAlignmentCenter;
     
     
-    myView.text = [activities_ objectAtIndex:row];
+    self.myview .text = [activities_ objectAtIndex:row];
     
     //  myView.font = [UIFont systemFontOfSize:16];   //用label来设置字体大小
     
-    myView.backgroundColor = [UIColor clearColor];
+    self.myview .backgroundColor = [UIColor clearColor];
     
-    myView.textColor = [UIColor redColor];
+    self.myview .textColor = [UIColor redColor];
     
+    row_0=[pickerView selectedRowInComponent:0];
+    row_1=[pickerView selectedRowInComponent:1];
+    row_2=[pickerView selectedRowInComponent:2];
+
+       return self.myview ;
     
-    return myView;
     
 }
 
@@ -263,7 +388,14 @@ NSArray *third_;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    //获取当前用户信息
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.UserID =[defaults objectForKey:@"UserID"];
+    self.UserPermission = [defaults objectForKey:@"UserPermission"];
+    self.AccountStatus = [defaults objectForKey:@"AccountStatus"];
+    self.HeadPortraitUrl = [defaults objectForKey:@"HeadPortraitUrl"];
+    self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
 
 
     
@@ -333,7 +465,7 @@ NSArray *third_;
     //wangyao0412
     //edit_flag edit or new
     if([_ED_FLAG isEqualToString:@"1"]){
-        [StatusTool statusToolPostNewPostWithcom_id:self.post_item.belong_community_id forumID:self.post_item.belong_forum_id posterID:self.post_item.poster_id postTitle:self.Tcell.Title.text postText:self.textcell.textview.text Image:@"0" chainFlag:@"0" chainName:@"0" chainURL:@"0" pushMember:@"0" Success:^(id object) {
+        [StatusTool statusToolPostNewPostWithcom_id:self.forum_item.community_id forumID:self.forum_item.forum_id posterID:self.UserID postTitle:self.Tcell.Title.text postText:self.textcell.textview.text Image:@"0" chainFlag:chain_flag chainName:self.ECcell.chain_name.text chainURL:self.ECcell.chain_url.text pushMember:@"0" LimitAppNum:self.LAcell.limit_apply_num.text Success:^(id object) {
             NSLog(@"^^^^^^^^^^^%@",object);
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提交发布" message:@"发布成功" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
             alert.delegate = self;
@@ -349,6 +481,21 @@ NSArray *third_;
             
             
         }];
+    }else if([_ED_FLAG isEqualToString:@"2"]){
+
+        [StatusTool statusToolPostEditWithcomID:self.post_item.belong_community_id forumID:self.post_item.belong_forum_id postTitle:self.Tcell.Title.text Image:@"0" chainFlag:chain_flag chainName:self.ECcell.chain_name.text chainURL:self.ECcell.chain_url.text pushMember:@"0" userID:self.UserID  postText:self.textcell.textview.text posterID:self.post_item.poster_id LimitAppNum:self.LAcell.limit_apply_num.text  Success:^(id object) {
+            NSLog(@"^^^^^^^^^^^%@",object);
+                        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提交发布" message:@"发布成功" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+                        alert.delegate = self;
+                        [alert show];
+        } failurs:^(NSError *error) {
+            NSLog(@"%@",error);
+                        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提交发布" message:@"错误"delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                        alert.delegate = self;
+                        [alert show];
+        }];
+        
+    
     }
     
     
@@ -411,6 +558,7 @@ NSArray *third_;
     UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 300, 1)];
     [vi setBackgroundColor:[UIColor redColor]];
     [self.addchain   addSubview:vi];
+    
     //wenzi
     UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 80, 100, 30)];
     tlabel.text = @"文字";
@@ -418,12 +566,14 @@ NSArray *third_;
     tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     [self.addchain addSubview:tlabel];
     //qingshuru
-    UITextField *ctfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 80, 200, 30)];
+    ctfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 80, 200, 30)];
     ctfield.placeholder = @"请输入外联文字";
     ctfield.borderStyle = UITextBorderStyleNone;
     ctfield.textColor = [UIColor grayColor];
     ctfield.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     [self.addchain addSubview:ctfield];
+    
+    
     //
     UIView *vi2 = [[UIView alloc]initWithFrame:CGRectMake(0, 110, 300, 1)];
     vi2.backgroundColor = [UIColor grayColor];
@@ -435,7 +585,7 @@ NSArray *third_;
     wlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     [self.addchain addSubview:wlabel];
     //qingshuru
-    UITextField *wtfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 140, 200, 30)];
+    wtfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 140, 200, 30)];
     wtfield.placeholder = @"请输入外联网址";
     wtfield.borderStyle = UITextBorderStyleNone;
     wtfield.textColor = [UIColor grayColor];
@@ -452,6 +602,7 @@ NSArray *third_;
     //点击进入函数
     [bt addTarget:self action:@selector(surea) forControlEvents:UIControlEventTouchUpInside];
     
+
     [self.addchain addSubview:bt];
     
     
@@ -459,80 +610,80 @@ NSArray *third_;
 
 }
 //点击推送按钮
-- (IBAction)AddPushOnClick:(id)sender {
-    
-    self.maskview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    self.maskview.backgroundColor = [UIColor blackColor];
-    self.maskview.alpha = 0.3;
-    [self.view addSubview:self.maskview];
-    
-    
-
-    
-    //实例化一个view
-    self.addpush =[[UIView alloc]init];
-    self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height, 300, 220);
-    self.addpush.alpha = 0;
-    self.addpush.backgroundColor = [UIColor whiteColor];
-    [UIView animateWithDuration:0.5 animations:^{
-        self.addpush.alpha = 1;
-        self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-110, 300, 220);
-        [self.addpush.layer setCornerRadius:self.addpush.frame.size.height/20];
-    }];
-    
-    
-    [self.view addSubview:self.addpush];
-    
-    
-    
-    //tuisong
-    UILabel *adpush = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 30)];
-    adpush.text = @"推送";
-    adpush.textColor = [UIColor redColor];
-    adpush.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
-    [self.addpush addSubview:adpush];
-    //hongxian
-    UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 300, 1)];
-    [vi setBackgroundColor:[UIColor redColor]];
-    [self.addpush   addSubview:vi];
-    //wenzi
-    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 70, 130, 30)];
-    tlabel.text = @"首页轮播图推送";
-    tlabel.textColor = [UIColor grayColor];
-    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
-    [self.addpush addSubview:tlabel];
-    //swich
-    UISwitch *picswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(220, 70, 30, 30)];
-    [self.addpush addSubview:picswitch];
-    //
-    UIView *vi2 = [[UIView alloc]initWithFrame:CGRectMake(0, 110, 300, 1)];
-    vi2.backgroundColor = [UIColor grayColor];
-    [self.addpush addSubview:vi2];
-    //wenzi
-    UILabel *wlabel = [[UILabel alloc]initWithFrame:CGRectMake(10,130, 130, 30)];
-    wlabel.text = @"手机通知推送";
-    wlabel.textColor = [UIColor grayColor];
-    wlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
-    [self.addpush addSubview:wlabel];
-    //swich
-    UISwitch *notiswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(220, 130, 30, 30)];
-    [self.addpush addSubview:notiswitch];
-
-    //
-    UIView *vi3 = [[UIView alloc]initWithFrame:CGRectMake(0, 170, 300, 1)];
-    vi3.backgroundColor = [UIColor grayColor];
-    [self.addpush addSubview:vi3];
-    UIButton *bt =  [UIButton buttonWithType:UIButtonTypeCustom];
-    bt.frame = CGRectMake(125, 170, 50, 50);
-    [bt setTitle:@"确定" forState:UIControlStateNormal];
-    [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    //点击进入函数
-    [bt addTarget:self action:@selector(sureb) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.addpush addSubview:bt];
-
-    
-}
+//- (IBAction)AddPushOnClick:(id)sender {
+//    
+//    self.maskview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    self.maskview.backgroundColor = [UIColor blackColor];
+//    self.maskview.alpha = 0.3;
+//    [self.view addSubview:self.maskview];
+//    
+//    
+//
+//    
+//    //实例化一个view
+//    self.addpush =[[UIView alloc]init];
+//    self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height, 300, 220);
+//    self.addpush.alpha = 0;
+//    self.addpush.backgroundColor = [UIColor whiteColor];
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.addpush.alpha = 1;
+//        self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-110, 300, 220);
+//        [self.addpush.layer setCornerRadius:self.addpush.frame.size.height/20];
+//    }];
+//    
+//    
+//    [self.view addSubview:self.addpush];
+//    
+//    
+//    
+//    //tuisong
+//    UILabel *adpush = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 30)];
+//    adpush.text = @"推送";
+//    adpush.textColor = [UIColor redColor];
+//    adpush.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
+//    [self.addpush addSubview:adpush];
+//    //hongxian
+//    UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 300, 1)];
+//    [vi setBackgroundColor:[UIColor redColor]];
+//    [self.addpush   addSubview:vi];
+//    //wenzi
+//    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 70, 130, 30)];
+//    tlabel.text = @"首页轮播图推送";
+//    tlabel.textColor = [UIColor grayColor];
+//    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+//    [self.addpush addSubview:tlabel];
+//    //swich
+//    UISwitch *picswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(220, 70, 30, 30)];
+//    [self.addpush addSubview:picswitch];
+//    //
+//    UIView *vi2 = [[UIView alloc]initWithFrame:CGRectMake(0, 110, 300, 1)];
+//    vi2.backgroundColor = [UIColor grayColor];
+//    [self.addpush addSubview:vi2];
+//    //wenzi
+//    UILabel *wlabel = [[UILabel alloc]initWithFrame:CGRectMake(10,130, 130, 30)];
+//    wlabel.text = @"手机通知推送";
+//    wlabel.textColor = [UIColor grayColor];
+//    wlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+//    [self.addpush addSubview:wlabel];
+//    //swich
+//    UISwitch *notiswitch = [[UISwitch alloc ]initWithFrame:CGRectMake(220, 130, 30, 30)];
+//    [self.addpush addSubview:notiswitch];
+//
+//    //
+//    UIView *vi3 = [[UIView alloc]initWithFrame:CGRectMake(0, 170, 300, 1)];
+//    vi3.backgroundColor = [UIColor grayColor];
+//    [self.addpush addSubview:vi3];
+//    UIButton *bt =  [UIButton buttonWithType:UIButtonTypeCustom];
+//    bt.frame = CGRectMake(125, 170, 50, 50);
+//    [bt setTitle:@"确定" forState:UIControlStateNormal];
+//    [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    //点击进入函数
+//    [bt addTarget:self action:@selector(sureb) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.addpush addSubview:bt];
+//
+//    
+//}
 
 //点击报名按钮
 - (IBAction)AddApplyOnClick:(id)sender {
@@ -615,6 +766,12 @@ NSArray *third_;
     
         self.addchain.hidden = YES;
     [self.maskview removeFromSuperview];
+
+    chain_flag = @"1";
+    self.ECcell.hidden = NO;
+//    [self.PEtableview reloadData];
+    self.ECcell.chain_name.text = ctfield.text;
+    self.ECcell.chain_url.text = wtfield.text;
    
 }
 -(void)sureb{
@@ -626,6 +783,39 @@ NSArray *third_;
     
     self.addapply.hidden = YES;
     [self.maskview removeFromSuperview];
+    self.LAcell.hidden = NO;
+    la_flag = @"1";
+//    [self.PEtableview reloadData];
+    
+    
+    //获取限制报名人数
+    //连接字符串
+
+    
+    
+    int a = (int)row_0;
+    int b = (int)row_1;
+    int c = (int)row_2;
+    
+//    NSLog(@"%d",a);
+    if(a!=0){
+            self.LAcell.limit_apply_num.text =  [NSString stringWithFormat:@"%d",a*100+b*10+c];
+            NSLog(@"%@",self.LAcell.limit_apply_num.text);
+    }else{// a=0
+        if (b!=0) {
+            
+            self.LAcell.limit_apply_num.text =  [NSString stringWithFormat:@"%d",b*10+c];
+            NSLog(@"%@",self.LAcell.limit_apply_num.text);
+            
+        }else{
+        
+            self.LAcell.limit_apply_num.text = [NSString stringWithFormat:@"%d",c];
+        }
+    
+    }
+
+    
+    
 }
 
 /*

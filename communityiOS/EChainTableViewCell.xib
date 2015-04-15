@@ -7,41 +7,85 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="91" id="KGk-i7-Jjw" customClass="EChainTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="68" id="KGk-i7-Jjw" customClass="EChainTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="外链：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUK-yB-3Zx">
-                        <rect key="frame" x="29" y="37" width="68" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="外链：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUK-yB-3Zx">
+                        <rect key="frame" x="20" y="10" width="126" height="30"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="30" id="lkH-dL-1nq"/>
                             <constraint firstAttribute="width" constant="42" id="r7n-TG-qw1"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="r7n-TG-qw1"/>
+                            </mask>
+                        </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="链接" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZs-cl-VvO">
-                        <rect key="frame" x="216" y="35" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="文字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jp-5O-Fmg">
+                        <rect key="frame" x="156" y="10" width="100" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="8Hn-q3-2RQ"/>
+                            <constraint firstAttribute="height" constant="30" id="mha-FT-qc7"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="文字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jp-5O-Fmg">
-                        <rect key="frame" x="105" y="35" width="78" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="链接" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZs-cl-VvO">
+                        <rect key="frame" x="266" y="10" width="33" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="XpP-ij-aJD"/>
+                            <constraint firstAttribute="height" constant="30" id="yDL-1O-OAq"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="XpP-ij-aJD"/>
+                            </mask>
+                        </variation>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="OZs-cl-VvO" secondAttribute="trailing" constant="20" id="KGL-Ah-JqJ"/>
+                    <constraint firstItem="PUK-yB-3Zx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="L8i-fZ-QoL"/>
+                    <constraint firstItem="7jp-5O-Fmg" firstAttribute="leading" secondItem="PUK-yB-3Zx" secondAttribute="trailing" id="LRX-3W-vMh"/>
+                    <constraint firstItem="OZs-cl-VvO" firstAttribute="leading" secondItem="7jp-5O-Fmg" secondAttribute="trailing" constant="10" id="Nrl-gq-IAY"/>
+                    <constraint firstItem="OZs-cl-VvO" firstAttribute="leading" secondItem="7jp-5O-Fmg" secondAttribute="trailing" id="R71-j4-gAl"/>
+                    <constraint firstItem="OZs-cl-VvO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="U80-4Q-whX"/>
+                    <constraint firstAttribute="trailing" secondItem="OZs-cl-VvO" secondAttribute="trailing" constant="20" id="buC-vn-Kyn"/>
+                    <constraint firstItem="7jp-5O-Fmg" firstAttribute="leading" secondItem="PUK-yB-3Zx" secondAttribute="trailing" constant="8" id="diY-vA-2Kk"/>
+                    <constraint firstItem="7jp-5O-Fmg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fPx-s2-E51"/>
+                    <constraint firstItem="PUK-yB-3Zx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="fhV-WX-hUr"/>
                     <constraint firstItem="PUK-yB-3Zx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="26" id="iBz-l7-fUl"/>
+                    <constraint firstItem="OZs-cl-VvO" firstAttribute="leading" secondItem="7jp-5O-Fmg" secondAttribute="trailing" constant="10" id="mdj-y7-eTD"/>
                     <constraint firstItem="PUK-yB-3Zx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="21" id="nfR-mk-7fm"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="iBz-l7-fUl"/>
+                        <exclude reference="nfR-mk-7fm"/>
+                        <exclude reference="diY-vA-2Kk"/>
+                        <exclude reference="KGL-Ah-JqJ"/>
+                        <exclude reference="Nrl-gq-IAY"/>
+                        <exclude reference="mdj-y7-eTD"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="387" y="370.5"/>
+            <connections>
+                <outlet property="chain_name" destination="7jp-5O-Fmg" id="i8s-GD-Hg3"/>
+                <outlet property="chain_url" destination="OZs-cl-VvO" id="6kj-bI-eD9"/>
+            </connections>
+            <point key="canvasLocation" x="379" y="380"/>
         </tableViewCell>
     </objects>
 </document>

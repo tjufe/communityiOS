@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EChainTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *chain_url;
+@property (weak, nonatomic) IBOutlet UILabel *chain_name;
 
 @end

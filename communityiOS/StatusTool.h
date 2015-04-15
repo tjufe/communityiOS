@@ -39,16 +39,26 @@ typedef void(^ForumListFailurs)(NSError * error);
 +(void)statusToolGetPostRelatedInfoWithpostID:(NSString *)post_id  poster_ID:(NSString *)poster_id community_ID:(NSString *)community_id forum_ID:(NSString *)forum_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
 
 //请求发送新帖
-+(void)statusToolPostNewPostWithcom_id:(NSString *)community_id  forumID:(NSString *)forum_id posterID:(NSString *)poster_id postTitle:(NSString *)post_title postText:(NSString *)post_text Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
++(void)statusToolPostNewPostWithcom_id:(NSString *)community_id  forumID:(NSString *)forum_id posterID:(NSString *)poster_id postTitle:(NSString *)post_title postText:(NSString *)post_text Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member LimitAppNum:(NSString *)limit_apply_num Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
 
 //请求编辑帖子
-+(void)statusToolPostEditWithcomID:(NSString *)community_id forumID:(NSString *)forum_id postTitle:(NSString *)post_title Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushFlag:(NSString*)push_flag userID:(NSString *)user_id postText:(NSString *)post_text editFlag:(NSString *)edit_flag posterID:(NSString *)poster_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
++(void)statusToolPostEditWithcomID:(NSString *)community_id forumID:(NSString *)forum_id postTitle:(NSString *)post_title Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member userID:(NSString *)user_id postText:(NSString *)post_text  posterID:(NSString *)poster_id LimitAppNum:(NSString *)limit_apply_num  Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
 
 //请求帖子操作
 +(void)statusToolPostOperateWithcommunityID:(NSString *)community_id forumID:(NSString *)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Flag:(NSNumber *)flag Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
 
-//wangyao
-//请求发帖人昵称，回帖人数，报名人数，阅读人数
-//+(void)statusToolPostInfoWithcommunityID:(NSString *)community_id forumID:(NSString *)forum_id postID:(NSString *)post_id poster_id:(NSString *)poster_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
+
+//删除帖子操作
++(void)statusToolDeletePostWithpostID:(NSString *)post_id deleteUserID:
+    (NSString *)delete_user_id communityID:(NSString *)community_id fourmID:
+    (NSString *)forum_id Success:(ForumListSuccess)success failurs:
+    (ForumListFailurs)failure;
+
+//Request_ReplyContent
++(void)statusToolReplyContentWithID:(NSString *)ID Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
+
+//Request_PostReply
++(void)statusToolPostReplyWithReplyText:(NSString *)reply_text communityID:(NSString*)community_id forumID:(NSString*)forum_id postID:(NSString*)post_id userID:(NSString *)user_id Success:(ForumListSuccess)success failurs:(ForumListFailurs)failure;
+
 
 @end

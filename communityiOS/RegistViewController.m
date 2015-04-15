@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIView *resView;
 @property (weak, nonatomic) IBOutlet UIButton *resBtn;
 - (IBAction)regAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UITableView *Rtableview;
 
 @end
 
@@ -27,6 +28,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)sendOnclick:(id)sender {
 }
 
 /*

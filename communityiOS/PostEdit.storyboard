@@ -63,23 +63,8 @@
                                             <action selector="AddChainOnClick:" destination="CX2-fh-HnU" eventType="touchUpInside" id="I9j-sR-mnB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1j7-cp-pYg">
-                                        <rect key="frame" x="140" y="11" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="3b1-1r-XgQ"/>
-                                            <constraint firstAttribute="height" constant="40" id="UeX-s3-jZA"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="db6-oc-1zQ"/>
-                                            <constraint firstAttribute="width" constant="40" id="u0B-8Y-mf2"/>
-                                        </constraints>
-                                        <state key="normal" title="Button" image="推送">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="AddPushOnClick:" destination="CX2-fh-HnU" eventType="touchUpInside" id="rS3-EM-TC6"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skZ-8q-h1I">
-                                        <rect key="frame" x="200" y="11" width="40" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skZ-8q-h1I">
+                                        <rect key="frame" x="140" y="12" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="OAg-j7-PgE"/>
                                             <constraint firstAttribute="height" constant="40" id="U3Y-aC-WNM"/>
@@ -98,17 +83,15 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="1N1-kM-Mt9"/>
                                     <constraint firstItem="O37-1s-lui" firstAttribute="top" secondItem="OGa-SU-hi0" secondAttribute="bottom" constant="15" id="6kK-Sz-OWn"/>
-                                    <constraint firstItem="skZ-8q-h1I" firstAttribute="leading" secondItem="1j7-cp-pYg" secondAttribute="trailing" constant="20" id="7WC-qq-0eC"/>
                                     <constraint firstItem="OGa-SU-hi0" firstAttribute="leading" secondItem="Pun-I3-FkS" secondAttribute="leading" id="TZS-Nd-Zf5"/>
-                                    <constraint firstItem="1j7-cp-pYg" firstAttribute="top" secondItem="OGa-SU-hi0" secondAttribute="bottom" constant="10" id="XNw-aY-ybK"/>
                                     <constraint firstItem="O37-1s-lui" firstAttribute="leading" secondItem="Pun-I3-FkS" secondAttribute="leading" constant="20" id="aTk-5B-AGw"/>
                                     <constraint firstItem="O37-1s-lui" firstAttribute="top" secondItem="OGa-SU-hi0" secondAttribute="bottom" constant="10" id="b80-BD-VMw"/>
                                     <constraint firstItem="skZ-8q-h1I" firstAttribute="top" secondItem="OGa-SU-hi0" secondAttribute="bottom" constant="10" id="gdp-da-MHS"/>
                                     <constraint firstAttribute="trailing" secondItem="OGa-SU-hi0" secondAttribute="trailing" id="iLI-h3-L0g"/>
-                                    <constraint firstItem="1j7-cp-pYg" firstAttribute="leading" secondItem="eRQ-pn-nk2" secondAttribute="trailing" constant="20" id="jzN-9P-2EC"/>
                                     <constraint firstItem="eRQ-pn-nk2" firstAttribute="leading" secondItem="O37-1s-lui" secondAttribute="trailing" constant="20" id="mn8-ZS-X7E"/>
                                     <constraint firstItem="eRQ-pn-nk2" firstAttribute="top" secondItem="OGa-SU-hi0" secondAttribute="bottom" constant="10" id="poH-zX-sWe"/>
                                     <constraint firstItem="OGa-SU-hi0" firstAttribute="top" secondItem="Pun-I3-FkS" secondAttribute="top" id="xyw-kq-ocN"/>
+                                    <constraint firstItem="skZ-8q-h1I" firstAttribute="leading" secondItem="eRQ-pn-nk2" secondAttribute="trailing" constant="20" id="y8F-sR-l2M"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -134,7 +117,6 @@
                         <outlet property="addpic" destination="O37-1s-lui" id="zkw-BF-qLu"/>
                         <outlet property="apply" destination="skZ-8q-h1I" id="lFM-jP-VUt"/>
                         <outlet property="chain" destination="eRQ-pn-nk2" id="7gB-pm-N27"/>
-                        <outlet property="push" destination="1j7-cp-pYg" id="SK5-BE-iR6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Kv-FL-qCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -145,7 +127,6 @@
     <resources>
         <image name="外链-2" width="52" height="52"/>
         <image name="报名" width="50" height="49"/>
-        <image name="推送" width="46" height="46"/>
         <image name="相片" width="51" height="52"/>
     </resources>
 </document>

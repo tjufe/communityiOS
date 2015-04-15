@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface RegistViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *user_head;
+@property (weak, nonatomic) IBOutlet UITextView *reply_text;
+@property (weak, nonatomic) IBOutlet UIButton *sendbutton;
 
 @end

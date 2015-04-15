@@ -23,8 +23,8 @@
              
              @"nickname":@"nickname",
              @"date":@"date",
-             @"content":@"content"
-             
+             @"content":@"content",
+             @"head_portrait_url":@"head_portrait_url"
              };
 }
 

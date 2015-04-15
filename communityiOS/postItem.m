@@ -43,7 +43,9 @@
                              @"delete_date":@"delete_date",
                              @"delete_man_id":@"delete_man_id",
                              @"need_check":@"need_check",
-                             @"checked":@"checked"
+                             @"checked":@"checked",
+                             @"limit_apply_num":@"limit_apply_num",
+                             @"apply_enough":@"apply_enough"
                              
                      
              };

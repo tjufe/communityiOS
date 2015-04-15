@@ -48,14 +48,14 @@
                         <color key="textColor" red="0.45194128789999999" green="0.45194128789999999" blue="0.45194128789999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="· 评论数：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOO-37-LSi">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="· 评论：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOO-37-LSi">
                         <rect key="frame" x="89" y="51" width="65" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.45194128789999999" green="0.45194128789999999" blue="0.45194128789999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="52" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBc-jq-W22">
-                        <rect key="frame" x="152" y="51" width="16" height="17"/>
+                        <rect key="frame" x="135" y="51" width="16" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.45194128789999999" green="0.45194128789999999" blue="0.45194128789999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -88,7 +88,7 @@
                     <constraint firstItem="jIg-yn-zIr" firstAttribute="leading" secondItem="3Qo-FL-jOK" secondAttribute="leading" id="gQQ-PQ-sw3"/>
                     <constraint firstItem="jIg-yn-zIr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jDK-Cr-qtS"/>
                     <constraint firstItem="d2C-Zk-Aw1" firstAttribute="top" secondItem="WOO-37-LSi" secondAttribute="top" id="m8L-jG-5J0"/>
-                    <constraint firstItem="QBc-jq-W22" firstAttribute="leading" secondItem="d2C-Zk-Aw1" secondAttribute="trailing" constant="71" id="vqz-UQ-CgU"/>
+                    <constraint firstItem="QBc-jq-W22" firstAttribute="leading" secondItem="d2C-Zk-Aw1" secondAttribute="trailing" constant="54" id="vqz-UQ-CgU"/>
                     <constraint firstItem="jIg-yn-zIr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="w8L-I8-a8i"/>
                     <constraint firstItem="CRn-aB-vf3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="wvt-gH-zK4"/>
                     <constraint firstItem="QBc-jq-W22" firstAttribute="leading" secondItem="d2C-Zk-Aw1" secondAttribute="trailing" id="zJI-7J-OHC"/>
@@ -112,6 +112,8 @@
                 <outlet property="PostLabel" destination="Uck-wG-uqy" id="wIf-Qu-tzM"/>
                 <outlet property="postDate" destination="d2C-Zk-Aw1" id="56v-uI-M4u"/>
                 <outlet property="postImg" destination="CRn-aB-vf3" id="Vyi-Hl-RBJ"/>
+                <outlet property="post_reply_num" destination="QBc-jq-W22" id="PSD-mb-JrO"/>
+                <outlet property="poster_nic" destination="3Qo-FL-jOK" id="ow3-Fn-rBK"/>
                 <outlet property="setTop" destination="jIg-yn-zIr" id="3AD-YG-cvT"/>
             </connections>
             <point key="canvasLocation" x="265" y="230"/>

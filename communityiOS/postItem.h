@@ -35,6 +35,8 @@
 @property (nonatomic,strong)NSString *delete_man_id;
 @property (nonatomic,strong)NSString *need_check;
 @property (nonatomic,strong)NSString *checked;
+@property (nonatomic,strong)NSString *limit_apply_num;
+@property (nonatomic,strong)NSString *apply_enough;
 
 
 +(postItem *)createItemWitparametes:(NSDictionary*)dic;

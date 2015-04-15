@@ -14,7 +14,7 @@
 @property (nonatomic,strong)NSString *nickname;
 @property (nonatomic,strong)NSString *date;
 @property (nonatomic,strong)NSString *content;
-
+@property (nonatomic,strong)NSString *head_portrait_url;
 
 +(replyInfoItem *)createItemWitparametes:(NSDictionary*)dic;
 
