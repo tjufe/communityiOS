@@ -18,6 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pwdCheck) name:UITextFieldTextDidEndEditingNotification object:self.tf_NewPsw];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pwdCheck) name:UITextFieldTextDidEndEditingNotification object:self.tf_SecPsw];
+}
+
+-(void)pwdCheck{
+    if (![self.tf_NewPsw.text isEqualToString:self.tf_SecPsw.text]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确认密码不符合" message:@"请重新输入确认密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新输入", nil];
+        [alert show];
+        
+    }else{
+        self.saveBtn.enabled = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,12 +41,14 @@
 - (IBAction)saveNewPassword:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [defaults valueForKey:@"UserID"];
+
+    
     [StatusTool statusToolCorrectPwdWithPwd:self.tf_OldPsw.text UserID:user_id NewPwd:self.tf_NewPsw.text ConfirmPwd:self.tf_SecPsw.text Success:^(id object) {
-        
+        //提交表单，不作处理
     } failurs:^(NSError *error) {
         NSLog(@"%@",error);
     }];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
@@ -47,4 +61,9 @@
 }
 */
 
+- (IBAction)View_TouchDown:(id)sender {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+    
+    
+}
 @end

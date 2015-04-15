@@ -255,7 +255,7 @@
 }
 
 
-#pragma mark --LoginViewController delegate
+
 
 #pragma mark --LoginViewController delegate
 -(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id{
