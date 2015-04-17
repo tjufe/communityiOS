@@ -12,5 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tf_OldPsw;
 @property (weak, nonatomic) IBOutlet UITextField *tf_NewPsw;
 @property (weak, nonatomic) IBOutlet UITextField *tf_SecPsw;
+- (IBAction)View_TouchDown:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBtn;
 
 @end

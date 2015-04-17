@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -30,7 +30,7 @@
                         <viewControllerLayoutGuide type="top" id="U0x-ly-RYn"/>
                         <viewControllerLayoutGuide type="bottom" id="GJf-tj-Dj8"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="k7v-BH-Iol">
+                    <view key="view" contentMode="scaleToFill" id="k7v-BH-Iol" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -128,6 +128,9 @@
                             <constraint firstItem="2pf-Jb-diQ" firstAttribute="trailing" secondItem="k7v-BH-Iol" secondAttribute="trailingMargin" id="hC9-sh-3Mt"/>
                             <constraint firstItem="GEm-t4-ihU" firstAttribute="trailing" secondItem="9Zq-y1-eem" secondAttribute="trailing" id="vUo-AD-llX"/>
                         </constraints>
+                        <connections>
+                            <action selector="View_TouchDown:" destination="lOJ-nz-sfY" eventType="touchDown" id="9gS-bV-ctp"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="登录" id="IrJ-Cy-1nt">
                         <barButtonItem key="backBarButtonItem" title="返回" id="1ia-jN-ls4">
@@ -180,7 +183,7 @@
                         <viewControllerLayoutGuide type="top" id="s5Y-k5-bzc"/>
                         <viewControllerLayoutGuide type="bottom" id="FOi-fM-851"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="n14-5S-mje">
+                    <view key="view" contentMode="scaleToFill" id="n14-5S-mje" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -342,6 +345,9 @@
                                 <exclude reference="T14-Vt-lXb"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="View_TouchDown:" destination="j4W-6T-2TF" eventType="touchDown" id="NTk-Xz-5e7"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="注册" id="1mD-wj-Q0L">
                         <barButtonItem key="backBarButtonItem" title="返回" id="IVq-Ge-31B">
@@ -352,6 +358,10 @@
                     <connections>
                         <outlet property="resBtn" destination="iQc-r7-xDJ" id="3X3-eh-HB1"/>
                         <outlet property="resView" destination="bHX-Jq-2hh" id="QX7-An-Cmw"/>
+                        <outlet property="tfNickname" destination="Ith-Fz-2Kc" id="M65-Ee-j8S"/>
+                        <outlet property="tfPassword" destination="Iaa-PW-Wan" id="v5S-Cp-4v7"/>
+                        <outlet property="tfPhoneNumber" destination="FPK-Bq-FMZ" id="rZN-Ui-6D9"/>
+                        <outlet property="tfSecondPassword" destination="FJx-CD-6uv" id="CGX-rZ-Jzs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sET-y5-ZH3" userLabel="First Responder" sceneMemberID="firstResponder"/>

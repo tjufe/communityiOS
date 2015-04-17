@@ -11,5 +11,7 @@
 @interface AlterNicknameViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *tf_Nickname;
+- (IBAction)View_TouchDown:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBtn;
 @end
