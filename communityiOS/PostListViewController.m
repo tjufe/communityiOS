@@ -16,6 +16,7 @@
 #import "UIImageView+WebCache.h"//加载图片
 #import "postInfoItem.h"
 #import "PostEditViewController.h"
+#import "forumSetItem.h"
 
 
 
@@ -33,15 +34,18 @@
 @property(strong,nonatomic)postListItem *post_list_item;
 @property (strong,nonatomic) postInfoItem *post_info_item;
 @property (strong,nonatomic) NSMutableArray *postinfo;
-//@property (strong,nonatomic) NSMutableArray *Poster_Nic_Array;//发帖人昵称数组
-//@property (strong,nonatomic) NSMutableArray *Poster_Img_Array;//发帖人头像url数组
-//@property (strong,nonatomic) NSMutableArray *Post_Rpply_Array;//帖子评论数
+@property (strong,nonatomic) forumSetItem *forum_set_item;//版块设置
+@property (strong,nonatomic) NSMutableArray *Poster_Nic_Array;//发帖人昵称数组
+@property (strong,nonatomic) NSMutableArray *Poster_Img_Array;//发帖人头像url数组
+@property (strong,nonatomic) NSMutableArray *Post_Rpply_Array;//帖子评论数
 @property (strong,nonatomic) NSString *UserPermission;//当前用户身份
 @property (strong,nonatomic) NSString *UserID;//当前用户id
 @property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
+
+@property (strong,nonatomic)NSString *ISNEWPOST;
 @end
 
-
+NSString * const site_newpost_user = @"允许发帖的用户";
 
 
 @implementation PostListViewController
@@ -62,17 +66,18 @@
     cell.PostLabel.text = [postTitleData objectAtIndex:indexPath.row];//title
     cell.postDate.text = [postDateData objectAtIndex:indexPath.row];//date
 
-    cell.poster_nic.text = [self.post_list_item.poster_nickname objectAtIndex:indexPath.row];//nickname
+    cell.poster_nic.text = [self.Poster_Nic_Array objectAtIndex:indexPath.row];//nickname
      
-     NSString *reply_num =[[NSString alloc]init];
-     reply_num = [self.post_list_item.reply_num objectAtIndex:indexPath.row];
+    cell.post_reply_num.text = [self.Post_Rpply_Array objectAtIndex:indexPath.row];
      
-     if([reply_num isKindOfClass:[NSNull class]]){
-          cell.post_reply_num.text = @"暂无";
-     }else{
-          cell.post_reply_num.text = reply_num;//reply_num
-
-     }
+    // if([reply_num isKindOfClass:[NSNull class]]){
+   // if([reply_num isEqualToString:@""]){
+//     if(reply_num ==nil){
+//          cell.post_reply_num.text = @"暂无";
+//     }else{
+//          cell.post_reply_num.text = reply_num;//reply_num
+//
+//     }
      
     //加载图片
     NSString* URL=[[NSString alloc]init];
@@ -112,9 +117,9 @@
      PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
      //全局变量传值
      PDVC.forum_item = _forum_item;
-     PDVC.poster_nickname = [self.post_list_item.poster_nickname objectAtIndex:indexPath.row];
-     PDVC.Phead_portrait_url = [self.post_list_item.Phead_portrait_url objectAtIndex:indexPath.row];
-     PDVC.reply_num = [self.post_list_item.reply_num objectAtIndex:indexPath.row];
+//     PDVC.poster_nickname = [self.post_list_item.poster_nickname objectAtIndex:indexPath.row];
+//     PDVC.Phead_portrait_url = [self.post_list_item.Phead_portrait_url objectAtIndex:indexPath.row];
+//     PDVC.reply_num = [self.post_list_item.reply_num objectAtIndex:indexPath.row];
     //协议实现页面传值
     self.delegate = PDVC;
     if ([self.delegate
@@ -132,11 +137,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      
+     
      //获取当前用户信息
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
      self.UserID =[defaults objectForKey:@"UserID"];
      self.UserPermission = [defaults objectForKey:@"UserPermission"];
      self.AccountStatus = [defaults objectForKey:@"AccountStatus"];
+     bool status_auth = NO;//是否认证用户
+     bool status_admin = NO;//管理员
+     bool status_normal = NO;//普通用户
+     if ([self.UserPermission rangeOfString:@"认证用户"].location!=NSNotFound) {
+          status_auth =YES;
+     }
+     if ([self.UserPermission rangeOfString:@"管理员"].location!=NSNotFound) {
+          status_admin = YES;
+     }
+     if([self.UserPermission rangeOfString:@"普通用户"].location!=NSNotFound) {
+          status_normal = YES;
+     }
+
      
 
      
@@ -153,6 +172,30 @@
 //    [rightbutton setTitle:@"aaa" forState:UIControlStateNormal];
 //    UIBarButtonItem *rightItem  = [[UIBarButtonItem alloc]initWithCustomView:rightbutton];
 //    self.navigationItem.rightBarButtonItem = rightItem;
+     
+     //获取版块设置
+     self.ISNEWPOST = @"N";
+     
+     for(int i=0;i < [_forum_item.ForumSetlist count];i++){
+          self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];
+               
+               if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"普通用户"].location!=NSNotFound){
+                    if (status_normal) {
+                         self.ISNEWPOST = @"Y";
+                    }
+               }
+          if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"认证用户"].location!=NSNotFound){
+               if (status_auth) {
+                    self.ISNEWPOST = @"Y";
+               }
+          }
+          if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"管理员"].location!=NSNotFound){
+               if (status_admin) {
+                    self.ISNEWPOST = @"Y";
+               }
+          }
+          
+     }
 
 
     //设置导航右侧按钮
@@ -172,20 +215,21 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
      
      //判断用户身份来决定是否显示发帖图标
-     if (![self.UserPermission isEqualToString:@""]&&[self.AccountStatus isEqualToString:@"正常"]) {
+     if (![self.UserPermission isEqualToString:@""]&&[self.ISNEWPOST isEqualToString:@"Y"]&&[self.AccountStatus isEqualToString:@"正常"]) {
           
     
           self.navigationItem.rightBarButtonItem = rightItem;
 
      }
+     
     postTitleData = [[NSMutableArray alloc]init];
     postDateData = [[NSMutableArray alloc]init];
     postImageData = [[NSMutableArray alloc]init];
     postSetTopData = [[NSMutableArray alloc]init];
     self.postinfo = [[NSMutableArray alloc]init];
-//    self.Poster_Nic_Array = [[NSMutableArray alloc]init];
-//    self.Poster_Img_Array = [[NSMutableArray alloc]init];
-//    self.Post_Rpply_Array =[[NSMutableArray alloc]init];
+    self.Poster_Nic_Array = [[NSMutableArray alloc]init];
+    self.Poster_Img_Array = [[NSMutableArray alloc]init];
+    self.Post_Rpply_Array =[[NSMutableArray alloc]init];
     self.PostListArray =[[NSMutableArray alloc]init];
   
      
@@ -211,7 +255,7 @@
             if (self.pitem.title != nil){
                 [postTitleData addObject:self.pitem.title];
             }else{
-                [postTitleData addObject:@"default"];
+                [postTitleData addObject:@""];
             }
              
             //取date
@@ -246,6 +290,27 @@
             }else{
                 [postSetTopData addObject:@""];
             }
+             
+             //取nickname
+             if(self.pitem.poster_nickname!=nil){
+                  [self.Poster_Nic_Array addObject:self.pitem.poster_nickname];
+             }else{
+                  [self.Poster_Nic_Array addObject:@"游客"];
+             }
+             
+             //取poster_head_url
+             if(self.pitem.poster_head!=nil){
+                  [self.Poster_Img_Array addObject:self.pitem.poster_head];
+             }else{
+                  [self.Poster_Img_Array addObject:@""];
+             }
+             //取reply_num
+             if(![self.pitem.reply_num isEqualToString:@""]){
+                  [self.Post_Rpply_Array addObject:self.pitem.reply_num];
+             }else{
+                  [self.Post_Rpply_Array addObject:@"暂无"];
+             }
+             
         }
          
         [self.pltable reloadData];

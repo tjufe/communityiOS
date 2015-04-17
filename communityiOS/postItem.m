@@ -43,7 +43,12 @@
                              @"delete_date":@"delete_date",
                              @"delete_man_id":@"delete_man_id",
                              @"need_check":@"need_check",
-                             @"checked":@"checked"
+                             @"checked":@"checked",
+                             @"poster_nickname":@"poster_nickname",
+                             @"poster_head":@"poster_head",
+                             @"reply_num":@"reply_num",
+                             @"apply_num":@"apply_num",
+                             @"read_num":@"read_num"
                              
                      
              };

@@ -106,4 +106,8 @@ NSString *strSecondPassword;
     [alert show];
 }
 
+- (IBAction)View_TouchDown:(id)sender {
+    
+    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
 @end

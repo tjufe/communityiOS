@@ -20,6 +20,7 @@ extern NSString *const site_addmainimg;
 @property (weak, nonatomic) IBOutlet UIButton *push;
 @property (weak, nonatomic) IBOutlet UIButton *apply;
 
+@property (strong,nonatomic) NSArray *forum_list_item;
 @property(strong,nonatomic)forumItem *forum_item;
 @property(strong,nonatomic)postItem *post_item ;
 @property(strong,nonatomic)NSString *ED_FLAG;

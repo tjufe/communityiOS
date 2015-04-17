@@ -46,7 +46,7 @@
 @property NSInteger *currentPage;
 @property (weak, nonatomic) IBOutlet UISwitch *testSwitch;
 @property (nonatomic ,strong) forumItem *forum_item;
-@property (nonatomic ,strong) NSMutableArray *forum_list_item;
+//@property (nonatomic ,strong) NSMutableArray *forum_list_item;
 
 @property (nonatomic,strong) NSMutableArray *forumName;
 @property (nonatomic,strong) NSMutableArray *forumImage;
@@ -253,7 +253,7 @@
 }
 
 
-#pragma mark --LoginViewController delegate
+
 
 #pragma mark --LoginViewController delegate
 -(void)addUser:(LoginViewController *)addVc didAddUser:(NSString *)login_id{
@@ -336,6 +336,7 @@
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
     poLVC.forum_item = [self.listForumItem objectAtIndex:indexPath.row];
     
+    
     [self.navigationController pushViewController:poLVC animated:YES];
     
 }
@@ -383,7 +384,8 @@
     //判断用户身份来决定是否能够发帖
     if (![self.UserPermission isEqualToString:@""]&&[self.AccountStatus isEqualToString:@"正常"]) {
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
-    PEVC.ED_FLAG = @"0";//直接发新帖
+        PEVC.ED_FLAG = @"0";//直接发新帖
+        PEVC.forum_list_item = self.listForumItem;//传递版块列表
     
     [self.navigationController pushViewController:PEVC animated:YES];
     }else{

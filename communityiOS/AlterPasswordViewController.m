@@ -18,6 +18,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pwdCheckAlert) name:UITextFieldTextDidEndEditingNotification object:self.tf_SecPsw];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pwdCheck) name:UITextFieldTextDidChangeNotification object:self.tf_SecPsw];
+}
+
+-(void)pwdCheckAlert{
+    if (![self.tf_NewPsw.text isEqualToString:self.tf_SecPsw.text]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认密码与密码不匹配" message:@"请重新确认密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新输入", nil];
+        [alert show];
+    }
+}
+-(void)pwdCheck{
+    
+    self.saveBtn.enabled = ([self.tf_NewPsw.text isEqualToString:self.tf_SecPsw.text]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,14 +41,17 @@
 
 #pragma mark --保存修改密码
 - (IBAction)saveNewPassword:(id)sender {
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [defaults valueForKey:@"UserID"];
+    //将新密码写入偏好设置
+    [defaults setObject:self.tf_NewPsw.text forKey:@"LoginPassword"];
     [StatusTool statusToolCorrectPwdWithPwd:self.tf_OldPsw.text UserID:user_id NewPwd:self.tf_NewPsw.text ConfirmPwd:self.tf_SecPsw.text Success:^(id object) {
         //提交表单，不作处理
     } failurs:^(NSError *error) {
         NSLog(@"%@",error);
     }];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
@@ -47,4 +64,7 @@
 }
 */
 
+- (IBAction)View_TouchDown:(id)sender {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
 @end
