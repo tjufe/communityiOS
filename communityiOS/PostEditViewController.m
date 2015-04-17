@@ -37,6 +37,9 @@
 @property (strong,nonatomic)NSMutableArray *forumSetList;//帖子设置数组
 @property (strong,nonatomic)forumSetItem *forum_set_item;//帖子的设置
 
+@property (strong,nonatomic) NSMutableArray *forum_id;
+@property (strong,nonatomic) NSMutableArray *forum_name;
+
 @property (strong,nonatomic)NSString *ISCHAIN;
 @property (strong,nonatomic)NSString *ISAPPLY;
 @property (strong,nonatomic)NSString *ISMAINIMG;
@@ -153,13 +156,16 @@ NSArray *third_;
         
         //初始化colletionview
         self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
+            //传值
+            self.fs.forum_id = self.forum_id;
+            self.fs.forum_name = self.forum_name;
         self.fs.alpha = 0;
 
         
         self.fs.backgroundColor= [UIColor whiteColor];
        
         self.fs.dataSource = self.fs;
-        self.fs.delegate = self.fs;
+       self.fs.delegate = self.fs;
         //在collectionview注册collectionviewcell；
         [self.fs  registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell11"];
 
@@ -170,21 +176,13 @@ NSArray *third_;
             self.fs.alpha = 1;
             [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
         }];
-        //定义数组
-//        NSArray *arr = [[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
-        //获取点击的cell
-        [self.fs getcelltext:indexPath:self.PEtableview];
+            [self.fs getcelltext:indexPath:self.PEtableview];
         }
         
         
             
     }
 }
-
-
-//    FSCollectionview *fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(10, 10, 300, 300)];
-//    
-//    [self.PEtableview addSubview:fs];
 
 /*
  下面代码是设置pickerview
@@ -258,6 +256,18 @@ NSArray *third_;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //直接从首页发新帖时，获取版块信息
+    
+    self.forum_id = [[NSMutableArray alloc]init];
+    self.forum_name = [[NSMutableArray alloc]init];
+    for(int j=0;j<[_forum_list_item count];j++){
+        forumItem *fitem = [_forum_list_item objectAtIndex:j];
+        [self.forum_id addObject:fitem.forum_id];
+        [self.forum_name addObject:fitem.forum_name];
+    }
+    
+    
     self.PEtableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"发布话题";

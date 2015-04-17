@@ -18,6 +18,7 @@
 #import "deletepostItem.h"
 
 
+
 @interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
@@ -43,14 +44,20 @@
 
 
 
+
 @end
 
 @implementation PostDetailViewController
+//int count=0;//用于菜单点击计数
 
-int count=0;//用于菜单点击计数
+int alert = 0;//用于警告框UIAlertView计数
+
+bool alertcount=false;//用于菜单点击计数
+
 float cellheight;
 
-bool isModerator;//是否是版主
+bool isModerator = NO;//是否是版主
+
 
 #pragma mark------下方快速回复
 - (IBAction)SendOnClick:(id)sender {
@@ -60,7 +67,7 @@ bool isModerator;//是否是版主
     
     
 }
-#pragma mark------textview协议，当textview获取焦点，回复按钮text改变
+
 
 //- (void)textViewDidBeginEditing:(UITextView *)textView
 //{
@@ -71,11 +78,28 @@ bool isModerator;//是否是版主
 //    }
 //    
 //}
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+#pragma mark------当点击view的区域就会触发这个事件
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    [self.reply_text resignFirstResponder];
+//}
+
+#pragma mark------textview协议，当textview获取焦点，回复按钮text改变
+//- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+//{
+//    [self.SendButton setTitle:@"快速回复" forState:UIControlStateNormal];
+//    return YES;
+//}
+- (void)textViewDidChange:(UITextView *)textView
 {
-    [self.SendButton setTitle:@"快速回复" forState:UIControlStateNormal];
-    return YES;
+    if(![textView.text isEqualToString:@""]){
+    [self.SendButton setTitle:@"发送" forState:UIControlStateNormal];
+    }
+    if ([textView.text isEqualToString:@""]) {
+        [self.SendButton setTitle:@"查看回复" forState:UIControlStateNormal];
+    }
 }
+
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -98,10 +122,14 @@ bool isModerator;//是否是版主
         
             }
             //nickname
-            cell.poster_nickname.text = _poster_nickname;
+            cell.poster_nickname.text = self.post_item.poster_nickname;
             //HeadPortraitUrl
-            if(![_Phead_portrait_url isEqualToString:@""]){
-                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:_Phead_portrait_url] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if(self.post_item.poster_head==nil ){
+                self.post_item.poster_head=@"";
+            }
+            
+            if(![self.post_item.poster_head isEqualToString:@""]){
+                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:self.post_item.poster_head] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.poster_img.image = image;
                     
@@ -222,7 +250,12 @@ bool isModerator;//是否是版主
     self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
     
     //判断用户是否是版主
-//    for(int m;m<[self.moderator_of_forum_list count])
+    for(int m=0;m<[self.moderator_of_forum_list count];m++){
+        NSString *mod = [self.moderator_of_forum_list objectAtIndex:m];
+        if ([mod isEqualToString:self.post_item.belong_forum_id]) {
+            isModerator = YES;
+        }
+    }
     
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划线
     
@@ -244,8 +277,10 @@ bool isModerator;//是否是版主
     //评论数
     NSString *ns = [[NSString alloc]init];
     ns = @"评论(";
-    if(![_reply_num isKindOfClass:[NSNull class]]){
-        ns = [ns stringByAppendingString:_reply_num];
+ //   if(![_reply_num isKindOfClass:[NSNull class]]){
+ //   if(![_reply_num isEqualToString:@""]){
+    if (![self.post_item.reply_num isEqualToString:@""]) {
+        ns = [ns stringByAppendingString:self.post_item.reply_num];
         ns = [ns stringByAppendingString:@")"];
     }else{
         ns = @"评论(暂无)";
@@ -284,10 +319,23 @@ bool isModerator;//是否是版主
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     //判断用户身份来决定是否显示菜单
-    if (![self.UserPermission isEqualToString:@""]&&[self.AccountStatus isEqualToString:@"正常"]) {
+    if (![self.UserPermission isEqualToString:@""]&&[self.AccountStatus isEqualToString:@"正常"]){
+        if([self.UserID isEqualToString:self.post_item.poster_id]||[self.UserPermission isEqualToString:@"管理员"]||isModerator) {
     self.navigationItem.rightBarButtonItem = rightItem;
     }
+    }
+    
+    //添加单击手势
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
+    tgr.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tgr];
+    [self.tableview addGestureRecognizer:tgr];
    
+}
+
+#pragma mark------单击方法，单击空白处，textview失去焦点
+-(void)handleSingleTap:(UITapGestureRecognizer*)gestureRecognizer{
+    [self.reply_text resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -298,8 +346,10 @@ bool isModerator;//是否是版主
 
 #pragma mark-------右上角菜单
 -(void)Operation{
-    if(count % 2!=0){
-        count++;
+//    if(count % 2!=0){
+//        count++;
+    if(alertcount){
+        alertcount = false;
         self.operlist.hidden = YES;
     }else{
     self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 150)];
@@ -311,35 +361,49 @@ bool isModerator;//是否是版主
     }];
     [self.view addSubview:self.operlist];
     //编辑按钮
+    //楼主可编辑
+    if([self.UserID isEqualToString:self.post_item.poster_id]){
+
     UIButton * editbutton = [[UIButton alloc]init];
     editbutton.frame = CGRectMake(25, 0, 50, 50);
     [editbutton setTitle:@"编辑" forState:UIControlStateNormal];
-    [self.operlist addSubview:editbutton];
-    [editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [editbutton addTarget:self action:@selector(EditPost) forControlEvents:UIControlEventTouchUpInside];
+    [editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.operlist addSubview:editbutton];
+    }
+    
     //删除按钮
+    //楼主、版主和管理员显示删除按钮
+    if([self.UserID isEqualToString:self.post_item.poster_id]||[self.UserPermission rangeOfString:@"管理员"].location!=NSNotFound||isModerator){
     UIButton * delebutton = [[UIButton alloc]init];
     delebutton.frame = CGRectMake(25, 50, 50, 50);
     [delebutton setTitle:@"删除" forState:UIControlStateNormal];
-    [self.operlist addSubview:delebutton];
     [delebutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        //楼主、版主和管理员显示删除按钮
     [delebutton addTarget:self action:@selector(DelePost) forControlEvents:UIControlEventTouchUpInside];
+    [self.operlist addSubview:delebutton];
+    }
+        
+        
     //置顶按钮
+    //版主和管理员显示置顶按钮
+    if([self.UserPermission rangeOfString:@"管理员"].location!=NSNotFound||isModerator){
     UIButton * settopbutton = [[UIButton alloc]init];
     settopbutton.frame = CGRectMake(25, 100, 50, 50);
     
     [settopbutton setTitle:@"置顶" forState:UIControlStateNormal];
-    [self.operlist addSubview:settopbutton];
-    [settopbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [settopbutton addTarget:self action:@selector(Settop) forControlEvents:UIControlEventTouchUpInside];
-        count++;
+    [settopbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.operlist addSubview:settopbutton];
+    }
+        alertcount = true;
+      //  count++;
     }
     
 }
 #pragma mark--------菜单中编辑帖子
 -(void)EditPost{
-    count++;
+//    count++;
+    alertcount = false;
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];
     //通过UIViewController+Create扩展方法创建FourViewController的实例对象
     //传值
@@ -353,23 +417,34 @@ bool isModerator;//是否是版主
 
 #pragma mark------菜单中删除帖子
 -(void)DelePost{
-    count++;
+//    count++;
+    alertcount = false;
     [self.operlist removeFromSuperview];
     
     //警告框
-    UIAlertView *delete_alert=[[UIAlertView alloc]initWithTitle:@"删除确认" message:@"是否确定删除该话题" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *delete_alert=[[UIAlertView alloc]initWithTitle:@"删除确认" message:@"是否确定删除该话题?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [delete_alert show];
+    alert=0;
 
 }
 
 #pragma mark------实现delete_alert警告框中的点击事件
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if(buttonIndex==0){//"取消"
-        [alertView removeFromSuperview];
+    if(alert==0){
+        if(buttonIndex==0){//"取消"
+            [alertView removeFromSuperview];
         
-    }else{             //"确定"
-        [self deletePost];//删除帖子操作
+        }else{             //"确定"
+            [self deletePost];//删除帖子操作
+        }
+    }
+    if(alert==1){
+        if (buttonIndex==0) {
+        PostListViewController *PLVC=[PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+            PLVC.forum_item = _forum_item;
+            
+        [self.navigationController pushViewController:PLVC animated:YES];
+        }
     }
 }
 
@@ -382,9 +457,12 @@ bool isModerator;//是否是版主
         if ([self.delete.delete_result isEqualToString:@"是"]) {
             UIAlertView *result_alert = [[UIAlertView alloc]initWithTitle:@"删除成功！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [result_alert show];
+            alert=1;
+            
         }else{
             UIAlertView *result_alert = [[UIAlertView alloc]initWithTitle:@"删除失败！" message:self.delete.msg  delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [result_alert show];
+            alert=2;
 
         }
         
@@ -396,8 +474,8 @@ bool isModerator;//是否是版主
 
 #pragma mark------菜单中置顶帖子
 -(void)Settop{
-    
-    count++;
+    alertcount = false;
+    //count++;
      [self.operlist removeFromSuperview];
 }
 
