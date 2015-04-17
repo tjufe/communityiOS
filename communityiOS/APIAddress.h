@@ -9,6 +9,8 @@
 #ifndef communityiOS_APIAddress_h
 #define communityiOS_APIAddress_h
 
-#define API_HOST @"http://192.168.28.211/sq/index.php/Home/Index/index4ios/"
+#define API_HOST @"http://192.168.28.211/sq/"
 
+#define API_UPLOAD_HOST @"http://192.168.28.211/sq/upload.php"
+//上传图片的地址
 #endif

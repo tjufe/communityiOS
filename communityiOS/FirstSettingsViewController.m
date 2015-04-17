@@ -20,6 +20,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    
+    
+}
+
+-(void)initPortraitWithImage:(UIImage *)image{
+    
+    self.portraitImage.layer.masksToBounds=YES;
+    [self.portraitImage.layer setCornerRadius:self.portraitImage.frame.size.width/2];
+    self.portraitImage.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
+    self.portraitImage.image = image;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +62,7 @@
         [self presentModalViewController:imagePicker animated:YES];
     }]];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消相机拍摄" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    [alert addAction:[UIAlertAction actionWithTitle:@"相机拍摄" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         UIImagePickerController *imagePicker;
         imagePicker = [[UIImagePickerController alloc]init];
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -72,7 +84,7 @@
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
     UIImage *chosenImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    self.portraitImage.image = chosenImage;
+    [self initPortraitWithImage:chosenImage];
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
