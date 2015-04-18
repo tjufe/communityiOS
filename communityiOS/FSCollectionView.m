@@ -12,7 +12,9 @@
 #import "ForumSelectTableViewCell.h"
 
 
-@implementation FSCollectionview
+@implementation FSCollectionview{
+    
+}
 
 
 int i ;
@@ -60,14 +62,14 @@ int i ;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self removeFromSuperview ];
     
-    i = (int)indexPath.item;
-    NSArray *as=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
+//    i = (int)indexPath.item;
+//    NSArray *as=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
     ForumSelectTableViewCell *cell = [self.tb cellForRowAtIndexPath:self.index];
-    cell.fslabel.text = [as objectAtIndex:i];
+    cell.fslabel.text = [_forum_name objectAtIndex:indexPath.row];
 //    [self.maskView removeFromSuperview];
-    
-    
-    
+    _select_forum_id = [_forum_id objectAtIndex:indexPath.row];
+    _select_forum_name = [_forum_name objectAtIndex:indexPath.row];
+    _select_row = indexPath;//选择的索引号
     
 }
 

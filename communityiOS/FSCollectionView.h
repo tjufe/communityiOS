@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import <Foundation/Foundation.h>
 #import "PostEditViewController.h"
+
+
 
 
 @interface FSCollectionview : UICollectionView
@@ -16,6 +19,10 @@
 
 @property (strong,nonatomic) NSMutableArray *forum_id;
 @property (strong,nonatomic) NSMutableArray *forum_name;
+@property (strong,nonatomic) NSString *select_forum_name;//选择的版块名称
+@property (strong,nonatomic) NSString *select_forum_id;//选择的版块id
+@property (strong,nonatomic) NSIndexPath *select_row;//选择的索引号
+
 
 
 -(id)getcelltext:(NSIndexPath *)indexPath:(UITableView*)tableview;

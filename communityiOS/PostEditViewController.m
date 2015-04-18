@@ -44,6 +44,12 @@
 @property (strong,nonatomic)NSString *ISAPPLY;
 @property (strong,nonatomic)NSString *ISMAINIMG;
 
+@property (strong,nonatomic)NSString *select_forum_id;//选择的版块id
+@property (strong,nonatomic)NSString *select_forum_name;//选择的版块名称
+@property (strong,nonatomic)NSIndexPath *select_row;
+@property (strong,nonatomic)NSString *ISNEWPOST;
+@property (strong,nonatomic) NSString *UserPermission;//当前用户身份
+
 
 
 @end
@@ -52,10 +58,15 @@ NSString * const site_addchain = @"是否提供外链功能";
 NSString * const site_addapply = @"是否提供报名功能";
 NSString * const site_addmainimg=@"主帖是否包含主图";
 
+NSString * const site_newpost_user = @"允许发帖的用户";
+
 @implementation PostEditViewController
 NSArray *activities_;
 NSArray *feelings_;
 NSArray *third_;
+
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
     
@@ -177,6 +188,36 @@ NSArray *third_;
             [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
         }];
             [self.fs getcelltext:indexPath:self.PEtableview];
+            
+            //获取选择的版块
+            self.select_forum_id = self.fs.select_forum_id;
+            self.select_forum_name = self.select_forum_name;
+            self.select_row = self.fs.select_row;
+            //判断当前用户选择的版块能否发帖
+            forumItem *fit = [_forum_list_item objectAtIndex:self.select_row.row];
+            for(int m=0;m<[fit.ForumSetlist count];m++){
+                forumSetItem *fs_item = [forumSetItem createItemWitparametes:[fit. ForumSetlist objectAtIndex:m]];
+                
+                if([fs_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"普通用户"].location!=NSNotFound && ![self.UserPermission isEqualToString:@""] ){
+                    
+                        self.ISNEWPOST = @"Y";
+                    }
+                }
+            if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"认证用户"].location!=NSNotFound && [self.UserPermission rangeOfString:@"认证用户"].location!=NSNotFound){
+                
+                        self.ISNEWPOST = @"Y";
+                
+                }
+                if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"管理员"].location!=NSNotFound && [self.UserPermission rangeOfString:@"管理员"].location!=NSNotFound ){
+                    
+                        self.ISNEWPOST = @"Y";
+                    
+                }
+            
+        }
+        if(![self.ISNEWPOST isEqualToString:@"Y"]){
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"您不能在该版块下发布消息！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
         }
         
         
@@ -267,6 +308,10 @@ NSArray *third_;
         [self.forum_name addObject:fitem.forum_name];
     }
     
+    //获取当前用户信息
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.UserPermission = [defaults objectForKey:@"UserPermission"];
+    
     
     self.PEtableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划
     // Do any additional setup after loading the view.
@@ -291,6 +336,7 @@ NSArray *third_;
     self.ISMAINIMG = @"N";
     self.ISAPPLY = @"N";
     self.ISCHAIN =@"N";
+    self.ISNEWPOST = @"N";
     if(![_ED_FLAG isEqualToString:@"0"]){
         for(int i=0;i < [_forum_item.ForumSetlist count];i++){
             self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];
