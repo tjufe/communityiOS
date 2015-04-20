@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import "postItem.h"
 #import "forumItem.h"
+
+extern NSString *const site_newpost_user;
+
 
 @protocol PostListViewControllerDelegate <NSObject>
 
@@ -18,6 +22,9 @@
 
 @interface PostListViewController : UIViewController
 @property(strong,nonatomic)postItem *PostItem;
-@property(strong,nonatomic)forumItem *forum_item;
+@property(strong,nonatomic)forumItem *forum_item;//viewcontroller页传值
+@property(strong,nonatomic) NSString *forum_id;//删除帖子后detail页传值
+@property(strong,nonatomic) NSString *community_id;
+//@property (strong,nonatomic) NSString *PL_EDIT;
 @property (assign) id<PostListViewControllerDelegate>delegate;
 @end

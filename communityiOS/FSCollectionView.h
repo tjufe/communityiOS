@@ -13,7 +13,9 @@
 @interface FSCollectionview : UICollectionView
 @property (weak,nonatomic)NSIndexPath *index;
 @property(weak,nonatomic)UITableView *tb;
-@property(weak,nonatomic)NSArray *asdf;
+
+@property (strong,nonatomic) NSMutableArray *forum_id;
+@property (strong,nonatomic) NSMutableArray *forum_name;
 
 
 -(id)getcelltext:(NSIndexPath *)indexPath:(UITableView*)tableview;

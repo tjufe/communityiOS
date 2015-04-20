@@ -26,9 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-   
-    
 
+    
 }
 
 //刷新昵称
@@ -66,8 +65,10 @@
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"相机拍摄" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+
         
         [self pickImageFromCamera];
+
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -112,6 +113,7 @@
     
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
+
     //保存到本地documents中
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
@@ -130,6 +132,7 @@
     NSMutableDictionary * dict= [NSMutableDictionary dictionaryWithDictionary:editingInfo];
     [dict setObject:image forKey:@"UIImagePickerControllerEditedImage"];
     [self imagePickerController:picker didFinishPickingMediaWithInfo:dict];
+
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{

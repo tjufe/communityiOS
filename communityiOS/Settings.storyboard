@@ -363,11 +363,11 @@
                         <viewControllerLayoutGuide type="top" id="uda-rg-csx"/>
                         <viewControllerLayoutGuide type="bottom" id="eIV-d6-s7V"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="VZa-Cf-pLj">
+                    <view key="view" contentMode="scaleToFill" id="VZa-Cf-pLj" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入昵称……" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="70d-sv-JoX">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入昵称……" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="70d-sv-JoX">
                                 <rect key="frame" x="16" y="64" width="288" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Nu3-bK-0Gb"/>
@@ -400,9 +400,12 @@
                             <constraint firstItem="BWz-JZ-6dw" firstAttribute="leading" secondItem="tbs-DW-0aY" secondAttribute="leading" id="gZf-Ia-PXo"/>
                             <constraint firstItem="tbs-DW-0aY" firstAttribute="top" secondItem="70d-sv-JoX" secondAttribute="bottom" constant="8" id="sSS-Yk-o0B"/>
                         </constraints>
+                        <connections>
+                            <action selector="View_TouchDown:" destination="pIl-Mb-hcb" eventType="touchDown" id="j8O-ci-a8y"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="昵称" id="y6v-JC-4NT">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="tI1-4u-NFq">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="保存" id="tI1-4u-NFq">
                             <color key="tintColor" red="0.99215686274509807" green="0.22745098039215686" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="saveNickname:" destination="pIl-Mb-hcb" id="OUA-mB-P9d"/>
@@ -411,6 +414,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="saveBtn" destination="tI1-4u-NFq" id="26B-Us-azN"/>
                         <outlet property="tf_Nickname" destination="70d-sv-JoX" id="Opa-yu-RVg"/>
                     </connections>
                 </viewController>
@@ -529,17 +533,17 @@
                         <viewControllerLayoutGuide type="top" id="INu-nc-bmJ"/>
                         <viewControllerLayoutGuide type="bottom" id="gRT-9b-QFz"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ult-cv-6DA">
+                    <view key="view" contentMode="scaleToFill" id="ult-cv-6DA" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="原密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="naf-3U-ggn">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="原密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="naf-3U-ggn">
                                 <rect key="frame" x="16" y="64" width="288" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Shq-5u-fNO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-qs-4E8">
                                 <rect key="frame" x="16" y="114" width="288" height="1"/>
@@ -548,13 +552,13 @@
                                     <constraint firstAttribute="height" constant="1" id="gyd-9E-fZp"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="新密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zRP-NW-bRJ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="新密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zRP-NW-bRJ">
                                 <rect key="frame" x="16" y="114" width="288" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FEk-Ja-sJy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jaF-o4-xvK">
                                 <rect key="frame" x="16" y="164" width="288" height="1"/>
@@ -563,13 +567,13 @@
                                     <constraint firstAttribute="height" constant="1" id="RAf-h6-kyH"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="重复" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YXV-SR-t4s">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="重复" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YXV-SR-t4s">
                                 <rect key="frame" x="16" y="164" width="288" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Tq9-cD-4t3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
@@ -590,9 +594,12 @@
                             <constraint firstItem="jaF-o4-xvK" firstAttribute="top" secondItem="zRP-NW-bRJ" secondAttribute="bottom" id="zIh-Oq-pGy"/>
                             <constraint firstItem="YXV-SR-t4s" firstAttribute="leading" secondItem="jaF-o4-xvK" secondAttribute="leading" id="ztt-ZQ-jf5"/>
                         </constraints>
+                        <connections>
+                            <action selector="View_TouchDown:" destination="EH1-td-SRf" eventType="touchDown" id="Wxk-Hs-8bp"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="修改密码" id="Px3-Z7-Pcg">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="tep-E3-2Gc">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="保存" id="tep-E3-2Gc">
                             <color key="tintColor" red="0.99215686270000003" green="0.2274509804" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="saveNewPassword:" destination="EH1-td-SRf" id="PbR-2E-AZ3"/>
@@ -601,6 +608,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="saveBtn" destination="tep-E3-2Gc" id="uuE-rI-WF4"/>
                         <outlet property="tf_NewPsw" destination="zRP-NW-bRJ" id="KMt-we-mFP"/>
                         <outlet property="tf_OldPsw" destination="naf-3U-ggn" id="yMJ-rR-cYA"/>
                         <outlet property="tf_SecPsw" destination="YXV-SR-t4s" id="Nnz-UT-ikW"/>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+>>>>>>> 0b3a96fe4f50ac582e440c2ebeecd6d90236b484
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -30,7 +34,7 @@
                         <viewControllerLayoutGuide type="top" id="U0x-ly-RYn"/>
                         <viewControllerLayoutGuide type="bottom" id="GJf-tj-Dj8"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="k7v-BH-Iol">
+                    <view key="view" contentMode="scaleToFill" id="k7v-BH-Iol" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -128,6 +132,9 @@
                             <constraint firstItem="2pf-Jb-diQ" firstAttribute="trailing" secondItem="k7v-BH-Iol" secondAttribute="trailingMargin" id="hC9-sh-3Mt"/>
                             <constraint firstItem="GEm-t4-ihU" firstAttribute="trailing" secondItem="9Zq-y1-eem" secondAttribute="trailing" id="vUo-AD-llX"/>
                         </constraints>
+                        <connections>
+                            <action selector="View_TouchDown:" destination="lOJ-nz-sfY" eventType="touchDown" id="9gS-bV-ctp"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="登录" id="IrJ-Cy-1nt">
                         <barButtonItem key="backBarButtonItem" title="返回" id="1ia-jN-ls4">
@@ -342,6 +349,9 @@
                                 <exclude reference="T14-Vt-lXb"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="View_TouchDown:" destination="j4W-6T-2TF" eventType="touchDown" id="NTk-Xz-5e7"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="注册" id="1mD-wj-Q0L">
                         <barButtonItem key="backBarButtonItem" title="返回" id="IVq-Ge-31B">

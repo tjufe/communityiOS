@@ -39,6 +39,7 @@
     _imgAvatar.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
     UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
     _imgAvatar.image = placeholderImage;
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *phoneNumber = [defaults valueForKey:@"PhoneNumber"];
     if(phoneNumber!=nil){

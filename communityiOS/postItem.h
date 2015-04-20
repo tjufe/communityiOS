@@ -35,6 +35,12 @@
 @property (nonatomic,strong)NSString *delete_man_id;
 @property (nonatomic,strong)NSString *need_check;
 @property (nonatomic,strong)NSString *checked;
+@property (nonatomic,strong)NSString *poster_nickname;
+@property (nonatomic,strong)NSString *poster_head;
+@property (nonatomic,strong)NSString *reply_num;
+@property (nonatomic,strong)NSString *apply_num;
+@property (nonatomic,strong)NSString *read_num;
+
 
 
 +(postItem *)createItemWitparametes:(NSDictionary*)dic;

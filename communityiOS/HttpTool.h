@@ -13,6 +13,8 @@ typedef void (^Failure)(NSError *error);
 
 @interface HttpTool : NSObject
 
+//数据请求方法
 + (void)postWithparams:(NSDictionary *)params success:(Success)success failure:(Failure)failure;
+
 
 @end
