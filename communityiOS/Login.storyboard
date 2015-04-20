@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -175,12 +175,12 @@
         <!--注册-->
         <scene sceneID="YGr-iC-VAs">
             <objects>
-                <viewController id="j4W-6T-2TF" customClass="RegistViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="regist" id="j4W-6T-2TF" customClass="RegistViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s5Y-k5-bzc"/>
                         <viewControllerLayoutGuide type="bottom" id="FOi-fM-851"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="n14-5S-mje">
+                    <view key="view" contentMode="scaleToFill" id="n14-5S-mje" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -352,6 +352,10 @@
                     <connections>
                         <outlet property="resBtn" destination="iQc-r7-xDJ" id="3X3-eh-HB1"/>
                         <outlet property="resView" destination="bHX-Jq-2hh" id="QX7-An-Cmw"/>
+                        <outlet property="tfNickname" destination="Ith-Fz-2Kc" id="M65-Ee-j8S"/>
+                        <outlet property="tfPassword" destination="Iaa-PW-Wan" id="v5S-Cp-4v7"/>
+                        <outlet property="tfPhoneNumber" destination="FPK-Bq-FMZ" id="rZN-Ui-6D9"/>
+                        <outlet property="tfSecondPassword" destination="FJx-CD-6uv" id="CGX-rZ-Jzs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sET-y5-ZH3" userLabel="First Responder" sceneMemberID="firstResponder"/>

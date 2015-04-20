@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface RegistViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *tfPhoneNumber;
+@property (weak, nonatomic) IBOutlet UITextField *tfNickname;
+@property (weak, nonatomic) IBOutlet UITextField *tfPassword;
+@property (weak, nonatomic) IBOutlet UITextField *tfSecondPassword;
 
 @end
