@@ -589,11 +589,13 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
+
 				1842ADF31ADB5FEE0022D2CB /* APService.h */,
 				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
 
 				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
 				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
+
 				13B1C3761AD4D817005C179C /* regItem.h */,
 				13B1C3771AD4D817005C179C /* regItem.m */,
 				13B1C35F1AD4D80B005C179C /* forumItem.h */,

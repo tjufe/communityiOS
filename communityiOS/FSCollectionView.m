@@ -21,7 +21,7 @@ int i ;
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 8;
+    return [_forum_name count];
     
     
 }
@@ -32,11 +32,11 @@ int i ;
     //    FSCollectionView *fs = [[FSCollectionView alloc]init];
     
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell11" forIndexPath:indexPath ];
-    NSArray *qwer=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
-    self.asdf = [NSArray arrayWithArray:qwer];
+   // NSArray *qwer=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
+
     //cell里面的控件
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 30)];
-    label.text = [qwer objectAtIndex:indexPath.row] ;
+    label.text = [_forum_name objectAtIndex:indexPath.row] ;
     label.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [cell addSubview:label];
     cell.backgroundColor = [UIColor colorWithRed:246.0/255 green:246.0/255 blue:246.0/255 alpha:1];
