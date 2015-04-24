@@ -12,6 +12,7 @@
 #import "UserCenterLoggedViewController.h"
 #import "PPRevealSideViewController.h"
 #import "UIImageView+WebCache.h"
+#import "APIClient.h"
 
 @interface UserCenterLoggedViewController ()
 
