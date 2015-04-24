@@ -211,6 +211,7 @@
     [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:(NSString *)guid Success:^(id object) {
         // to do right
         NSLog(@"^^^^^^^^^^^^");
+        NSLog(@"%@",object);
     } failurs:^(NSError *error) {
         // to do error
     }];
