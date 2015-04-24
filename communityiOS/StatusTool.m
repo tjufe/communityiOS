@@ -314,7 +314,6 @@
     [secondDic  setObject:firstDic forKey:@"Data"];
     NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
     [thirdDic setObject:secondDic forKey:@"param"];
-    
     [thirdDic setObject:@"DeletePost" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic

@@ -119,31 +119,15 @@
     [super viewDidLoad];
     
     
-    //    [self.btnNickname setTitle:@"lalala" forState:UIControlStateNormal];
     
-    
-    //    UITapGestureRecognizer 手势
-    //    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
-    //    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
-    //    [self initTableData];
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-    //    [self.navigationController setNavigationBarHidden:YES];
-    //    tableData = [[NSMutableArray alloc] init];
-    //    for (int i = 0; i< 7; i++) {
-    //        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
-    //    }
-    
-    //    _forumName = [[NSMutableArray alloc] init];
-    //    _forumImage = [[NSMutableArray alloc] init];
+  
     self.navigationController.delegate=self;
 
-    
-    
-    
-    
+  
     // Do any additional setup after loading the view, typically from a nib.
     //    图片的宽
     CGFloat imageW = self.view.frame.size.width;
@@ -187,7 +171,6 @@
     [self reloadData];
     [self autoLogin];
     
-    //    [self setupRefresh];
     
 }
 
@@ -494,7 +477,7 @@
     [self.btnNickname setTitle:@"游客" forState:UIControlStateNormal];
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
-    self.avaterImageView.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
+    self.avaterImageView.contentMode = UIViewContentModeScaleAspectFill; //取图片的中部分
     UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
     self.avaterImageView.image = placeholderImage;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
