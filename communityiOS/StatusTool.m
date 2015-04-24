@@ -394,7 +394,8 @@
     [thirdDic setObject:@"UserUploadPhoto" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        // no response
+        
+        success(responseObject);
         
     } failure:^(NSError *error) {
         if (failure == nil) return;

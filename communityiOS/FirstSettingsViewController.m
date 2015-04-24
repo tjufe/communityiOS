@@ -150,8 +150,7 @@
 
 #pragma mark---------------保存图片到document
 - (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
-        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString* documentsDirectory = [paths objectAtIndex:0];
+        NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
         [imageData writeToFile:fullPathToFile atomically:NO];
 }
@@ -204,9 +203,10 @@
 -(void)refreshDB:(id)guid{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
-    NSLog(@"^^^^^^^^^^^^%@",(NSString *)guid);
     [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:(NSString *)guid Success:^(id object) {
         // to do right
+        NSLog(@"%@",object);
+        
     } failurs:^(NSError *error) {
         // to do error
     }];
