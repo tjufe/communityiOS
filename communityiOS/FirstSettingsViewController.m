@@ -115,17 +115,10 @@
     //保存到本地documents中
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
-    
-    if (UIImagePNGRepresentation(chosenImage) == nil) {
-        NSData * data = UIImageJPEGRepresentation(chosenImage, 1);
-        NSString * userImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
-        [self saveImage:data WithName:userImage];
-    }else{
-        NSData *data = UIImagePNGRepresentation(chosenImage);
-        NSString * userImage = [[NSString alloc]initWithFormat:@"%@.png",user_id ];
-        [self saveImage:data WithName:userImage];
-    }
-    
+    NSData * data = UIImageJPEGRepresentation(chosenImage, 1);
+    NSString * userImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+    [self saveImage:data WithName:userImage];
+
     //显示在UI中
     [self initPortraitWithImage:chosenImage];
     //这里要上传头像图片
@@ -181,17 +174,10 @@
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
-            if (UIImagePNGRepresentation(image) == nil) {
-                
-                NSData *data = UIImageJPEGRepresentation(image, 1);
-                NSString * fileName = [NSString stringWithFormat:@"%@.jpg", str];
-                [formData appendPartWithFileData:data name:@"uploadfile" fileName:fileName mimeType:@"image/jpeg"];
-            }else{
-                
-                 NSData *data = UIImagePNGRepresentation(image);
-                 NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-                [formData appendPartWithFileData:data name:@"uploadfile" fileName:fileName mimeType:@"image/png"];
-            }
+            NSData *data = UIImageJPEGRepresentation(image, 1);
+            NSString * fileName = [NSString stringWithFormat:@"%@.jpg", str];
+            [formData appendPartWithFileData:data name:@"uploadfile" fileName:fileName mimeType:@"image/jpeg"];
+           
         
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
@@ -209,9 +195,17 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
     [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:(NSString *)guid Success:^(id object) {
-        // to do right
-        NSLog(@"^^^^^^^^^^^^");
-        NSLog(@"%@",object);
+        NSData *data = [[NSData alloc] initWithData:object];
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        if ([[result valueForKey:@"status"] isEqualToString:@"OK"]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传头像成功" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
+            [alert show];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传头像失败" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
+            [alert show];
+        }
+        
+
     } failurs:^(NSError *error) {
         // to do error
     }];
