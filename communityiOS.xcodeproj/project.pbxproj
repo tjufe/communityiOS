@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */; };
 		13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE11AD624B300658F21 /* AlterNicknameViewController.m */; };
 		13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE41AD6260400658F21 /* AlterPasswordViewController.m */; };
 		13B1C2B61ACA58B5005C179C /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2B41ACA58B5005C179C /* APIClient.m */; };
@@ -118,6 +119,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1352E0CE1AE76B4D0089EAC8 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
+		1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
 		13878AE01AD624B300658F21 /* AlterNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterNicknameViewController.h; sourceTree = "<group>"; };
 		13878AE11AD624B300658F21 /* AlterNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterNicknameViewController.m; sourceTree = "<group>"; };
 		13878AE31AD6260400658F21 /* AlterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterPasswordViewController.h; sourceTree = "<group>"; };
@@ -523,6 +526,8 @@
 			isa = PBXGroup;
 			children = (
 				13B1C2FD1ACBB56B005C179C /* Settings.storyboard */,
+				1352E0CE1AE76B4D0089EAC8 /* AuthViewController.h */,
+				1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */,
 				1892E3EB1ADBFAAD008A75B1 /* FirstSettingsViewController.h */,
 				1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */,
 				13B1C2FF1ACBBED2005C179C /* SettingsViewController.h */,
@@ -589,12 +594,10 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
-
 				1842ADF31ADB5FEE0022D2CB /* APService.h */,
 				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
 				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
 				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
-
 				13B1C3761AD4D817005C179C /* regItem.h */,
 				13B1C3771AD4D817005C179C /* regItem.m */,
 				13B1C35F1AD4D80B005C179C /* forumItem.h */,
@@ -939,6 +942,7 @@
 				13B1C2E41ACB7DC5005C179C /* MJRefreshBaseView+CustomActivityIndicator.m in Sources */,
 				13B1C36F1AD4D80B005C179C /* forumListItem.m in Sources */,
 				13B1C37B1AD4D817005C179C /* StatusTool.m in Sources */,
+				1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */,
 				13B1C2EB1ACB7DC5005C179C /* UIView+MJExtension.m in Sources */,
 				13B1C3701AD4D80B005C179C /* forumSetItem.m in Sources */,
 				13B1C3501AD4D6ED005C179C /* PosterTableViewCell.m in Sources */,

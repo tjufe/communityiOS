@@ -12,6 +12,7 @@
 #import "UserCenterLoggedViewController.h"
 #import "PPRevealSideViewController.h"
 #import "UIImageView+WebCache.h"
+#import "APIClient.h"
 
 @interface UserCenterLoggedViewController ()
 
@@ -45,12 +46,28 @@
     if(phoneNumber!=nil){
         NSString *userNickname = [defaults valueForKey:@"UserNickname"];
         NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
+        NSString *user_id = [defaults valueForKey:@"UserID"];
         _labelNickname.text = userNickname;
-        [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if(image!=nil){
-                _imgAvatar.image = image;
-            }
-        }];
+        NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+        NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
+        if (fileExits) {
+            _imgAvatar.image = [UIImage imageWithContentsOfFile:fullPathToFile];
+            
+        } else {
+            //从服务器下载头像
+            
+        }
+
+        
+        
+//        [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//            if(image!=nil){
+//                _imgAvatar.image = image;
+//            }
+//        }];
     }
 }
 

@@ -314,7 +314,6 @@
     [secondDic  setObject:firstDic forKey:@"Data"];
     NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
     [thirdDic setObject:secondDic forKey:@"param"];
-    
     [thirdDic setObject:@"DeletePost" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic
@@ -395,7 +394,8 @@
     [thirdDic setObject:@"UserUploadPhoto" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        // no response
+        
+        success(responseObject);
         
     } failure:^(NSError *error) {
         if (failure == nil) return;

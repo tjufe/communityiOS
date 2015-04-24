@@ -1,3 +1,4 @@
+
 //
 //  FirstSettingsViewController.m
 //  communityiOS
@@ -10,6 +11,7 @@
 #import "APIClient.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "StatusTool.h"
+#import "APIAddress.h"
 
 @interface FirstSettingsViewController ()<UIImagePickerControllerDelegate>
 
@@ -110,19 +112,20 @@
     }
     //获得编辑过的图片
     UIImage* chosenImage = [info objectForKey: @"UIImagePickerControllerEditedImage"];
-    
-    [[UIApplication sharedApplication]setStatusBarHidden:NO];
-    [self dismissModalViewControllerAnimated:YES];
-
     //保存到本地documents中
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
-    NSString *userImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id];
-    [self saveImage:chosenImage WithName:userImage];
+    NSData * data = UIImageJPEGRepresentation(chosenImage, 1);
+    NSString * userImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+    [self saveImage:data WithName:userImage];
+
     //显示在UI中
     [self initPortraitWithImage:chosenImage];
     //这里要上传头像图片
     [self uploadPersonImginitWithImage:chosenImage];
+    [[UIApplication sharedApplication]setStatusBarHidden:NO];
+    [self dismissModalViewControllerAnimated:YES];
+
     
 }
 #pragma mark--------------UIImagePickerViewController  delegate
@@ -141,15 +144,14 @@
 }
 
 #pragma mark---------------保存图片到document
-- (void)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName{
-        NSData* imageData = UIImageJPEGRepresentation(tempImage,0.2);
-        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString* documentsDirectory = [paths objectAtIndex:0];
-        // Now we get the full path to the file
-        NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
-        // and then we write it out
-        [imageData writeToFile:fullPathToFile atomically:NO];
+- (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPathToFile atomically:NO];
 }
+
+
+
 
 #pragma mark---------------将头像切割成圆形
 -(void)initPortraitWithImage:(UIImage *)image{
@@ -163,39 +165,47 @@
 
 #pragma mark--------------    上传头像图片
 -(void)uploadPersonImginitWithImage:(UIImage *)image{
-
-     NSURL *baseUrl = [NSURL URLWithString:@"http://192.168.1.109/sq/upload.php"];
-     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager POST:@"" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    
+        NSURL *baseUrl = [NSURL URLWithString:API_HOST];
+        AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        [manager POST:@"upload.php" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyyMMddHHmmss";
+            NSString *str = [formatter stringFromDate:[NSDate date]];
+            NSData *data = UIImageJPEGRepresentation(image, 1);
+            NSString * fileName = [NSString stringWithFormat:@"%@.jpg", str];
+            [formData appendPartWithFileData:data name:@"uploadfile" fileName:fileName mimeType:@"image/jpeg"];
+           
         
-        //上传时使用当前的系统事件作为文件名
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyyMMddHHmmss";
-        NSString *str = [formatter stringFromDate:[NSDate date]];
-        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
-        // 上传图片，以文件流的格式
-        [formData appendPartWithFileData:imageData name:@"uploadfile" fileName:fileName mimeType:@"image/jpeg"];
-        
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
-        //刷新数据库，post
-        [self refreshDB:responseObject];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSLog(@"^^^^^^^^^^^%@",responseObject);
+            [self refreshDB:responseObject];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
     
 }
+
 #pragma  mark-------------------刷新数据库
--(void)refreshDB:(id)object{
+-(void)refreshDB:(id)guid{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
-    
-    [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:(NSString *)object Success:^(id object) {
-        // to do right
+    [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:(NSString *)guid Success:^(id object) {
+        NSData *data = [[NSData alloc] initWithData:object];
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        if ([[result valueForKey:@"status"] isEqualToString:@"OK"]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传头像成功" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
+            [alert show];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传头像失败" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
+            [alert show];
+        }
+        
+
     } failurs:^(NSError *error) {
         // to do error
     }];
