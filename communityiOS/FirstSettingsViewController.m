@@ -11,6 +11,7 @@
 #import "APIClient.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "StatusTool.h"
+#import "APIAddress.h"
 
 @interface FirstSettingsViewController ()<UIImagePickerControllerDelegate>
 
@@ -124,6 +125,7 @@
         NSString * userImage = [[NSString alloc]initWithFormat:@"%@.png",user_id ];
         [self saveImage:data WithName:userImage];
     }
+    
     //显示在UI中
     [self initPortraitWithImage:chosenImage];
     //这里要上传头像图片
@@ -150,10 +152,13 @@
 
 #pragma mark---------------保存图片到document
 - (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
-        NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
-        [imageData writeToFile:fullPathToFile atomically:NO];
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPathToFile atomically:NO];
 }
+
+
+
 
 #pragma mark---------------将头像切割成圆形
 -(void)initPortraitWithImage:(UIImage *)image{
@@ -168,11 +173,11 @@
 #pragma mark--------------    上传头像图片
 -(void)uploadPersonImginitWithImage:(UIImage *)image{
     
-        NSURL *baseUrl = [NSURL URLWithString:@"http://192.168.28.211/sq/upload.php"];
+        NSURL *baseUrl = [NSURL URLWithString:API_HOST];
         AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        [manager POST:@"" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [manager POST:@"upload.php" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
@@ -205,8 +210,8 @@
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
     [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:(NSString *)guid Success:^(id object) {
         // to do right
+        NSLog(@"^^^^^^^^^^^^");
         NSLog(@"%@",object);
-        
     } failurs:^(NSError *error) {
         // to do error
     }];
