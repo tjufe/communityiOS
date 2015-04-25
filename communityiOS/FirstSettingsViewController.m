@@ -12,6 +12,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "StatusTool.h"
 #import "APIAddress.h"
+#import "MBProgressHUD.h"
 
 @interface FirstSettingsViewController ()<UIImagePickerControllerDelegate>
 
@@ -28,8 +29,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    [self initPortraitWithImage:[self loadImageOfDoc]];
     
+}
+
+-(UIImage *)loadImageOfDoc{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *user_id = [defaults valueForKey:@"UserID"];
+    NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+    return[UIImage imageWithContentsOfFile:fullPathToFile];
+
 }
 
 //刷新昵称
@@ -68,8 +79,10 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:@"相机拍摄" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [self pickImageFromCamera];
+        }
         
-        [self pickImageFromCamera];
 
     }]];
     
@@ -84,7 +97,7 @@
 - (void)pickImageFromAlbum{
       self.imagePicker = [[UIImagePickerController alloc] init];
      self.imagePicker.delegate = self;
-     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;  //从媒体库选择图片
      self.imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
       self.imagePicker.allowsEditing = YES;
      [[UIApplication sharedApplication]setStatusBarHidden:YES];
@@ -184,7 +197,9 @@
             NSLog(@"^^^^^^^^^^^%@",responseObject);
             [self refreshDB:responseObject];
             
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
             
         }];
     
@@ -198,11 +213,21 @@
         NSData *data = [[NSData alloc] initWithData:object];
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([[result valueForKey:@"status"] isEqualToString:@"OK"]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传头像成功" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
-            [alert show];
+            
+            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:hud];
+//            hud.dimBackground = YES;
+            hud.labelText = @"设置成功";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [hud removeFromSuperview];
+            }];
+            
         }else{
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传头像失败" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
-            [alert show];
+            
+            
         }
         
 
