@@ -155,7 +155,6 @@ NSString * const site_newpost_user = @"允许发帖的用户";
      if([self.UserPermission rangeOfString:@"普通用户"].location!=NSNotFound) {
           status_normal = YES;
      }
-
      
 
      
@@ -211,7 +210,7 @@ NSString * const site_newpost_user = @"允许发帖的用户";
     
     [button setImage:image forState:UIControlStateNormal];
     [button addTarget:self action:@selector(NewPost) forControlEvents:UIControlEventTouchUpInside];
-    
+
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
      
      //判断用户身份来决定是否显示发帖图标
@@ -331,7 +330,7 @@ NSString * const site_newpost_user = @"允许发帖的用户";
     PEVC.forum_item = _forum_item;
     PEVC.ED_FLAG =@"1";// 当前版块下发帖
     [self.navigationController pushViewController:PEVC animated:YES];
-    
+   
 }
 
 

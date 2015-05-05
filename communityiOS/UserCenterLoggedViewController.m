@@ -57,18 +57,22 @@
             _imgAvatar.image = [UIImage imageWithContentsOfFile:fullPathToFile];
             
         } else {
-            //从服务器下载头像
-            
+            //从服务器下载头像,并存储到本地
+            [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                _imgAvatar.image = image;
+                NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                [self saveImage:imageData WithName:fullPathToFile];
+            }];
         }
 
-        
-        
-//        [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//            if(image!=nil){
-//                _imgAvatar.image = image;
-//            }
-//        }];
     }
+}
+
+#pragma mark---------------保存图片到document
+- (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
 - (void)didReceiveMemoryWarning {

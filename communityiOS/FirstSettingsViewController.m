@@ -33,15 +33,6 @@
     
 }
 
--(UIImage *)loadImageOfDoc{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *user_id = [defaults valueForKey:@"UserID"];
-    NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
-    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
-    return[UIImage imageWithContentsOfFile:fullPathToFile];
-
-}
 
 //刷新昵称
 -(void)viewWillAppear:(BOOL)animated{
@@ -95,11 +86,11 @@
 #pragma mark--------从用户相册获取活动图片
 
 - (void)pickImageFromAlbum{
-      self.imagePicker = [[UIImagePickerController alloc] init];
+     self.imagePicker = [[UIImagePickerController alloc] init];
      self.imagePicker.delegate = self;
      self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;  //从媒体库选择图片
      self.imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-      self.imagePicker.allowsEditing = YES;
+     self.imagePicker.allowsEditing = YES;
      [[UIApplication sharedApplication]setStatusBarHidden:YES];
      [self presentModalViewController:self.imagePicker animated:YES];
    }
@@ -163,7 +154,16 @@
     [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
-
+#pragma mark -------------------------从本地读取头像图片
+-(UIImage *)loadImageOfDoc{
+    
+    NSString *user_id = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+    return[UIImage imageWithContentsOfFile:fullPathToFile];
+    
+}
 
 
 #pragma mark---------------将头像切割成圆形
@@ -194,10 +194,9 @@
         
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSLog(@"^^^^^^^^^^^%@",responseObject);
-            [self refreshDB:responseObject];
-            
-            
+            if (responseObject != nil) {
+                [self refreshDB:responseObject];
+            }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             
@@ -216,7 +215,6 @@
             
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
-//            hud.dimBackground = YES;
             hud.labelText = @"设置成功";
             hud.mode = MBProgressHUDModeText;
             [hud showAnimated:YES whileExecutingBlock:^{
@@ -224,16 +222,21 @@
             } completionBlock:^{
                 [hud removeFromSuperview];
             }];
-            
         }else{
-            
-            
+            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:hud];
+            hud.labelText = @"请查看您的网络";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [hud removeFromSuperview];
+            }];
         }
-        
+     } failurs:^(NSError *error) {
 
-    } failurs:^(NSError *error) {
-        // to do error
-    }];
+        // to do wrong deals
+     }];
    
 }
 

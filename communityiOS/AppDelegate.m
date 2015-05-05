@@ -11,6 +11,7 @@
 #import "PostDetailViewController.h"
 #import "UIViewController+Create.h"
 #import "APService.h"
+#import "PostReplyViewController.h"
 
 
 #import "DemoViewController.h"
@@ -106,9 +107,8 @@
     }
     if ([type isEqualToString:@"001"]) {
         if (self.shouldJumpToPostReply) {
-            
           //这里是向PostReplyVewController跳转
-        
+
         }
     }
     
