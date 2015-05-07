@@ -15,6 +15,8 @@
 #import "APIClient.h"
 
 @interface UserCenterLoggedViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *authIcon;
+@property (strong, nonatomic) IBOutlet UIButton *authBtn;
 
 @end
 
@@ -35,11 +37,6 @@
 }
 
 - (void)initUI {
-    _imgAvatar.layer.masksToBounds=YES;
-    [_imgAvatar.layer setCornerRadius:_imgAvatar.frame.size.width/2];
-    _imgAvatar.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
-    UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
-    _imgAvatar.image = placeholderImage;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *phoneNumber = [defaults valueForKey:@"PhoneNumber"];
@@ -59,13 +56,32 @@
         } else {
             //从服务器下载头像,并存储到本地
             [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                _imgAvatar.image = image;
-                NSData *imageData = UIImageJPEGRepresentation(image, 1);
-                [self saveImage:imageData WithName:fullPathToFile];
+                if (image!=nil) {
+                    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                    [self saveImage:imageData WithName:fullPathToFile];
+                    [self initPortraitWithImage:image];
+                }else{
+                    [self initPortraitWithImage:[UIImage imageNamed:@"icon_acatar_default_r"]];
+                }
+                
             }];
+        }
+        //判断是否是管理员，显示“实名认证”图标
+        if ([[NSString stringWithString:[defaults valueForKey:@"UserPermission"]]isEqualToString:@"管理员"]) {
+            self.authIcon.hidden = NO;
+            self.authBtn.hidden = NO;
         }
 
     }
+}
+
+#pragma mark---------------将头像切割成圆形
+-(void)initPortraitWithImage:(UIImage *)image{
+    
+    self.imgAvatar.layer.masksToBounds = YES;
+    [self.imgAvatar.layer setCornerRadius:self.imgAvatar.frame.size.width/2];
+    self.imgAvatar.contentMode = UIViewContentModeScaleAspectFill;
+    self.imgAvatar.image = image;
 }
 
 #pragma mark---------------保存图片到document

@@ -161,7 +161,14 @@
     NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
     NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
-    return[UIImage imageWithContentsOfFile:fullPathToFile];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
+    if (fileExits) {
+        return[UIImage imageWithContentsOfFile:fullPathToFile];
+    }else{
+        return [UIImage imageNamed:@"icon_acatar_default_r"];
+    }
+    
     
 }
 
