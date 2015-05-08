@@ -7,8 +7,18 @@
 //
 
 #import "AuthViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "StatusTool.h"
 
 @interface AuthViewController ()
+@property (strong, nonatomic) IBOutlet UITextField *roomField;
+@property (strong, nonatomic) IBOutlet UITextField *hostField;
+@property (strong, nonatomic) IBOutlet UITextField *phoneField;
+@property (strong, nonatomic) IBOutlet UITextField *nameField;
+@property (strong, nonatomic) IBOutlet UIButton *saveBtn;
+@property (strong, nonatomic) IBOutlet UIView *inputView;
+- (IBAction)saveAction:(id)sender;
+- (IBAction)ViewTouchDown:(id)sender;
 
 @end
 
@@ -17,6 +27,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.inputView.layer.masksToBounds = YES;
+    self.inputView.layer.cornerRadius = 6.0;
+    self.inputView.layer.borderWidth = 1.0;
+    self.inputView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.saveBtn.layer.masksToBounds = YES;
+    self.saveBtn.layer.cornerRadius = 6.0;
+    self.saveBtn.layer.borderColor = [[UIColor redColor] CGColor];
+    self.saveBtn.layer.borderWidth = 1.0;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,4 +53,21 @@
 }
 */
 
+- (IBAction)saveAction:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *user_id = [NSString stringWithString:[defaults valueForKey:@"UserID"]];
+    [StatusTool statusToolUserAuthWithRealName:self.nameField.text HostName:self.hostField.text ID:user_id HouseNumber:self.roomField.text Phone:self.phoneField.text Success:^(id object) {
+        //提交表单，不做处理
+    } failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+- (IBAction)ViewTouchDown:(id)sender {
+    
+    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
 @end

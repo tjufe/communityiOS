@@ -128,12 +128,14 @@ bool isModerator = NO;//是否是版主
             //nickname
             cell.poster_nickname.text = self.post_item.poster_nickname;
             //HeadPortraitUrl
-            if(self.post_item.poster_head==nil ){
+            if(self.post_item.poster_head==nil || [self.post_item.poster_head isEqualToString:@"''"] ){
                 self.post_item.poster_head=@"";
             }
             
             if(![self.post_item.poster_head isEqualToString:@""]){
-                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:self.post_item.poster_head] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSString *url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,HEAD_PIC_PATH,@"/",self.post_item.poster_head];
+                
+                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.poster_img.image = image;
                     
@@ -180,10 +182,10 @@ bool isModerator = NO;//是否是版主
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             //加载图片
-            if(self.post_item.main_image_url!=nil){
-                
+            if(self.post_item.main_image_url!=nil&&![self.post_item.main_image_url isEqualToString:@"''"]){
+                NSString *url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,TOPIC_PIC_PATH,@"/",self.post_item.main_image_url];
                 cell.MainImage.hidden = NO;
-                [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:self.post_item.main_image_url] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.MainImage.image = image;
                     }];

@@ -12,6 +12,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "StatusTool.h"
 #import "APIAddress.h"
+#import "MBProgressHUD.h"
 
 @interface FirstSettingsViewController ()<UIImagePickerControllerDelegate>
 
@@ -28,9 +29,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    [self initPortraitWithImage:[self loadImageOfDoc]];
     
 }
+
 
 //刷新昵称
 -(void)viewWillAppear:(BOOL)animated{
@@ -68,8 +70,10 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:@"相机拍摄" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [self pickImageFromCamera];
+        }
         
-        [self pickImageFromCamera];
 
     }]];
     
@@ -82,11 +86,11 @@
 #pragma mark--------从用户相册获取活动图片
 
 - (void)pickImageFromAlbum{
-      self.imagePicker = [[UIImagePickerController alloc] init];
+     self.imagePicker = [[UIImagePickerController alloc] init];
      self.imagePicker.delegate = self;
-     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;  //从媒体库选择图片
      self.imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-      self.imagePicker.allowsEditing = YES;
+     self.imagePicker.allowsEditing = YES;
      [[UIApplication sharedApplication]setStatusBarHidden:YES];
      [self presentModalViewController:self.imagePicker animated:YES];
    }
@@ -150,7 +154,23 @@
     [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
-
+#pragma mark -------------------------从本地读取头像图片
+-(UIImage *)loadImageOfDoc{
+    
+    NSString *user_id = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
+    if (fileExits) {
+        return[UIImage imageWithContentsOfFile:fullPathToFile];
+    }else{
+        return [UIImage imageNamed:@"icon_acatar_default_r"];
+    }
+    
+    
+}
 
 
 #pragma mark---------------将头像切割成圆形
@@ -181,10 +201,11 @@
         
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSLog(@"^^^^^^^^^^^%@",responseObject);
-            [self refreshDB:responseObject];
-            
+            if (responseObject != nil) {
+                [self refreshDB:responseObject];
+            }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
             
         }];
     
@@ -198,17 +219,31 @@
         NSData *data = [[NSData alloc] initWithData:object];
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([[result valueForKey:@"status"] isEqualToString:@"OK"]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传头像成功" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
-            [alert show];
+            
+            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:hud];
+            hud.labelText = @"设置成功";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [hud removeFromSuperview];
+            }];
         }else{
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"上传头像失败" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
-            [alert show];
+            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:hud];
+            hud.labelText = @"请查看您的网络";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [hud removeFromSuperview];
+            }];
         }
-        
+     } failurs:^(NSError *error) {
 
-    } failurs:^(NSError *error) {
-        // to do error
-    }];
+        // to do wrong deals
+     }];
    
 }
 

@@ -44,6 +44,14 @@
 @property (strong,nonatomic)NSString *ISAPPLY;
 @property (strong,nonatomic)NSString *ISMAINIMG;
 
+@property (strong,nonatomic)NSString *select_forum_id;//选择的版块id
+@property (strong,nonatomic)NSString *select_forum_name;//选择的版块名称
+@property (strong,nonatomic)NSIndexPath *select_row;
+@property (strong,nonatomic)NSString *ISNEWPOST;
+@property (strong,nonatomic) NSString *UserPermission;//当前用户身份
+@property (strong,nonatomic) NSArray *moderator;//版主版号
+
+
 
 
 @end
@@ -52,10 +60,15 @@ NSString * const site_addchain = @"是否提供外链功能";
 NSString * const site_addapply = @"是否提供报名功能";
 NSString * const site_addmainimg=@"主帖是否包含主图";
 
+NSString * const site_newpost_user = @"允许发帖的用户";
+
 @implementation PostEditViewController
 NSArray *activities_;
 NSArray *feelings_;
 NSArray *third_;
+
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
     
@@ -159,6 +172,9 @@ NSArray *third_;
             //传值
             self.fs.forum_id = self.forum_id;
             self.fs.forum_name = self.forum_name;
+            self.fs.forum_list_item = _forum_list_item;
+            self.fs.UserPermission = self.UserPermission;
+            self.fs.moderator = self.moderator;
         self.fs.alpha = 0;
 
         
@@ -177,9 +193,14 @@ NSArray *third_;
             [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
         }];
             [self.fs getcelltext:indexPath:self.PEtableview];
+            
+            //获取选择的版块
+//            NSMutableArray *select = [self.fs GetSelectedResult];
+//            self.select_forum_id = [select objectAtIndex:1];
+//            self.select_forum_name =[select objectAtIndex:2];
+//            self.select_row = [select objectAtIndex:0];
+                   
         }
-        
-        
             
     }
 }
@@ -267,6 +288,11 @@ NSArray *third_;
         [self.forum_name addObject:fitem.forum_name];
     }
     
+    //获取当前用户信息
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.UserPermission = [defaults objectForKey:@"UserPermission"];
+    self.moderator = [defaults objectForKey:@"moderator_of_forum_list"];
+    
     
     self.PEtableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划
     // Do any additional setup after loading the view.
@@ -291,6 +317,7 @@ NSArray *third_;
     self.ISMAINIMG = @"N";
     self.ISAPPLY = @"N";
     self.ISCHAIN =@"N";
+    self.ISNEWPOST = @"N";
     if(![_ED_FLAG isEqualToString:@"0"]){
         for(int i=0;i < [_forum_item.ForumSetlist count];i++){
             self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];
