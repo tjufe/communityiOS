@@ -34,15 +34,15 @@
 
 @implementation UserJoinPostListViewController
 
-int page = 1;//页数
-int rows = 5;//分页请求行数
-int page_filter = 0;
+int page1 = 1;//页数
+int rows1 = 5;//分页请求行数
+int page_filter1 = 0;
 
 #pragma mark------切换我报名的
 - (IBAction)isApply:(id)sender {
     if(![self.filter isEqualToString:@"我报名的"]){
         self.filter = @"我报名的";
-        page = 1;
+        page1 = 1;
         self.left_img.hidden = NO;
         self.right_img.hidden = YES;
         [postListArray removeAllObjects];
@@ -54,7 +54,7 @@ int page_filter = 0;
 - (IBAction)isReply:(id)sender {
     if(![self.filter isEqualToString:@"我回复的"]){
         self.filter = @"我回复的";
-        page = 1;
+        page1 = 1;
         self.left_img.hidden = YES;
         self.right_img.hidden = NO;
         [postListArray removeAllObjects];
@@ -176,8 +176,8 @@ int page_filter = 0;
 #pragma mark----上拉刷新
 -(void)footerRereshing{
     
-    page_filter = 2;
-    page++;
+    page_filter1 = 2;
+    page1++;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
@@ -218,8 +218,8 @@ int page_filter = 0;
 
 #pragma mark-------请求加载帖子列表数据(我报名的，我回复的)
 -(void)loadData{
-    self.Page = [NSNumber numberWithInt:page];
-    self.Rows = [NSNumber numberWithInt:rows];
+    self.Page = [NSNumber numberWithInt:page1];
+    self.Rows = [NSNumber numberWithInt:rows1];
     [StatusTool statusToolGetPostListWithbfID:@"" bcID:self.communityID userID:self.UserID filter:self.filter page:self.Page rows:self.Rows Success:^(id object) {
         
         self.post_list_item = (postListItem *)object;
@@ -227,7 +227,7 @@ int page_filter = 0;
         if(self.post_list_item.PostList!=nil){
             for(int i=0;i<[self.post_list_item.PostList count];i++){
                 self.pitem = [postItem createItemWitparametes:[self.post_list_item.PostList objectAtIndex:i]];
-                if(page_filter==0){//第一次加载
+                if(page_filter1==0){//第一次加载
                     [postListArray addObject:self.pitem];
                 }else{ //上拉刷新
                     if(![postListArray containsObject:self.pitem]){//去重
@@ -238,10 +238,10 @@ int page_filter = 0;
             }
             [self.table reloadData];
         }else{
-            if(page_filter==0){
+            if(page_filter1==0){
                 self.table.hidden = YES;
             }else{//刷新完成，已无更多
-                page--;
+                page1--;
             }
         }
         
