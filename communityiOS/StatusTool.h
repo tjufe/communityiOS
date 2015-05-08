@@ -67,6 +67,8 @@ typedef void(^StatusFailurs)(NSError * error);
 //刷新数据库，更新上传图片
 +(void)statusToolRefreshUserImageWithUserID:(NSString *)user_id ImageGUID:(NSString *)image_guid Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
+//请求实名认证
++(void)statusToolUserAuthWithRealName:(NSString *)realname HostName:(NSString *)name ID:(NSString *)user_id HouseNumber:(NSString *)house Phone:(NSString *)phone Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 
 @end

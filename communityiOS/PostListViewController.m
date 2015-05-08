@@ -231,6 +231,7 @@ int page_filter = 0;
                }
           }
      }
+
 //     bool status_auth = NO;//是否认证用户
 //     bool status_admin = NO;//管理员
 //     bool status_normal = NO;//普通用户
@@ -243,6 +244,7 @@ int page_filter = 0;
 //     if([self.UserPermission rangeOfString:@"普通用户"].location!=NSNotFound) {
 //          status_normal = YES;
 //     }
+
 
 
      
@@ -328,7 +330,7 @@ int page_filter = 0;
     
     [button setImage:image forState:UIControlStateNormal];
     [button addTarget:self action:@selector(NewPost) forControlEvents:UIControlEventTouchUpInside];
-    
+
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
      
      //判断用户身份来决定是否显示发帖图标（我发起的和待审核的都不显示发帖图标）
@@ -785,7 +787,7 @@ int page_filter = 0;
     PEVC.forum_item = _forum_item;
     PEVC.ED_FLAG =@"1";// 当前版块下发帖
     [self.navigationController pushViewController:PEVC animated:YES];
-    
+   
 }
 
 

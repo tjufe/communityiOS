@@ -118,7 +118,7 @@ extern NSString *const kJPFServiceErrorNotification;  // 错误提示
 * @param notification 本地推送对象
 * @param notificationKey 需要前台显示的本地推送通知的标示符
 */
-+ (void)showLocalNotificationAtFront:(UILocalNotification *)notification
++ (void)showLocalNotificationAtOFront:(UILocalNotification *)notification
                        identifierKey:(NSString *)notificationKey;
 /**
 * 删除本地推送

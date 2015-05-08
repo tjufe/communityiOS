@@ -20,6 +20,7 @@
 
 @implementation StatusTool
 
+
 //请求板块列表
 + (void)statusToolGetForumListWithID:(NSString *)ID  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     
@@ -351,7 +352,6 @@
     [secondDic  setObject:firstDic forKey:@"Data"];
     NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
     [thirdDic setObject:secondDic forKey:@"param"];
-    
     [thirdDic setObject:@"DeletePost" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic
@@ -432,13 +432,37 @@
     [thirdDic setObject:@"UserUploadPhoto" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        // no response
+        
+        success(responseObject);
         
     } failure:^(NSError *error) {
         if (failure == nil) return;
         failure(error);
     }];
         
+}
+
+//请求实名认证
++(void)statusToolUserAuthWithRealName:(NSString *)realname HostName:(NSString *)name ID:(NSString *)user_id HouseNumber:(NSString *)house Phone:(NSString *)phone Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:realname forKey:@"realname"];
+    [firstDic setObject:name forKey:@"name"];
+    [firstDic setObject:user_id forKey:@"user_id"];
+    [firstDic setObject:house forKey:@"house"];
+    [firstDic setObject:phone forKey:@"phone"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"UserAuthenticate" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        success(responseObject);
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+    
 }
 
 @end

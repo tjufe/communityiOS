@@ -120,31 +120,15 @@
     [super viewDidLoad];
     
     
-    //    [self.btnNickname setTitle:@"lalala" forState:UIControlStateNormal];
     
-    
-    //    UITapGestureRecognizer 手势
-    //    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
-    //    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
-    //    [self initTableData];
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-    //    [self.navigationController setNavigationBarHidden:YES];
-    //    tableData = [[NSMutableArray alloc] init];
-    //    for (int i = 0; i< 7; i++) {
-    //        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
-    //    }
-    
-    //    _forumName = [[NSMutableArray alloc] init];
-    //    _forumImage = [[NSMutableArray alloc] init];
+  
     self.navigationController.delegate=self;
 
-    
-    
-    
-    
+  
     // Do any additional setup after loading the view, typically from a nib.
     //    图片的宽
     CGFloat imageW = self.view.frame.size.width;
@@ -188,7 +172,6 @@
     [self reloadData];
     [self autoLogin];
     
-    //    [self setupRefresh];
     
 }
 
@@ -502,7 +485,7 @@
     [self.btnNickname setTitle:@"游客" forState:UIControlStateNormal];
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
-    self.avaterImageView.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
+    self.avaterImageView.contentMode = UIViewContentModeScaleAspectFill; //取图片的中部分
     UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
     self.avaterImageView.image = placeholderImage;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -510,6 +493,7 @@
     if(phoneNumber!=nil){
         NSString *userNickname = [defaults valueForKey:@"UserNickname"];
         NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
+        NSString *user_id = [defaults valueForKey:@"UserID"];
         
         ///20150418 认证标志显示
         NSString *userPermission = [defaults valueForKey:@"UserPermission"];
@@ -519,12 +503,21 @@
             self.user_status.hidden = YES;
         }
         ///
+
+       
+
         [self.btnNickname setTitle:userNickname forState:UIControlStateNormal];
-        [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if(image!=nil){
-                self.avaterImageView.image = image;
-            }
-        }];
+        NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+        NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
+        if (fileExits) {
+            self.avaterImageView.image = [UIImage imageWithContentsOfFile:fullPathToFile];
+            
+        } else {
+            //从服务器下载头像
+        }
     }
 }
 
