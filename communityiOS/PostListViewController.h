@@ -11,7 +11,9 @@
 #import "postItem.h"
 #import "forumItem.h"
 
-extern NSString *const site_newpost_user;
+extern NSString *const TOPIC_PIC_PATH;//图片路径
+extern NSString *const URL_SERVICE;//服务器路径
+extern NSString *const HEAD_PIC_PATH;//头像路径
 
 
 @protocol PostListViewControllerDelegate <NSObject>
@@ -25,6 +27,8 @@ extern NSString *const site_newpost_user;
 @property(strong,nonatomic)forumItem *forum_item;//viewcontroller页传值
 @property(strong,nonatomic) NSString *forum_id;//删除帖子后detail页传值
 @property(strong,nonatomic) NSString *community_id;
+@property(strong,nonatomic) NSString *filter_flag;
+@property(strong,nonatomic) NSArray *forumlist;//版块列表
 //@property (strong,nonatomic) NSString *PL_EDIT;
 @property (assign) id<PostListViewControllerDelegate>delegate;
 @end

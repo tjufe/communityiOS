@@ -49,6 +49,8 @@
 @property (strong,nonatomic)NSIndexPath *select_row;
 @property (strong,nonatomic)NSString *ISNEWPOST;
 @property (strong,nonatomic) NSString *UserPermission;//当前用户身份
+@property (strong,nonatomic) NSArray *moderator;//版主版号
+
 
 
 
@@ -170,6 +172,9 @@ NSArray *third_;
             //传值
             self.fs.forum_id = self.forum_id;
             self.fs.forum_name = self.forum_name;
+            self.fs.forum_list_item = _forum_list_item;
+            self.fs.UserPermission = self.UserPermission;
+            self.fs.moderator = self.moderator;
         self.fs.alpha = 0;
 
         
@@ -190,37 +195,12 @@ NSArray *third_;
             [self.fs getcelltext:indexPath:self.PEtableview];
             
             //获取选择的版块
-            self.select_forum_id = self.fs.select_forum_id;
-            self.select_forum_name = self.select_forum_name;
-            self.select_row = self.fs.select_row;
-            //判断当前用户选择的版块能否发帖
-            forumItem *fit = [_forum_list_item objectAtIndex:self.select_row.row];
-            for(int m=0;m<[fit.ForumSetlist count];m++){
-                forumSetItem *fs_item = [forumSetItem createItemWitparametes:[fit. ForumSetlist objectAtIndex:m]];
-                
-                if([fs_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"普通用户"].location!=NSNotFound && ![self.UserPermission isEqualToString:@""] ){
-                    
-                        self.ISNEWPOST = @"Y";
-                    }
-                }
-            if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"认证用户"].location!=NSNotFound && [self.UserPermission rangeOfString:@"认证用户"].location!=NSNotFound){
-                
-                        self.ISNEWPOST = @"Y";
-                
-                }
-                if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"管理员"].location!=NSNotFound && [self.UserPermission rangeOfString:@"管理员"].location!=NSNotFound ){
-                    
-                        self.ISNEWPOST = @"Y";
-                    
-                }
-            
+//            NSMutableArray *select = [self.fs GetSelectedResult];
+//            self.select_forum_id = [select objectAtIndex:1];
+//            self.select_forum_name =[select objectAtIndex:2];
+//            self.select_row = [select objectAtIndex:0];
+                   
         }
-        if(![self.ISNEWPOST isEqualToString:@"Y"]){
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"您不能在该版块下发布消息！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-        
-        
             
     }
 }
@@ -311,6 +291,7 @@ NSArray *third_;
     //获取当前用户信息
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.UserPermission = [defaults objectForKey:@"UserPermission"];
+    self.moderator = [defaults objectForKey:@"moderator_of_forum_list"];
     
     
     self.PEtableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划
