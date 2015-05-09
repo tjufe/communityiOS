@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *resBtn;
 - (IBAction)regAction:(id)sender;
 
+
 @end
 
 @implementation RegistViewController
@@ -30,6 +31,19 @@ NSString *strSecondPassword;
     // Do any additional setup after loading the view.
     [self.resView.layer setCornerRadius:4];
     [self.resBtn.layer setCornerRadius:4];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pwdCheckAlert) name:UITextFieldTextDidEndEditingNotification object:self.tfSecondPassword];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pwdCheck) name:UITextFieldTextDidChangeNotification object:self.tfSecondPassword];
+    
+}
+-(void)pwdCheckAlert{
+    if (![self.tfPassword.text isEqualToString:self.tfSecondPassword.text ]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认密码与密码不匹配" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新输入", nil];
+        [alert show];
+    }
+}
+
+-(void)pwdCheck{
+    self.resBtn.enabled = ([self.tfPassword.text isEqualToString:self.tfSecondPassword.text]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,8 +83,13 @@ NSString *strSecondPassword;
     
 }
 
+- (IBAction)View_TouchDown:(id)sender {
+     [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
+
 - (BOOL) checkAllowedRegWithPhoneNumber:(NSString *)phoneNumber nickName:(NSString *)nickName password:(NSString *)password secPassword:(NSString *)secPassword {
     return [password isEqualToString:secPassword];
+    
 }
 
 - (void) checkRegResult:(regItem *)regItem {
@@ -106,8 +125,4 @@ NSString *strSecondPassword;
     [alert show];
 }
 
-- (IBAction)View_TouchDown:(id)sender {
-    
-    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
-}
 @end

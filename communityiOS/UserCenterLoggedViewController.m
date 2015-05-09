@@ -12,6 +12,10 @@
 #import "UserCenterLoggedViewController.h"
 #import "PPRevealSideViewController.h"
 #import "UIImageView+WebCache.h"
+
+#import "PostListViewController.h"
+#import "UserJoinPostListViewController.h"
+
 #import "APIClient.h"
 #import "AuthTableViewController.h"
 
@@ -23,6 +27,60 @@
 @end
 
 @implementation UserCenterLoggedViewController
+
+#pragma mark------我的话题 lx20150504
+- (IBAction)go2myPostList:(id)sender {
+    PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+    poLVC.filter_flag = @"我发起的";
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:poLVC];
+//    UIBarButtonItem *leftBtn=[[UIBarButtonItem alloc]initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(go2main)];
+//    poLVC.navigationItem.leftBarButtonItem=leftBtn;
+    
+    UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 20, 10, 20);
+    [btn setImage:[UIImage imageNamed:@"back"] forState: UIControlStateNormal];
+    [btn addTarget:self action:@selector(go2main) forControlEvents:UIControlEventTouchUpInside];
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    UIBarButtonItem *leftBtn =[[UIBarButtonItem alloc]initWithCustomView:btn];
+    poLVC.navigationItem.leftBarButtonItem =leftBtn;
+    
+   [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
+    [nav pushViewController:poLVC animated:YES];
+}
+
+-(void)go2main{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *view = [storyboard instantiateViewControllerWithIdentifier:@"mainViewController"];
+    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:view];
+    [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
+}
+
+#pragma mark------我参与的 lx20150505
+- (IBAction)go2myEnjoyPostList:(id)sender {
+//    UncheckPostListViewController *unPLVC = [UncheckPostListViewController
+//        createFromStoryboardName:@"UncheckPostList" withIdentifier:@"uncheck"];
+    UINavigationController  *unPLVC = [UINavigationController createFromStoryboardName:@"UserJoinPostList" withIdentifier:@"myIn"];
+    [self.revealSideViewController popViewControllerWithNewCenterController:unPLVC animated:YES];
+}
+
+#pragma mark------待审核话题 lx20150504
+- (IBAction)go2uncheckPostList:(id)sender {
+    PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+    poLVC.filter_flag = @"待审核";
+    
+    UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 20, 10, 20);
+    [btn setImage:[UIImage imageNamed:@"back"] forState: UIControlStateNormal];
+    [btn addTarget:self action:@selector(go2main) forControlEvents:UIControlEventTouchUpInside];
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    UIBarButtonItem *leftBtn =[[UIBarButtonItem alloc]initWithCustomView:btn];
+    poLVC.navigationItem.leftBarButtonItem =leftBtn;
+    
+    [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
+    [nav pushViewController:poLVC animated:YES];
+
+}
+
 
 - (IBAction)go2settings:(id)sender {
     UINavigationController *vc=[UINavigationController createFromStoryboardName:@"Settings" withIdentifier:@"Settings"];

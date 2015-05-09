@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *TitleRect;
 @property (weak, nonatomic) IBOutlet UIImageView *user_img;
+@property (weak, nonatomic) IBOutlet UITextView *reply_text;
 
 @property (weak, nonatomic) IBOutlet UIImageView *PosterImage;
 @property (strong, nonatomic) IBOutlet UIView *operlist;
@@ -79,16 +80,18 @@ bool isModerator = NO;//是否是版主
 //    
 //}
 #pragma mark------当点击view的区域就会触发这个事件
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-//    [self.reply_text resignFirstResponder];
-//}
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+  //  [self.reply_text resignFirstResponder];
+    [self.view endEditing:YES];
+    
+}
 
 #pragma mark------textview协议，当textview获取焦点，回复按钮text改变
-//- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-//{
-//    [self.SendButton setTitle:@"快速回复" forState:UIControlStateNormal];
-//    return YES;
-//}
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    [self.SendButton setTitle:@"快速回复" forState:UIControlStateNormal];
+    return YES;
+}
 - (void)textViewDidChange:(UITextView *)textView
 {
     if(![textView.text isEqualToString:@""]){
@@ -96,6 +99,7 @@ bool isModerator = NO;//是否是版主
     }
     if ([textView.text isEqualToString:@""]) {
         [self.SendButton setTitle:@"查看回复" forState:UIControlStateNormal];
+        
     }
 }
 
@@ -124,12 +128,14 @@ bool isModerator = NO;//是否是版主
             //nickname
             cell.poster_nickname.text = self.post_item.poster_nickname;
             //HeadPortraitUrl
-            if(self.post_item.poster_head==nil ){
+            if(self.post_item.poster_head==nil || [self.post_item.poster_head isEqualToString:@"''"] ){
                 self.post_item.poster_head=@"";
             }
             
             if(![self.post_item.poster_head isEqualToString:@""]){
-                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:self.post_item.poster_head] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSString *url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,HEAD_PIC_PATH,@"/",self.post_item.poster_head];
+                
+                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.poster_img.image = image;
                     
@@ -176,10 +182,10 @@ bool isModerator = NO;//是否是版主
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             //加载图片
-            if(self.post_item.main_image_url!=nil){
-                
+            if(self.post_item.main_image_url!=nil&&![self.post_item.main_image_url isEqualToString:@"''"]){
+                NSString *url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,TOPIC_PIC_PATH,@"/",self.post_item.main_image_url];
                 cell.MainImage.hidden = NO;
-                [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:self.post_item.main_image_url] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.MainImage.image = image;
                     }];
@@ -204,6 +210,11 @@ bool isModerator = NO;//是否是版主
     }
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.view endEditing:YES];
+}
     
 
 -(void)setTitleRect:(UIView *)TitleRect{
@@ -326,10 +337,10 @@ bool isModerator = NO;//是否是版主
     }
     
     //添加单击手势
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
-    tgr.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tgr];
-    [self.tableview addGestureRecognizer:tgr];
+//    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
+//    tgr.cancelsTouchesInView = NO;
+//    [self.view addGestureRecognizer:tgr];
+   // [self.tableview addGestureRecognizer:tgr];
    
 }
 
