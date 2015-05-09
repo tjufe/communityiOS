@@ -365,8 +365,6 @@
 		13B1C2A71ACA4AAF005C179C /* models */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C2B11ACA5885005C179C /* API */,
-				13B1C2B21ACA588F005C179C /* DB */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -456,20 +454,6 @@
 			children = (
 			);
 			name = vendor;
-			sourceTree = "<group>";
-		};
-		13B1C2B11ACA5885005C179C /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = API;
-			sourceTree = "<group>";
-		};
-		13B1C2B21ACA588F005C179C /* DB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = DB;
 			sourceTree = "<group>";
 		};
 		13B1C2C01ACA5FD8005C179C /* userCenter */ = {
