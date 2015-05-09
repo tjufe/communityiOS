@@ -65,6 +65,7 @@
     
     [HttpTool postWithparams:thirdDic
                      success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
         NSData *data = [[NSData alloc] initWithData:responseObject];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                          loginItem *login_item = [loginItem createItemWitparametes:dic];

@@ -21,7 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *portraitImage;
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
-
+-(void)refreshDB;
 @end
 
 @implementation FirstSettingsViewController
@@ -122,11 +122,11 @@
     NSData * data = UIImageJPEGRepresentation(chosenImage, 1);
     NSString * userImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
     [self saveImage:data WithName:userImage];
-
     //显示在UI中
     [self initPortraitWithImage:chosenImage];
     //这里要上传头像图片
     [self uploadPersonImginitWithImage:chosenImage];
+    
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
 
@@ -197,25 +197,32 @@
             NSData *data = UIImageJPEGRepresentation(image, 1);
             NSString * fileName = [NSString stringWithFormat:@"%@.jpg", str];
             [formData appendPartWithFileData:data name:@"uploadfile" fileName:fileName mimeType:@"image/jpeg"];
-           
         
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
+            NSLog(@"%@",responseObject[@"photourl"]);
             if (responseObject != nil) {
-                [self refreshDB:responseObject];
+                NSString *guidStr = [[NSString alloc]init ];
+                guidStr = responseObject;
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setValue:guidStr forKey:@"PORTRAIT_IMAGE"];
+                [defaults synchronize];
+                [self refreshDB];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
-            
+            if (error != nil) {
+                //to do
+            }
         }];
     
 }
 
 #pragma  mark-------------------刷新数据库
--(void)refreshDB:(id)guid{
+-(void)refreshDB{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
-    [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:(NSString *)guid Success:^(id object) {
+    NSString *guid = [[NSString alloc]initWithString:[defaults valueForKey:@"PORTRAIT_IMAGE"]];
+    [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:guid Success:^(id object) {
         NSData *data = [[NSData alloc] initWithData:object];
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([[result valueForKey:@"status"] isEqualToString:@"OK"]) {

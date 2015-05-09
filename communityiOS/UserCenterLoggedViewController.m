@@ -111,8 +111,7 @@
         NSFileManager *fileManager = [NSFileManager defaultManager];
         BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
         if (fileExits) {
-            _imgAvatar.image = [UIImage imageWithContentsOfFile:fullPathToFile];
-            
+            [self initPortraitWithImage:[UIImage imageWithContentsOfFile:fullPathToFile]];
         } else {
             //从服务器下载头像,并存储到本地
             [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -127,10 +126,10 @@
             }];
         }
         //判断是否是管理员，显示“实名认证”图标
-        if ([[NSString stringWithString:[defaults valueForKey:@"UserPermission"]]isEqualToString:@"管理员"]) {
-            self.authIcon.hidden = NO;
-            self.authBtn.hidden = NO;
-        }
+//        if ([[NSString stringWithString:[defaults valueForKey:@"UserPermission"]]isEqualToString:@"管理员"]) {
+//            self.authIcon.hidden = NO;
+//            self.authBtn.hidden = NO;
+//        }
 
     }
 }
