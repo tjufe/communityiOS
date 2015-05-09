@@ -338,7 +338,7 @@
 				13B1C2A71ACA4AAF005C179C /* models */,
 				13B1C2A91ACA4ACB005C179C /* views */,
 				13B1C2A61ACA4AA1005C179C /* controllers */,
-				13B1C2A81ACA4ABB005C179C /* modules */,
+				13B1C2A81ACA4ABB005C179C /* tools */,
 			);
 			name = app;
 			sourceTree = "<group>";
@@ -365,24 +365,17 @@
 		13B1C2A71ACA4AAF005C179C /* models */ = {
 			isa = PBXGroup;
 			children = (
+				18AF2A2C1AFE615A00CCCDBB /* API */,
 			);
 			name = models;
 			sourceTree = "<group>";
 		};
-		13B1C2A81ACA4ABB005C179C /* modules */ = {
+		13B1C2A81ACA4ABB005C179C /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */,
-				8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */,
-				13B1C3081ACCFE98005C179C /* GGAddressPickerHelper.h */,
-				13B1C3091ACCFE98005C179C /* GGAddressPickerHelper.m */,
-				13B1C2CC1ACB7DC5005C179C /* MJRefresh */,
-				13B1C2BC1ACA5A27005C179C /* KZPropertyMapper.h */,
-				13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */,
-				13B1C2B41ACA58B5005C179C /* APIClient.m */,
-				13B1C2B51ACA58B5005C179C /* APIClient.h */,
+				18AF2A2D1AFE61CE00CCCDBB /* APITools */,
 			);
-			name = modules;
+			name = tools;
 			sourceTree = "<group>";
 		};
 		13B1C2A91ACA4ACB005C179C /* views */ = {
@@ -428,7 +421,7 @@
 			name = config;
 			sourceTree = "<group>";
 		};
-		13B1C2AE1ACA57DE005C179C /* ext */ = {
+		13B1C2AE1ACA57DE005C179C /* extions */ = {
 			isa = PBXGroup;
 			children = (
 				13BE567D1ABA70CB00379ACD /* UIStoryboard+Addition.h */,
@@ -436,7 +429,7 @@
 				13BE56711ABA6F0E00379ACD /* UIViewController+Create.m */,
 				13BE56701ABA6F0500379ACD /* UIViewController+Create.h */,
 			);
-			name = ext;
+			name = extions;
 			sourceTree = "<group>";
 		};
 		13B1C2AF1ACA57FD005C179C /* resource */ = {
@@ -452,6 +445,13 @@
 		13B1C2B01ACA5833005C179C /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				18AF2A2F1AFE626200CCCDBB /* JPush */,
+				18AF2A2E1AFE624B00CCCDBB /* PropertyMapper */,
+				8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */,
+				8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */,
+				13B1C3081ACCFE98005C179C /* GGAddressPickerHelper.h */,
+				13B1C3091ACCFE98005C179C /* GGAddressPickerHelper.m */,
+				13B1C2CC1ACB7DC5005C179C /* MJRefresh */,
 			);
 			name = vendor;
 			sourceTree = "<group>";
@@ -592,42 +592,10 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
-				1842ADF31ADB5FEE0022D2CB /* APService.h */,
-				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
-				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
-				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
-				13B1C3761AD4D817005C179C /* regItem.h */,
-				13B1C3771AD4D817005C179C /* regItem.m */,
-				13B1C35F1AD4D80B005C179C /* forumItem.h */,
-				13B1C3601AD4D80B005C179C /* forumItem.m */,
-				13B1C3611AD4D80B005C179C /* forumListItem.h */,
-				13B1C3621AD4D80B005C179C /* forumListItem.m */,
-				13B1C3631AD4D80B005C179C /* forumSetItem.h */,
-				13B1C3641AD4D80B005C179C /* forumSetItem.m */,
-				13B1C3671AD4D80B005C179C /* loginItem.h */,
-				13B1C3681AD4D80B005C179C /* loginItem.m */,
-				13B1C36A1AD4D80B005C179C /* postItem.h */,
-				13B1C36B1AD4D80B005C179C /* postItem.m */,
-				13B1C36C1AD4D80B005C179C /* postListItem.h */,
-				13B1C36D1AD4D80B005C179C /* postListItem.m */,
-				8EEC487C1AD8B9CF002E70DA /* ifApplyItem.h */,
-				8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */,
-				8EEC487F1AD8BA3F002E70DA /* postInfoItem.h */,
-				8EEC48801AD8BA3F002E70DA /* postInfoItem.m */,
-				8EEC48821AD8BAB9002E70DA /* replyInfoItem.h */,
-				8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */,
-				8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */,
-				8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */,
-				184BC71D1AFDB4F500ADABFE /* uncheckPostListItem.h */,
-				184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */,
-				13B1C3781AD4D817005C179C /* StatusTool.h */,
-				13B1C3791AD4D817005C179C /* StatusTool.m */,
-				13B1C3651AD4D80B005C179C /* HttpTool.h */,
-				13B1C3661AD4D80B005C179C /* HttpTool.m */,
 				13B1C2A51ACA4A93005C179C /* app */,
 				13B1C2B01ACA5833005C179C /* vendor */,
 				13B1C2AF1ACA57FD005C179C /* resource */,
-				13B1C2AE1ACA57DE005C179C /* ext */,
+				13B1C2AE1ACA57DE005C179C /* extions */,
 				13B1C2AD1ACA57C2005C179C /* config */,
 				13C58BDC1AB9550600090157 /* Supporting Files */,
 			);
@@ -669,6 +637,70 @@
 				188933891AFB580F006329D8 /* AuthTableViewController.m */,
 			);
 			name = auth;
+			sourceTree = "<group>";
+		};
+		18AF2A2C1AFE615A00CCCDBB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
+				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
+				13B1C3761AD4D817005C179C /* regItem.h */,
+				13B1C3771AD4D817005C179C /* regItem.m */,
+				13B1C35F1AD4D80B005C179C /* forumItem.h */,
+				13B1C3601AD4D80B005C179C /* forumItem.m */,
+				13B1C3611AD4D80B005C179C /* forumListItem.h */,
+				13B1C3621AD4D80B005C179C /* forumListItem.m */,
+				13B1C3631AD4D80B005C179C /* forumSetItem.h */,
+				13B1C3641AD4D80B005C179C /* forumSetItem.m */,
+				13B1C3671AD4D80B005C179C /* loginItem.h */,
+				13B1C3681AD4D80B005C179C /* loginItem.m */,
+				13B1C36A1AD4D80B005C179C /* postItem.h */,
+				13B1C36B1AD4D80B005C179C /* postItem.m */,
+				13B1C36C1AD4D80B005C179C /* postListItem.h */,
+				13B1C36D1AD4D80B005C179C /* postListItem.m */,
+				8EEC487C1AD8B9CF002E70DA /* ifApplyItem.h */,
+				8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */,
+				8EEC487F1AD8BA3F002E70DA /* postInfoItem.h */,
+				8EEC48801AD8BA3F002E70DA /* postInfoItem.m */,
+				8EEC48821AD8BAB9002E70DA /* replyInfoItem.h */,
+				8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */,
+				8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */,
+				8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */,
+				184BC71D1AFDB4F500ADABFE /* uncheckPostListItem.h */,
+				184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		18AF2A2D1AFE61CE00CCCDBB /* APITools */ = {
+			isa = PBXGroup;
+			children = (
+				13B1C3781AD4D817005C179C /* StatusTool.h */,
+				13B1C3791AD4D817005C179C /* StatusTool.m */,
+				13B1C3651AD4D80B005C179C /* HttpTool.h */,
+				13B1C3661AD4D80B005C179C /* HttpTool.m */,
+				13B1C2B41ACA58B5005C179C /* APIClient.m */,
+				13B1C2B51ACA58B5005C179C /* APIClient.h */,
+			);
+			name = APITools;
+			sourceTree = "<group>";
+		};
+		18AF2A2E1AFE624B00CCCDBB /* PropertyMapper */ = {
+			isa = PBXGroup;
+			children = (
+				13B1C2BC1ACA5A27005C179C /* KZPropertyMapper.h */,
+				13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */,
+			);
+			name = PropertyMapper;
+			sourceTree = "<group>";
+		};
+		18AF2A2F1AFE626200CCCDBB /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				1842ADF31ADB5FEE0022D2CB /* APService.h */,
+				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
+			);
+			name = JPush;
 			sourceTree = "<group>";
 		};
 		8EF3F7491AD50B0200924975 /* postDetail */ = {
