@@ -21,7 +21,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *portraitImage;
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
--(void)refreshDB;
 @end
 
 @implementation FirstSettingsViewController
@@ -202,12 +201,7 @@
             
             NSLog(@"%@",responseObject[@"photourl"]);
             if (responseObject != nil) {
-                NSString *guidStr = [[NSString alloc]init ];
-                guidStr = responseObject;
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setValue:guidStr forKey:@"PORTRAIT_IMAGE"];
-                [defaults synchronize];
-                [self refreshDB];
+                [self refreshDB:responseObject[@"photourl"]];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             if (error != nil) {
@@ -218,10 +212,9 @@
 }
 
 #pragma  mark-------------------刷新数据库
--(void)refreshDB{
+-(void)refreshDB:(NSString *)guid{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
-    NSString *guid = [[NSString alloc]initWithString:[defaults valueForKey:@"PORTRAIT_IMAGE"]];
     [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:guid Success:^(id object) {
         NSData *data = [[NSData alloc] initWithData:object];
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
