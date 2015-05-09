@@ -13,10 +13,12 @@
 #import "PPRevealSideViewController.h"
 #import "UIImageView+WebCache.h"
 #import "APIClient.h"
+#import "AuthTableViewController.h"
 
 @interface UserCenterLoggedViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *authIcon;
 @property (strong, nonatomic) IBOutlet UIButton *authBtn;
+- (IBAction)authAction:(id)sender;
 
 @end
 
@@ -106,4 +108,7 @@
 }
 */
 
+- (IBAction)authAction:(id)sender {
+    
+}
 @end

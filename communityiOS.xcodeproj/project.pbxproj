@@ -92,6 +92,8 @@
 		1842ADF51ADB5FEE0022D2CB /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */; };
 		1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1842AE6C1ADB77290022D2CB /* PushConfig.plist */; };
 		187ACF691AEA610A003A6DEF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187ACF681AEA610A003A6DEF /* QuartzCore.framework */; };
+		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
+		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
 		8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */; };
 		8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */; };
@@ -262,6 +264,9 @@
 		1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		1842AE6C1ADB77290022D2CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		187ACF681AEA610A003A6DEF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
+		188933881AFB580F006329D8 /* AuthTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTableViewController.h; sourceTree = "<group>"; };
+		188933891AFB580F006329D8 /* AuthTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTableViewController.m; sourceTree = "<group>"; };
 		1892E3EB1ADBFAAD008A75B1 /* FirstSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSettingsViewController.h; sourceTree = "<group>"; };
 		1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSettingsViewController.m; sourceTree = "<group>"; };
 		265117CBD0FCA383D4E565E6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -336,6 +341,7 @@
 		13B1C2A61ACA4AA1005C179C /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				188933851AFB5798006329D8 /* auth */,
 				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
 				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
 				13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */,
@@ -664,6 +670,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		188933851AFB5798006329D8 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */,
+				188933881AFB580F006329D8 /* AuthTableViewController.h */,
+				188933891AFB580F006329D8 /* AuthTableViewController.m */,
+			);
+			name = auth;
+			sourceTree = "<group>";
+		};
 		8EF3F7491AD50B0200924975 /* postDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -863,6 +879,7 @@
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
 				13C58BE81AB9550600090157 /* Main.storyboard in Resources */,
 				1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */,
+				188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
 				13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
@@ -964,6 +981,7 @@
 				13B1C2E81ACB7DC5005C179C /* MJRefreshHeaderView.m in Sources */,
 				13B1C3201AD4D6B3005C179C /* FSCollectionView.m in Sources */,
 				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
+				1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */,
 				13B1C37A1AD4D817005C179C /* regItem.m in Sources */,
 				13BE56721ABA6F0E00379ACD /* UIViewController+Create.m in Sources */,
 				13B1C3751AD4D80B005C179C /* postListItem.m in Sources */,
