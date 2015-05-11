@@ -10,5 +10,6 @@
 #define communityiOS_APIAddress_h
 
 #define API_HOST @"http://192.168.28.211/sq/"
+#define API_PORTRAIT_UPLOAD @"upload.php"
 
 #endif
