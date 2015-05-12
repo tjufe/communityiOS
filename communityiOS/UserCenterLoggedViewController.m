@@ -18,6 +18,7 @@
 
 #import "APIClient.h"
 #import "AuthTableViewController.h"
+#import "APIAddress.h"
 
 @interface UserCenterLoggedViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *authIcon;
@@ -114,15 +115,13 @@
             [self initPortraitWithImage:[UIImage imageWithContentsOfFile:fullPathToFile]];
         } else {
             //从服务器下载头像,并存储到本地
-            [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (image!=nil) {
-                    NSData *imageData = UIImageJPEGRepresentation(image, 1);
-                    [self saveImage:imageData WithName:fullPathToFile];
-                    [self initPortraitWithImage:image];
-                }else{
-                    [self initPortraitWithImage:[UIImage imageNamed:@"icon_acatar_default_r"]];
-                }
-                
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,headPortraitUrl];
+            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+            [self.imgAvatar sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                [self saveImage:imageData WithName:fullPathToFile];
+                [self initPortraitWithImage:image];
             }];
         }
         //判断是否是管理员，显示“实名认证”图标

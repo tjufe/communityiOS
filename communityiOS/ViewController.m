@@ -502,10 +502,7 @@
         }else{
             self.user_status.hidden = YES;
         }
-        ///
-
-       
-
+        
         [self.btnNickname setTitle:userNickname forState:UIControlStateNormal];
         NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
         NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -514,11 +511,25 @@
         BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
         if (fileExits) {
             self.avaterImageView.image = [UIImage imageWithContentsOfFile:fullPathToFile];
-            
         } else {
-            //从服务器下载头像
+            NSString *str = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,headPortraitUrl];
+            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)str, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+            [self.avaterImageView sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                [self saveImage:imageData WithName:fullPathToFile];
+            }];
+            
         }
     }
+}
+
+
+#pragma mark---------------保存图片到document
+- (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
 #pragma mark --点击用户状态栏hmx
