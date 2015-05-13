@@ -12,6 +12,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "StatusTool.h"
 #import "APIAddress.h"
+#import "MBProgressHUD.h"
 
 @interface FirstSettingsViewController ()<UIImagePickerControllerDelegate>
 
@@ -20,7 +21,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *portraitImage;
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
-
 @end
 
 @implementation FirstSettingsViewController
@@ -28,9 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    [self initPortraitWithImage:[self loadImageOfDoc]];
     
 }
+
 
 //刷新昵称
 -(void)viewWillAppear:(BOOL)animated{
@@ -68,8 +69,10 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:@"相机拍摄" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [self pickImageFromCamera];
+        }
         
-        [self pickImageFromCamera];
 
     }]];
     
@@ -82,11 +85,11 @@
 #pragma mark--------从用户相册获取活动图片
 
 - (void)pickImageFromAlbum{
-      self.imagePicker = [[UIImagePickerController alloc] init];
+     self.imagePicker = [[UIImagePickerController alloc] init];
      self.imagePicker.delegate = self;
-     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;  //从媒体库选择图片
      self.imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-      self.imagePicker.allowsEditing = YES;
+     self.imagePicker.allowsEditing = YES;
      [[UIApplication sharedApplication]setStatusBarHidden:YES];
      [self presentModalViewController:self.imagePicker animated:YES];
    }
@@ -115,21 +118,14 @@
     //保存到本地documents中
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
-    
-    if (UIImagePNGRepresentation(chosenImage) == nil) {
-        NSData * data = UIImageJPEGRepresentation(chosenImage, 1);
-        NSString * userImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
-        [self saveImage:data WithName:userImage];
-    }else{
-        NSData *data = UIImagePNGRepresentation(chosenImage);
-        NSString * userImage = [[NSString alloc]initWithFormat:@"%@.png",user_id ];
-        [self saveImage:data WithName:userImage];
-    }
-    
+    NSData * data = UIImageJPEGRepresentation(chosenImage, 1);
+    NSString * userImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+    [self saveImage:data WithName:userImage];
     //显示在UI中
     [self initPortraitWithImage:chosenImage];
     //这里要上传头像图片
     [self uploadPersonImginitWithImage:chosenImage];
+    
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
 
@@ -157,7 +153,23 @@
     [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
-
+#pragma mark -------------------------从本地读取头像图片
+-(UIImage *)loadImageOfDoc{
+    
+    NSString *user_id = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
+    if (fileExits) {
+        return[UIImage imageWithContentsOfFile:fullPathToFile];
+    }else{
+        return [UIImage imageNamed:@"icon_acatar_default_r"];
+    }
+    
+    
+}
 
 
 #pragma mark---------------将头像切割成圆形
@@ -177,44 +189,61 @@
         AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        [manager POST:@"upload.php" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [manager POST:API_PORTRAIT_UPLOAD parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
-            if (UIImagePNGRepresentation(image) == nil) {
-                
-                NSData *data = UIImageJPEGRepresentation(image, 1);
-                NSString * fileName = [NSString stringWithFormat:@"%@.jpg", str];
-                [formData appendPartWithFileData:data name:@"uploadfile" fileName:fileName mimeType:@"image/jpeg"];
-            }else{
-                
-                 NSData *data = UIImagePNGRepresentation(image);
-                 NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-                [formData appendPartWithFileData:data name:@"uploadfile" fileName:fileName mimeType:@"image/png"];
-            }
+            NSData *data = UIImageJPEGRepresentation(image, 1);
+            NSString * fileName = [NSString stringWithFormat:@"%@.jpg", str];
+            [formData appendPartWithFileData:data name:@"uploadfile" fileName:fileName mimeType:@"image/jpeg"];
         
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSLog(@"^^^^^^^^^^^%@",responseObject);
-            [self refreshDB:responseObject];
-            
+            NSLog(@"^^^^^^^^^^%@",responseObject[@"photourl"]);
+            if (responseObject != nil) {
+                [self refreshDB:responseObject[@"photourl"]];
+            }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
+            if (error != nil) {
+                //to do
+            }
         }];
     
 }
 
 #pragma  mark-------------------刷新数据库
--(void)refreshDB:(id)guid{
+-(void)refreshDB:(NSString *)guid{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [[NSString alloc]initWithString:[defaults valueForKey:@"UserID"]];
-    [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:(NSString *)guid Success:^(id object) {
-        // to do right
-        NSLog(@"^^^^^^^^^^^^");
-        NSLog(@"%@",object);
-    } failurs:^(NSError *error) {
-        // to do error
-    }];
+    [StatusTool statusToolRefreshUserImageWithUserID:user_id ImageGUID:guid Success:^(id object) {
+        NSData *data = [[NSData alloc] initWithData:object];
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        if ([[result valueForKey:@"status"] isEqualToString:@"OK"]) {
+            
+            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:hud];
+            hud.labelText = @"设置成功";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [hud removeFromSuperview];
+            }];
+        }else{
+            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:hud];
+            hud.labelText = @"请查看您的网络";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [hud removeFromSuperview];
+            }];
+        }
+     } failurs:^(NSError *error) {
+
+        // to do wrong deals
+     }];
    
 }
 

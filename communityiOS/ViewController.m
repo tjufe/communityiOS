@@ -36,6 +36,7 @@
     NSMutableArray *tableData;  //表格数据
     NSInteger *currentPage;
 }
+@property (weak, nonatomic) IBOutlet UIImageView *user_status;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *mainPageControl;
@@ -279,7 +280,12 @@
     //    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
     forumItem *item = [_listForumItem objectAtIndex:indexPath.row];
     [cell setForumName:item.forum_name];
-    [cell setForumIconImage:item.image_url];
+    //lx 20150508
+//    NSString *main_img_url = [URL_SERVICE stringByAppendingString:TOPIC_PIC_PATH];
+//    main_img_url = [main_img_url stringByAppendingString:@"/"];
+//    main_img_url = [main_img_url stringByAppendingString:item.image_url];
+    NSString *main_img_url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,TOPIC_PIC_PATH,@"/",item.image_url];//字符串拼接
+    [cell setForumIconImage:main_img_url];
     return cell;
 }
 
@@ -317,7 +323,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+    poLVC.forumlist = self.listForumItem;
     poLVC.forum_item = [self.listForumItem objectAtIndex:indexPath.row];
+    poLVC.filter_flag = @"全部";
     
     
     [self.navigationController pushViewController:poLVC animated:YES];
@@ -485,13 +493,43 @@
     if(phoneNumber!=nil){
         NSString *userNickname = [defaults valueForKey:@"UserNickname"];
         NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
+        NSString *user_id = [defaults valueForKey:@"UserID"];
+        
+        ///20150418 认证标志显示
+        NSString *userPermission = [defaults valueForKey:@"UserPermission"];
+        if([userPermission rangeOfString:@"认证用户"].location!=NSNotFound){
+            self.user_status.hidden = NO;
+        }else{
+            self.user_status.hidden = YES;
+        }
+        
         [self.btnNickname setTitle:userNickname forState:UIControlStateNormal];
-        [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if(image!=nil){
-                self.avaterImageView.image = image;
-            }
-        }];
+        NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+        NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
+        if (fileExits) {
+            self.avaterImageView.image = [UIImage imageWithContentsOfFile:fullPathToFile];
+        } else {
+            NSString *str = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,headPortraitUrl];
+            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)str, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+            [self.avaterImageView sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                [self saveImage:imageData WithName:fullPathToFile];
+            }];
+            
+        }
     }
+}
+
+
+#pragma mark---------------保存图片到document
+- (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
 #pragma mark --点击用户状态栏hmx

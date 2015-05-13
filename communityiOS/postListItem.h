@@ -15,6 +15,7 @@
 @property (nonatomic,strong)NSDictionary *data;
 
 @property (nonatomic,strong)NSArray *PostList;
+@property (nonatomic,strong)NSString *total;
 //@property (nonatomic,strong)NSArray *apply_num;
 //@property (nonatomic,strong)NSArray *reply_num;
 //@property (nonatomic,strong)NSArray *read_num;

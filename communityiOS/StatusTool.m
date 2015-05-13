@@ -16,8 +16,11 @@
 #import "postListItem.h"
 #import "postInfoItem.h"
 #import "deletepostItem.h"
+#import "uncheckPostListItem.h"
+#import "replyInfoListItem.h"
 
 @implementation StatusTool
+
 
 //请求板块列表
 + (void)statusToolGetForumListWithID:(NSString *)ID  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
@@ -63,6 +66,7 @@
     
     [HttpTool postWithparams:thirdDic
                      success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
         NSData *data = [[NSData alloc] initWithData:responseObject];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                          loginItem *login_item = [loginItem createItemWitparametes:dic];
@@ -103,13 +107,16 @@
     
 }
 //请求加载帖子列表
-+(void)statusToolGetPostListWithbfID:(NSString *)bfID  bcID:(NSString *)bcID userID:(NSString *)userID filter:(NSString *)filter Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
++(void)statusToolGetPostListWithbfID:(NSString *)bfID  bcID:(NSString *)bcID userID:(NSString *)userID filter:(NSString *)filter page:(NSNumber *)page rows:(NSNumber *)rows Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
     [firstDic setObject:bfID forKey:@"belong_forum_id"];
     [firstDic setObject:bcID forKey:@"belong_community_id"];
     [firstDic setObject:userID forKey:@"user_id"];
     [firstDic setObject:filter forKey:@"filter"];
+    [firstDic setObject:page forKey:@"page"];
+    [firstDic setObject:rows forKey:@"rows"];
+    
     NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
     [secondDic  setObject:firstDic forKey:@"Data"];
     NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
@@ -135,6 +142,39 @@
  
 }
 
+//请求待审核帖子列表-----by lx 20150504
++(void)statusToolGetUncheckPostListWithbfID:(NSArray *)bfID  bcID:(NSString *)bcID page:(NSNumber *)page rows:(NSNumber *)rows Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:bfID forKey:@"forum_id"];
+    [firstDic setObject:bcID forKey:@"community_id"];
+    [firstDic setObject:page forKey:@"page"];
+    [firstDic setObject:rows forKey:@"rows"];
+
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"LoadUncheckPostList" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic
+                     success:^(id responseObject) {
+                         NSData *data = [[NSData alloc] initWithData:responseObject];
+                         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                         uncheckPostListItem *uncheck_post_list_item = [uncheckPostListItem createItemWitparametes:dic];
+                         //                         NSMutableArray *ListArray = [NSMutableArray array];
+                         //
+                         //                         for(NSDictionary *dic in post_list_item.PostList){
+                         //                             [ListArray addObject:[postItem createItemWitparametes:dic]];
+                         //                         }
+                         success(uncheck_post_list_item);
+                         
+                     } failure:^(NSError *error) {
+                         if (failure == nil) return;
+                         failure(error);
+                     }];
+    
+}
 
 
 //请求修改昵称
@@ -333,15 +373,13 @@
 
 
 
-//Request_ReplyContent
-+(void)statusToolReplyContentWithContent:(NSString *)content Name:(NSString *)name replyID:(NSString *)reply_id Date:(NSString *)date ID:(NSString *)ID Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+//请求回复列表
++(void)statusToolReplyListWithPostID:(NSString *)postID Page:(NSNumber *)page Rows:(NSNumber *)rows  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
-    [firstDic setObject:content forKey:@"content"];
-    [firstDic setObject:name forKey:@"name"];
-    [firstDic setObject:reply_id forKey:@"reply_id"];
-    [firstDic setObject:ID forKey:@"ID"];
-    [firstDic setObject:date forKey:@"date"];
+    [firstDic setObject:postID forKey:@"id"];
+    [firstDic setObject:page forKey:@"page"];  //获得列表的第几页
+    [firstDic setObject:rows forKey:@"rows"];  //每页的行数
     NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
     [secondDic  setObject:firstDic forKey:@"Data"];
     NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
@@ -349,7 +387,10 @@
     [thirdDic setObject:@"ReplyContent" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        // no response
+        NSData *data = [[NSData alloc]initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        replyInfoListItem *reply_list_item = [replyInfoListItem createItemWitparametes:dic];
+        success(reply_list_item);
         
     } failure:^(NSError *error) {
         if (failure == nil) return;
@@ -357,7 +398,7 @@
     }];
 }
 
-//Request_PostReply
+//请求发送回复
 +(void)statusToolPostReplyWithReplyText:(NSString *)reply_text communityID:(NSString*)community_id forumID:(NSString*)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
@@ -402,6 +443,29 @@
         failure(error);
     }];
         
+}
+
+//请求实名认证
++(void)statusToolUserAuthWithRealName:(NSString *)realname HostName:(NSString *)name ID:(NSString *)user_id HouseNumber:(NSString *)house Phone:(NSString *)phone Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:realname forKey:@"realname"];
+    [firstDic setObject:name forKey:@"name"];
+    [firstDic setObject:user_id forKey:@"user_id"];
+    [firstDic setObject:house forKey:@"house"];
+    [firstDic setObject:phone forKey:@"phone"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"UserAuthenticate" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        success(responseObject);
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+    
 }
 
 @end

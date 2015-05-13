@@ -133,6 +133,8 @@
     [StatusTool statusToolGetUserLoginWithName:[self.phoneTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
                                       PassWord:[self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
                                        Success:^(id object) {
+                                           
+                                           NSLog(@"%@",object);
                                            [self checkLoginResult:object];
                                            
                                        } failurs:^(NSError *error) {

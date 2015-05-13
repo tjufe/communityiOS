@@ -11,6 +11,7 @@
 #import "PostTextTableViewCell.h"
 #import "PostImageTableViewCell.h"
 #import "PostEditViewController.h"
+#import "PostReplyViewController.h"
 #import "UIViewController+Create.h"
 #import "PostListViewController.h"
 #import "UIImageView+WebCache.h"//加载图片
@@ -23,27 +24,16 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
 @property (weak, nonatomic) IBOutlet UILabel *post_reply_num;
-@property (weak, nonatomic) IBOutlet UIButton *SendButton;
-
 @property (weak, nonatomic) IBOutlet UIView *TitleRect;
-@property (weak, nonatomic) IBOutlet UIImageView *user_img;
-
-@property (weak, nonatomic) IBOutlet UIImageView *PosterImage;
-@property (strong, nonatomic) IBOutlet UIView *operlist;
-
 @property (weak, nonatomic) IBOutlet UILabel *forumlabel;
-
-@property(strong,nonatomic)postItem *post_item ;
+@property (strong ,nonatomic) IBOutlet UIView *operlist;
+@property (strong,nonatomic) postItem *post_item ;
 @property (strong,nonatomic) NSString *HeadPortraitUrl;//当前用户头像
 @property (strong,nonatomic) NSString *UserPermission;//当前用户身份
 @property (strong,nonatomic) NSString *UserID;//当前用户id
 @property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
 @property (strong,nonatomic) NSArray *moderator_of_forum_list;//版块版主信息
-
 @property (weak,nonatomic) deletepostItem *delete;
-
-
-
 
 @end
 
@@ -62,45 +52,19 @@ bool isModerator = NO;//是否是版主
 #pragma mark------下方快速回复
 - (IBAction)SendOnClick:(id)sender {
     
-    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
+    PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
+    PEVC.postItem = self.post_item;
     [self.navigationController pushViewController:PEVC animated:YES];
     
     
 }
 
-
-//- (void)textViewDidBeginEditing:(UITextView *)textView
-//{
-//    if(textView==self.reply_text){
-//      //  [textView resignFirstResponder];
-//      //  NSLog(@"^^^^^^^asx");
-//       [self.SendButton setTitle:@"快速回复" forState:UIControlStateNormal];
-//    }
-//    
-//}
 #pragma mark------当点击view的区域就会触发这个事件
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-//    [self.reply_text resignFirstResponder];
-//}
-
-#pragma mark------textview协议，当textview获取焦点，回复按钮text改变
-//- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-//{
-//    [self.SendButton setTitle:@"快速回复" forState:UIControlStateNormal];
-//    return YES;
-//}
-- (void)textViewDidChange:(UITextView *)textView
-{
-    if(![textView.text isEqualToString:@""]){
-    [self.SendButton setTitle:@"发送" forState:UIControlStateNormal];
-    }
-    if ([textView.text isEqualToString:@""]) {
-        [self.SendButton setTitle:@"查看回复" forState:UIControlStateNormal];
-    }
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+  //  [self.reply_text resignFirstResponder];
+    [self.view endEditing:YES];
+    
 }
-
-
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -124,12 +88,14 @@ bool isModerator = NO;//是否是版主
             //nickname
             cell.poster_nickname.text = self.post_item.poster_nickname;
             //HeadPortraitUrl
-            if(self.post_item.poster_head==nil ){
+            if(self.post_item.poster_head==nil || [self.post_item.poster_head isEqualToString:@"''"] ){
                 self.post_item.poster_head=@"";
             }
             
             if(![self.post_item.poster_head isEqualToString:@""]){
-                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:self.post_item.poster_head] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSString *url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,HEAD_PIC_PATH,@"/",self.post_item.poster_head];
+                
+                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.poster_img.image = image;
                     
@@ -176,10 +142,10 @@ bool isModerator = NO;//是否是版主
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             //加载图片
-            if(self.post_item.main_image_url!=nil){
-                
+            if(self.post_item.main_image_url!=nil&&![self.post_item.main_image_url isEqualToString:@"''"]){
+                NSString *url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,TOPIC_PIC_PATH,@"/",self.post_item.main_image_url];
                 cell.MainImage.hidden = NO;
-                [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:self.post_item.main_image_url] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.MainImage.image = image;
                     }];
@@ -204,6 +170,11 @@ bool isModerator = NO;//是否是版主
     }
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.view endEditing:YES];
+}
     
 
 -(void)setTitleRect:(UIView *)TitleRect{
@@ -263,12 +234,6 @@ bool isModerator = NO;//是否是版主
        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-    
-    self.reply_text.delegate = self;
-    
-    //sendbutton设置
-    self.SendButton.layer.masksToBounds = YES;
-    [self.SendButton.layer setCornerRadius:self.SendButton.frame.size.height/6];
 
     //界面赋值
     //title
@@ -286,18 +251,6 @@ bool isModerator = NO;//是否是版主
         ns = @"评论(暂无)";
     }
     [self.post_reply_num setText:ns];
-    
-    //下方回复框当前用户头像
-    if(self.HeadPortraitUrl!=nil){
-        [self.user_img sd_setImageWithURL:[NSURL URLWithString:self.HeadPortraitUrl] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-            self.user_img.image = image;
-            
-        }];
-        
-    }
-    self.user_img.layer.masksToBounds = YES;
-    [self.user_img.layer setCornerRadius:self.user_img.layer.frame.size.height/2];
 
     //刷新table数据
     [self.tableview reloadData];
@@ -326,17 +279,17 @@ bool isModerator = NO;//是否是版主
     }
     
     //添加单击手势
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
-    tgr.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tgr];
-    [self.tableview addGestureRecognizer:tgr];
+//    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
+//    tgr.cancelsTouchesInView = NO;
+//    [self.view addGestureRecognizer:tgr];
+   // [self.tableview addGestureRecognizer:tgr];
    
 }
 
-#pragma mark------单击方法，单击空白处，textview失去焦点
--(void)handleSingleTap:(UITapGestureRecognizer*)gestureRecognizer{
-    [self.reply_text resignFirstResponder];
-}
+//#pragma mark------单击方法，单击空白处，textview失去焦点
+//-(void)handleSingleTap:(UITapGestureRecognizer*)gestureRecognizer{
+//    [self.reply_text resignFirstResponder];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

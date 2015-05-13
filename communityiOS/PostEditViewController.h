@@ -14,6 +14,7 @@
 extern NSString *const site_addchain;
 extern NSString *const site_addapply;
 extern NSString *const site_addmainimg;
+extern NSString *const site_newpost_user;
 
 @interface PostEditViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *chain;
