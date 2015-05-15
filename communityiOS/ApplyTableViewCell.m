@@ -1,14 +1,15 @@
 //
-//  ChainTableViewCell.m
+//  ApplyTableViewCell.m
 //  communityiOS
 //
-//  Created by 何茂馨 on 15/5/13.
+//  Created by 何茂馨 on 15/5/14.
 //  Copyright (c) 2015年 &#20309;&#33538;&#39336;. All rights reserved.
 //
 
-#import "ChainTableViewCell.h"
+#import "ApplyTableViewCell.h"
 
-@implementation ChainTableViewCell
+
+@implementation ApplyTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -20,6 +21,8 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)chainOnclick:(id)sender {
+- (IBAction)btApply:(id)sender {
+}
+- (IBAction)ApplyOnClick:(id)sender {
 }
 @end

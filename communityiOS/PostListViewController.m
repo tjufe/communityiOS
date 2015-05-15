@@ -134,6 +134,7 @@ int page_filter = 0;
      PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
      //全局变量传值
      PDVC.forum_item = _forum_item;
+     PDVC.forumList = _forumlist;
 //     PDVC.poster_nickname = [self.post_list_item.poster_nickname objectAtIndex:indexPath.row];
 //     PDVC.Phead_portrait_url = [self.post_list_item.Phead_portrait_url objectAtIndex:indexPath.row];
 //     PDVC.reply_num = [self.post_list_item.reply_num objectAtIndex:indexPath.row];

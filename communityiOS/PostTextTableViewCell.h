@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PostTextTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *Text;
+
+@property (weak, nonatomic) IBOutlet UILabel *postText;
 
 @end
