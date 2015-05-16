@@ -48,7 +48,11 @@
                              @"poster_head":@"poster_head",
                              @"reply_num":@"reply_num",
                              @"apply_num":@"apply_num",
-                             @"read_num":@"read_num"
+                             @"read_num":@"read_num",
+                             @"limit_apply_num":@"limit_apply_num",
+                             @"open_apply":@"open_apply",
+                             @"apply_enough":@"apply_enough",
+                             @"poster_auth":@"poster_auth"
                              
                      
              };

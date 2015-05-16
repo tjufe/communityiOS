@@ -21,7 +21,8 @@
 }
 
 - (void)setForumIconImage:(NSString *)forumIconImage {
-    [_forumIconImageView sd_setImageWithURL:[NSURL URLWithString:forumIconImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    //lx 20150508
+    [_forumIconImageView sd_setImageWithURL:[NSURL URLWithString:[forumIconImage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         _forumIconImageView.image = image;
     }];
     _forumIconImageView.contentMode=UIViewContentModeScaleAspectFill;
@@ -35,5 +36,8 @@
     _lastNewContentLabel.text=lastNewContent;
 }
 
-
+//lx 20150513
+-(void)setLast_new_date:(NSString *)last_new_date{
+    _lastNewDate.text = last_new_date;
+}
 @end

@@ -13,18 +13,33 @@
 
 
 
-@interface FSCollectionview : UICollectionView
-@property (weak,nonatomic)NSIndexPath *index;
-@property(weak,nonatomic)UITableView *tb;
+@interface FSCollectionview : UICollectionView<UIAlertViewDelegate>
+@property (strong,nonatomic)NSIndexPath *index;
+@property(strong,nonatomic)UITableView *tb;
 
-@property (strong,nonatomic) NSMutableArray *forum_id;
-@property (strong,nonatomic) NSMutableArray *forum_name;
+@property (strong,nonatomic) NSMutableArray *select_forum;
+
 @property (strong,nonatomic) NSString *select_forum_name;//选择的版块名称
 @property (strong,nonatomic) NSString *select_forum_id;//选择的版块id
 @property (strong,nonatomic) NSIndexPath *select_row;//选择的索引号
 
+@property (weak, nonatomic) UIButton *Addpic;
+@property (weak, nonatomic) UIButton *Chain;
+@property (weak, nonatomic) UIButton *Apply;
+
+@property (strong, nonatomic) NSString *ISMAINIMG1;
+@property (strong, nonatomic) NSString *ISAPPLY1;
+@property (strong, nonatomic) NSString *ISCHAIN1;
+@property (strong, nonatomic) NSString *ISCHECK1;
 
 
+//@property (strong,nonatomic) NSString *UserPermission;//当前用户身份
+//@property (strong,nonatomic) UIAlertView *alert;
+
+
+
+
+-(NSMutableArray *)GetSelectedResult;
 -(id)getcelltext:(NSIndexPath *)indexPath:(UITableView*)tableview;
 //
 //@property(strong,nonatomic)NSString *i;

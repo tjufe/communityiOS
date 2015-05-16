@@ -16,6 +16,7 @@
 #import "postListItem.h"
 #import "postInfoItem.h"
 #import "deletepostItem.h"
+#import "uncheckPostListItem.h"
 
 @implementation StatusTool
 
@@ -103,13 +104,16 @@
     
 }
 //请求加载帖子列表
-+(void)statusToolGetPostListWithbfID:(NSString *)bfID  bcID:(NSString *)bcID userID:(NSString *)userID filter:(NSString *)filter Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
++(void)statusToolGetPostListWithbfID:(NSString *)bfID  bcID:(NSString *)bcID userID:(NSString *)userID filter:(NSString *)filter page:(NSNumber *)page rows:(NSNumber *)rows Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
     [firstDic setObject:bfID forKey:@"belong_forum_id"];
     [firstDic setObject:bcID forKey:@"belong_community_id"];
     [firstDic setObject:userID forKey:@"user_id"];
     [firstDic setObject:filter forKey:@"filter"];
+    [firstDic setObject:page forKey:@"page"];
+    [firstDic setObject:rows forKey:@"rows"];
+    
     NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
     [secondDic  setObject:firstDic forKey:@"Data"];
     NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
@@ -135,6 +139,39 @@
  
 }
 
+//请求待审核帖子列表-----by lx 20150504
++(void)statusToolGetUncheckPostListWithbfID:(NSArray *)bfID  bcID:(NSString *)bcID page:(NSNumber *)page rows:(NSNumber *)rows Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:bfID forKey:@"forum_id"];
+    [firstDic setObject:bcID forKey:@"community_id"];
+    [firstDic setObject:page forKey:@"page"];
+    [firstDic setObject:rows forKey:@"rows"];
+
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"LoadUncheckPostList" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic
+                     success:^(id responseObject) {
+                         NSData *data = [[NSData alloc] initWithData:responseObject];
+                         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                         uncheckPostListItem *uncheck_post_list_item = [uncheckPostListItem createItemWitparametes:dic];
+                         //                         NSMutableArray *ListArray = [NSMutableArray array];
+                         //
+                         //                         for(NSDictionary *dic in post_list_item.PostList){
+                         //                             [ListArray addObject:[postItem createItemWitparametes:dic]];
+                         //                         }
+                         success(uncheck_post_list_item);
+                         
+                     } failure:^(NSError *error) {
+                         if (failure == nil) return;
+                         failure(error);
+                     }];
+    
+}
 
 
 //请求修改昵称
@@ -403,6 +440,44 @@
     }];
         
 }
+
+//发帖
++(void)statusToolNewPostWithcID:(NSString *)communityID fID:(NSString *)forumID PosterID:(NSString *)posterID postTitle:(NSString *)post_title postText:(NSString *)post_text imgURL:(NSString *)img_url chain:(NSString *)chain chainName:(NSString *)chain_name chainURL:(NSString *)chain_url apply:(NSString *)apply limApplyNum:(NSString*)limit_apply_num needCheck:(NSString *)need_check Checked:(NSString *)checked Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:communityID forKey:@"community_id"];
+    [firstDic setObject:forumID forKey:@"forum_id"];
+    [firstDic setObject:posterID forKey:@"poster_id"];
+    [firstDic setObject:post_title forKey:@"post_title"];
+    [firstDic setObject:post_text forKey:@"post_text"];
+    [firstDic setObject:img_url forKey:@"main_image_url"];
+    [firstDic setObject:chain forKey:@"chain"];
+    [firstDic setObject:chain_name forKey:@"chain_name"];
+    [firstDic setObject:chain_url forKey:@"chain_url"];
+    [firstDic setObject:apply forKey:@"open_apply"];
+    [firstDic setObject:limit_apply_num forKey:@"limit_apply_num"];
+    [firstDic setObject:need_check forKey:@"need_check"];
+    [firstDic setObject:checked forKey:@"checked"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"NewPost" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic
+                     success:^(id responseObject) {
+                         // no response
+                         
+                     } failure:^(NSError *error) {
+                         if (failure == nil) return;
+                         failure(error);
+                     }];
+    
+
+    
+}
+
 
 @end
 

@@ -16,10 +16,12 @@
 #import "UIImageView+WebCache.h"//加载图片
 #import "StatusTool.h"
 #import "deletepostItem.h"
+#import "APIAddress.h"
+#import "UserJoinPostListViewController.h"
 
 
 
-@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate>
+@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
 @property (weak, nonatomic) IBOutlet UILabel *post_reply_num;
@@ -124,12 +126,14 @@ bool isModerator = NO;//是否是版主
             //nickname
             cell.poster_nickname.text = self.post_item.poster_nickname;
             //HeadPortraitUrl
-            if(self.post_item.poster_head==nil ){
+            if(self.post_item.poster_head==nil || [self.post_item.poster_head isEqualToString:@"''"] ){
                 self.post_item.poster_head=@"";
             }
             
             if(![self.post_item.poster_head isEqualToString:@""]){
-                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:self.post_item.poster_head] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSString *url = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,self.post_item.poster_head];
+                
+                [cell.poster_img sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.poster_img.image = image;
                     
@@ -176,10 +180,10 @@ bool isModerator = NO;//是否是版主
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             //加载图片
-            if(self.post_item.main_image_url!=nil){
-                
+            if(self.post_item.main_image_url!=nil&&![self.post_item.main_image_url isEqualToString:@"''"]){
+                NSString *url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.post_item.main_image_url];
                 cell.MainImage.hidden = NO;
-                [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:self.post_item.main_image_url] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [cell.MainImage sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     cell.MainImage.image = image;
                     }];
@@ -237,6 +241,11 @@ bool isModerator = NO;//是否是版主
     
 }
 
+#pragma mark------实现UserJoinPostListViewControllerDelegate
+-(void)addpostItem2:(postItem *)PostItem{
+    self.post_item = PostItem;
+}
+
 - (void)viewDidLoad {
 //    self.scrollview.frame.size.width = self.view.frame.size.width;
     [super viewDidLoad];
@@ -276,15 +285,16 @@ bool isModerator = NO;//是否是版主
     
     //评论数
     NSString *ns = [[NSString alloc]init];
-    ns = @"评论(";
- //   if(![_reply_num isKindOfClass:[NSNull class]]){
- //   if(![_reply_num isEqualToString:@""]){
-    if (![self.post_item.reply_num isEqualToString:@""]) {
-        ns = [ns stringByAppendingString:self.post_item.reply_num];
-        ns = [ns stringByAppendingString:@")"];
-    }else{
-        ns = @"评论(暂无)";
-    }
+//    ns = @"评论(";
+// //   if(![_reply_num isKindOfClass:[NSNull class]]){
+// //   if(![_reply_num isEqualToString:@""]){
+//    if (![self.post_item.reply_num isEqualToString:@""]) {
+//        ns = [ns stringByAppendingString:self.post_item.reply_num];
+//        ns = [ns stringByAppendingString:@")"];
+//    }else{
+//        ns = @"评论(暂无)";
+//    }
+    ns = self.post_item.reply_num;
     [self.post_reply_num setText:ns];
     
     //下方回复框当前用户头像
