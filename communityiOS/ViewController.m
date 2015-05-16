@@ -127,31 +127,15 @@ NSArray *forum;
     [super viewDidLoad];
     
     
-    //    [self.btnNickname setTitle:@"lalala" forState:UIControlStateNormal];
     
-    
-    //    UITapGestureRecognizer 手势
-    //    ［self.view addGestureRecognizer:<#(UIGestureRecognizer *)#>］; 响应手势操作
-    //    TPKeyboardAvoiding 触摸收起键盘的的scollview
     self.navigationController.delegate=self;
-    //    [self initTableData];
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-    //    [self.navigationController setNavigationBarHidden:YES];
-    //    tableData = [[NSMutableArray alloc] init];
-    //    for (int i = 0; i< 7; i++) {
-    //        [tableData addObject:[NSString stringWithFormat:@"模块%i",i+1]];
-    //    }
-    
-    //    _forumName = [[NSMutableArray alloc] init];
-    //    _forumImage = [[NSMutableArray alloc] init];
+  
     self.navigationController.delegate=self;
 
-    
-    
-    
-    
+  
     // Do any additional setup after loading the view, typically from a nib.
     //    图片的宽
     CGFloat imageW = self.view.frame.size.width;
@@ -195,7 +179,6 @@ NSArray *forum;
     [self reloadData];
     [self autoLogin];
     
-    //    [self setupRefresh];
     
 }
 
@@ -309,6 +292,7 @@ NSArray *forum;
 //    NSString *main_img_url = [URL_SERVICE stringByAppendingString:TOPIC_PIC_PATH];
 //    main_img_url = [main_img_url stringByAppendingString:@"/"];
 //    main_img_url = [main_img_url stringByAppendingString:item.image_url];
+
     NSString *main_img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,item.image_url];//字符串拼接
     [cell setForumIconImage:main_img_url];
     
@@ -328,6 +312,7 @@ NSArray *forum;
         cell.lastNewDate.hidden = YES;
     }
     
+
     return cell;
 }
 
@@ -434,7 +419,9 @@ NSArray *forum;
     poLVC.forumlist = self.listForumItem;
     poLVC.forum_item = [self.listForumItem objectAtIndex:indexPath.row];
     poLVC.filter_flag = @"全部";
+
   //  poLVC.pl_go = @"1";//从首页跳转
+
     
     
     [self.navigationController pushViewController:poLVC animated:YES];
@@ -594,7 +581,7 @@ NSArray *forum;
     [self.btnNickname setTitle:@"游客" forState:UIControlStateNormal];
     self.avaterImageView.layer.masksToBounds=YES;
     [self.avaterImageView.layer setCornerRadius:self.avaterImageView.frame.size.width/2];
-    self.avaterImageView.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
+    self.avaterImageView.contentMode = UIViewContentModeScaleAspectFill; //取图片的中部分
     UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
     self.avaterImageView.image = placeholderImage;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -602,6 +589,9 @@ NSArray *forum;
     if(phoneNumber!=nil){
         NSString *userNickname = [defaults valueForKey:@"UserNickname"];
         NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
+
+        NSString *user_id = [defaults valueForKey:@"UserID"];
+
         
         ///20150418 认证标志显示
         NSString *userPermission = [defaults valueForKey:@"UserPermission"];
@@ -612,12 +602,32 @@ NSArray *forum;
         }
         ///
         [self.btnNickname setTitle:userNickname forState:UIControlStateNormal];
-        [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if(image!=nil){
-                self.avaterImageView.image = image;
-            }
-        }];
+        NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+        NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
+        if (fileExits) {
+            self.avaterImageView.image = [UIImage imageWithContentsOfFile:fullPathToFile];
+        } else {
+            NSString *str = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,headPortraitUrl];
+            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)str, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+            [self.avaterImageView sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                [self saveImage:imageData WithName:fullPathToFile];
+            }];
+            
+        }
     }
+}
+
+
+#pragma mark---------------保存图片到document
+- (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
 #pragma mark --点击用户状态栏hmx

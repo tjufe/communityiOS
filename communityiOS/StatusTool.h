@@ -67,7 +67,21 @@ typedef void(^StatusFailurs)(NSError * error);
 //刷新数据库，更新上传图片
 +(void)statusToolRefreshUserImageWithUserID:(NSString *)user_id ImageGUID:(NSString *)image_guid Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
+
 //发帖子
 +(void)statusToolNewPostWithcID:(NSString *)communityID fID:(NSString *)forumID PosterID:(NSString *)posterID postTitle:(NSString *)post_title postText:(NSString *)post_text imgURL:(NSString *)img_url chain:(NSString *)chain chainName:(NSString *)chain_name chainURL:(NSString *)chain_url apply:(NSString *)apply limApplyNum:(NSString*)limit_apply_num needCheck:(NSString *)need_check Checked:(NSString *)checked Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
+//请求实名认证
++(void)statusToolUserAuthWithRealName:(NSString *)realname HostName:(NSString *)name ID:(NSString *)user_id HouseNumber:(NSString *)house Phone:(NSString *)phone Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
+//查看用户是否报名
++(void)statusToolIfApplyWithcommunity_id:(NSString *)community_id forum_id:(NSString *)forum_id post_id:(NSString *)post_id user_id:(NSString *)user_id  Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+//用户报名操作
++(void)statusToolPostApplyWithcommunity_id:(NSString *)community_id forum_id:(NSString *)forum_id post_id:(NSString *)post_id user_id:(NSString *)user_id limit_apply_num:(NSString *)limit_apply_num  Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+//结束报名操作
++(void)statusToolEndApplyWithcommunity_id:(NSString *)community_id forum_id:(NSString *)forum_id post_id:(NSString *)post_id user_id:(NSString *)user_id  Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
+
+
 
 @end

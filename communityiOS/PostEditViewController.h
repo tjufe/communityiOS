@@ -19,6 +19,7 @@ extern NSString *const site_isreply;
 extern NSString *const site_ischeck;
 extern NSString *const site_isbrowse;
 
+
 @interface PostEditViewController : UIViewController
 
 @property (strong,nonatomic) UIImage *select_image;//选择上传的图片

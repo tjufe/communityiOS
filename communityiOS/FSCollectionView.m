@@ -7,6 +7,7 @@
 //
 
 #import "FSCollectionview.h"
+
 #import "ForumSelectTableViewCell.h"
 #import "forumItem.h"
 #import "forumSetItem.h"
@@ -21,6 +22,7 @@
 
 int i ;
 forumSetItem *forum_set_item;//帖子的设置
+
 ForumSelectTableViewCell *cell;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -46,6 +48,7 @@ ForumSelectTableViewCell *cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self removeFromSuperview ];
+
     forumItem *f = [_select_forum objectAtIndex:indexPath.row];
     _select_forum_id = f.forum_id;
     _select_forum_name = f.forum_name;
@@ -133,6 +136,8 @@ ForumSelectTableViewCell *cell;
 
 
 
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(buttonIndex==0){
         cell.fslabel.text = @"请重新选择！";
@@ -151,7 +156,9 @@ ForumSelectTableViewCell *cell;
 
 -(NSMutableArray *)GetSelectedResult{
     
+
     NSMutableArray *select_array = [NSMutableArray arrayWithObjects:_select_row,_select_forum_id,_select_forum_name,_ISMAINIMG1,_ISCHAIN1,_ISAPPLY1, nil ];
+
     return select_array;
 }
 

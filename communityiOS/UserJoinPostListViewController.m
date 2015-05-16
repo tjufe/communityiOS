@@ -7,20 +7,24 @@
 //
 
 #import "UserJoinPostListViewController.h"
+
 #import "UIViewController+Create.h"
 #import "APIAddress.h"
+
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
 #import "StatusTool.h"
 #import "postListItem.h"
 #import "postItem.h"
 #import "PostTableViewCell.h"
+
 #import "forumItem.h"
 #import "ViewController.h"
 #import "forumSetItem.h"
 #import "PostEditViewController.h"
 #import "PostDetailViewController.h"
 #import "MBProgressHUD.h"
+
 
 
 @interface UserJoinPostListViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -44,25 +48,30 @@
 @property (strong,nonatomic) forumItem *forumitem;
 
 
+
 @end
 
 @implementation UserJoinPostListViewController
 
+
 NSInteger page1 ;//页数
 NSInteger rows1 ;//分页请求行数
 NSInteger page_filter1 ;
+
 
 #pragma mark------切换我报名的
 - (IBAction)isApply:(id)sender {
     if(![self.filter isEqualToString:@"我报名的"]){
         self.filter = @"我报名的";
         page1 = 1;
+
         page_filter1 = 0;
         self.left_img.hidden = NO;
         self.right_img.hidden = YES;
         [postListArray removeAllObjects];
         [self.ISReply1 removeAllObjects];
         [self.ISApply1 removeAllObjects];
+
         [self loadData];
     }
 }
@@ -72,12 +81,14 @@ NSInteger page_filter1 ;
     if(![self.filter isEqualToString:@"我回复的"]){
         self.filter = @"我回复的";
         page1 = 1;
+
         page_filter1 = 0;
         self.left_img.hidden = YES;
         self.right_img.hidden = NO;
         [postListArray removeAllObjects];
         [self.ISReply1 removeAllObjects];
         [self.ISApply1 removeAllObjects];
+
         [self loadData];
     }
 }
@@ -95,7 +106,9 @@ NSInteger page_filter1 ;
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"PostTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
+
     postItem *ptiem1 = [postListArray objectAtIndex:indexPath.row];
+
     
     //title
     if(ptiem1.title!=nil){
@@ -111,6 +124,7 @@ NSInteger page_filter1 ;
     }
     //nickname
     if(ptiem1.poster_nickname!=nil){
+
         NSString *nic = ptiem1.poster_nickname;
         if(nic.length > 7){//过长时截取
             nic =[nic substringToIndex:7];
@@ -121,10 +135,12 @@ NSInteger page_filter1 ;
         }
 
     //    cell.poster_nic.text = ptiem1.poster_nickname;
+
     }else{
         cell.poster_nic.text = @"游客";
     }
     //reply
+
     if([[self.ISReply1 objectAtIndex:indexPath.row] isEqualToString:@"Y"]){
         if(![ptiem1.reply_num isEqualToString:@""]&&![ptiem1.reply_num isEqualToString:@"''"]){
             cell.post_reply_num.text = ptiem1.reply_num;
@@ -205,6 +221,7 @@ NSInteger page_filter1 ;
     
     [self.navigationController pushViewController:PDVC animated:YES];
 }
+
 
 -(NSString *)twoDateDistants:(NSString *)date{
     //日期格式转换
@@ -311,6 +328,7 @@ NSInteger page_filter1 ;
     page_filter1 = 0;
     
 
+
     //获取当前用户信息
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.UserID =[defaults objectForKey:@"UserID"];
@@ -319,19 +337,23 @@ NSInteger page_filter1 ;
     //初始化数据
     self.filter = @"我报名的";
     postListArray = [[NSMutableArray alloc]init];
+
     self.ISApply1 = [[NSMutableArray alloc]init];
     self.ISReply1 = [[NSMutableArray alloc]init];
+
     //初始化table刷新控件
     [self setupRefresh];
     //请求table数据
     [self loadData];
-    
+
 }
 
 #pragma mark-------请求加载帖子列表数据(我报名的，我回复的)
 -(void)loadData{
+
     self.Page = [NSNumber numberWithInteger:page1];
     self.Rows = [NSNumber numberWithInteger:rows1];
+
     [StatusTool statusToolGetPostListWithbfID:@"" bcID:self.communityID userID:self.UserID filter:self.filter page:self.Page rows:self.Rows Success:^(id object) {
         
         self.post_list_item = (postListItem *)object;
@@ -347,6 +369,7 @@ NSInteger page_filter1 ;
                     }
                     
                 }
+
                 //获取当前帖子的版块设置
                 [self check2];
             }
@@ -368,6 +391,7 @@ NSInteger page_filter1 ;
                     [hud removeFromSuperview];
                 }];
 
+
             }
         }
         
@@ -378,6 +402,7 @@ NSInteger page_filter1 ;
         NSLog(@"%@",error);
     }];
 }
+
 
 #pragma mark------获取当前帖子的版块设置
 -(void)check2{
@@ -418,6 +443,7 @@ NSInteger page_filter1 ;
     
 
 }
+
 
 
 

@@ -20,7 +20,9 @@
 #import "uncheckPostListItem.h"
 #import "MJRefresh.h"//用于列表下拉刷新第三方集成控件
 #import "MBProgressHUD.h" //刷新的进度条
+
 #import "APIAddress.h"
+
 
 
 @interface PostListViewController ()<UITableViewDataSource,UITableViewDelegate>{
@@ -61,16 +63,20 @@
 
 @end
 
+
 //NSString * const TOPIC_PIC_PATH = @"topicpic";
 //NSString * const HEAD_PIC_PATH = @"uploadimg";
 //NSString * const URL_SERVICE = @"http://192.168.28.211/sq/";
 
 
+
 @implementation PostListViewController
+
 
 NSInteger page ;//页数
 NSInteger rows ;//分页请求行数
 NSInteger page_filter;
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
@@ -182,7 +188,9 @@ NSInteger page_filter;
     //加载图片
     NSString* URL=[[NSString alloc]init];
     URL =[postImageData objectAtIndex:indexPath.row];
+
     NSString *img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,URL];
+
      //包含中文字符的string转换为nsurl
      NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     if([URL isEqualToString:@""] ||[URL isEqualToString:@"''"]){
@@ -220,6 +228,7 @@ NSInteger page_filter;
      PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
      //全局变量传值
      PDVC.forum_item = _forum_item;
+
     //协议实现页面传值
     self.delegate = PDVC;
     if ([self.delegate
@@ -285,6 +294,7 @@ NSInteger page_filter;
 }
 
 
+
 #pragma mark-----视图切换回该页调用
 //-(void)viewWillAppear:(BOOL)animated{
 //     [super viewWillAppear:(BOOL)animated];
@@ -307,12 +317,14 @@ NSInteger page_filter;
      self.AccountStatus = [defaults objectForKey:@"AccountStatus"];
      self.moderator = [defaults objectForKey:@"moderator_of_forum_list"];
      self.communityID = [defaults objectForKey:@"CommunityID"];
+
      
      self.ISNEWPOST = @"N";
      self.ISReply = @"N";
      self.ISApply = @"N";
      self.ISBrowse = @"N";
      
+
      if(_forum_item!=nil&&[_filter_flag isEqualToString:@"全部"]){
           self.forumID = _forum_item.forum_id;
      }else if([_filter_flag isEqualToString:@"我发起的"]){
@@ -345,6 +357,7 @@ NSInteger page_filter;
 //     }
 
 
+
      
      
    //使下一页的导航栏左边没有文字
@@ -359,15 +372,16 @@ NSInteger page_filter;
      }else{
           self.navigationItem.title = @"待审核话题";
      }
-     
-    
+
     //try nav button fail
 //    UIButton *rightbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    [rightbutton setTitle:@"aaa" forState:UIControlStateNormal];
 //    UIBarButtonItem *rightItem  = [[UIBarButtonItem alloc]initWithCustomView:rightbutton];
 //    self.navigationItem.rightBarButtonItem = rightItem;
      
+
      //               if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"普通用户"].location!=NSNotFound){
+
 //                    if (status_normal) {
 //                         self.ISNEWPOST = @"Y";
 //                    }
@@ -382,6 +396,7 @@ NSInteger page_filter;
 //                    self.ISNEWPOST = @"Y";
 //               }
 //          }
+
 //
 
 
@@ -398,14 +413,16 @@ NSInteger page_filter;
     
     [button setImage:image forState:UIControlStateNormal];
     [button addTarget:self action:@selector(NewPost) forControlEvents:UIControlEventTouchUpInside];
-    
+
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
      
      //判断用户身份来决定是否显示发帖图标（我发起的和待审核的都不显示发帖图标）
      
      if([_filter_flag isEqualToString:@"全部"]){
      
+
            [self check];
+
      
      if (![self.UserPermission isEqualToString:@""]&&[self.ISNEWPOST isEqualToString:@"Y"]&&[self.AccountStatus isEqualToString:@"正常"]) {
           
@@ -426,6 +443,7 @@ NSInteger page_filter;
     self.PostListArray =[[NSMutableArray alloc]init];
     self.Apply = [[NSMutableArray alloc]init];
     self.Reply = [[NSMutableArray alloc]init];
+
     self.Page = [[NSNumber alloc]init];
     self.Rows = [[NSNumber alloc]init];
   
@@ -519,6 +537,7 @@ NSInteger page_filter;
 -(void)loadData{
      self.Page = [NSNumber numberWithInteger:page];
      self.Rows = [NSNumber numberWithInteger:rows];
+
      [StatusTool statusToolGetPostListWithbfID:self.forumID bcID:self.communityID userID:self.UserID filter:_filter_flag page:self.Page rows:self.Rows Success:^(id object) {
         
         self.post_list_item = (postListItem *)object;
@@ -527,7 +546,9 @@ NSInteger page_filter;
                      [self getData];
                      [self.pltable reloadData];
                 }else{
+
                  //    self.pltable.hidden = YES;//没有数据则隐藏table
+
                 }
                
           }else{
@@ -565,6 +586,7 @@ NSInteger page_filter;
                               [hud removeFromSuperview];
                          }];
                          
+
                     }
                }
           }
@@ -653,6 +675,7 @@ NSInteger page_filter;
           self.pitem = [postItem createItemWitparametes:[self.post_list_item.PostList objectAtIndex:i]];
           if(page_filter==2){
                if(![self.PostListArray containsObject:self.pitem]){
+
                     if([_filter_flag isEqualToString:@"全部"]){
                          if([self.ISBrowse isEqualToString:@"N"]){
                          if([self.pitem.poster_id isEqualToString:self.UserID]||
@@ -710,6 +733,7 @@ NSInteger page_filter;
 
 #pragma mark------分别加载个部分数据
 -(void)getData2{
+
      
      //判断权限（我的话题）
 
@@ -756,6 +780,7 @@ NSInteger page_filter;
      
      
      
+
      //取title
     
           if (self.pitem.title != nil){
@@ -796,11 +821,13 @@ NSInteger page_filter;
           [self.Poster_Nic_Array addObject:@"游客"];
      }
      
+
      //取apply_num
      if(![self.pitem.apply_num isEqualToString:@""]&&![self.pitem.apply_num isEqualToString:@"''"]){
           [self.Poster_Apply_Array addObject:self.pitem.apply_num];
      }else{
           [self.Poster_Apply_Array addObject:@"0"];
+
      }
      //取reply_num
      if(![self.pitem.reply_num isEqualToString:@""]&&![self.pitem.reply_num isEqualToString:@"''"]){
@@ -814,7 +841,7 @@ NSInteger page_filter;
 
 #pragma mark--------请求加载帖子列表数据（待审核）
 -(void)loadData2{
-     
+    
      self.Page = [NSNumber numberWithInteger:page];
      self.Rows = [NSNumber numberWithInteger:rows];
      [StatusTool statusToolGetUncheckPostListWithbfID:self.checked_forum_id bcID:self.communityID page:self.Page rows:self.Rows Success:^(id object) {
@@ -1016,7 +1043,7 @@ NSInteger page_filter;
     PEVC.forum_item = _forum_item;
     PEVC.ED_FLAG =@"1";// 当前版块下发帖
     [self.navigationController pushViewController:PEVC animated:YES];
-    
+   
 }
 
 

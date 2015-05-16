@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,22 +13,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="      健身房价格两款手机的法规建设；离开的房间管理升级到房管局SD卡链接发过来看世界的福利国家实力的房价该两款手机的福利高科技时代了房间管理上空间大发了个接受对方；三季度非公路建设的浪费空间够死了；的康复机构" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQr-55-BJH">
-                        <rect key="frame" x="15" y="0.0" width="290" height="202"/>
+
+                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="      " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQr-55-BJH">
+                        <rect key="frame" x="15" y="0.0" width="290" height="21"/>
+
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="AQr-55-BJH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="PdL-DH-dBu"/>
-                    <constraint firstItem="AQr-55-BJH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="S5G-TA-Okd"/>
-                    <constraint firstAttribute="trailing" secondItem="AQr-55-BJH" secondAttribute="trailing" constant="15" id="gm0-P5-jwv"/>
-                    <constraint firstAttribute="bottom" secondItem="AQr-55-BJH" secondAttribute="bottom" id="r7x-Fd-2ao"/>
+                    <constraint firstAttribute="trailing" secondItem="AQr-55-BJH" secondAttribute="trailing" constant="15" id="08g-ae-EFu"/>
+                    <constraint firstItem="AQr-55-BJH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Lrv-j3-5ah"/>
+                    <constraint firstItem="AQr-55-BJH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fh0-RM-Pj7"/>
+                    <constraint firstItem="AQr-55-BJH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="mbN-Eg-gHZ"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="mbN-Eg-gHZ"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="Text" destination="AQr-55-BJH" id="9m6-Zb-Glg"/>
+                <outlet property="postText" destination="AQr-55-BJH" id="I6m-oO-Cjs"/>
             </connections>
             <point key="canvasLocation" x="218" y="295"/>
         </tableViewCell>

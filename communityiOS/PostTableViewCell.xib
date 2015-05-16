@@ -13,7 +13,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="顶" translatesAutoresizingMaskIntoConstraints="NO" id="jIg-yn-zIr">
+
                         <rect key="frame" x="8" y="8" width="21" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="QzE-Ql-sNM"/>
@@ -193,8 +195,10 @@
     </objects>
     <resources>
         <image name="icon_03" width="47" height="47"/>
+
         <image name="icon_people" width="105" height="105"/>
         <image name="list_comment_nt" width="18" height="18"/>
+
         <image name="顶" width="32" height="32"/>
     </resources>
 </document>

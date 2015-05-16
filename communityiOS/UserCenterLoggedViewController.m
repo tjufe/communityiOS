@@ -15,7 +15,17 @@
 #import "PostListViewController.h"
 #import "UserJoinPostListViewController.h"
 
+#import "PostListViewController.h"
+#import "UserJoinPostListViewController.h"
+
+#import "APIClient.h"
+#import "AuthTableViewController.h"
+#import "APIAddress.h"
+
 @interface UserCenterLoggedViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *authIcon;
+@property (strong, nonatomic) IBOutlet UIButton *authBtn;
+- (IBAction)authAction:(id)sender;
 
 @end
 
@@ -25,7 +35,9 @@
 - (IBAction)go2myPostList:(id)sender {
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
     poLVC.filter_flag = @"我发起的";
+
  //   poLVC.pl_go = @"2";//从我的话题页跳转
+
 //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:poLVC];
 //    UIBarButtonItem *leftBtn=[[UIBarButtonItem alloc]initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(go2main)];
 //    poLVC.navigationItem.leftBarButtonItem=leftBtn;
@@ -51,6 +63,7 @@
 
 #pragma mark------我参与的 lx20150505
 - (IBAction)go2myEnjoyPostList:(id)sender {
+
     
     UserJoinPostListViewController *uj_PLVC = [UserJoinPostListViewController createFromStoryboardName:@"UserJoinPostList" withIdentifier:@"join"];
     UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
@@ -63,6 +76,7 @@
     
     [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
     [nav pushViewController:uj_PLVC animated:YES];
+
 }
 
 #pragma mark------待审核话题 lx20150504
@@ -99,24 +113,55 @@
 }
 
 - (void)initUI {
-    _imgAvatar.layer.masksToBounds=YES;
-    [_imgAvatar.layer setCornerRadius:_imgAvatar.frame.size.width/2];
-    _imgAvatar.contentMode = UIViewContentModeScaleAspectFill;//取图片的中部分
-    UIImage *placeholderImage = [UIImage imageNamed:@"icon_acatar_default_r"];
-    _imgAvatar.image = placeholderImage;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *phoneNumber = [defaults valueForKey:@"PhoneNumber"];
     if(phoneNumber!=nil){
         NSString *userNickname = [defaults valueForKey:@"UserNickname"];
         NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
+        NSString *user_id = [defaults valueForKey:@"UserID"];
         _labelNickname.text = userNickname;
-        [_imgAvatar sd_setImageWithURL:[NSURL URLWithString:headPortraitUrl] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if(image!=nil){
-                _imgAvatar.image = image;
-            }
-        }];
+        NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
+        NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
+        if (fileExits) {
+            [self initPortraitWithImage:[UIImage imageWithContentsOfFile:fullPathToFile]];
+        } else {
+            //从服务器下载头像,并存储到本地
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,headPortraitUrl];
+            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+            [self.imgAvatar sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                [self saveImage:imageData WithName:fullPathToFile];
+                [self initPortraitWithImage:image];
+            }];
+        }
+        //判断是否是管理员，显示“实名认证”图标
+//        if ([[NSString stringWithString:[defaults valueForKey:@"UserPermission"]]isEqualToString:@"管理员"]) {
+//            self.authIcon.hidden = NO;
+//            self.authBtn.hidden = NO;
+//        }
+
     }
+}
+
+#pragma mark---------------将头像切割成圆形
+-(void)initPortraitWithImage:(UIImage *)image{
+    
+    self.imgAvatar.layer.masksToBounds = YES;
+    [self.imgAvatar.layer setCornerRadius:self.imgAvatar.frame.size.width/2];
+    self.imgAvatar.contentMode = UIViewContentModeScaleAspectFill;
+    self.imgAvatar.image = image;
+}
+
+#pragma mark---------------保存图片到document
+- (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
+    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    [imageData writeToFile:fullPathToFile atomically:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,4 +179,7 @@
 }
 */
 
+- (IBAction)authAction:(id)sender {
+   
+}
 @end

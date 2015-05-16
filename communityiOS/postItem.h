@@ -40,10 +40,12 @@
 @property (nonatomic,strong)NSString *reply_num;
 @property (nonatomic,strong)NSString *apply_num;
 @property (nonatomic,strong)NSString *read_num;
-@property (nonatomic,strong)NSString *limit_apply_num;
+
 @property (nonatomic,strong)NSString *open_apply;
-@property (nonatomic,strong)NSString *apply_enough;
+@property (nonatomic,strong)NSString *limit_apply_num;
 @property (nonatomic,strong)NSString *poster_auth;
+@property (nonatomic,strong)NSString *apply_enough;
+
 
 
 

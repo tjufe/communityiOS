@@ -53,6 +53,8 @@
 @property (strong,nonatomic)NSString *select_forum_name;//选择的版块名称
 @property (strong,nonatomic)NSIndexPath *select_row;
 
+
+
 @property (strong,nonatomic) NSString *UserPermission;//当前用户身份
 @property (strong,nonatomic) NSString *userID;//
 @property (strong,nonatomic) NSString *communityID;
@@ -233,12 +235,14 @@ NSString *num3 ;
         
         //初始化colletionview
         self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
+
         //传值
         self.fs.select_forum = self.select_forum;
         self.fs.Addpic = self.addpic;
         self.fs.Apply = self.apply;
         self.fs.Chain = self.chain;
            
+
         self.fs.alpha = 0;
 
         
@@ -264,10 +268,12 @@ NSString *num3 ;
 //            self.select_forum_id = [select objectAtIndex:1];
 //            self.select_forum_name =[select objectAtIndex:2];
 //            self.select_row = [select objectAtIndex:0];
+
 //            
 
             
         }
+
     }
 }
 
@@ -472,8 +478,10 @@ NSString *num3 ;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.UserPermission = [defaults objectForKey:@"UserPermission"];
     self.moderator = [defaults objectForKey:@"moderator_of_forum_list"];
+
     self.communityID = [defaults objectForKey:@"CommunityID"];
     self.userID = [defaults objectForKey:@"UserID"];
+
     
     //直接从首页发新帖时，获取版块信息
     if([_ED_FLAG isEqualToString:@"0"]){

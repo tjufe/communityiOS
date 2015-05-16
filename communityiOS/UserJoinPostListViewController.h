@@ -19,4 +19,5 @@
 
 @interface UserJoinPostListViewController : UIViewController
 @property (assign) id<UserJoinPostListViewControllerDelegate>delegate;
+
 @end
