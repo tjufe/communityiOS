@@ -18,8 +18,10 @@
 #import "deletepostItem.h"
 #import "uncheckPostListItem.h"
 #import "replyInfoListItem.h"
+
 #import "ifApplyItem.h"
 #import "postApplyItem.h"
+
 
 @implementation StatusTool
 
@@ -469,6 +471,7 @@
     }];
     
 }
+
 +(void)statusToolIfApplyWithcommunity_id:(NSString *)community_id forum_id:(NSString *)forum_id post_id:(NSString *)post_id user_id:(NSString *)user_id  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
 
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
@@ -540,6 +543,7 @@
 
 
 }
+
 
 @end
 

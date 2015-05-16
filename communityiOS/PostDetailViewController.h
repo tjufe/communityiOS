@@ -14,6 +14,9 @@
 @interface PostDetailViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *PDview;
 @property (weak, nonatomic) IBOutlet UILabel *forumTitle;
+- (IBAction)ReplyNumOnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btReplyNum;
+
 
 @property(strong,nonatomic)forumItem *forum_item;
 @property (weak, nonatomic) IBOutlet UILabel *replyNum;

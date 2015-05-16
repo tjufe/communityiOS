@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2XF-rz-Jdl">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XF-rz-Jdl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -25,6 +25,12 @@
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2XF-rz-Jdl" firstAttribute="leading" secondItem="Qwb-HF-xzj" secondAttribute="leading" id="808-jP-h2u"/>
+                            <constraint firstAttribute="trailing" secondItem="2XF-rz-Jdl" secondAttribute="trailing" id="IxG-c7-ZqA"/>
+                            <constraint firstItem="fLP-Jf-ZYE" firstAttribute="top" secondItem="2XF-rz-Jdl" secondAttribute="bottom" id="mCb-zB-OdK"/>
+                            <constraint firstItem="2XF-rz-Jdl" firstAttribute="top" secondItem="Qwb-HF-xzj" secondAttribute="top" id="mO5-P3-dnD"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

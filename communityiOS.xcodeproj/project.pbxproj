@@ -10,6 +10,10 @@
 		131A9ECB1B03846700926D6F /* ChainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 131A9EC91B03846700926D6F /* ChainTableViewCell.m */; };
 		131A9ECC1B03846700926D6F /* ChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 131A9ECA1B03846700926D6F /* ChainTableViewCell.xib */; };
 		1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */; };
+		137D80DE1B06FC24001E8CDA /* EditApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 137D80DC1B06FC24001E8CDA /* EditApplyTableViewCell.m */; };
+		137D80DF1B06FC24001E8CDA /* EditApplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137D80DD1B06FC24001E8CDA /* EditApplyTableViewCell.xib */; };
+		137D80E31B06FD25001E8CDA /* EditChainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 137D80E11B06FD25001E8CDA /* EditChainTableViewCell.m */; };
+		137D80E41B06FD25001E8CDA /* EditChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137D80E21B06FD25001E8CDA /* EditChainTableViewCell.xib */; };
 		13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE11AD624B300658F21 /* AlterNicknameViewController.m */; };
 		13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE41AD6260400658F21 /* AlterPasswordViewController.m */; };
 		13B1C2B61ACA58B5005C179C /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2B41ACA58B5005C179C /* APIClient.m */; };
@@ -139,6 +143,12 @@
 		131A9ECA1B03846700926D6F /* ChainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChainTableViewCell.xib; sourceTree = "<group>"; };
 		1352E0CE1AE76B4D0089EAC8 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
 		1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
+		137D80DB1B06FC24001E8CDA /* EditApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditApplyTableViewCell.h; sourceTree = "<group>"; };
+		137D80DC1B06FC24001E8CDA /* EditApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditApplyTableViewCell.m; sourceTree = "<group>"; };
+		137D80DD1B06FC24001E8CDA /* EditApplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditApplyTableViewCell.xib; sourceTree = "<group>"; };
+		137D80E01B06FD25001E8CDA /* EditChainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditChainTableViewCell.h; sourceTree = "<group>"; };
+		137D80E11B06FD25001E8CDA /* EditChainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditChainTableViewCell.m; sourceTree = "<group>"; };
+		137D80E21B06FD25001E8CDA /* EditChainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditChainTableViewCell.xib; sourceTree = "<group>"; };
 		13878AE01AD624B300658F21 /* AlterNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterNicknameViewController.h; sourceTree = "<group>"; };
 		13878AE11AD624B300658F21 /* AlterNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterNicknameViewController.m; sourceTree = "<group>"; };
 		13878AE31AD6260400658F21 /* AlterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterPasswordViewController.h; sourceTree = "<group>"; };
@@ -790,6 +800,12 @@
 				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
 				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
 				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
+				137D80DB1B06FC24001E8CDA /* EditApplyTableViewCell.h */,
+				137D80DC1B06FC24001E8CDA /* EditApplyTableViewCell.m */,
+				137D80DD1B06FC24001E8CDA /* EditApplyTableViewCell.xib */,
+				137D80E01B06FD25001E8CDA /* EditChainTableViewCell.h */,
+				137D80E11B06FD25001E8CDA /* EditChainTableViewCell.m */,
+				137D80E21B06FD25001E8CDA /* EditChainTableViewCell.xib */,
 			);
 			name = postEdit;
 			sourceTree = "<group>";
@@ -953,6 +969,7 @@
 				1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */,
 				188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
+				137D80DF1B06FC24001E8CDA /* EditApplyTableViewCell.xib in Resources */,
 				13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */,
 				13D247211B048CCE00717780 /* chainToWeb.storyboard in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
@@ -970,6 +987,7 @@
 				13B1C3511AD4D6ED005C179C /* PosterTableViewCell.xib in Resources */,
 				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
+				137D80E41B06FD25001E8CDA /* EditChainTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1027,6 +1045,7 @@
 				13D247141B0436E400717780 /* ChainToWebView.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
+				137D80E31B06FD25001E8CDA /* EditChainTableViewCell.m in Sources */,
 				184BC7241AFDB63E00ADABFE /* UserJoinPostListViewController.m in Sources */,
 				13C865E41B05C0B5001D34B4 /* postApplyItem.m in Sources */,
 				13D247181B04383F00717780 /* ApplyTableViewCell.m in Sources */,
@@ -1078,6 +1097,7 @@
 				13B1C3721AD4D80B005C179C /* loginItem.m in Sources */,
 				13B1C3741AD4D80B005C179C /* postItem.m in Sources */,
 				13B1C34D1AD4D6ED005C179C /* PostDetailViewController.m in Sources */,
+				137D80DE1B06FC24001E8CDA /* EditApplyTableViewCell.m in Sources */,
 				13B1C2E51ACB7DC5005C179C /* MJRefreshBaseView.m in Sources */,
 				13C58BDF1AB9550600090157 /* main.m in Sources */,
 				13BE566D1ABA574700379ACD /* ForumTableViewCell.m in Sources */,

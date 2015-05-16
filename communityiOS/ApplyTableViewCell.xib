@@ -20,7 +20,7 @@
                             <constraint firstAttribute="width" constant="81" id="NBh-7k-L9s"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyN-uL-VRh" customClass="EAColourfulProgressView">
@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="21" id="Zcw-wK-6Uc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZr-jV-Ues">
@@ -43,7 +43,7 @@
                                     <constraint firstAttribute="height" constant="21" id="dsq-KH-dCq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -57,7 +57,7 @@
                                     <constraint firstAttribute="height" constant="21" id="lZc-G9-huo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -116,6 +116,7 @@
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="C8V-O5-DnA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="8Yw-dj-ug3"/>
                     <constraint firstItem="eyN-uL-VRh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="Ds2-ON-jk7"/>
                     <constraint firstItem="byh-JS-ZGo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="FhH-3J-ZeQ"/>
                     <constraint firstItem="eyN-uL-VRh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="99" id="KHO-Dk-QcL"/>
@@ -123,6 +124,11 @@
                     <constraint firstAttribute="trailing" secondItem="C8V-O5-DnA" secondAttribute="trailing" constant="23" id="rj7-nl-2BP"/>
                     <constraint firstItem="byh-JS-ZGo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="yVE-cG-eWM"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="XH5-hk-0Uk"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="applyNum" destination="pTU-oM-whI" id="p3v-qP-flh"/>
