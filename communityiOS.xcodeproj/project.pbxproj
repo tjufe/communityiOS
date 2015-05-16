@@ -105,9 +105,6 @@
 		1842ADF21ADB5FC10022D2CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF11ADB5FC10022D2CB /* libz.dylib */; };
 		1842ADF51ADB5FEE0022D2CB /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */; };
 		1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1842AE6C1ADB77290022D2CB /* PushConfig.plist */; };
-		184BC71F1AFDB4F500ADABFE /* uncheckPostListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */; };
-		184BC7231AFDB63E00ADABFE /* UserJoinPostList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */; };
-		184BC7241AFDB63E00ADABFE /* UserJoinPostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */; };
 		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
 		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
@@ -306,11 +303,6 @@
 		1842ADF31ADB5FEE0022D2CB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		1842AE6C1ADB77290022D2CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-		184BC71D1AFDB4F500ADABFE /* uncheckPostListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uncheckPostListItem.h; sourceTree = "<group>"; };
-		184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uncheckPostListItem.m; sourceTree = "<group>"; };
-		184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserJoinPostList.storyboard; sourceTree = "<group>"; };
-		184BC7211AFDB63E00ADABFE /* UserJoinPostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserJoinPostListViewController.h; sourceTree = "<group>"; };
-		184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserJoinPostListViewController.m; sourceTree = "<group>"; };
 		188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
 		188933881AFB580F006329D8 /* AuthTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTableViewController.h; sourceTree = "<group>"; };
 		188933891AFB580F006329D8 /* AuthTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTableViewController.m; sourceTree = "<group>"; };
@@ -720,8 +712,6 @@
 				8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */,
 				8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */,
 				8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */,
-				184BC71D1AFDB4F500ADABFE /* uncheckPostListItem.h */,
-				184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */,
 				13C865E21B05C0B5001D34B4 /* postApplyItem.h */,
 				13C865E31B05C0B5001D34B4 /* postApplyItem.m */,
 				13C865E51B05D4A0001D34B4 /* endApplyItem.h */,
@@ -868,9 +858,6 @@
 				A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */,
 				A0CA6DED1AFC5E3400F88237 /* UserJoinPostListViewController.h */,
 				A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */,
-				184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */,
-				184BC7211AFDB63E00ADABFE /* UserJoinPostListViewController.h */,
-				184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */,
 				13D247121B0436E400717780 /* ChainToWebView.h */,
 				13D247131B0436E400717780 /* ChainToWebView.m */,
 				13D2471D1B048C8C00717780 /* ChainToWebViewController.h */,
@@ -1002,7 +989,6 @@
 				13B1C2BB1ACA5956005C179C /* demo.xcassets in Resources */,
 				8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */,
 				8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */,
-				184BC7231AFDB63E00ADABFE /* UserJoinPostList.storyboard in Resources */,
 				13B1C3511AD4D6ED005C179C /* PosterTableViewCell.xib in Resources */,
 				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
@@ -1057,7 +1043,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				184BC71F1AFDB4F500ADABFE /* uncheckPostListItem.m in Sources */,
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
 				A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */,
 				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
@@ -1065,7 +1050,6 @@
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
 				137D80E31B06FD25001E8CDA /* EditChainTableViewCell.m in Sources */,
-				184BC7241AFDB63E00ADABFE /* UserJoinPostListViewController.m in Sources */,
 				13C865E41B05C0B5001D34B4 /* postApplyItem.m in Sources */,
 				13D247181B04383F00717780 /* ApplyTableViewCell.m in Sources */,
 				13B1C3521AD4D6ED005C179C /* PostImageTableViewCell.m in Sources */,
@@ -1264,7 +1248,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1286,7 +1269,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

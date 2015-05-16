@@ -42,7 +42,7 @@
 @property (strong,nonatomic) NSNumber *Page;
 @property (strong,nonatomic) NSNumber *Rows;
 @property (strong,nonatomic) NSString *filter;//筛选条件
-@property (strong,nonatomic)NSMutableArray *ISApply1;
+@property (strong,nonatomic)NSMutableArray *ISApply2;
 @property (strong,nonatomic)NSMutableArray *ISReply1;
 @property (weak,nonatomic)NSArray *forumlist;
 @property (strong,nonatomic) forumItem *forumitem;
@@ -70,7 +70,7 @@ NSInteger page_filter1 ;
         self.right_img.hidden = YES;
         [postListArray removeAllObjects];
         [self.ISReply1 removeAllObjects];
-        [self.ISApply1 removeAllObjects];
+        [self.ISApply2 removeAllObjects];
 
         [self loadData];
     }
@@ -87,7 +87,7 @@ NSInteger page_filter1 ;
         self.right_img.hidden = NO;
         [postListArray removeAllObjects];
         [self.ISReply1 removeAllObjects];
-        [self.ISApply1 removeAllObjects];
+        [self.ISApply2 removeAllObjects];
 
         [self loadData];
     }
@@ -155,7 +155,7 @@ NSInteger page_filter1 ;
     }
     
     //apply
-    if([[self.ISApply1 objectAtIndex:indexPath.row] isEqualToString:@"Y"]&&[ptiem1.open_apply isEqualToString:@"是"]){
+    if([[self.ISApply2 objectAtIndex:indexPath.row] isEqualToString:@"Y"]&&[ptiem1.open_apply isEqualToString:@"是"]){
         if(![ptiem1.apply_num isEqualToString:@""]&&![ptiem1.apply_num isEqualToString:@"''"]){
             
             cell.post_apply_num.text = ptiem1.apply_num;
@@ -338,7 +338,7 @@ NSInteger page_filter1 ;
     self.filter = @"我报名的";
     postListArray = [[NSMutableArray alloc]init];
 
-    self.ISApply1 = [[NSMutableArray alloc]init];
+    self.ISApply2 = [[NSMutableArray alloc]init];
     self.ISReply1 = [[NSMutableArray alloc]init];
 
     //初始化table刷新控件
@@ -431,9 +431,9 @@ NSInteger page_filter1 ;
             //能否报名
             if([fs.site_name isEqualToString:site_addapply]){
                 if([fs.site_value rangeOfString:@"是"].location!=NSNotFound){
-                    [self.ISApply1 addObject:@"Y"];
+                    [self.ISApply2 addObject:@"Y"];
                 }else{
-                    [self.ISApply1 addObject:@"N"];
+                    [self.ISApply2 addObject:@"N"];
                 }
                 
             }
