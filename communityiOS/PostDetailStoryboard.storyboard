@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -119,7 +119,7 @@
                                             <constraint firstAttribute="height" constant="40" id="xgm-ke-dGB"/>
                                             <constraint firstAttribute="width" constant="70" id="zRi-EP-mmH"/>
                                         </constraints>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" title="查看回复">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -127,7 +127,7 @@
                                             <action selector="SendOnClick:" destination="Swc-ik-nzf" eventType="touchUpInside" id="V8e-eX-d4r"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_01" translatesAutoresizingMaskIntoConstraints="NO" id="mfZ-c2-8Lm">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="默认小头像" translatesAutoresizingMaskIntoConstraints="NO" id="mfZ-c2-8Lm">
                                         <rect key="frame" x="5" y="15" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="PpB-UJ-mlF"/>
@@ -139,6 +139,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Swc-ik-nzf" id="AhW-R2-j5v"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90697995580000002" green="0.90697995580000002" blue="0.90697995580000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -160,8 +164,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nes-gG-y4a">
-                                <rect key="frame" x="0.0" y="149" width="320" height="349"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nes-gG-y4a">
+                                <rect key="frame" x="0.0" y="150" width="320" height="349"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Swc-ik-nzf" id="sms-wb-SrM"/>
@@ -199,12 +203,14 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="PDview" destination="18P-zj-67F" id="Ukh-lN-VSH"/>
-                        <outlet property="SendButton" destination="PPf-0j-jbo" id="1oG-Qd-E2G"/>
+                        <outlet property="SendButton" destination="PPf-0j-jbo" id="8lB-Hw-wuL"/>
                         <outlet property="TitleRect" destination="Tbm-0S-qXi" id="dax-QM-TOL"/>
                         <outlet property="forumlabel" destination="KB9-fZ-5mw" id="Hzh-bo-67O"/>
                         <outlet property="postTitle" destination="ATc-4W-hQG" id="vFS-gZ-YQB"/>
-                        <outlet property="reply_text" destination="4bg-n8-4qD" id="Kde-RY-dxo"/>
+                        <outlet property="post_reply_num" destination="p5r-lp-mOe" id="Djq-hS-IuC"/>
+                        <outlet property="reply_text" destination="4bg-n8-4qD" id="K6b-y6-Bx0"/>
                         <outlet property="tableview" destination="nes-gG-y4a" id="4KF-ul-ggu"/>
+                        <outlet property="user_img" destination="mfZ-c2-8Lm" id="UM5-GB-hCv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZo-mP-qfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -213,6 +219,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_01" width="47" height="47"/>
+        <image name="默认小头像" width="57" height="55"/>
     </resources>
 </document>

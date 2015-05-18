@@ -8,20 +8,26 @@
 
 #import "FSCollectionview.h"
 #import "PostEditViewController.h"
-#import <UIKit/UIKit.h>
 #import "ForumSelectTableViewCell.h"
+#import "forumItem.h"
+#import "forumSetItem.h"
 
 
-@implementation FSCollectionview
+
+
+@implementation FSCollectionview{
+    
+}
 
 
 int i ;
-
-
-
+forumSetItem *forum_set_item;//帖子的设置
+NSString *ISNEWPOST = @"N";
+NSString *site_newpost_user_post = @"允许发帖的用户";
+ForumSelectTableViewCell *cell;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 8;
+    return [_forum_name count];
     
     
 }
@@ -32,11 +38,11 @@ int i ;
     //    FSCollectionView *fs = [[FSCollectionView alloc]init];
     
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell11" forIndexPath:indexPath ];
-    NSArray *qwer=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
-    self.asdf = [NSArray arrayWithArray:qwer];
+   // NSArray *qwer=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
+
     //cell里面的控件
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 30)];
-    label.text = [qwer objectAtIndex:indexPath.row] ;
+    label.text = [_forum_name objectAtIndex:indexPath.row] ;
     label.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [cell addSubview:label];
     cell.backgroundColor = [UIColor colorWithRed:246.0/255 green:246.0/255 blue:246.0/255 alpha:1];
@@ -59,16 +65,63 @@ int i ;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self removeFromSuperview ];
+    _select_forum_id = [_forum_id objectAtIndex:indexPath.row];
+    _select_forum_name = [_forum_name objectAtIndex:indexPath.row];
+    _select_row = indexPath;//选择的索引号
     
-    i = (int)indexPath.item;
-    NSArray *as=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
-    ForumSelectTableViewCell *cell = [self.tb cellForRowAtIndexPath:self.index];
-    cell.fslabel.text = [as objectAtIndex:i];
+//    i = (int)indexPath.item;
+//    NSArray *as=[[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
+    cell = [self.tb cellForRowAtIndexPath:self.index];
+    cell.fslabel.text = [_forum_name objectAtIndex:indexPath.row];
 //    [self.maskView removeFromSuperview];
     
     
-    
-    
+    //判断当前用户选择的版块能否发帖
+    NSString *user_status = @"/";
+    user_status = [user_status stringByAppendingString:_UserPermission];
+    user_status = [user_status stringByAppendingString:_UserPermission];
+    forumItem *fit = [_forum_list_item objectAtIndex:indexPath.row];
+    for(int m=0;m<[fit.ForumSetlist count];m++){
+        forumSetItem *fs_item = [forumSetItem createItemWitparametes:[fit. ForumSetlist objectAtIndex:m]];
+        
+        if ([fs_item.site_name isEqualToString:site_newpost_user]) {
+            
+            if([fs_item.site_value rangeOfString:user_status].location!=NSNotFound){
+                ISNEWPOST = @"Y";
+                break;
+            }
+            
+            //版主
+            if(_moderator!=nil){
+            for(int m=0;m<[_moderator count];m++){
+                if([[_moderator objectAtIndex:m] isEqualToString:_select_forum_id]){
+                    ISNEWPOST = @"Y";
+                    break;
+                }
+                
+            }
+            }
+            break;
+        }
+    }
+    if(![ISNEWPOST isEqualToString:@"Y"]){
+         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"您不能在该版块下发布消息！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+         [alert show];
+      
+    }else{
+        ISNEWPOST = @"N";
+    }
+
+
+
+
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex==0){
+        cell.fslabel.text = @"请重新选择！";
+    }
 }
 
 
@@ -79,6 +132,12 @@ int i ;
 
     
     
+}
+
+-(NSMutableArray *)GetSelectedResult{
+    
+    NSMutableArray *select_array = [NSMutableArray arrayWithObjects:_select_row,_select_forum_id,_select_forum_name,nil ];
+    return select_array;
 }
 
 

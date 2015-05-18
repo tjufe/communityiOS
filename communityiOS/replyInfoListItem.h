@@ -12,6 +12,7 @@
 @property (nonatomic,strong)NSString *status;
 @property (nonatomic,strong)NSString *msg;
 @property (nonatomic,strong)NSDictionary *data;
+
 @property (nonatomic,strong)NSArray *replyInfoList;
 
 +(replyInfoListItem *)createItemWitparametes:(NSDictionary*)dic;

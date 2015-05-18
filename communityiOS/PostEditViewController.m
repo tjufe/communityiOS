@@ -37,9 +37,22 @@
 @property (strong,nonatomic)NSMutableArray *forumSetList;//帖子设置数组
 @property (strong,nonatomic)forumSetItem *forum_set_item;//帖子的设置
 
+
+@property (strong,nonatomic) NSMutableArray *forum_id;
+@property (strong,nonatomic) NSMutableArray *forum_name;
+
 @property (strong,nonatomic)NSString *ISCHAIN;
 @property (strong,nonatomic)NSString *ISAPPLY;
 @property (strong,nonatomic)NSString *ISMAINIMG;
+
+
+@property (strong,nonatomic)NSString *select_forum_id;//选择的版块id
+@property (strong,nonatomic)NSString *select_forum_name;//选择的版块名称
+@property (strong,nonatomic)NSIndexPath *select_row;
+@property (strong,nonatomic)NSString *ISNEWPOST;
+@property (strong,nonatomic) NSString *UserPermission;//当前用户身份
+@property (strong,nonatomic) NSArray *moderator;//版主版号
+
 
 
 
@@ -49,10 +62,15 @@ NSString * const site_addchain = @"是否提供外链功能";
 NSString * const site_addapply = @"是否提供报名功能";
 NSString * const site_addmainimg=@"主帖是否包含主图";
 
+NSString * const site_newpost_user = @"允许发帖的用户";
+
 @implementation PostEditViewController
 NSArray *activities_;
 NSArray *feelings_;
 NSArray *third_;
+
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
     
@@ -153,13 +171,19 @@ NSArray *third_;
         
         //初始化colletionview
         self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
+            //传值
+            self.fs.forum_id = self.forum_id;
+            self.fs.forum_name = self.forum_name;
+            self.fs.forum_list_item = _forum_list_item;
+            self.fs.UserPermission = self.UserPermission;
+            self.fs.moderator = self.moderator;
         self.fs.alpha = 0;
 
         
         self.fs.backgroundColor= [UIColor whiteColor];
        
         self.fs.dataSource = self.fs;
-        self.fs.delegate = self.fs;
+       self.fs.delegate = self.fs;
         //在collectionview注册collectionviewcell；
         [self.fs  registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell11"];
 
@@ -170,21 +194,19 @@ NSArray *third_;
             self.fs.alpha = 1;
             [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
         }];
-        //定义数组
-//        NSArray *arr = [[NSArray alloc]initWithObjects:@"社区信息通告",@"号码万事通",@"拼生活",@"周末生活",@"结伴生活",@"物业报修",@"物业投诉",@"敬请期待...",nil];
-        //获取点击的cell
-        [self.fs getcelltext:indexPath:self.PEtableview];
+
+            [self.fs getcelltext:indexPath:self.PEtableview];
+            
+            //获取选择的版块
+//            NSMutableArray *select = [self.fs GetSelectedResult];
+//            self.select_forum_id = [select objectAtIndex:1];
+//            self.select_forum_name =[select objectAtIndex:2];
+//            self.select_row = [select objectAtIndex:0];
+                   
         }
-        
-        
             
     }
 }
-
-
-//    FSCollectionview *fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(10, 10, 300, 300)];
-//    
-//    [self.PEtableview addSubview:fs];
 
 /*
  下面代码是设置pickerview
@@ -258,6 +280,23 @@ NSArray *third_;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //直接从首页发新帖时，获取版块信息
+    
+    self.forum_id = [[NSMutableArray alloc]init];
+    self.forum_name = [[NSMutableArray alloc]init];
+    for(int j=0;j<[_forum_list_item count];j++){
+        forumItem *fitem = [_forum_list_item objectAtIndex:j];
+        [self.forum_id addObject:fitem.forum_id];
+        [self.forum_name addObject:fitem.forum_name];
+    }
+    
+    //获取当前用户信息
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.UserPermission = [defaults objectForKey:@"UserPermission"];
+    self.moderator = [defaults objectForKey:@"moderator_of_forum_list"];
+    
+    
     self.PEtableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"发布话题";
@@ -281,6 +320,8 @@ NSArray *third_;
     self.ISMAINIMG = @"N";
     self.ISAPPLY = @"N";
     self.ISCHAIN =@"N";
+
+    self.ISNEWPOST = @"N";
     if(![_ED_FLAG isEqualToString:@"0"]){
         for(int i=0;i < [_forum_item.ForumSetlist count];i++){
             self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];

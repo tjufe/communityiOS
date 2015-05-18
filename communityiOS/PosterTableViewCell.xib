@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,11 +13,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_03" translatesAutoresizingMaskIntoConstraints="NO" id="U89-Fw-W9B">
-                        <rect key="frame" x="159" y="13" width="19" height="19"/>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="认证-2" translatesAutoresizingMaskIntoConstraints="NO" id="U89-Fw-W9B">
+                        <rect key="frame" x="152" y="13" width="12" height="12"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="19" id="r40-3g-GLu"/>
-                            <constraint firstAttribute="height" constant="19" id="xYg-4l-J5V"/>
+                            <constraint firstAttribute="width" constant="12" id="r40-3g-GLu"/>
+                            <constraint firstAttribute="height" constant="12" id="xYg-4l-J5V"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="李易峰" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTV-yv-jxI">
@@ -44,7 +44,7 @@
                         <color key="textColor" red="0.45194128789999999" green="0.45194128789999999" blue="0.45194128789999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_default_avater@2x" translatesAutoresizingMaskIntoConstraints="NO" id="ASs-lb-bIJ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="ASs-lb-bIJ">
                         <rect key="frame" x="17" y="11" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="Usd-BL-7NH"/>
@@ -74,20 +74,22 @@
                     <constraint firstItem="zWo-cu-2DZ" firstAttribute="leading" secondItem="ASs-lb-bIJ" secondAttribute="trailing" constant="17" id="FcJ-oa-ryj"/>
                     <constraint firstItem="ASs-lb-bIJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="NZx-me-Wi0"/>
                     <constraint firstItem="U89-Fw-W9B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="OgV-s6-FGP"/>
-                    <constraint firstItem="U89-Fw-W9B" firstAttribute="leading" secondItem="dTV-yv-jxI" secondAttribute="trailing" constant="8" id="PZk-Qu-bd6"/>
+                    <constraint firstItem="U89-Fw-W9B" firstAttribute="leading" secondItem="dTV-yv-jxI" secondAttribute="trailing" constant="1" id="PZk-Qu-bd6"/>
                     <constraint firstItem="dTV-yv-jxI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="U1C-cc-Pw0"/>
                     <constraint firstItem="dTV-yv-jxI" firstAttribute="leading" secondItem="ASs-lb-bIJ" secondAttribute="trailing" constant="13" id="oIZ-sF-9Wf"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="postDate" destination="nv3-ZB-JpO" id="BPW-FE-VVz"/>
-                <outlet property="posterImage" destination="ASs-lb-bIJ" id="zJJ-DJ-6rH"/>
+                <outlet property="poster_img" destination="ASs-lb-bIJ" id="ImL-eG-n3g"/>
+                <outlet property="poster_nickname" destination="dTV-yv-jxI" id="3iv-DJ-ylN"/>
+                <outlet property="poster_status" destination="U89-Fw-W9B" id="EZO-f2-tBY"/>
             </connections>
             <point key="canvasLocation" x="290" y="247.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_default_avater@2x" width="30" height="30"/>
-        <image name="icon_03" width="47" height="47"/>
+        <image name="loading" width="93" height="94"/>
+        <image name="认证-2" width="24" height="24"/>
     </resources>
 </document>

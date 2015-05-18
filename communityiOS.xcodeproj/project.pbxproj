@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */; };
 		13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE11AD624B300658F21 /* AlterNicknameViewController.m */; };
 		13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE41AD6260400658F21 /* AlterPasswordViewController.m */; };
 		13B1C2B61ACA58B5005C179C /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2B41ACA58B5005C179C /* APIClient.m */; };
@@ -79,6 +80,23 @@
 		13C58BEA1AB9550600090157 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BE91AB9550600090157 /* Images.xcassets */; };
 		13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BEB1AB9550600090157 /* LaunchScreen.xib */; };
 		13C58BF91AB9550700090157 /* communityiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C58BF81AB9550700090157 /* communityiOSTests.m */; };
+		1842ADE21ADB5F6F0022D2CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */; };
+		1842ADE41ADB5F7A0022D2CB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */; };
+		1842ADE61ADB5F830022D2CB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */; };
+		1842ADE81ADB5F8D0022D2CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE71ADB5F8D0022D2CB /* SystemConfiguration.framework */; };
+		1842ADEA1ADB5F960022D2CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE91ADB5F960022D2CB /* CoreGraphics.framework */; };
+		1842ADEC1ADB5FA50022D2CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADEB1ADB5FA50022D2CB /* Foundation.framework */; };
+		1842ADEE1ADB5FAE0022D2CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADED1ADB5FAE0022D2CB /* UIKit.framework */; };
+		1842ADF01ADB5FB90022D2CB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADEF1ADB5FB90022D2CB /* Security.framework */; };
+		1842ADF21ADB5FC10022D2CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF11ADB5FC10022D2CB /* libz.dylib */; };
+		1842ADF51ADB5FEE0022D2CB /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */; };
+		1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1842AE6C1ADB77290022D2CB /* PushConfig.plist */; };
+		184BC71F1AFDB4F500ADABFE /* uncheckPostListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */; };
+		184BC7231AFDB63E00ADABFE /* UserJoinPostList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */; };
+		184BC7241AFDB63E00ADABFE /* UserJoinPostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */; };
+		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
+		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
+		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
 		8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */; };
 		8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */; };
 		8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48801AD8BA3F002E70DA /* postInfoItem.m */; };
@@ -88,6 +106,7 @@
 		8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */; };
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
+		A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
 		A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */; };
 		A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */; };
@@ -105,6 +124,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1352E0CE1AE76B4D0089EAC8 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
+		1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
 		13878AE01AD624B300658F21 /* AlterNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterNicknameViewController.h; sourceTree = "<group>"; };
 		13878AE11AD624B300658F21 /* AlterNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterNicknameViewController.m; sourceTree = "<group>"; };
 		13878AE31AD6260400658F21 /* AlterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterPasswordViewController.h; sourceTree = "<group>"; };
@@ -232,6 +253,28 @@
 		13C58BF21AB9550700090157 /* communityiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = communityiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13C58BF71AB9550700090157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13C58BF81AB9550700090157 /* communityiOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = communityiOSTests.m; sourceTree = "<group>"; };
+		1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		1842ADE71ADB5F8D0022D2CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1842ADE91ADB5F960022D2CB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1842ADEB1ADB5FA50022D2CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1842ADED1ADB5FAE0022D2CB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1842ADEF1ADB5FB90022D2CB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1842ADF11ADB5FC10022D2CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		1842ADF31ADB5FEE0022D2CB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
+		1842AE6C1ADB77290022D2CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		184BC71D1AFDB4F500ADABFE /* uncheckPostListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uncheckPostListItem.h; sourceTree = "<group>"; };
+		184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uncheckPostListItem.m; sourceTree = "<group>"; };
+		184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserJoinPostList.storyboard; sourceTree = "<group>"; };
+		184BC7211AFDB63E00ADABFE /* UserJoinPostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserJoinPostListViewController.h; sourceTree = "<group>"; };
+		184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserJoinPostListViewController.m; sourceTree = "<group>"; };
+		188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
+		188933881AFB580F006329D8 /* AuthTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTableViewController.h; sourceTree = "<group>"; };
+		188933891AFB580F006329D8 /* AuthTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTableViewController.m; sourceTree = "<group>"; };
+		1892E3EB1ADBFAAD008A75B1 /* FirstSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSettingsViewController.h; sourceTree = "<group>"; };
+		1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSettingsViewController.m; sourceTree = "<group>"; };
 		265117CBD0FCA383D4E565E6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		735E3463C69F5339C7061D88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7E639B0AA95704A9F1BEA0E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -251,8 +294,10 @@
 		8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostReplyViewController.h; sourceTree = "<group>"; };
 		8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostReplyViewController.m; sourceTree = "<group>"; };
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
+		A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deletepostItem.h; sourceTree = "<group>"; };
+		A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deletepostItem.m; sourceTree = "<group>"; };
 		A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
-		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
+		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 5; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
 		A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
 		A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
 		A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -263,6 +308,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1842ADF21ADB5FC10022D2CB /* libz.dylib in Frameworks */,
+				1842ADF01ADB5FB90022D2CB /* Security.framework in Frameworks */,
+				1842ADEE1ADB5FAE0022D2CB /* UIKit.framework in Frameworks */,
+				1842ADF51ADB5FEE0022D2CB /* libPushSDK-1.8.3.a in Frameworks */,
+				1842ADEC1ADB5FA50022D2CB /* Foundation.framework in Frameworks */,
+				1842ADEA1ADB5F960022D2CB /* CoreGraphics.framework in Frameworks */,
+				1842ADE81ADB5F8D0022D2CB /* SystemConfiguration.framework in Frameworks */,
+				1842ADE61ADB5F830022D2CB /* CoreTelephony.framework in Frameworks */,
+				1842ADE41ADB5F7A0022D2CB /* CoreFoundation.framework in Frameworks */,
+				1842ADE21ADB5F6F0022D2CB /* CFNetwork.framework in Frameworks */,
 				F2C08D8A5D78D26F9DB7CA8F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,7 +338,7 @@
 				13B1C2A71ACA4AAF005C179C /* models */,
 				13B1C2A91ACA4ACB005C179C /* views */,
 				13B1C2A61ACA4AA1005C179C /* controllers */,
-				13B1C2A81ACA4ABB005C179C /* modules */,
+				13B1C2A81ACA4ABB005C179C /* tools */,
 			);
 			name = app;
 			sourceTree = "<group>";
@@ -291,11 +346,11 @@
 		13B1C2A61ACA4AA1005C179C /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				188933851AFB5798006329D8 /* auth */,
 				13B1C32D1AD4D6ED005C179C /* mypickview.h */,
 				13B1C32E1AD4D6ED005C179C /* mypickview.m */,
 				13B1C3251AD4D6BF005C179C /* UserCenterLoggedNavigationController.h */,
 				13B1C3261AD4D6BF005C179C /* UserCenterLoggedNavigationController.m */,
-				13B1C37C1AD50B70005C179C /* post */,
 				13B1C3021ACCDA61005C179C /* demo */,
 				13B1C2FC1ACBB527005C179C /* settings */,
 				13B1C2AC1ACA4BC4005C179C /* main */,
@@ -309,26 +364,17 @@
 		13B1C2A71ACA4AAF005C179C /* models */ = {
 			isa = PBXGroup;
 			children = (
-				13B1C2B11ACA5885005C179C /* API */,
-				13B1C2B21ACA588F005C179C /* DB */,
+				18AF2A2C1AFE615A00CCCDBB /* API */,
 			);
 			name = models;
 			sourceTree = "<group>";
 		};
-		13B1C2A81ACA4ABB005C179C /* modules */ = {
+		13B1C2A81ACA4ABB005C179C /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */,
-				8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */,
-				13B1C3081ACCFE98005C179C /* GGAddressPickerHelper.h */,
-				13B1C3091ACCFE98005C179C /* GGAddressPickerHelper.m */,
-				13B1C2CC1ACB7DC5005C179C /* MJRefresh */,
-				13B1C2BC1ACA5A27005C179C /* KZPropertyMapper.h */,
-				13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */,
-				13B1C2B41ACA58B5005C179C /* APIClient.m */,
-				13B1C2B51ACA58B5005C179C /* APIClient.h */,
+				18AF2A2D1AFE61CE00CCCDBB /* APITools */,
 			);
-			name = modules;
+			name = tools;
 			sourceTree = "<group>";
 		};
 		13B1C2A91ACA4ACB005C179C /* views */ = {
@@ -374,7 +420,7 @@
 			name = config;
 			sourceTree = "<group>";
 		};
-		13B1C2AE1ACA57DE005C179C /* ext */ = {
+		13B1C2AE1ACA57DE005C179C /* extions */ = {
 			isa = PBXGroup;
 			children = (
 				13BE567D1ABA70CB00379ACD /* UIStoryboard+Addition.h */,
@@ -382,7 +428,7 @@
 				13BE56711ABA6F0E00379ACD /* UIViewController+Create.m */,
 				13BE56701ABA6F0500379ACD /* UIViewController+Create.h */,
 			);
-			name = ext;
+			name = extions;
 			sourceTree = "<group>";
 		};
 		13B1C2AF1ACA57FD005C179C /* resource */ = {
@@ -398,22 +444,15 @@
 		13B1C2B01ACA5833005C179C /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				18AF2A2F1AFE626200CCCDBB /* JPush */,
+				18AF2A2E1AFE624B00CCCDBB /* PropertyMapper */,
+				8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */,
+				8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */,
+				13B1C3081ACCFE98005C179C /* GGAddressPickerHelper.h */,
+				13B1C3091ACCFE98005C179C /* GGAddressPickerHelper.m */,
+				13B1C2CC1ACB7DC5005C179C /* MJRefresh */,
 			);
 			name = vendor;
-			sourceTree = "<group>";
-		};
-		13B1C2B11ACA5885005C179C /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = API;
-			sourceTree = "<group>";
-		};
-		13B1C2B21ACA588F005C179C /* DB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = DB;
 			sourceTree = "<group>";
 		};
 		13B1C2C01ACA5FD8005C179C /* userCenter */ = {
@@ -484,6 +523,10 @@
 			isa = PBXGroup;
 			children = (
 				13B1C2FD1ACBB56B005C179C /* Settings.storyboard */,
+				1352E0CE1AE76B4D0089EAC8 /* AuthViewController.h */,
+				1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */,
+				1892E3EB1ADBFAAD008A75B1 /* FirstSettingsViewController.h */,
+				1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */,
 				13B1C2FF1ACBBED2005C179C /* SettingsViewController.h */,
 				13B1C3001ACBBED2005C179C /* SettingsViewController.m */,
 				13878AE01AD624B300658F21 /* AlterNicknameViewController.h */,
@@ -502,13 +545,6 @@
 				13B1C3051ACCDA92005C179C /* DemoViewController.xib */,
 			);
 			name = demo;
-			sourceTree = "<group>";
-		};
-		13B1C37C1AD50B70005C179C /* post */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = post;
 			sourceTree = "<group>";
 		};
 		13BE56731ABA6F2700379ACD /* login */ = {
@@ -548,6 +584,58 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
+				13B1C2A51ACA4A93005C179C /* app */,
+				13B1C2B01ACA5833005C179C /* vendor */,
+				13B1C2AF1ACA57FD005C179C /* resource */,
+				13B1C2AE1ACA57DE005C179C /* extions */,
+				13B1C2AD1ACA57C2005C179C /* config */,
+				13C58BDC1AB9550600090157 /* Supporting Files */,
+			);
+			path = communityiOS;
+			sourceTree = "<group>";
+		};
+		13C58BDC1AB9550600090157 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				13C58BDD1AB9550600090157 /* Info.plist */,
+				13C58BDE1AB9550600090157 /* main.m */,
+				1842AE6C1ADB77290022D2CB /* PushConfig.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		13C58BF51AB9550700090157 /* communityiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				13C58BF81AB9550700090157 /* communityiOSTests.m */,
+				13C58BF61AB9550700090157 /* Supporting Files */,
+			);
+			path = communityiOSTests;
+			sourceTree = "<group>";
+		};
+		13C58BF61AB9550700090157 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				13C58BF71AB9550700090157 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		188933851AFB5798006329D8 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */,
+				188933881AFB580F006329D8 /* AuthTableViewController.h */,
+				188933891AFB580F006329D8 /* AuthTableViewController.m */,
+			);
+			name = auth;
+			sourceTree = "<group>";
+		};
+		18AF2A2C1AFE615A00CCCDBB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
+				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
 				13B1C3761AD4D817005C179C /* regItem.h */,
 				13B1C3771AD4D817005C179C /* regItem.m */,
 				13B1C35F1AD4D80B005C179C /* forumItem.h */,
@@ -570,44 +658,41 @@
 				8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */,
 				8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */,
 				8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */,
+				184BC71D1AFDB4F500ADABFE /* uncheckPostListItem.h */,
+				184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		18AF2A2D1AFE61CE00CCCDBB /* APITools */ = {
+			isa = PBXGroup;
+			children = (
 				13B1C3781AD4D817005C179C /* StatusTool.h */,
 				13B1C3791AD4D817005C179C /* StatusTool.m */,
 				13B1C3651AD4D80B005C179C /* HttpTool.h */,
 				13B1C3661AD4D80B005C179C /* HttpTool.m */,
-				13B1C2A51ACA4A93005C179C /* app */,
-				13B1C2B01ACA5833005C179C /* vendor */,
-				13B1C2AF1ACA57FD005C179C /* resource */,
-				13B1C2AE1ACA57DE005C179C /* ext */,
-				13B1C2AD1ACA57C2005C179C /* config */,
-				13C58BDC1AB9550600090157 /* Supporting Files */,
+				13B1C2B41ACA58B5005C179C /* APIClient.m */,
+				13B1C2B51ACA58B5005C179C /* APIClient.h */,
 			);
-			path = communityiOS;
+			name = APITools;
 			sourceTree = "<group>";
 		};
-		13C58BDC1AB9550600090157 /* Supporting Files */ = {
+		18AF2A2E1AFE624B00CCCDBB /* PropertyMapper */ = {
 			isa = PBXGroup;
 			children = (
-				13C58BDD1AB9550600090157 /* Info.plist */,
-				13C58BDE1AB9550600090157 /* main.m */,
+				13B1C2BC1ACA5A27005C179C /* KZPropertyMapper.h */,
+				13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */,
 			);
-			name = "Supporting Files";
+			name = PropertyMapper;
 			sourceTree = "<group>";
 		};
-		13C58BF51AB9550700090157 /* communityiOSTests */ = {
+		18AF2A2F1AFE626200CCCDBB /* JPush */ = {
 			isa = PBXGroup;
 			children = (
-				13C58BF81AB9550700090157 /* communityiOSTests.m */,
-				13C58BF61AB9550700090157 /* Supporting Files */,
+				1842ADF31ADB5FEE0022D2CB /* APService.h */,
+				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
 			);
-			path = communityiOSTests;
-			sourceTree = "<group>";
-		};
-		13C58BF61AB9550700090157 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				13C58BF71AB9550700090157 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = JPush;
 			sourceTree = "<group>";
 		};
 		8EF3F7491AD50B0200924975 /* postDetail */ = {
@@ -665,6 +750,15 @@
 		9995B5493DF95E776F0C00A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1842ADF11ADB5FC10022D2CB /* libz.dylib */,
+				1842ADEF1ADB5FB90022D2CB /* Security.framework */,
+				1842ADED1ADB5FAE0022D2CB /* UIKit.framework */,
+				1842ADEB1ADB5FA50022D2CB /* Foundation.framework */,
+				1842ADE91ADB5F960022D2CB /* CoreGraphics.framework */,
+				1842ADE71ADB5F8D0022D2CB /* SystemConfiguration.framework */,
+				1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */,
+				1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */,
+				1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */,
 				265117CBD0FCA383D4E565E6 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -680,6 +774,8 @@
 				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
 				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
 				13B1C33B1AD4D6ED005C179C /* PostList.storyboard */,
+				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
+				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				13B1C3181AD4D6B3005C179C /* FSCollectionView.h */,
 				13B1C3191AD4D6B3005C179C /* FSCollectionView.m */,
 				13B1C31A1AD4D6B3005C179C /* FSCollectionView.storyboard */,
@@ -688,11 +784,12 @@
 				13B1C31D1AD4D6B3005C179C /* FSCollectionViewController.xib */,
 				13B1C31E1AD4D6B3005C179C /* FSViewController.h */,
 				13B1C31F1AD4D6B3005C179C /* FSViewController.m */,
-				A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */,
-				A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */,
 				8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */,
 				8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */,
 				8EF3F7501AD54F5400924975 /* PostReply.storyboard */,
+				184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */,
+				184BC7211AFDB63E00ADABFE /* UserJoinPostListViewController.h */,
+				184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */,
 			);
 			name = post;
 			sourceTree = "<group>";
@@ -757,6 +854,7 @@
 				TargetAttributes = {
 					13C58BD81AB9550600090157 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 2SPA2FSXHP;
 					};
 					13C58BF11AB9550700090157 = {
 						CreatedOnToolsVersion = 6.2;
@@ -798,6 +896,8 @@
 				13B1C3171AD4D674005C179C /* ForumSelectTableViewCell.xib in Resources */,
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
 				13C58BE81AB9550600090157 /* Main.storyboard in Resources */,
+				1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */,
+				188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
 				13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
@@ -811,6 +911,7 @@
 				13B1C2BB1ACA5956005C179C /* demo.xcassets in Resources */,
 				8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */,
 				8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */,
+				184BC7231AFDB63E00ADABFE /* UserJoinPostList.storyboard in Resources */,
 				13B1C3511AD4D6ED005C179C /* PosterTableViewCell.xib in Resources */,
 				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
@@ -864,20 +965,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184BC71F1AFDB4F500ADABFE /* uncheckPostListItem.m in Sources */,
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
+				A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */,
 				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
+				184BC7241AFDB63E00ADABFE /* UserJoinPostListViewController.m in Sources */,
 				13B1C3521AD4D6ED005C179C /* PostImageTableViewCell.m in Sources */,
 				13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */,
 				13B1C3241AD4D6B3005C179C /* FSViewController.m in Sources */,
 				13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */,
+				1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */,
 				13B1C2BE1ACA5A27005C179C /* KZPropertyMapper.m in Sources */,
 				13B1C35D1AD4D6ED005C179C /* TitleTableViewCell.m in Sources */,
 				13B1C35B1AD4D6ED005C179C /* TextTableViewCell.m in Sources */,
 				13B1C2E41ACB7DC5005C179C /* MJRefreshBaseView+CustomActivityIndicator.m in Sources */,
 				13B1C36F1AD4D80B005C179C /* forumListItem.m in Sources */,
 				13B1C37B1AD4D817005C179C /* StatusTool.m in Sources */,
+				1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */,
 				13B1C2EB1ACB7DC5005C179C /* UIView+MJExtension.m in Sources */,
 				13B1C3701AD4D80B005C179C /* forumSetItem.m in Sources */,
 				13B1C3501AD4D6ED005C179C /* PosterTableViewCell.m in Sources */,
@@ -896,6 +1002,7 @@
 				13B1C2E81ACB7DC5005C179C /* MJRefreshHeaderView.m in Sources */,
 				13B1C3201AD4D6B3005C179C /* FSCollectionView.m in Sources */,
 				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
+				1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */,
 				13B1C37A1AD4D817005C179C /* regItem.m in Sources */,
 				13BE56721ABA6F0E00379ACD /* UIViewController+Create.m in Sources */,
 				13B1C3751AD4D80B005C179C /* postListItem.m in Sources */,
@@ -1045,14 +1152,20 @@
 			baseConfigurationReference = 7E639B0AA95704A9F1BEA0E7 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				INFOPLIST_FILE = communityiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1061,14 +1174,20 @@
 			baseConfigurationReference = 735E3463C69F5339C7061D88 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				INFOPLIST_FILE = communityiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

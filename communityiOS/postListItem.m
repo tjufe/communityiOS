@@ -23,8 +23,10 @@
              @"status" : @"status",
              @"msg" : @"msg",
              @"data" : @{
-                     @"PostList":@"PostList"
-                    },
+                     @"PostList":@"PostList",
+                     @"total":@"total"
+
+                    }
              };
 }
 

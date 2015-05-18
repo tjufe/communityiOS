@@ -133,6 +133,8 @@
     [StatusTool statusToolGetUserLoginWithName:[self.phoneTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
                                       PassWord:[self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
                                        Success:^(id object) {
+                                           
+                                           NSLog(@"%@",object);
                                            [self checkLoginResult:object];
                                            
                                        } failurs:^(NSError *error) {
@@ -187,6 +189,8 @@
     [defaults setObject:loginItem.head_portrait_url forKey:@"HeadPortraitUrl"];
     [defaults setObject:loginItem.user_permission forKey:@"UserPermission"];
     [defaults setObject:loginItem.login_password forKey:@"LoginPassword"];
+    [defaults setObject:loginItem.account_status forKey:@"AccountStatus"];
+    [defaults setObject:loginItem.moderator_of_forum_list forKey:@"moderator_of_forum_list"];
     [defaults setBool:YES forKey:@"Logged"];
     [defaults synchronize];  //保持同步
 }
@@ -197,4 +201,7 @@
     [alert show];
 }
 
+- (IBAction)View_TouchDown:(id)sender {
+    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
 @end

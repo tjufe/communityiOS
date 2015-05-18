@@ -7,6 +7,7 @@
 //
 
 #import "AlterNicknameViewController.h"
+#import "StatusTool.h"
 
 @interface AlterNicknameViewController ()
 
@@ -17,6 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange) name:UITextFieldTextDidChangeNotification object:self.tf_Nickname];
+}
+
+-(void)textChange{
+    self.saveBtn.enabled = (self.tf_Nickname.text.length);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,7 +33,17 @@
 
 #pragma mark --保存修改昵称
 - (IBAction)saveNickname:(id)sender {
-    NSString *nickname=_tf_Nickname.text;
+    //读取本地存储的ID
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *user_id = [defaults valueForKey:@"UserID"];
+    [defaults setObject:self.tf_Nickname.text forKey:@"UserNickname"];
+    
+    [StatusTool statusToolCorrectNickNameWithNickName:self.tf_Nickname.text UserID:user_id Success:^(id object) {
+        //提交表单，不做处理
+    } failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -40,4 +57,8 @@
 }
 */
 
+- (IBAction)View_TouchDown:(id)sender {
+    
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
 @end
