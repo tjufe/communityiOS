@@ -80,7 +80,7 @@ NSInteger page_filter;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    return  postTitleData.count;
+    return  self.PostListArray.count;
     
 }
 
@@ -484,16 +484,15 @@ NSInteger page_filter;
                     
                     if([self.forum_set_item.site_value rangeOfString:user_status].location!=NSNotFound){
                          self.ISNEWPOST = @"Y";
-                         break;
+                    //     break;
                     }
                     
                     //版主
-                    if(self.moderator!=nil){
+                    else if(self.moderator!=nil){
                          for(int m=0;m<[self.moderator count];m++){
                               if([[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
                                    self.ISNEWPOST = @"Y";
-                                   self.ISBrowse = @"N";
-                                   break;
+                     //              break;
                               }
                               
                          }
@@ -521,11 +520,19 @@ NSInteger page_filter;
                if([self.forum_set_item.site_name isEqualToString:site_isbrowse]){
                     if([self.forum_set_item.site_value containsString:user_status]){
                          self.ISBrowse = @"Y";
-                    }else{
-                         if(![self.ISBrowse isEqualToString:@"Y"]){
-                              self.ISBrowse = NO;
+                       //  break;
+                    }
+                   else if(self.moderator!=nil){
+                         for(int m=0;m<[self.moderator count];m++){
+                              if([[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
+                                   self.ISBrowse = @"Y";
+                              //     break;
+                              }
+                              
                          }
                     }
+
+                    
                }
           }
           }
@@ -681,16 +688,24 @@ NSInteger page_filter;
                          if([self.pitem.poster_id isEqualToString:self.UserID]||
                             [self.pitem.set_top isEqualToString:@"是"]){
                               [self.PostListArray addObject:self.pitem];
+                              if(self.PostListArray){
+                                   [self getData2];
+                              }
+                              
                          }
                          }else{
                              [self.PostListArray addObject:self.pitem];
+                              if(self.PostListArray){
+                                   [self getData2];
+                              }
+
                          }
-                    }else{
-                    [self.PostListArray addObject:self.pitem];
-                    }
-                    if(self.PostListArray){
-                         [self getData2];
-                    }
+                     }else{
+                         [self.PostListArray addObject:self.pitem];
+                          if(self.PostListArray){
+                               [self getData2];
+                          }
+                     }
                }
           }else{
                
@@ -699,19 +714,26 @@ NSInteger page_filter;
                          if([self.pitem.poster_id isEqualToString:self.UserID]||
                             [self.pitem.set_top isEqualToString:@"是"]){
                               [self.PostListArray addObject:self.pitem];
+                              if(self.PostListArray){
+                                   [self getData2];
+                              }
                          }
                     }else{
                          [self.PostListArray addObject:self.pitem];
+                         if(self.PostListArray){
+                              [self getData2];
+                         }
                     }
                }else{
                     [self.PostListArray addObject:self.pitem];
+                    if(self.PostListArray){
+                         [self getData2];
+                    }
                }
-               if(self.PostListArray){
-                   [self getData2];
-               }
+               
           }
-          
      }
+          
 
      }else{//待审核
           for (int i = 0; i < [self.uncheck_post_list_item.PostList count]; i++) {
@@ -719,7 +741,7 @@ NSInteger page_filter;
                if(page_filter==2){
                     if(![self.PostListArray containsObject:self.pitem]){
                          [self.PostListArray addObject:self.pitem];
-                         [self getData2];
+                          [self getData2];
                     }
                }else{
                     [self.PostListArray addObject:self.pitem];
@@ -727,13 +749,15 @@ NSInteger page_filter;
                }
                
           }
+         
 
      }
 }
 
 #pragma mark------分别加载个部分数据
 -(void)getData2{
-
+     
+     
      
      //判断权限（我的话题）
 
@@ -835,7 +859,7 @@ NSInteger page_filter;
      }else{
           [self.Post_Rpply_Array addObject:@"0"];
      }
-     
+  
 
 }
 

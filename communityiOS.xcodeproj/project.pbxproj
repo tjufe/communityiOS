@@ -120,6 +120,7 @@
 		A0539A641B05E65800DC33BB /* newPostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0539A631B05E65800DC33BB /* newPostItem.m */; };
 		A05C7D3A1AF86D7400838247 /* UserJoinPostList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */; };
 		A0CA6DEF1AFC5E3400F88237 /* UserJoinPostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */; };
+		A0CB290B1B09BB2900082FF0 /* editPostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CB290A1B09BB2900082FF0 /* editPostItem.m */; };
 		A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */; };
 		A0D39DFA1AF76419007DEFA0 /* uncheckPostListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D39DF91AF76419007DEFA0 /* uncheckPostListItem.m */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
@@ -332,6 +333,8 @@
 		A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserJoinPostList.storyboard; sourceTree = "<group>"; };
 		A0CA6DED1AFC5E3400F88237 /* UserJoinPostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserJoinPostListViewController.h; sourceTree = "<group>"; };
 		A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserJoinPostListViewController.m; sourceTree = "<group>"; };
+		A0CB29091B09BB2900082FF0 /* editPostItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editPostItem.h; sourceTree = "<group>"; };
+		A0CB290A1B09BB2900082FF0 /* editPostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editPostItem.m; sourceTree = "<group>"; };
 		A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deletepostItem.h; sourceTree = "<group>"; };
 		A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deletepostItem.m; sourceTree = "<group>"; };
 		A0D39DF81AF76419007DEFA0 /* uncheckPostListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uncheckPostListItem.h; sourceTree = "<group>"; };
@@ -686,6 +689,8 @@
 			children = (
 				A0539A621B05E65800DC33BB /* newPostItem.h */,
 				A0539A631B05E65800DC33BB /* newPostItem.m */,
+				A0CB29091B09BB2900082FF0 /* editPostItem.h */,
+				A0CB290A1B09BB2900082FF0 /* editPostItem.m */,
 				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
 				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
 				13B1C3761AD4D817005C179C /* regItem.h */,
@@ -1063,6 +1068,7 @@
 				13B1C35B1AD4D6ED005C179C /* TextTableViewCell.m in Sources */,
 				13B1C2E41ACB7DC5005C179C /* MJRefreshBaseView+CustomActivityIndicator.m in Sources */,
 				13B1C36F1AD4D80B005C179C /* forumListItem.m in Sources */,
+				A0CB290B1B09BB2900082FF0 /* editPostItem.m in Sources */,
 				13B1C37B1AD4D817005C179C /* StatusTool.m in Sources */,
 				1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */,
 				13B1C2EB1ACB7DC5005C179C /* UIView+MJExtension.m in Sources */,

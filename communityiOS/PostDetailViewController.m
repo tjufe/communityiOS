@@ -28,7 +28,7 @@
 
 
 
-@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate>
+@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
 
@@ -102,6 +102,8 @@ float applyHeight = 0;
 float imageHeight = 0;
 
 bool isModerator = NO;//是否是版主
+
+
 
 
 #pragma mark------下方快速回复
@@ -326,6 +328,11 @@ bool isModerator = NO;//是否是版主
 -(void)addpostItem2:(postItem *)PostItem{
     self.post_item = PostItem;
 }
+#pragma mark------实现PostEditViewControllerDelegate
+-(void)addpostItem3:(postItem *)PostItem{
+    self.post_item = PostItem;
+}
+
 
 - (void)viewDidLoad {
 //    self.scrollview.frame.size.width = self.view.frame.size.width;
@@ -843,7 +850,7 @@ bool isModerator = NO;//是否是版主
     //传值
     PEVC.ED_FLAG = @"2";//编辑帖子
     PEVC.post_item = self.post_item;//帖子详情
-    PEVC.forum_item = _forum_item;
+//    PEVC.forum_item = _forum_item;
     
     [self.navigationController pushViewController:PEVC animated:YES];
     [self.operlist removeFromSuperview];

@@ -17,9 +17,9 @@
 #import "postInfoItem.h"
 #import "deletepostItem.h"
 #import "uncheckPostListItem.h"
-
+#import "newPostItem.h"
 #import "replyInfoListItem.h"
-
+#import "editPostItem.h"
 #import "ifApplyItem.h"
 #import "postApplyItem.h"
 
@@ -260,49 +260,55 @@
 }
 
 //请求发送新帖
-+(void)statusToolPostNewPostWithcom_id:(NSString *)community_id  forumID:(NSString *)forum_id posterID:(NSString *)poster_id postTitle:(NSString *)post_title postText:(NSString *)post_text Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
-    
-    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
-    [firstDic setObject:community_id forKey:@"community_id"];
-    [firstDic setObject:forum_id forKey:@"forum_id"];
-    [firstDic setObject:poster_id forKey:@"poster_id"];
-    [firstDic setObject:post_title forKey:@"post_title"];
-    [firstDic setObject:post_text forKey:@"post_text"];
-    [firstDic setObject:main_image_url forKey:@"main_image_url"];
-    [firstDic setObject:chain_flag forKey:@"chain_flag"];
-    [firstDic setObject:chain_name forKey:@"chain_name"];
-    [firstDic setObject:chain_url forKey:@"chain_url"];
-    [firstDic setObject:push_member forKey:@"push_member"];
-    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
-    [secondDic  setObject:firstDic forKey:@"Data"];
-    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
-    [thirdDic setObject:secondDic forKey:@"param"];
-    [thirdDic setObject:@"NewPost" forKey:@"method"];
-    
-    [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        // no response
-        
-    } failure:^(NSError *error) {
-        if (failure == nil) return;
-        failure(error);
-    }];
-}
+//+(void)statusToolPostNewPostWithcom_id:(NSString *)community_id  forumID:(NSString *)forum_id posterID:(NSString *)poster_id postTitle:(NSString *)post_title postText:(NSString *)post_text Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+//    
+//    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+//    [firstDic setObject:community_id forKey:@"community_id"];
+//    [firstDic setObject:forum_id forKey:@"forum_id"];
+//    [firstDic setObject:poster_id forKey:@"poster_id"];
+//    [firstDic setObject:post_title forKey:@"post_title"];
+//    [firstDic setObject:post_text forKey:@"post_text"];
+//    [firstDic setObject:main_image_url forKey:@"main_image_url"];
+//    [firstDic setObject:chain_flag forKey:@"chain_flag"];
+//    [firstDic setObject:chain_name forKey:@"chain_name"];
+//    [firstDic setObject:chain_url forKey:@"chain_url"];
+//    [firstDic setObject:push_member forKey:@"push_member"];
+//    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+//    [secondDic  setObject:firstDic forKey:@"Data"];
+//    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+//    [thirdDic setObject:secondDic forKey:@"param"];
+//    [thirdDic setObject:@"NewPost" forKey:@"method"];
+//    
+//    [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
+//        // no response
+//        
+//    } failure:^(NSError *error) {
+//        if (failure == nil) return;
+//        failure(error);
+//    }];
+//}
 //请求编辑帖子
-+(void)statusToolPostEditWithcomID:(NSString *)community_id forumID:(NSString *)forum_id postTitle:(NSString *)post_title Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushFlag:(NSString*)push_flag userID:(NSString *)user_id postText:(NSString *)post_text editFlag:(NSString *)edit_flag posterID:(NSString *)poster_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
++(void)statusToolEditPostWithcID:(NSString *)communityID fID:(NSString *)forumID postID:(NSString *)post_id PosterID:(NSString *)posterID postTitle:(NSString *)post_title postText:(NSString *)post_text imgURL:(NSString *)img_url chain:(NSString *)chain chainName:(NSString *)chain_name chainURL:(NSString *)chain_url apply:(NSString *)apply limApplyNum:(NSString*)limit_apply_num needCheck:(NSString *)need_check Checked:(NSString *)checked Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
-    [firstDic setObject:community_id forKey:@"community_id"];
-    [firstDic setObject:forum_id forKey:@"forum_id"];
+    [firstDic setObject:communityID forKey:@"community_id"];
+    [firstDic setObject:forumID forKey:@"forum_id"];
+    [firstDic setObject:post_id forKey:@"post_id"];
+    [firstDic setObject:posterID forKey:@"poster_id"];
     [firstDic setObject:post_title forKey:@"post_title"];
-    [firstDic setObject:main_image_url forKey:@"main_image_url"];
-    [firstDic setObject:chain_flag forKey:@"chain_flag"];
+    [firstDic setObject:post_text forKey:@"post_text"];
+    [firstDic setObject:img_url forKey:@"main_image_url"];
+    [firstDic setObject:chain forKey:@"chain_flag"];
     [firstDic setObject:chain_name forKey:@"chain_name"];
     [firstDic setObject:chain_url forKey:@"chain_url"];
-    [firstDic setObject:push_flag forKey:@"push_flag"];
-    [firstDic setObject:user_id forKey:@"user_id"];
-    [firstDic setObject:post_text forKey:@"post_text"];
-    [firstDic setObject:edit_flag forKey:@"edit_flag"];
-    [firstDic setObject:poster_id forKey:@"poster_id"];
+    [firstDic setObject:apply forKey:@"open_apply"];
+    [firstDic setObject:limit_apply_num forKey:@"limit_apply_num"];
+    [firstDic setObject:need_check forKey:@"need_check"];
+    [firstDic setObject:checked forKey:@"checked"];
+
+  
+   
     NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
     [secondDic  setObject:firstDic forKey:@"Data"];
     NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
@@ -311,7 +317,11 @@
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
         // no response
-        
+        NSData *data = [[NSData alloc]initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        editPostItem *edit_post_item = [editPostItem createItemWitparametes:dic];
+        success(edit_post_item);
+
     } failure:^(NSError *error) {
         if (failure == nil) return;
         failure(error);
@@ -480,7 +490,10 @@
     [HttpTool postWithparams:thirdDic
                      success:^(id responseObject) {
                          // no response
-                         
+                         NSData *data = [[NSData alloc]initWithData:responseObject];
+                         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                         newPostItem *new_post_item = [newPostItem createItemWitparametes:dic];
+                         success(new_post_item);
                      } failure:^(NSError *error) {
                          if (failure == nil) return;
                          failure(error);

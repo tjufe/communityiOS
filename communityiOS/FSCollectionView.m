@@ -120,6 +120,10 @@ ForumSelectTableViewCell *cell;
           _Chain.enabled = YES;
           _Chain.hidden = NO;
       }
+    index = [NSIndexPath indexPathForRow:4 inSection:0];
+    indexArrary = [NSArray arrayWithObjects:index,nil];
+    //刷新指定行
+    [_tb reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
       if(![_ISAPPLY1 isEqualToString:@"Y"]){
         _Apply.enabled = NO;
         _Apply.hidden = YES;
@@ -127,7 +131,10 @@ ForumSelectTableViewCell *cell;
           _Apply.enabled = YES;
           _Apply.hidden = NO;
       }
-
+    index = [NSIndexPath indexPathForRow:5 inSection:0];
+    indexArrary = [NSArray arrayWithObjects:index,nil];
+    //刷新指定行
+    [_tb reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
     
 
 }
