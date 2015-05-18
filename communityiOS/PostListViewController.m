@@ -381,6 +381,7 @@ NSInteger page_filter;
 //    self.navigationItem.rightBarButtonItem = rightItem;
      
 
+
      //               if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"普通用户"].location!=NSNotFound){
 
 //                    if (status_normal) {

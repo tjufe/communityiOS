@@ -383,7 +383,7 @@
 
 
 //请求回复列表
-+(void)statusToolReplyListWithPostID:(NSString *)postID Page:(NSNumber *)page Rows:(NSNumber *)rows  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
++(void)statusToolGetReplyListWithPostID:(NSString *)postID Page:(NSNumber *)page Rows:(NSNumber *)rows  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
     [firstDic setObject:postID forKey:@"id"];
@@ -423,7 +423,7 @@
     [thirdDic setObject:@"PostReply" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        // no response
+        success(responseObject);
         
     } failure:^(NSError *error) {
         if (failure == nil) return;

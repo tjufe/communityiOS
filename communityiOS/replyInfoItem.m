@@ -21,10 +21,13 @@
 {
     return @{
              
-             @"nickname":@"nickname",
-             @"date":@"date",
-             @"content":@"content"
-             
+             @"user_nickname":@"user_nickname",
+             @"post_reply_date":@"post_reply_date",
+             @"reply_text":@"reply_text",
+             @"post_reply_man_id":@"post_reply_man_id",
+             @"head_portrait_url":@"head_portrait_url",
+             @"post_reply_id":@"post_reply_id",
+             @"deleted":@"deleted"
              };
 }
 

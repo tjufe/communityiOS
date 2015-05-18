@@ -11,9 +11,13 @@
 
 @interface replyInfoItem : NSObject
 
-@property (nonatomic,strong)NSString *nickname;
-@property (nonatomic,strong)NSString *date;
-@property (nonatomic,strong)NSString *content;
+@property (nonatomic,strong)NSString *user_nickname;
+@property (nonatomic,strong)NSString *post_reply_date;
+@property (nonatomic,strong)NSString *reply_text;
+@property (nonatomic,strong)NSString *post_reply_man_id;
+@property (nonatomic,strong)NSString *head_portrait_url;
+@property (nonatomic,strong)NSString *post_reply_id;
+@property (nonatomic,strong)NSString *deleted;
 
 
 +(replyInfoItem *)createItemWitparametes:(NSDictionary*)dic;

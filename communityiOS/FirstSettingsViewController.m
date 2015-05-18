@@ -213,7 +213,6 @@
         
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSLog(@"^^^^^^^^^^%@",responseObject[@"photourl"]);
             if (responseObject != nil) {
                 [self refreshDB:responseObject[@"photourl"]];
             }
