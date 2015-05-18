@@ -27,6 +27,7 @@
 #import "UIImageView+WebCache.h"
 #import "RegistViewController.h"
 
+#import "SlideInfoItem.h"
 
 
 
@@ -59,6 +60,7 @@
 @property (strong,nonatomic) NSString *UserID;//当前用户id
 @property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
 
+@property (nonatomic,strong) NSArray *listSlide;
 
 @end
 
@@ -135,7 +137,16 @@ NSArray *forum;
   
     self.navigationController.delegate=self;
 
-  
+    [self initSlide];
+    [self addTimer];
+    [self reloadData];
+    [self autoLogin];
+    
+    
+}
+
+#pragma mark --初始化轮播图
+-(void)initSlide{
     // Do any additional setup after loading the view, typically from a nib.
     //    图片的宽
     CGFloat imageW = self.view.frame.size.width;
@@ -146,40 +157,75 @@ NSArray *forum;
     CGFloat imageY = 0;
     //    图片中数
     NSInteger totalCount = 3;
-    //   1.添加5张图片
-    for (int i = 0; i < totalCount; i++) {
-        UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        
-        //        图片X
-        CGFloat imageX = i * imageW;
-        //        设置frame
-        imageView.frame = CGRectMake(imageX, imageY, imageW, imageH);
-        //        设置图片
-        NSString *name = [NSString stringWithFormat:@"image_0%d", i + 1];
-        imageView.image = [UIImage imageNamed:name];
-        //        隐藏指示条
-        self.mainScrollView.showsHorizontalScrollIndicator = NO;
-        
-        [self.mainScrollView addSubview:imageView];
-    }
+    [StatusTool statusToolGetSlideListWithCommunityID:@"0001" Success:^(NSArray *array) {
+        NSInteger i = 0;
+        self.listSlide = array;
+        //   1.添加图片
+        for(SlideInfoItem *row in array){
+            if(i<totalCount){
+                UIImageView *imageView = [[UIImageView alloc] init];
+                imageView.contentMode = UIViewContentModeScaleAspectFit;
+                //        图片X
+                CGFloat imageX = i * imageW;
+                //        设置frame
+                imageView.frame = CGRectMake(imageX, imageY, imageW, imageH);
+                //        设置图片
+//                NSString *name = [NSString stringWithFormat:@"image_0%d", i + 1];
+//                imageView.image = [UIImage imageNamed:name];
+                NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,row.main_image_url];
+                NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+                NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+                [imageView sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                    if(image!=nil){
+                        imageView.image = image;
+                    }
+                }];
+                UILabel *titleLabel = [[UILabel alloc]init];
+                titleLabel.frame = CGRectMake(imageX, imageY, imageW, 30);
+                NSString *t=[@"  " stringByAppendingString:row.title];
+                titleLabel.text =t;
+                [titleLabel setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];
+                [titleLabel setTextColor:[UIColor whiteColor]];
+                
+                //        隐藏指示条
+                self.mainScrollView.showsHorizontalScrollIndicator = NO;
+                
+                [self.mainScrollView addSubview:imageView];
+                [self.mainScrollView addSubview:titleLabel];
+                
+                [imageView setUserInteractionEnabled:YES];
+                [imageView setTag:i];
+                UITapGestureRecognizer *singleTap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(GoThisPost:)];
+                [imageView addGestureRecognizer:singleTap3];
+                i++;
+            }else{
+                break;
+            }
+            //    2.设置scrollview的滚动范围
+            CGFloat contentW = totalCount *imageW;
+            //不允许在垂直方向上进行滚动
+            self.mainScrollView.contentSize = CGSizeMake(contentW, 0);
+            
+            //    3.设置分页
+            self.mainScrollView.pagingEnabled = YES;
+            
+            //    4.监听scrollview的滚动
+            self.mainScrollView.delegate = self;
+        }
+    } failurs:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
     
-    //    2.设置scrollview的滚动范围
-    CGFloat contentW = totalCount *imageW;
-    //不允许在垂直方向上进行滚动
-    self.mainScrollView.contentSize = CGSizeMake(contentW, 0);
-    
-    //    3.设置分页
-    self.mainScrollView.pagingEnabled = YES;
-    
-    //    4.监听scrollview的滚动
-    self.mainScrollView.delegate = self;
-    
-    [self addTimer];
-    [self reloadData];
-    [self autoLogin];
-    
-    
+}
+
+-(void)GoThisPost:(UIGestureRecognizer *)gestureRecognizer
+{
+    UIImageView *view = [gestureRecognizer view];
+    NSInteger *index = view.tag;
+    SlideInfoItem *s = [self.listSlide objectAtIndex:index];
+    NSString *postID = s.post_id;
+    NSLog(@"%@",postID);
 }
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {

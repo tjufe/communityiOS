@@ -18,6 +18,9 @@
 #import "deletepostItem.h"
 #import "uncheckPostListItem.h"
 
+#import "SlideInfoList.h"
+#import "SlideInfoItem.h"
+
 #import "replyInfoListItem.h"
 
 #import "ifApplyItem.h"
@@ -576,6 +579,33 @@
         failure(error);
     }];
 
+}
+
+
+//hmx05181056 加载轮播图
++(void)statusToolGetSlideListWithCommunityID:(NSString *)community_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:community_id forKey:@"community_id"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"GetSlideList" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        SlideInfoList *list = [SlideInfoList createItemWitparametes:dic];
+        NSMutableArray *ListArray = [NSMutableArray array];
+        
+        for(NSDictionary *dic in list.slideList){
+            [ListArray addObject:[SlideInfoItem createItemWitparametes:dic]];
+        }
+        success(ListArray);
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
 }
 
 

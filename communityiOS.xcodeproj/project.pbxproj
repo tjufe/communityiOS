@@ -109,6 +109,8 @@
 		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
 		8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */; };
+		8EEB4BF31B098E9A00B77265 /* SlideInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB4BF21B098E9A00B77265 /* SlideInfoItem.m */; };
+		8EEB4BF61B098F7D00B77265 /* SlideInfoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB4BF51B098F7D00B77265 /* SlideInfoList.m */; };
 		8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */; };
 		8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48801AD8BA3F002E70DA /* postInfoItem.m */; };
 		8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */; };
@@ -313,6 +315,10 @@
 		7E639B0AA95704A9F1BEA0E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
 		8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
+		8EEB4BF11B098E9A00B77265 /* SlideInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideInfoItem.h; sourceTree = "<group>"; };
+		8EEB4BF21B098E9A00B77265 /* SlideInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideInfoItem.m; sourceTree = "<group>"; };
+		8EEB4BF41B098F7D00B77265 /* SlideInfoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideInfoList.h; sourceTree = "<group>"; };
+		8EEB4BF51B098F7D00B77265 /* SlideInfoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideInfoList.m; sourceTree = "<group>"; };
 		8EEC487C1AD8B9CF002E70DA /* ifApplyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ifApplyItem.h; sourceTree = "<group>"; };
 		8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ifApplyItem.m; sourceTree = "<group>"; };
 		8EEC487F1AD8BA3F002E70DA /* postInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postInfoItem.h; sourceTree = "<group>"; };
@@ -708,6 +714,10 @@
 				13C865E31B05C0B5001D34B4 /* postApplyItem.m */,
 				13C865E51B05D4A0001D34B4 /* endApplyItem.h */,
 				13C865E61B05D4A0001D34B4 /* endApplyItem.m */,
+				8EEB4BF11B098E9A00B77265 /* SlideInfoItem.h */,
+				8EEB4BF21B098E9A00B77265 /* SlideInfoItem.m */,
+				8EEB4BF41B098F7D00B77265 /* SlideInfoList.h */,
+				8EEB4BF51B098F7D00B77265 /* SlideInfoList.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -1055,6 +1065,7 @@
 				13B1C35B1AD4D6ED005C179C /* TextTableViewCell.m in Sources */,
 				13B1C2E41ACB7DC5005C179C /* MJRefreshBaseView+CustomActivityIndicator.m in Sources */,
 				13B1C36F1AD4D80B005C179C /* forumListItem.m in Sources */,
+				8EEB4BF31B098E9A00B77265 /* SlideInfoItem.m in Sources */,
 				13B1C37B1AD4D817005C179C /* StatusTool.m in Sources */,
 				1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */,
 				13B1C2EB1ACB7DC5005C179C /* UIView+MJExtension.m in Sources */,
@@ -1076,6 +1087,7 @@
 				13D2471C1B043DE200717780 /* EAColourfulProgressView.m in Sources */,
 				13B1C30A1ACCFE98005C179C /* GGAddressPickerHelper.m in Sources */,
 				13B1C2E81ACB7DC5005C179C /* MJRefreshHeaderView.m in Sources */,
+				8EEB4BF61B098F7D00B77265 /* SlideInfoList.m in Sources */,
 				13B1C3201AD4D6B3005C179C /* FSCollectionView.m in Sources */,
 				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
 				1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */,

@@ -81,7 +81,8 @@ typedef void(^StatusFailurs)(NSError * error);
 //结束报名操作
 +(void)statusToolEndApplyWithcommunity_id:(NSString *)community_id forum_id:(NSString *)forum_id post_id:(NSString *)post_id user_id:(NSString *)user_id  Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
-
+//hmx05181051 加载轮播图
++(void)statusToolGetSlideListWithCommunityID:(NSString *)community_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 
 @end
