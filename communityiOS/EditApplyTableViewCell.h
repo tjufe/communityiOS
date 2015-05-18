@@ -10,5 +10,6 @@
 
 @interface EditApplyTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *limitApplyNum;
+@property (weak, nonatomic) IBOutlet UILabel *limitApplyNumLab;
 
 @end

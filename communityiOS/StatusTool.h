@@ -42,11 +42,8 @@ typedef void(^StatusFailurs)(NSError * error);
  */
 +(void)statusToolGetPostRelatedInfoWithpostID:(NSString *)post_id  poster_ID:(NSString *)poster_id community_ID:(NSString *)community_id forum_ID:(NSString *)forum_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
-//请求发送新帖
-+(void)statusToolPostNewPostWithcom_id:(NSString *)community_id  forumID:(NSString *)forum_id posterID:(NSString *)poster_id postTitle:(NSString *)post_title postText:(NSString *)post_text Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushMember:(NSString*)push_member Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
-
 //请求编辑帖子
-+(void)statusToolPostEditWithcomID:(NSString *)community_id forumID:(NSString *)forum_id postTitle:(NSString *)post_title Image:(NSString*)main_image_url chainFlag:(NSString *)chain_flag chainName:(NSString *)chain_name chainURL:(NSString *)chain_url pushFlag:(NSString*)push_flag userID:(NSString *)user_id postText:(NSString *)post_text editFlag:(NSString *)edit_flag posterID:(NSString *)poster_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
++(void)statusToolEditPostWithcID:(NSString *)communityID fID:(NSString *)forumID postID:(NSString *)post_id PosterID:(NSString *)posterID postTitle:(NSString *)post_title postText:(NSString *)post_text imgURL:(NSString *)img_url chain:(NSString *)chain chainName:(NSString *)chain_name chainURL:(NSString *)chain_url apply:(NSString *)apply limApplyNum:(NSString*)limit_apply_num needCheck:(NSString *)need_check Checked:(NSString *)checked Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 //请求帖子操作
 +(void)statusToolPostOperateWithcommunityID:(NSString *)community_id forumID:(NSString *)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Flag:(NSNumber *)flag Success:(StatusSuccess)success failurs:(StatusFailurs)failure;

@@ -11,5 +11,7 @@
 @interface EditChainTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *chainName;
 @property (weak, nonatomic) IBOutlet UILabel *chainUrl;
+@property (weak, nonatomic) IBOutlet UILabel *chainNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *chainUrlLab;
 
 @end
