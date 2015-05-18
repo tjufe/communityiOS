@@ -134,9 +134,13 @@
             NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
             NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
             [self.imgAvatar sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                NSData *imageData = UIImageJPEGRepresentation(image, 1);
-                [self saveImage:imageData WithName:fullPathToFile];
-                [self initPortraitWithImage:image];
+                if (image != nil) {
+                    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                    [self saveImage:imageData WithName:fullPathToFile];
+                    [self initPortraitWithImage:image];
+                }else{
+                    [self initPortraitWithImage:[UIImage imageNamed:@"icon_acatar_default_r"]];
+                }
             }];
         }
         //判断是否是管理员，显示“实名认证”图标

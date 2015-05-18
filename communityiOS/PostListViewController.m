@@ -36,9 +36,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *pltable;
 @property(strong,nonatomic)postItem *pitem;
 @property(strong,nonatomic)NSMutableArray *PostListArray;
+@property (strong,nonatomic) postInfoItem *post_info_item;
+
 @property(strong,nonatomic)postListItem *post_list_item;
 @property(strong,nonatomic)uncheckPostListItem *uncheck_post_list_item;//待审核帖子列表
-@property (strong,nonatomic) postInfoItem *post_info_item;
 @property (strong,nonatomic) NSMutableArray *postinfo;
 @property (strong,nonatomic) forumSetItem *forum_set_item;//版块设置
 @property (strong,nonatomic) NSMutableArray *Poster_Nic_Array;//发帖人昵称数组
@@ -380,6 +381,7 @@ NSInteger page_filter;
 //    self.navigationItem.rightBarButtonItem = rightItem;
      
 
+
      //               if([self.forum_set_item.site_name isEqualToString:site_newpost_user]&&[self.forum_set_item.site_value rangeOfString:@"普通用户"].location!=NSNotFound){
 
 //                    if (status_normal) {
@@ -436,6 +438,7 @@ NSInteger page_filter;
     postDateData = [[NSMutableArray alloc]init];
     postImageData = [[NSMutableArray alloc]init];
     postSetTopData = [[NSMutableArray alloc]init];
+
     self.postinfo = [[NSMutableArray alloc]init];
     self.Poster_Nic_Array = [[NSMutableArray alloc]init];
     self.Poster_Apply_Array = [[NSMutableArray alloc]init];
@@ -1067,7 +1070,7 @@ NSInteger page_filter;
     PEVC.forum_item = _forum_item;
     PEVC.ED_FLAG =@"1";// 当前版块下发帖
     [self.navigationController pushViewController:PEVC animated:YES];
-   
+
 }
 
 

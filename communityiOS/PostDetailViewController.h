@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "forumItem.h"
 #import "postItem.h"
+#import "forumSetItem.h"
+
 
 
 
@@ -20,6 +22,7 @@
 
 
 @property(strong,nonatomic)forumItem *forum_item;
+
 @property (weak, nonatomic) IBOutlet UILabel *replyNum;
 @property (weak, nonatomic) IBOutlet UIImageView *replyImage;
 @property(strong,nonatomic) NSArray *forumList;//版块列表

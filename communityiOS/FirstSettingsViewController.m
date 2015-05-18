@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *portraitImage;
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *authButton;
+@property (weak, nonatomic) IBOutlet UILabel *authLabel;
 @end
 
 @implementation FirstSettingsViewController
@@ -29,14 +31,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initPortraitWithImage:[self loadImageOfDoc]];
+    [self initAuthUI];
     
 }
 
+#pragma mark--------初始化实名认证相关控件
+- (void)initAuthUI {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *strUserPermission = [defaults valueForKey:@"UserPermission"];
+    if(strUserPermission!=nil){
+        if([strUserPermission compare:@"认证用户"] == NSOrderedSame){
+            self.authLabel.text = @"已认证";
+            [self.authButton setEnabled:NO];
+        }
+    }
+}
 
 //刷新昵称
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.nickNameLabel.text = [defaults valueForKey:@"UserNickname"];
 }
 
@@ -199,7 +213,6 @@
         
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSLog(@"^^^^^^^^^^%@",responseObject[@"photourl"]);
             if (responseObject != nil) {
                 [self refreshDB:responseObject[@"photourl"]];
             }

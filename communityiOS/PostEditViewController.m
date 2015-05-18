@@ -58,6 +58,7 @@
 @property (strong,nonatomic)NSString *ISCHECK;
 //@property (strong,nonatomic)NSString *ISNEWPOST;
 
+
 @property (strong,nonatomic)NSString *select_forum_id;//选择的版块id
 @property (strong,nonatomic)NSString *select_forum_name;//选择的版块名称
 @property (strong,nonatomic)NSIndexPath *select_row;
@@ -391,6 +392,7 @@ NSString *num3 ;
             self.fs.alpha = 1;
             [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
         }];
+
             [self.fs getcelltext:indexPath:self.PEtableview];
             
             
@@ -729,6 +731,7 @@ NSString *num3 ;
     self.ISAPPLY = @"N";
     self.ISCHAIN =@"N";
     self.ISCHECK = @"N";
+
     //    self.ISNEWPOST = @"N";
         if(_forum_item.ForumSetlist!=nil){
             for(int i=0;i < [_forum_item.ForumSetlist count];i++){

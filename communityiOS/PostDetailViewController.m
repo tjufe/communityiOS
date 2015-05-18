@@ -90,6 +90,7 @@
 @end
 
 @implementation PostDetailViewController
+
 //int count=0;//用于菜单点击计数
 
 int alert = 0;//用于警告框UIAlertView计数
@@ -111,6 +112,8 @@ bool isModerator = NO;//是否是版主
     
     PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
     PEVC.postItem = self.post_item;
+    PEVC.forum_set_item = self.forum_item;
+    PEVC.forum_item = self.forum_item;
     [self.navigationController pushViewController:PEVC animated:YES];
     
     
@@ -464,6 +467,7 @@ bool isModerator = NO;//是否是版主
     
     self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
+
 -(void)setMenu{
     //下拉菜单
     self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 150)];
