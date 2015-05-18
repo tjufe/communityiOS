@@ -42,7 +42,6 @@
 @property (nonatomic) BOOL havePower;
 @property (nonatomic,strong) NSMutableArray *forumSetArray;
 
-- (IBAction)viewTouchDown:(id)sender;
 
 
 @end
@@ -89,9 +88,22 @@ int reply_page_filter = 0;
     }
     [self setupRefreshing];
     [self loadReplyListData];
+    
+    //添加手势，点击屏幕其他区域关闭键盘的操作
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gesture];
+
 }
 #pragma mark-
 #pragma mark----------------------防止键盘遮盖---------------------------
+
+//点击屏幕别处键盘收起
+-(void)hidenKeyboard
+{
+    [self.replyContentField resignFirstResponder];
+}
+
 //注册监听
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -171,14 +183,24 @@ int reply_page_filter = 0;
     NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
     NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
     [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        cell.replyerHead.layer.masksToBounds =YES;
-        [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-        cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-        cell.replyerHead.image = image;
+        if (image != nil) {
+            cell.replyerHead.layer.masksToBounds =YES;
+            [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+            cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+            cell.replyerHead.image = image;
+        }else{
+            cell.replyerHead.layer.masksToBounds =YES;
+            [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+            cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+            cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
+            
+            
+        }
     }];
     
     return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{//绘制行高
     UITableViewCell *cell = [self tableView:self.replyListTable cellForRowAtIndexPath:indexPath];
@@ -365,7 +387,7 @@ int reply_page_filter = 0;
 
 }
 
-
+#pragma mark-
 
 
 - (void)didReceiveMemoryWarning {
@@ -382,6 +404,8 @@ int reply_page_filter = 0;
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark-
+#pragma mark----------------------------发送回复--------------------------------------
 
 - (IBAction)replyAction:(id)sender {
     
@@ -417,8 +441,6 @@ int reply_page_filter = 0;
     }];
  
 }
+#pragma mark-
 
-- (IBAction)viewTouchDown:(id)sender {
-    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
-}
 @end

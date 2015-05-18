@@ -15,17 +15,11 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_acatar_default_r" translatesAutoresizingMaskIntoConstraints="NO" id="YVX-tr-Y24">
                         <rect key="frame" x="0.0" y="11" width="59" height="58"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="社区通告管理员" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFf-GJ-8Nd">
-                        <rect key="frame" x="59" y="11" width="103" height="22"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="103" id="RrJ-Ze-rCV"/>
+                            <constraint firstAttribute="height" constant="58" id="Jqg-bi-Ehq"/>
+                            <constraint firstAttribute="width" constant="59" id="tkF-pE-9bB"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我觉得这个活动靠谱" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3i-f8-ybf">
                         <rect key="frame" x="59" y="33" width="261" height="48"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,6 +47,16 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="社区通告管理员" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFf-GJ-8Nd">
+                        <rect key="frame" x="59" y="11" width="103" height="22"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="103" id="RrJ-Ze-rCV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="YVX-tr-Y24" secondAttribute="bottom" constant="10" id="66L-hh-SEb"/>
@@ -69,6 +73,11 @@
                     <constraint firstItem="sFf-GJ-8Nd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="unv-rD-BdF"/>
                     <constraint firstAttribute="trailing" secondItem="YVX-tr-Y24" secondAttribute="trailing" constant="261" id="zac-iO-5s2"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="zac-iO-5s2"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="replyContent" destination="z3i-f8-ybf" id="kep-q2-Tmw"/>

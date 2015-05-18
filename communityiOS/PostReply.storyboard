@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="top" id="4Vk-WH-KkY"/>
                         <viewControllerLayoutGuide type="bottom" id="WKb-YG-tqh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lTV-Qs-kur" customClass="UIControl">
+                    <view key="view" contentMode="scaleToFill" id="lTV-Qs-kur">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -79,9 +79,6 @@
                             <constraint firstItem="3iT-Pr-VXI" firstAttribute="leading" secondItem="lTV-Qs-kur" secondAttribute="leading" id="miU-hj-m81"/>
                             <constraint firstItem="rbP-Yb-pUH" firstAttribute="top" secondItem="3iT-Pr-VXI" secondAttribute="bottom" id="nBw-h9-AUC"/>
                         </constraints>
-                        <connections>
-                            <action selector="viewTouchDown:" destination="Dz0-B5-AkS" eventType="touchDown" id="JgB-i4-bDB"/>
-                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -91,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Z2-uc-w4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1032" y="341"/>
+            <point key="canvasLocation" x="979" y="340"/>
         </scene>
     </scenes>
 </document>
