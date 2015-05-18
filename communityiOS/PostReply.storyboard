@@ -30,11 +30,8 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Z2-uc-w4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="495" y="385"/>
-=======
+
             <point key="canvasLocation" x="366" y="365"/>
->>>>>>> 458735d54cc86e2292ad2056780985f8ac5fcc6b
         </scene>
     </scenes>
 </document>
