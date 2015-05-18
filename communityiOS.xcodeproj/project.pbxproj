@@ -105,7 +105,8 @@
 		1842ADF21ADB5FC10022D2CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF11ADB5FC10022D2CB /* libz.dylib */; };
 		1842ADF51ADB5FEE0022D2CB /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */; };
 		1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1842AE6C1ADB77290022D2CB /* PushConfig.plist */; };
-
+		184B42A91B098D2A004CD398 /* ReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B42A71B098D2A004CD398 /* ReplyTableViewCell.m */; };
+		184B42AA1B098D2A004CD398 /* ReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184B42A81B098D2A004CD398 /* ReplyTableViewCell.xib */; };
 		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
 		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
@@ -304,7 +305,9 @@
 		1842ADF31ADB5FEE0022D2CB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		1842AE6C1ADB77290022D2CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-
+		184B42A61B098D2A004CD398 /* ReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyTableViewCell.h; sourceTree = "<group>"; };
+		184B42A71B098D2A004CD398 /* ReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyTableViewCell.m; sourceTree = "<group>"; };
+		184B42A81B098D2A004CD398 /* ReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyTableViewCell.xib; sourceTree = "<group>"; };
 		188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
 		188933881AFB580F006329D8 /* AuthTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTableViewController.h; sourceTree = "<group>"; };
 		188933891AFB580F006329D8 /* AuthTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTableViewController.m; sourceTree = "<group>"; };
@@ -669,9 +672,9 @@
 		1855840A1B031E480025B66D /* replyList */ = {
 			isa = PBXGroup;
 			children = (
-				1855840B1B031F270025B66D /* ReplyTableViewCell.h */,
-				1855840C1B031F270025B66D /* ReplyTableViewCell.m */,
-				1855840D1B031F270025B66D /* ReplyTableViewCell.xib */,
+				184B42A61B098D2A004CD398 /* ReplyTableViewCell.h */,
+				184B42A71B098D2A004CD398 /* ReplyTableViewCell.m */,
+				184B42A81B098D2A004CD398 /* ReplyTableViewCell.xib */,
 			);
 			name = replyList;
 			sourceTree = "<group>";
@@ -964,6 +967,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184B42AA1B098D2A004CD398 /* ReplyTableViewCell.xib in Resources */,
 				13B1C2FB1ACB9C16005C179C /* UserCenterLogged.storyboard in Resources */,
 				13B1C3231AD4D6B3005C179C /* FSCollectionViewController.xib in Resources */,
 				13B1C34E1AD4D6ED005C179C /* PostEdit.storyboard in Resources */,
@@ -976,7 +980,6 @@
 				13B1C3171AD4D674005C179C /* ForumSelectTableViewCell.xib in Resources */,
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
 				13C58BE81AB9550600090157 /* Main.storyboard in Resources */,
-				1855840F1B031F270025B66D /* ReplyTableViewCell.xib in Resources */,
 				1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */,
 				188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
@@ -1111,6 +1114,7 @@
 				137D80DE1B06FC24001E8CDA /* EditApplyTableViewCell.m in Sources */,
 				13B1C2E51ACB7DC5005C179C /* MJRefreshBaseView.m in Sources */,
 				13C58BDF1AB9550600090157 /* main.m in Sources */,
+				184B42A91B098D2A004CD398 /* ReplyTableViewCell.m in Sources */,
 				A0CA6DEF1AFC5E3400F88237 /* UserJoinPostListViewController.m in Sources */,
 				13BE566D1ABA574700379ACD /* ForumTableViewCell.m in Sources */,
 				13B1C2E61ACB7DC5005C179C /* MJRefreshConst.m in Sources */,
@@ -1121,7 +1125,6 @@
 				8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */,
 				13B1C2E21ACB7DC5005C179C /* AMPActivityIndicator.m in Sources */,
 				13B1C3011ACBBED2005C179C /* SettingsViewController.m in Sources */,
-				1855840E1B031F270025B66D /* ReplyTableViewCell.m in Sources */,
 				13B1C3711AD4D80B005C179C /* HttpTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

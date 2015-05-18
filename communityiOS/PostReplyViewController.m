@@ -42,9 +42,9 @@
 @property (nonatomic) BOOL havePower;
 @property (nonatomic,strong) NSMutableArray *forumSetArray;
 
+- (IBAction)viewTouchDown:(id)sender;
 
 
-- (IBAction)View_TouchDown:(id)sender;
 @end
 
 @implementation PostReplyViewController
@@ -183,7 +183,6 @@ int reply_page_filter = 0;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{//绘制行高
     UITableViewCell *cell = [self tableView:self.replyListTable cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
-//    return 80;
 }
 
 #pragma mark-
@@ -220,6 +219,12 @@ int reply_page_filter = 0;
         self.reply_list_item = object;
         if (reply_page_filter == 0) {
             if (self.reply_list_item.contentList !=nil) {
+                [self.replyListArray removeAllObjects];
+                [self.replyIDData removeAllObjects];
+                [self.replyerNickNameData removeAllObjects];
+                [self.replyDateData removeAllObjects];
+                [self.replyerHeadData removeAllObjects];
+                [self.replyContentData removeAllObjects];
                 [self getReplyData];
                 [self.replyListTable reloadData];
             }else {
@@ -379,18 +384,19 @@ int reply_page_filter = 0;
 */
 
 - (IBAction)replyAction:(id)sender {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text communityID:self.postItem.belong_community_id forumID:self.postItem.belong_forum_id postID:self.postItem.post_id userID:[defaults valueForKey:@"UserID"] Success:^(id object) {
-        NSData *data = [[NSData alloc] initWithData:object];
-        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        if ([[result valueForKey:@"status"] isEqualToString:@"OK"]){
-            
+        
+        if (object != nil){
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
             hud.labelText = @"回复成功";
             hud.mode = MBProgressHUDModeText;
             [hud showAnimated:YES whileExecutingBlock:^{
                 sleep(1);
+                reply_page = 1;
+                reply_page_filter = 0;
                 [self loadReplyListData];
             } completionBlock:^{
                 [hud removeFromSuperview];
@@ -411,7 +417,8 @@ int reply_page_filter = 0;
     }];
  
 }
-- (IBAction)View_TouchDown:(id)sender {
+
+- (IBAction)viewTouchDown:(id)sender {
     [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 @end
