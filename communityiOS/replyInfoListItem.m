@@ -25,8 +25,8 @@
              @"status" : @"status",
              @"msg" : @"msg",
              @"data" : @{
-                     @"replyInfoList":@"replyInfoList"
-                     },
+                     @"contentList":@"contentList"
+                     }
              };
 }
 

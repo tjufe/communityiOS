@@ -13,21 +13,17 @@
                         <viewControllerLayoutGuide type="top" id="4Vk-WH-KkY"/>
                         <viewControllerLayoutGuide type="bottom" id="WKb-YG-tqh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lTV-Qs-kur">
+                    <view key="view" contentMode="scaleToFill" id="lTV-Qs-kur" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3iT-Pr-VXI">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbP-Yb-pUH">
                                 <rect key="frame" x="0.0" y="528" width="320" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUa-qb-as0">
                                         <rect key="frame" x="265" y="0.0" width="55" height="40"/>
                                         <color key="backgroundColor" red="1" green="0.22792665740000001" blue="0.26971799530000001" alpha="0.77000000000000002" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" title="回复">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -63,27 +59,39 @@
                                     <constraint firstAttribute="bottom" secondItem="PUa-qb-as0" secondAttribute="bottom" id="ygG-fE-5JW"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3iT-Pr-VXI">
+                                <rect key="frame" x="0.0" y="64" width="320" height="464"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Dz0-B5-AkS" id="cHP-81-ca3"/>
+                                    <outlet property="delegate" destination="Dz0-B5-AkS" id="DWU-jN-ZLB"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3iT-Pr-VXI" firstAttribute="top" secondItem="lTV-Qs-kur" secondAttribute="top" id="Cae-2H-Nu3"/>
                             <constraint firstItem="rbP-Yb-pUH" firstAttribute="leading" secondItem="lTV-Qs-kur" secondAttribute="leading" id="CoE-69-MXs"/>
                             <constraint firstAttribute="trailing" secondItem="rbP-Yb-pUH" secondAttribute="trailing" id="XHU-Ya-cr3"/>
-                            <constraint firstItem="rbP-Yb-pUH" firstAttribute="top" secondItem="3iT-Pr-VXI" secondAttribute="bottom" id="dpZ-Rx-crv"/>
+                            <constraint firstAttribute="trailing" secondItem="3iT-Pr-VXI" secondAttribute="trailing" id="XfV-Qs-gB4"/>
+                            <constraint firstItem="3iT-Pr-VXI" firstAttribute="top" secondItem="lTV-Qs-kur" secondAttribute="top" constant="64" id="a6f-IT-hJ1"/>
                             <constraint firstItem="rbP-Yb-pUH" firstAttribute="height" secondItem="lTV-Qs-kur" secondAttribute="height" multiplier="0.07" id="fWr-G9-hqw"/>
-                            <constraint firstItem="3iT-Pr-VXI" firstAttribute="leading" secondItem="lTV-Qs-kur" secondAttribute="leading" id="gZ7-3m-1eo"/>
                             <constraint firstItem="WKb-YG-tqh" firstAttribute="top" secondItem="rbP-Yb-pUH" secondAttribute="bottom" id="m3x-Gj-LG6"/>
-                            <constraint firstAttribute="trailing" secondItem="3iT-Pr-VXI" secondAttribute="trailing" id="x8I-rc-ixX"/>
+                            <constraint firstItem="3iT-Pr-VXI" firstAttribute="leading" secondItem="lTV-Qs-kur" secondAttribute="leading" id="miU-hj-m81"/>
+                            <constraint firstItem="rbP-Yb-pUH" firstAttribute="top" secondItem="3iT-Pr-VXI" secondAttribute="bottom" id="nBw-h9-AUC"/>
                         </constraints>
+                        <connections>
+                            <action selector="View_TouchDown:" destination="Dz0-B5-AkS" eventType="touchDown" id="eMr-aC-ojp"/>
+                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="replyContentField" destination="dNM-sv-Snu" id="5ov-wL-Xl6"/>
+                        <outlet property="replyListTable" destination="3iT-Pr-VXI" id="iUA-bM-Nca"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Z2-uc-w4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447" y="354"/>
+            <point key="canvasLocation" x="796" y="238"/>
         </scene>
     </scenes>
 </document>

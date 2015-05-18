@@ -58,10 +58,10 @@ typedef void(^StatusFailurs)(NSError * error);
     (NSString *)forum_id Success:(StatusSuccess)success failurs:
     (StatusFailurs)failure;
 
-//Request_ReplyContent
-+(void)statusToolReplyContentWithContent:(NSString *)content Name:(NSString *)name reply_id:(NSString *)reply_id Date:(NSString *)date ID:(NSString *)ID Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+//请求回复列表
++(void)statusToolGetReplyListWithPostID:(NSString *)postID Page:(NSNumber *)page Rows:(NSNumber *)rows  Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
-//Request_PostReply
+//请求发送回复
 +(void)statusToolPostReplyWithReplyText:(NSString *)reply_text communityID:(NSString*)community_id forumID:(NSString*)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 //刷新数据库，更新上传图片

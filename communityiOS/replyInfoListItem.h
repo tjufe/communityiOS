@@ -13,7 +13,7 @@
 @property (nonatomic,strong)NSString *msg;
 @property (nonatomic,strong)NSDictionary *data;
 
-@property (nonatomic,strong)NSArray *replyInfoList;
+@property (nonatomic,strong)NSArray *contentList;
 
 +(replyInfoListItem *)createItemWitparametes:(NSDictionary*)dic;
 

@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ReplyTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *replyerHead;
+@property (strong, nonatomic) IBOutlet UILabel *replyerNickName;
+@property (strong, nonatomic) IBOutlet UILabel *replyTime;
+
+@property (strong, nonatomic) IBOutlet UILabel *replyContent;
+
+-(void)setReplyContentText:(NSString *)text;
 
 @end

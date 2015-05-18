@@ -273,7 +273,7 @@ int page_filter = 0;
      
      NSString *user_status = @"/";
      user_status = [user_status stringByAppendingString:self.UserPermission];
-     user_status = [user_status stringByAppendingString:self.UserPermission];
+    // user_status = [user_status stringByAppendingString:self.UserPermission];
      for(int i=0;i < [_forum_item.ForumSetlist count];i++){
           self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];
           
