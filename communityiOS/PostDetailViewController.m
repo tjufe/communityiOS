@@ -336,8 +336,9 @@ bool isModerator = NO;//是否是版主
     //start by wangyao 0513
     //
     if(self.post_item == nil){
-//        self.post_id = //从轮播图和推送传过来的post id ，以后完善
-//        loadPostInfo();
+//        self.post_id = self.postIDFromLun;
+        NSString *str = self.postIDFromLun;
+        [self loadPostInfo:self.postIDFromLun];
     }else{
         [self setData_2];
         [self.tableview reloadData];
@@ -355,6 +356,17 @@ bool isModerator = NO;//是否是版主
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
 
     
+}
+
+-(void)loadPostInfo:(NSString *)postID{
+    [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
+        self.post_item = (postItem *)object;
+        [self setData_2];
+        [self.tableview reloadData];
+        [self initUI];
+    } failurs:^(NSError *error) {
+        //to do
+    }];
 }
 
 
