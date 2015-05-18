@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "postItem.h"
+
 
 @interface PostReplyViewController : UIViewController
 
+@property (strong ,nonatomic) NSArray *replyList;
+@property(strong ,nonatomic) postItem *postItem;
 @end

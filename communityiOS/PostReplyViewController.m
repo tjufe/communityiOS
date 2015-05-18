@@ -7,6 +7,9 @@
 //
 
 #import "PostReplyViewController.h"
+#import "replyInfoListItem.h"
+#import "replyInfoItem.h"
+
 
 @interface PostReplyViewController ()
 
@@ -16,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning {

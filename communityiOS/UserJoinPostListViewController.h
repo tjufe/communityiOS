@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "postItem.h"
+
+
+@protocol UserJoinPostListViewControllerDelegate <NSObject>
+
+-(void)addpostItem2:(postItem *)PostItem;
+
+@end
+
 
 @interface UserJoinPostListViewController : UIViewController
+@property (assign) id<UserJoinPostListViewControllerDelegate>delegate;
 
 @end

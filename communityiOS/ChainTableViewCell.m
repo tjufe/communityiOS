@@ -2,11 +2,14 @@
 //  ChainTableViewCell.m
 //  communityiOS
 //
-//  Created by tjufe on 15/3/31.
+//  Created by 何茂馨 on 15/5/13.
 //  Copyright (c) 2015年 &#20309;&#33538;&#39336;. All rights reserved.
 //
 
 #import "ChainTableViewCell.h"
+#import "ChainToWebViewController.h"
+#import "UIViewController+Create.h"
+
 
 @implementation ChainTableViewCell
 
@@ -19,5 +22,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end
