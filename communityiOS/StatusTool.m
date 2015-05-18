@@ -17,7 +17,13 @@
 #import "postInfoItem.h"
 #import "deletepostItem.h"
 #import "uncheckPostListItem.h"
+
 #import "replyInfoListItem.h"
+
+#import "ifApplyItem.h"
+#import "postApplyItem.h"
+
+
 
 @implementation StatusTool
 
@@ -445,11 +451,48 @@
         
 }
 
+//发帖
++(void)statusToolNewPostWithcID:(NSString *)communityID fID:(NSString *)forumID PosterID:(NSString *)posterID postTitle:(NSString *)post_title postText:(NSString *)post_text imgURL:(NSString *)img_url chain:(NSString *)chain chainName:(NSString *)chain_name chainURL:(NSString *)chain_url apply:(NSString *)apply limApplyNum:(NSString*)limit_apply_num needCheck:(NSString *)need_check Checked:(NSString *)checked Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:communityID forKey:@"community_id"];
+    [firstDic setObject:forumID forKey:@"forum_id"];
+    [firstDic setObject:posterID forKey:@"poster_id"];
+    [firstDic setObject:post_title forKey:@"post_title"];
+    [firstDic setObject:post_text forKey:@"post_text"];
+    [firstDic setObject:img_url forKey:@"main_image_url"];
+    [firstDic setObject:chain forKey:@"chain"];
+    [firstDic setObject:chain_name forKey:@"chain_name"];
+    [firstDic setObject:chain_url forKey:@"chain_url"];
+    [firstDic setObject:apply forKey:@"open_apply"];
+    [firstDic setObject:limit_apply_num forKey:@"limit_apply_num"];
+    [firstDic setObject:need_check forKey:@"need_check"];
+    [firstDic setObject:checked forKey:@"checked"];
+
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+
+    [thirdDic setObject:@"NewPost" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic
+                     success:^(id responseObject) {
+                         // no response
+                         
+                     } failure:^(NSError *error) {
+                         if (failure == nil) return;
+                         failure(error);
+                     }];
+
+
+}
 //请求实名认证
 +(void)statusToolUserAuthWithRealName:(NSString *)realname HostName:(NSString *)name ID:(NSString *)user_id HouseNumber:(NSString *)house Phone:(NSString *)phone Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
-    [firstDic setObject:realname forKey:@"realname"];
+    [firstDic setObject:realname forKey:@"realName"];
     [firstDic setObject:name forKey:@"name"];
     [firstDic setObject:user_id forKey:@"user_id"];
     [firstDic setObject:house forKey:@"house"];
@@ -467,6 +510,74 @@
     }];
     
 }
+
++(void)statusToolIfApplyWithcommunity_id:(NSString *)community_id forum_id:(NSString *)forum_id post_id:(NSString *)post_id user_id:(NSString *)user_id  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:community_id forKey:@"community_id"];
+    [firstDic setObject:forum_id forKey:@"forum_id"];
+    [firstDic setObject:post_id forKey:@"post_id"];
+    [firstDic setObject:user_id forKey:@"user_id"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"IfApply" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        NSData *data = [[NSData alloc]initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        ifApplyItem *if_apply_item = [ifApplyItem createItemWitparametes:dic];
+        success(if_apply_item);
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+    
+}
+//用户报名操作
++(void)statusToolPostApplyWithcommunity_id:(NSString *)community_id forum_id:(NSString *)forum_id post_id:(NSString *)post_id user_id:(NSString *)user_id limit_apply_num:(NSString *)limit_apply_num  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:community_id forKey:@"community_id"];
+    [firstDic setObject:forum_id forKey:@"forum_id"];
+    [firstDic setObject:post_id forKey:@"post_id"];
+    [firstDic setObject:user_id forKey:@"user_id"];
+    [firstDic setObject:limit_apply_num forKey:@"limit_apply_num"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"PostApply" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        success(responseObject);
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+}
+//结束报名操作
++(void)statusToolEndApplyWithcommunity_id:(NSString *)community_id forum_id:(NSString *)forum_id post_id:(NSString *)post_id user_id:(NSString *)user_id  Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:community_id forKey:@"community_id"];
+    [firstDic setObject:forum_id forKey:@"forum_id"];
+    [firstDic setObject:post_id forKey:@"post_id"];
+    [firstDic setObject:user_id forKey:@"user_id"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"PostEndApply" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        success(responseObject);
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+
+}
+
 
 @end
 

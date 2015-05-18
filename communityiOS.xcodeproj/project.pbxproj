@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		131A9ECB1B03846700926D6F /* ChainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 131A9EC91B03846700926D6F /* ChainTableViewCell.m */; };
+		131A9ECC1B03846700926D6F /* ChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 131A9ECA1B03846700926D6F /* ChainTableViewCell.xib */; };
 		1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */; };
+		137D80DE1B06FC24001E8CDA /* EditApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 137D80DC1B06FC24001E8CDA /* EditApplyTableViewCell.m */; };
+		137D80DF1B06FC24001E8CDA /* EditApplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137D80DD1B06FC24001E8CDA /* EditApplyTableViewCell.xib */; };
+		137D80E31B06FD25001E8CDA /* EditChainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 137D80E11B06FD25001E8CDA /* EditChainTableViewCell.m */; };
+		137D80E41B06FD25001E8CDA /* EditChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137D80E21B06FD25001E8CDA /* EditChainTableViewCell.xib */; };
 		13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE11AD624B300658F21 /* AlterNicknameViewController.m */; };
 		13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13878AE41AD6260400658F21 /* AlterPasswordViewController.m */; };
 		13B1C2B61ACA58B5005C179C /* APIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B1C2B41ACA58B5005C179C /* APIClient.m */; };
@@ -80,6 +86,14 @@
 		13C58BEA1AB9550600090157 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BE91AB9550600090157 /* Images.xcassets */; };
 		13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13C58BEB1AB9550600090157 /* LaunchScreen.xib */; };
 		13C58BF91AB9550700090157 /* communityiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C58BF81AB9550700090157 /* communityiOSTests.m */; };
+		13C865E41B05C0B5001D34B4 /* postApplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C865E31B05C0B5001D34B4 /* postApplyItem.m */; };
+		13C865E71B05D4A0001D34B4 /* endApplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C865E61B05D4A0001D34B4 /* endApplyItem.m */; };
+		13D247141B0436E400717780 /* ChainToWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D247131B0436E400717780 /* ChainToWebView.m */; };
+		13D247181B04383F00717780 /* ApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D247161B04383F00717780 /* ApplyTableViewCell.m */; };
+		13D247191B04383F00717780 /* ApplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13D247171B04383F00717780 /* ApplyTableViewCell.xib */; };
+		13D2471C1B043DE200717780 /* EAColourfulProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D2471B1B043DE200717780 /* EAColourfulProgressView.m */; };
+		13D2471F1B048C8C00717780 /* ChainToWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D2471E1B048C8C00717780 /* ChainToWebViewController.m */; };
+		13D247211B048CCE00717780 /* chainToWeb.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13D247201B048CCE00717780 /* chainToWeb.storyboard */; };
 		1842ADE21ADB5F6F0022D2CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */; };
 		1842ADE41ADB5F7A0022D2CB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */; };
 		1842ADE61ADB5F830022D2CB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */; };
@@ -91,11 +105,7 @@
 		1842ADF21ADB5FC10022D2CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF11ADB5FC10022D2CB /* libz.dylib */; };
 		1842ADF51ADB5FEE0022D2CB /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */; };
 		1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1842AE6C1ADB77290022D2CB /* PushConfig.plist */; };
-		184BC71F1AFDB4F500ADABFE /* uncheckPostListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */; };
-		184BC7231AFDB63E00ADABFE /* UserJoinPostList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */; };
-		184BC7241AFDB63E00ADABFE /* UserJoinPostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */; };
-		1855840E1B031F270025B66D /* ReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855840C1B031F270025B66D /* ReplyTableViewCell.m */; };
-		1855840F1B031F270025B66D /* ReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1855840D1B031F270025B66D /* ReplyTableViewCell.xib */; };
+
 		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
 		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
@@ -108,7 +118,11 @@
 		8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */; };
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
+		A0539A641B05E65800DC33BB /* newPostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0539A631B05E65800DC33BB /* newPostItem.m */; };
+		A05C7D3A1AF86D7400838247 /* UserJoinPostList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */; };
+		A0CA6DEF1AFC5E3400F88237 /* UserJoinPostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */; };
 		A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */; };
+		A0D39DFA1AF76419007DEFA0 /* uncheckPostListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D39DF91AF76419007DEFA0 /* uncheckPostListItem.m */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
 		A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */; };
 		A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */; };
@@ -126,8 +140,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		131A9EC81B03846700926D6F /* ChainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainTableViewCell.h; sourceTree = "<group>"; };
+		131A9EC91B03846700926D6F /* ChainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChainTableViewCell.m; sourceTree = "<group>"; };
+		131A9ECA1B03846700926D6F /* ChainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChainTableViewCell.xib; sourceTree = "<group>"; };
 		1352E0CE1AE76B4D0089EAC8 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
 		1352E0CF1AE76B4D0089EAC8 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
+		137D80DB1B06FC24001E8CDA /* EditApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditApplyTableViewCell.h; sourceTree = "<group>"; };
+		137D80DC1B06FC24001E8CDA /* EditApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditApplyTableViewCell.m; sourceTree = "<group>"; };
+		137D80DD1B06FC24001E8CDA /* EditApplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditApplyTableViewCell.xib; sourceTree = "<group>"; };
+		137D80E01B06FD25001E8CDA /* EditChainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditChainTableViewCell.h; sourceTree = "<group>"; };
+		137D80E11B06FD25001E8CDA /* EditChainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditChainTableViewCell.m; sourceTree = "<group>"; };
+		137D80E21B06FD25001E8CDA /* EditChainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditChainTableViewCell.xib; sourceTree = "<group>"; };
 		13878AE01AD624B300658F21 /* AlterNicknameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterNicknameViewController.h; sourceTree = "<group>"; };
 		13878AE11AD624B300658F21 /* AlterNicknameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterNicknameViewController.m; sourceTree = "<group>"; };
 		13878AE31AD6260400658F21 /* AlterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterPasswordViewController.h; sourceTree = "<group>"; };
@@ -255,6 +278,20 @@
 		13C58BF21AB9550700090157 /* communityiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = communityiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13C58BF71AB9550700090157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13C58BF81AB9550700090157 /* communityiOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = communityiOSTests.m; sourceTree = "<group>"; };
+		13C865E21B05C0B5001D34B4 /* postApplyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postApplyItem.h; sourceTree = "<group>"; };
+		13C865E31B05C0B5001D34B4 /* postApplyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = postApplyItem.m; sourceTree = "<group>"; };
+		13C865E51B05D4A0001D34B4 /* endApplyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = endApplyItem.h; sourceTree = "<group>"; };
+		13C865E61B05D4A0001D34B4 /* endApplyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = endApplyItem.m; sourceTree = "<group>"; };
+		13D247121B0436E400717780 /* ChainToWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainToWebView.h; sourceTree = "<group>"; };
+		13D247131B0436E400717780 /* ChainToWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChainToWebView.m; sourceTree = "<group>"; };
+		13D247151B04383F00717780 /* ApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyTableViewCell.h; sourceTree = "<group>"; };
+		13D247161B04383F00717780 /* ApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyTableViewCell.m; sourceTree = "<group>"; };
+		13D247171B04383F00717780 /* ApplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyTableViewCell.xib; sourceTree = "<group>"; };
+		13D2471A1B043DE200717780 /* EAColourfulProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAColourfulProgressView.h; sourceTree = "<group>"; };
+		13D2471B1B043DE200717780 /* EAColourfulProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAColourfulProgressView.m; sourceTree = "<group>"; };
+		13D2471D1B048C8C00717780 /* ChainToWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainToWebViewController.h; sourceTree = "<group>"; };
+		13D2471E1B048C8C00717780 /* ChainToWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChainToWebViewController.m; sourceTree = "<group>"; };
+		13D247201B048CCE00717780 /* chainToWeb.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = chainToWeb.storyboard; sourceTree = "<group>"; };
 		1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -267,14 +304,7 @@
 		1842ADF31ADB5FEE0022D2CB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		1842AE6C1ADB77290022D2CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-		184BC71D1AFDB4F500ADABFE /* uncheckPostListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uncheckPostListItem.h; sourceTree = "<group>"; };
-		184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uncheckPostListItem.m; sourceTree = "<group>"; };
-		184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserJoinPostList.storyboard; sourceTree = "<group>"; };
-		184BC7211AFDB63E00ADABFE /* UserJoinPostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserJoinPostListViewController.h; sourceTree = "<group>"; };
-		184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserJoinPostListViewController.m; sourceTree = "<group>"; };
-		1855840B1B031F270025B66D /* ReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyTableViewCell.h; sourceTree = "<group>"; };
-		1855840C1B031F270025B66D /* ReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyTableViewCell.m; sourceTree = "<group>"; };
-		1855840D1B031F270025B66D /* ReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyTableViewCell.xib; sourceTree = "<group>"; };
+
 		188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
 		188933881AFB580F006329D8 /* AuthTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTableViewController.h; sourceTree = "<group>"; };
 		188933891AFB580F006329D8 /* AuthTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTableViewController.m; sourceTree = "<group>"; };
@@ -299,8 +329,15 @@
 		8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostReplyViewController.h; sourceTree = "<group>"; };
 		8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostReplyViewController.m; sourceTree = "<group>"; };
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
+		A0539A621B05E65800DC33BB /* newPostItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newPostItem.h; sourceTree = "<group>"; };
+		A0539A631B05E65800DC33BB /* newPostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newPostItem.m; sourceTree = "<group>"; };
+		A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserJoinPostList.storyboard; sourceTree = "<group>"; };
+		A0CA6DED1AFC5E3400F88237 /* UserJoinPostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserJoinPostListViewController.h; sourceTree = "<group>"; };
+		A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserJoinPostListViewController.m; sourceTree = "<group>"; };
 		A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deletepostItem.h; sourceTree = "<group>"; };
 		A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deletepostItem.m; sourceTree = "<group>"; };
+		A0D39DF81AF76419007DEFA0 /* uncheckPostListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uncheckPostListItem.h; sourceTree = "<group>"; };
+		A0D39DF91AF76419007DEFA0 /* uncheckPostListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uncheckPostListItem.m; sourceTree = "<group>"; };
 		A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
 		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 5; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
 		A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
@@ -590,6 +627,8 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
+				1842ADF31ADB5FEE0022D2CB /* APService.h */,
+				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
 				13B1C2A51ACA4A93005C179C /* app */,
 				13B1C2B01ACA5833005C179C /* vendor */,
 				13B1C2AF1ACA57FD005C179C /* resource */,
@@ -650,6 +689,8 @@
 		18AF2A2C1AFE615A00CCCDBB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A0539A621B05E65800DC33BB /* newPostItem.h */,
+				A0539A631B05E65800DC33BB /* newPostItem.m */,
 				A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */,
 				A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */,
 				13B1C3761AD4D817005C179C /* regItem.h */,
@@ -666,6 +707,8 @@
 				13B1C36B1AD4D80B005C179C /* postItem.m */,
 				13B1C36C1AD4D80B005C179C /* postListItem.h */,
 				13B1C36D1AD4D80B005C179C /* postListItem.m */,
+				A0D39DF81AF76419007DEFA0 /* uncheckPostListItem.h */,
+				A0D39DF91AF76419007DEFA0 /* uncheckPostListItem.m */,
 				8EEC487C1AD8B9CF002E70DA /* ifApplyItem.h */,
 				8EEC487D1AD8B9CF002E70DA /* ifApplyItem.m */,
 				8EEC487F1AD8BA3F002E70DA /* postInfoItem.h */,
@@ -674,8 +717,10 @@
 				8EEC48831AD8BAB9002E70DA /* replyInfoItem.m */,
 				8EEC48851AD8BB11002E70DA /* replyInfoListItem.h */,
 				8EEC48861AD8BB11002E70DA /* replyInfoListItem.m */,
-				184BC71D1AFDB4F500ADABFE /* uncheckPostListItem.h */,
-				184BC71E1AFDB4F500ADABFE /* uncheckPostListItem.m */,
+				13C865E21B05C0B5001D34B4 /* postApplyItem.h */,
+				13C865E31B05C0B5001D34B4 /* postApplyItem.m */,
+				13C865E51B05D4A0001D34B4 /* endApplyItem.h */,
+				13C865E61B05D4A0001D34B4 /* endApplyItem.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -696,6 +741,8 @@
 		18AF2A2E1AFE624B00CCCDBB /* PropertyMapper */ = {
 			isa = PBXGroup;
 			children = (
+				13D2471A1B043DE200717780 /* EAColourfulProgressView.h */,
+				13D2471B1B043DE200717780 /* EAColourfulProgressView.m */,
 				13B1C2BC1ACA5A27005C179C /* KZPropertyMapper.h */,
 				13B1C2BD1ACA5A27005C179C /* KZPropertyMapper.m */,
 			);
@@ -705,8 +752,6 @@
 		18AF2A2F1AFE626200CCCDBB /* JPush */ = {
 			isa = PBXGroup;
 			children = (
-				1842ADF31ADB5FEE0022D2CB /* APService.h */,
-				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
 			);
 			name = JPush;
 			sourceTree = "<group>";
@@ -723,6 +768,12 @@
 				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
 				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
 				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
+				131A9EC81B03846700926D6F /* ChainTableViewCell.h */,
+				131A9EC91B03846700926D6F /* ChainTableViewCell.m */,
+				131A9ECA1B03846700926D6F /* ChainTableViewCell.xib */,
+				13D247151B04383F00717780 /* ApplyTableViewCell.h */,
+				13D247161B04383F00717780 /* ApplyTableViewCell.m */,
+				13D247171B04383F00717780 /* ApplyTableViewCell.xib */,
 			);
 			name = postDetail;
 			sourceTree = "<group>";
@@ -759,6 +810,12 @@
 				13B1C3481AD4D6ED005C179C /* TitleTableViewCell.h */,
 				13B1C3491AD4D6ED005C179C /* TitleTableViewCell.m */,
 				13B1C34A1AD4D6ED005C179C /* TitleTableViewCell.xib */,
+				137D80DB1B06FC24001E8CDA /* EditApplyTableViewCell.h */,
+				137D80DC1B06FC24001E8CDA /* EditApplyTableViewCell.m */,
+				137D80DD1B06FC24001E8CDA /* EditApplyTableViewCell.xib */,
+				137D80E01B06FD25001E8CDA /* EditChainTableViewCell.h */,
+				137D80E11B06FD25001E8CDA /* EditChainTableViewCell.m */,
+				137D80E21B06FD25001E8CDA /* EditChainTableViewCell.xib */,
 			);
 			name = postEdit;
 			sourceTree = "<group>";
@@ -803,9 +860,14 @@
 				8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */,
 				8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */,
 				8EF3F7501AD54F5400924975 /* PostReply.storyboard */,
-				184BC7201AFDB63E00ADABFE /* UserJoinPostList.storyboard */,
-				184BC7211AFDB63E00ADABFE /* UserJoinPostListViewController.h */,
-				184BC7221AFDB63E00ADABFE /* UserJoinPostListViewController.m */,
+				A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */,
+				A0CA6DED1AFC5E3400F88237 /* UserJoinPostListViewController.h */,
+				A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */,
+				13D247121B0436E400717780 /* ChainToWebView.h */,
+				13D247131B0436E400717780 /* ChainToWebView.m */,
+				13D2471D1B048C8C00717780 /* ChainToWebViewController.h */,
+				13D2471E1B048C8C00717780 /* ChainToWebViewController.m */,
+				13D247201B048CCE00717780 /* chainToWeb.storyboard */,
 			);
 			name = post;
 			sourceTree = "<group>";
@@ -905,9 +967,11 @@
 				13B1C2FB1ACB9C16005C179C /* UserCenterLogged.storyboard in Resources */,
 				13B1C3231AD4D6B3005C179C /* FSCollectionViewController.xib in Resources */,
 				13B1C34E1AD4D6ED005C179C /* PostEdit.storyboard in Resources */,
+				131A9ECC1B03846700926D6F /* ChainTableViewCell.xib in Resources */,
 				13B1C3531AD4D6ED005C179C /* PostImageTableViewCell.xib in Resources */,
 				13B1C35E1AD4D6ED005C179C /* TitleTableViewCell.xib in Resources */,
 				13B1C3541AD4D6ED005C179C /* PostList.storyboard in Resources */,
+				13D247191B04383F00717780 /* ApplyTableViewCell.xib in Resources */,
 				13B1C3211AD4D6B3005C179C /* FSCollectionView.storyboard in Resources */,
 				13B1C3171AD4D674005C179C /* ForumSelectTableViewCell.xib in Resources */,
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
@@ -916,7 +980,10 @@
 				1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */,
 				188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
+				A05C7D3A1AF86D7400838247 /* UserJoinPostList.storyboard in Resources */,
+				137D80DF1B06FC24001E8CDA /* EditApplyTableViewCell.xib in Resources */,
 				13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */,
+				13D247211B048CCE00717780 /* chainToWeb.storyboard in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
 				A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */,
 				13BE567A1ABA6FD800379ACD /* Login.storyboard in Resources */,
@@ -928,10 +995,10 @@
 				13B1C2BB1ACA5956005C179C /* demo.xcassets in Resources */,
 				8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */,
 				8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */,
-				184BC7231AFDB63E00ADABFE /* UserJoinPostList.storyboard in Resources */,
 				13B1C3511AD4D6ED005C179C /* PosterTableViewCell.xib in Resources */,
 				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
+				137D80E41B06FD25001E8CDA /* EditChainTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,13 +1049,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				184BC71F1AFDB4F500ADABFE /* uncheckPostListItem.m in Sources */,
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
 				A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */,
 				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
+				13D247141B0436E400717780 /* ChainToWebView.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
-				184BC7241AFDB63E00ADABFE /* UserJoinPostListViewController.m in Sources */,
+				137D80E31B06FD25001E8CDA /* EditChainTableViewCell.m in Sources */,
+				13C865E41B05C0B5001D34B4 /* postApplyItem.m in Sources */,
+				13D247181B04383F00717780 /* ApplyTableViewCell.m in Sources */,
 				13B1C3521AD4D6ED005C179C /* PostImageTableViewCell.m in Sources */,
 				13878AE21AD624B300658F21 /* AlterNicknameViewController.m in Sources */,
 				13B1C3241AD4D6B3005C179C /* FSViewController.m in Sources */,
@@ -996,6 +1065,7 @@
 				1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */,
 				13B1C2BE1ACA5A27005C179C /* KZPropertyMapper.m in Sources */,
 				13B1C35D1AD4D6ED005C179C /* TitleTableViewCell.m in Sources */,
+				13D2471F1B048C8C00717780 /* ChainToWebViewController.m in Sources */,
 				13B1C35B1AD4D6ED005C179C /* TextTableViewCell.m in Sources */,
 				13B1C2E41ACB7DC5005C179C /* MJRefreshBaseView+CustomActivityIndicator.m in Sources */,
 				13B1C36F1AD4D80B005C179C /* forumListItem.m in Sources */,
@@ -1003,6 +1073,7 @@
 				1352E0D01AE76B4D0089EAC8 /* AuthViewController.m in Sources */,
 				13B1C2EB1ACB7DC5005C179C /* UIView+MJExtension.m in Sources */,
 				13B1C3701AD4D80B005C179C /* forumSetItem.m in Sources */,
+				131A9ECB1B03846700926D6F /* ChainTableViewCell.m in Sources */,
 				13B1C3501AD4D6ED005C179C /* PosterTableViewCell.m in Sources */,
 				8EEC48871AD8BB11002E70DA /* replyInfoListItem.m in Sources */,
 				8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */,
@@ -1013,14 +1084,17 @@
 				8EEC48921AD90B17002E70DA /* DChainTableViewCell.m in Sources */,
 				13B1C2C91ACA690E005C179C /* UserCenterUnloggedViewController.m in Sources */,
 				13B1C3221AD4D6B3005C179C /* FSCollectionViewController.m in Sources */,
+				A0539A641B05E65800DC33BB /* newPostItem.m in Sources */,
 				13B1C3551AD4D6ED005C179C /* PostTextTableViewCell.m in Sources */,
 				13B1C34B1AD4D6ED005C179C /* mypickview.m in Sources */,
+				13D2471C1B043DE200717780 /* EAColourfulProgressView.m in Sources */,
 				13B1C30A1ACCFE98005C179C /* GGAddressPickerHelper.m in Sources */,
 				13B1C2E81ACB7DC5005C179C /* MJRefreshHeaderView.m in Sources */,
 				13B1C3201AD4D6B3005C179C /* FSCollectionView.m in Sources */,
 				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
 				1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */,
 				13B1C37A1AD4D817005C179C /* regItem.m in Sources */,
+				A0D39DFA1AF76419007DEFA0 /* uncheckPostListItem.m in Sources */,
 				13BE56721ABA6F0E00379ACD /* UIViewController+Create.m in Sources */,
 				13B1C3751AD4D80B005C179C /* postListItem.m in Sources */,
 				13B1C2E91ACB7DC5005C179C /* UIScrollView+MJExtension.m in Sources */,
@@ -1034,11 +1108,14 @@
 				13B1C3721AD4D80B005C179C /* loginItem.m in Sources */,
 				13B1C3741AD4D80B005C179C /* postItem.m in Sources */,
 				13B1C34D1AD4D6ED005C179C /* PostDetailViewController.m in Sources */,
+				137D80DE1B06FC24001E8CDA /* EditApplyTableViewCell.m in Sources */,
 				13B1C2E51ACB7DC5005C179C /* MJRefreshBaseView.m in Sources */,
 				13C58BDF1AB9550600090157 /* main.m in Sources */,
+				A0CA6DEF1AFC5E3400F88237 /* UserJoinPostListViewController.m in Sources */,
 				13BE566D1ABA574700379ACD /* ForumTableViewCell.m in Sources */,
 				13B1C2E61ACB7DC5005C179C /* MJRefreshConst.m in Sources */,
 				A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */,
+				13C865E71B05D4A0001D34B4 /* endApplyItem.m in Sources */,
 				8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */,
 				A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */,
 				8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */,
@@ -1178,7 +1255,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1200,7 +1276,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

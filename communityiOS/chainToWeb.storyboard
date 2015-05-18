@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Chain To Web View Controller-->
+        <scene sceneID="Ei0-XT-8gL">
+            <objects>
+                <viewController storyboardIdentifier="chianToWeb" id="qzr-Es-hOB" customClass="ChainToWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5YG-Hw-420"/>
+                        <viewControllerLayoutGuide type="bottom" id="fLP-Jf-ZYE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qwb-HF-xzj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XF-rz-Jdl">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="qzr-Es-hOB" id="YV4-1G-CjY"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2XF-rz-Jdl" firstAttribute="leading" secondItem="Qwb-HF-xzj" secondAttribute="leading" id="808-jP-h2u"/>
+                            <constraint firstAttribute="trailing" secondItem="2XF-rz-Jdl" secondAttribute="trailing" id="IxG-c7-ZqA"/>
+                            <constraint firstItem="fLP-Jf-ZYE" firstAttribute="top" secondItem="2XF-rz-Jdl" secondAttribute="bottom" id="mCb-zB-OdK"/>
+                            <constraint firstItem="2XF-rz-Jdl" firstAttribute="top" secondItem="Qwb-HF-xzj" secondAttribute="top" id="mO5-P3-dnD"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="ChainToWebView" destination="2XF-rz-Jdl" id="0cZ-Zt-bsa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qTI-2s-eYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="316" y="309"/>
+        </scene>
+    </scenes>
+</document>

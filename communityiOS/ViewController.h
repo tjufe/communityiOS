@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnNickname;
 
 @property(nonatomic,strong)NSString *name;
+
++(NSArray *)getForumList;
 @end
 

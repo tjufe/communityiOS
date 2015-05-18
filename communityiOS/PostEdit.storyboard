@@ -63,7 +63,7 @@
                                             <action selector="AddChainOnClick:" destination="CX2-fh-HnU" eventType="touchUpInside" id="I9j-sR-mnB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1j7-cp-pYg">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1j7-cp-pYg">
                                         <rect key="frame" x="140" y="11" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="3b1-1r-XgQ"/>
@@ -79,7 +79,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="skZ-8q-h1I">
-                                        <rect key="frame" x="200" y="11" width="40" height="40"/>
+                                        <rect key="frame" x="140" y="11" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="OAg-j7-PgE"/>
                                             <constraint firstAttribute="height" constant="40" id="U3Y-aC-WNM"/>
@@ -98,7 +98,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="1N1-kM-Mt9"/>
                                     <constraint firstItem="O37-1s-lui" firstAttribute="top" secondItem="OGa-SU-hi0" secondAttribute="bottom" constant="15" id="6kK-Sz-OWn"/>
-                                    <constraint firstItem="skZ-8q-h1I" firstAttribute="leading" secondItem="1j7-cp-pYg" secondAttribute="trailing" constant="20" id="7WC-qq-0eC"/>
+                                    <constraint firstItem="skZ-8q-h1I" firstAttribute="leading" secondItem="1j7-cp-pYg" secondAttribute="trailing" constant="-40" id="7WC-qq-0eC"/>
                                     <constraint firstItem="OGa-SU-hi0" firstAttribute="leading" secondItem="Pun-I3-FkS" secondAttribute="leading" id="TZS-Nd-Zf5"/>
                                     <constraint firstItem="1j7-cp-pYg" firstAttribute="top" secondItem="OGa-SU-hi0" secondAttribute="bottom" constant="10" id="XNw-aY-ybK"/>
                                     <constraint firstItem="O37-1s-lui" firstAttribute="leading" secondItem="Pun-I3-FkS" secondAttribute="leading" constant="20" id="aTk-5B-AGw"/>

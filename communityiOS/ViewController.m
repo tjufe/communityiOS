@@ -64,7 +64,14 @@
 
 @implementation ViewController
 
+NSArray *forum;
 //@synthesize btnNickname;
+
+
+#pragma mark----获取版块信息
++(NSArray *)getForumList{
+    return forum;
+}
 
 
 -(void) setupRefresh {
@@ -257,6 +264,7 @@
 -(void) reloadData {
     [StatusTool statusToolGetForumListWithID:@"0001" Success:^(NSArray *array) {
         _listForumItem = array;
+        forum = array;
         [self.mainTableView reloadData];
         
     } failurs:^(NSError *error) {
@@ -284,11 +292,96 @@
 //    NSString *main_img_url = [URL_SERVICE stringByAppendingString:TOPIC_PIC_PATH];
 //    main_img_url = [main_img_url stringByAppendingString:@"/"];
 //    main_img_url = [main_img_url stringByAppendingString:item.image_url];
-    NSString *main_img_url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,TOPIC_PIC_PATH,@"/",item.image_url];//字符串拼接
+
+    NSString *main_img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,item.image_url];//字符串拼接
     [cell setForumIconImage:main_img_url];
+    
+    //lx 20150513
+    NSString *lastnew_context = item.first_post_context;
+    if(lastnew_context.length > 11){
+        lastnew_context=[lastnew_context substringToIndex:11];
+    }
+    if(item.first_post_context!=nil){
+        [cell setLastNewContent:lastnew_context];
+    }else{
+        cell.lastNewContentLabel.hidden = YES;
+    }
+    if(item.first_post_date!=nil){
+      [cell setLast_new_date:[self twoDateDistants:item.first_post_date]];
+    }else{
+        cell.lastNewDate.hidden = YES;
+    }
+    
+
     return cell;
 }
 
+#pragma mark------日期处理
+-(NSString *)twoDateDistants:(NSString *)date{
+    //日期格式转换
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat : @"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date2 = [formatter dateFromString:date];
+    
+    //解决采用世界时间转换后与实际时间相差8小时的问题
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [timeZone secondsFromGMTForDate:date2];
+    NSDate *p_date = [date2 dateByAddingTimeInterval:interval];
+    //日期比较
+    NSDate *cur_date = [[NSDate alloc]init];//获取当前时间
+    interval = [timeZone secondsFromGMTForDate:cur_date];
+    cur_date = [cur_date dateByAddingTimeInterval:interval];
+    
+    NSInteger seconds = [cur_date timeIntervalSinceDate:p_date];//计算时间差秒数
+    long time =(long) seconds;
+    NSString *date_time = [[NSString alloc]init];
+    NSNumber *longNumber;
+    NSString *post_date = [[NSString alloc]init];
+    if (time<0) {
+        post_date = @"刚刚";
+    }
+    else if(time<60){
+        longNumber = [NSNumber numberWithLong:time];
+        date_time = [longNumber stringValue];
+        post_date = [date_time stringByAppendingString:@"秒前"];
+    }
+    else if (time<60*60){
+        time = time/60;
+        longNumber = [NSNumber numberWithLong:time];
+        date_time = [longNumber stringValue];
+        post_date =[date_time stringByAppendingString:@"分钟前"];
+        
+    }
+    else if (time<60*60*24){
+        time = time/60/60;
+        longNumber = [NSNumber numberWithLong:time];
+        date_time = [longNumber stringValue];
+        post_date = [date_time stringByAppendingString:@"小时前"];
+        
+    }
+    else if(time<60*60*24*7){
+        time = time/60/60/24;
+        longNumber = [NSNumber numberWithLong:time];
+        date_time = [longNumber stringValue];
+        post_date = [date_time stringByAppendingString:@"天前"];
+        
+    }
+    else if(time<60*60*24*365){
+        NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+        [formatter1 setDateFormat : @"MM-dd"];
+        date_time = [formatter1 stringFromDate:date2];
+        post_date = date_time;
+        
+    }
+    else{
+        NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+        [formatter1 setDateFormat : @"yyyy-MM-dd"];
+        date_time = [formatter1 stringFromDate:date2];
+        post_date = date_time;
+        
+    }
+    return post_date;
+}
 //- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 //    return [((NSMutableArray*)[tableData objectAtIndex:0]) count];
 //}
@@ -326,6 +419,9 @@
     poLVC.forumlist = self.listForumItem;
     poLVC.forum_item = [self.listForumItem objectAtIndex:indexPath.row];
     poLVC.filter_flag = @"全部";
+
+  //  poLVC.pl_go = @"1";//从首页跳转
+
     
     
     [self.navigationController pushViewController:poLVC animated:YES];
@@ -377,6 +473,7 @@
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
         PEVC.ED_FLAG = @"0";//直接发新帖
         PEVC.forum_list_item = self.listForumItem;//传递版块列表
+
     
     [self.navigationController pushViewController:PEVC animated:YES];
     }else{
@@ -493,7 +590,9 @@
     if(phoneNumber!=nil){
         NSString *userNickname = [defaults valueForKey:@"UserNickname"];
         NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
+
         NSString *user_id = [defaults valueForKey:@"UserID"];
+
         
         ///20150418 认证标志显示
         NSString *userPermission = [defaults valueForKey:@"UserPermission"];
@@ -502,7 +601,7 @@
         }else{
             self.user_status.hidden = YES;
         }
-        
+        ///
         [self.btnNickname setTitle:userNickname forState:UIControlStateNormal];
         NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
         NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -543,8 +642,6 @@
         [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
     }
 }
-
-
 
 
 @end

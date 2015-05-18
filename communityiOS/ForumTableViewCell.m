@@ -36,5 +36,8 @@
     _lastNewContentLabel.text=lastNewContent;
 }
 
-
+//lx 20150513
+-(void)setLast_new_date:(NSString *)last_new_date{
+    _lastNewDate.text = last_new_date;
+}
 @end

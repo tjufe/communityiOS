@@ -15,9 +15,16 @@
 
 @interface PostDetailViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *PDview;
+@property (weak, nonatomic) IBOutlet UILabel *forumTitle;
+- (IBAction)ReplyNumOnClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btReplyNum;
+
+
 @property(strong,nonatomic)forumItem *forum_item;
 
-
+@property (weak, nonatomic) IBOutlet UILabel *replyNum;
+@property (weak, nonatomic) IBOutlet UIImageView *replyImage;
+@property(strong,nonatomic) NSArray *forumList;//版块列表
 //@property (strong,nonatomic) NSString *poster_nickname; //用户昵称
 //@property (strong,nonatomic) NSString *Phead_portrait_url; //用户头像
 //@property (strong,nonatomic) NSString *reply_num; //评论数

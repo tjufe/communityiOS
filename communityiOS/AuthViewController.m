@@ -35,6 +35,9 @@
     self.saveBtn.layer.cornerRadius = 6.0;
     self.saveBtn.layer.borderColor = [[UIColor redColor] CGColor];
     self.saveBtn.layer.borderWidth = 1.0;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *strPhoneNumber = [defaults valueForKey:@"PhoneNumber"];
+    self.phoneField.text = strPhoneNumber;
 
 }
 

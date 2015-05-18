@@ -28,7 +28,9 @@
                              @"display_num":@"display_num",
                              @"image_url":@"image_url",      //图片
                              @"open_status":@"open_status",
-                             @"ForumSetlist":@"ForumSetlist"
+                             @"ForumSetlist":@"ForumSetlist",
+                             @"new_post_context":@"first_post_context",
+                             @"new_post_date":@"first_post_date"
                              
                 
              };

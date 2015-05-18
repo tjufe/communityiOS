@@ -17,6 +17,8 @@
 @property (nonatomic,strong)NSString *image_url;
 @property (nonatomic,strong)NSString *open_status;
 @property (nonatomic,strong)NSArray *ForumSetlist;
+@property (nonatomic,strong)NSString *first_post_context;
+@property (nonatomic,strong)NSString *first_post_date;
 
 +(forumItem *)createItemWitparametes:(NSDictionary*)dic;
 
