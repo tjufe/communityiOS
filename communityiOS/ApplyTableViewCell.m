@@ -21,8 +21,5 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)btApply:(id)sender {
-}
-- (IBAction)ApplyOnClick:(id)sender {
-}
+
 @end
