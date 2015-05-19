@@ -28,7 +28,7 @@
 
 
 
-@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate>
+@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
 
@@ -103,6 +103,8 @@ float applyHeight = 0;
 float imageHeight = 0;
 
 bool isModerator = NO;//是否是版主
+
+
 
 
 #pragma mark------下方快速回复
@@ -329,6 +331,11 @@ bool isModerator = NO;//是否是版主
 -(void)addpostItem2:(postItem *)PostItem{
     self.post_item = PostItem;
 }
+#pragma mark------实现PostEditViewControllerDelegate
+-(void)addpostItem3:(postItem *)PostItem{
+    self.post_item = PostItem;
+}
+
 
 - (void)viewDidLoad {
 //    self.scrollview.frame.size.width = self.view.frame.size.width;
@@ -336,8 +343,9 @@ bool isModerator = NO;//是否是版主
     //start by wangyao 0513
     //
     if(self.post_item == nil){
-//        self.post_id = //从轮播图和推送传过来的post id ，以后完善
-//        loadPostInfo();
+//        self.post_id = self.postIDFromLun;
+        NSString *str = self.postIDFromLun;
+        [self loadPostInfo:self.postIDFromLun];
     }else{
         [self setData_2];
         [self.tableview reloadData];
@@ -355,6 +363,17 @@ bool isModerator = NO;//是否是版主
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
 
     
+}
+
+-(void)loadPostInfo:(NSString *)postID{
+    [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
+        self.post_item = (postItem *)object;
+        [self setData_2];
+        [self.tableview reloadData];
+        [self initUI];
+    } failurs:^(NSError *error) {
+        //to do
+    }];
 }
 
 
@@ -847,7 +866,7 @@ bool isModerator = NO;//是否是版主
     //传值
     PEVC.ED_FLAG = @"2";//编辑帖子
     PEVC.post_item = self.post_item;//帖子详情
-    PEVC.forum_item = _forum_item;
+//    PEVC.forum_item = _forum_item;
     
     [self.navigationController pushViewController:PEVC animated:YES];
     [self.operlist removeFromSuperview];
