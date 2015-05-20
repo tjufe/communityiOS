@@ -19,15 +19,16 @@
 #import "UIImageView+WebCache.h"//加载图片
 #import "StatusTool.h"
 #import "deletepostItem.h"
+#import "APIAddress.h"
 #import "ifApplyItem.h"
 #import "ChainToWebView.h"
-
+#import "UserJoinPostListViewController.h"
 #import "ChainToWebViewController.h"
 #import "MBProgressHUD.h"
 
 
 
-@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate>
+@interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
 
@@ -92,6 +93,7 @@
 @implementation PostDetailViewController
 int count=0;//用于菜单点击计数
 
+
 int alert = 0;//用于警告框UIAlertView计数
 
 bool alertcount=false;//用于菜单点击计数
@@ -105,11 +107,15 @@ NSInteger menuHeight ;//menu的高度
 bool isModerator = NO;//是否是版主
 
 
+
+
 #pragma mark------下方快速回复
 - (IBAction)SendOnClick:(id)sender {
     
     PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
     PEVC.postItem = self.post_item;
+    PEVC.forum_set_item = self.forum_item;
+    PEVC.forum_item = self.forum_item;
     [self.navigationController pushViewController:PEVC animated:YES];
     
     
@@ -159,6 +165,7 @@ bool isModerator = NO;//是否是版主
             [self loadPosterHead];
             
         }else{
+
             
             self.posterCell.headPortrait.image = [UIImage imageNamed:@"默认小头像"];
         }
@@ -215,6 +222,7 @@ bool isModerator = NO;//是否是版主
                 self.chainCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 self.chainCell.hidden = YES;
             }
+
             //外链层
             if ([self.chain isEqualToString:@"是"]) {
                 //        self.chainCell.btChain.hidden = NO;
@@ -241,6 +249,7 @@ bool isModerator = NO;//是否是版主
                 
                 //取消用户点击
                 self.applyCell.btApply.userInteractionEnabled = NO;
+
             }
             //报名层
             for(int i=0;i< self.forum_item.ForumSetlist.count; i++){
@@ -336,14 +345,25 @@ bool isModerator = NO;//是否是版主
     
 }
 
+#pragma mark------实现UserJoinPostListViewControllerDelegate
+-(void)addpostItem2:(postItem *)PostItem{
+    self.post_item = PostItem;
+}
+#pragma mark------实现PostEditViewControllerDelegate
+-(void)addpostItem3:(postItem *)PostItem{
+    self.post_item = PostItem;
+}
+
+
 - (void)viewDidLoad {
 //    self.scrollview.frame.size.width = self.view.frame.size.width;
     [super viewDidLoad];
     //start by wangyao 0513
     //
     if(self.post_item == nil){
-//        self.post_id = //从轮播图和推送传过来的post id ，以后完善
-//        loadPostInfo();
+//        self.post_id = self.postIDFromLun;
+          NSString *str = self.postIDFromLun;
+          [self loadPostInfo:self.postIDFromLun];
     }else{
         [self setData_2];
 //        [self.tableview reloadData];
@@ -361,6 +381,17 @@ bool isModerator = NO;//是否是版主
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
 
     
+}
+
+-(void)loadPostInfo:(NSString *)postID{
+    [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
+        self.post_item = (postItem *)object;
+        [self setData_2];
+        [self.tableview reloadData];
+        [self initUI];
+    } failurs:^(NSError *error) {
+        //to do
+    }];
 }
 
 
@@ -435,6 +466,7 @@ bool isModerator = NO;//是否是版主
         [self setUserInit];
     }
 
+
     
     
 }
@@ -465,6 +497,7 @@ bool isModerator = NO;//是否是版主
     
     self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
+
 -(void)setMenu{
    
     //下拉菜单
@@ -482,7 +515,7 @@ bool isModerator = NO;//是否是版主
     self.endApplyButton = [[UIButton alloc]init];
     self.endApplyButton.frame = CGRectMake(25, 100, 50, 50);
     
-    [self.endApplyButton setTitle:@"置顶" forState:UIControlStateNormal];
+    [self.endApplyButton setTitle:@"结束报名" forState:UIControlStateNormal];
     [self.endApplyButton addTarget:self action:@selector(endapply) forControlEvents:UIControlEventTouchUpInside];
     [self.endApplyButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
@@ -499,7 +532,7 @@ bool isModerator = NO;//是否是版主
     if(count==1){//表示menu开着
 
         [UIView animateWithDuration:0.3 animations:^{
-            self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 50*menuHeight);
+            self.operlist.frame = CGRectMake(self.view.frame.size.width-100, -90, 100, 50*menuHeight);
             self.operlist.alpha = 1;
         }];
         count = 0;
@@ -698,7 +731,7 @@ bool isModerator = NO;//是否是版主
 
 }
 -(void)loadPosterHead{
-    NSString *url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,HEAD_PIC_PATH,@"/",self.head_portrait_url];
+    NSString *url = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,self.head_portrait_url];
     
     [self.posterCell.headPortrait sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
@@ -707,7 +740,7 @@ bool isModerator = NO;//是否是版主
     }];
 }
 -(void)loadMainImage{
-    NSString *url = [NSString stringWithFormat:@"%@%@%@%@",URL_SERVICE,TOPIC_PIC_PATH,@"/",self.main_image_url];
+    NSString *url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.main_image_url];
     
     [self.postImageCell.MainImage sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
@@ -787,11 +820,12 @@ bool isModerator = NO;//是否是版主
             [hud removeFromSuperview];
         }];
         [self.operlist removeFromSuperview];
-        
+        count = 0;
 
     } failurs:^(NSError *error) {
         NSLog(@"%@",error);
         [self.operlist removeFromSuperview];
+        
     }];
     
 
@@ -876,6 +910,7 @@ bool isModerator = NO;//是否是版主
     
     [self.navigationController pushViewController:PEVC animated:YES];
     [self.operlist removeFromSuperview];
+    count = 0;
 }
 
 #pragma mark------菜单中删除帖子
@@ -888,6 +923,7 @@ bool isModerator = NO;//是否是版主
     UIAlertView *delete_alert=[[UIAlertView alloc]initWithTitle:@"删除确认" message:@"是否确定删除该话题?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [delete_alert show];
     alert=0;
+    count = 0;
 
 }
 

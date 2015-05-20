@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "postItem.h"
+#import "forumSetItem.h"
+#import "forumItem.h"
 
 
 @interface PostReplyViewController : UIViewController
 
 @property (strong ,nonatomic) NSArray *replyList;
 @property(strong ,nonatomic) postItem *postItem;
+@property (strong,nonatomic) forumItem *forum_item;
+@property (strong,nonatomic) forumSetItem *forum_set_item;
+
+
 @end

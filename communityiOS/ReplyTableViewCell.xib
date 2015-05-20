@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="99" id="KGk-i7-Jjw" customClass="ReplyTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_acatar_default_r" translatesAutoresizingMaskIntoConstraints="NO" id="YVX-tr-Y24">
+                        <rect key="frame" x="0.0" y="11" width="59" height="58"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="58" id="Jqg-bi-Ehq"/>
+                            <constraint firstAttribute="width" constant="59" id="tkF-pE-9bB"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="我觉得这个活动靠谱" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3i-f8-ybf">
+                        <rect key="frame" x="59" y="33" width="261" height="48"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="261" id="RmF-Fl-nZE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="认证-2" translatesAutoresizingMaskIntoConstraints="NO" id="Vxd-f3-aUM">
+                        <rect key="frame" x="163" y="15" width="17" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="17" id="Vt3-mU-x4p"/>
+                            <constraint firstAttribute="height" constant="17" id="mat-aR-Hvh"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="3小时前" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJH-5V-Ebe">
+                        <rect key="frame" x="261" y="11" width="59" height="22"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="59" id="1zP-iz-LgP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="社区通告管理员" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFf-GJ-8Nd">
+                        <rect key="frame" x="59" y="11" width="103" height="22"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="103" id="RrJ-Ze-rCV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="YVX-tr-Y24" secondAttribute="bottom" constant="10" id="66L-hh-SEb"/>
+                    <constraint firstItem="YVX-tr-Y24" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8gh-1m-U8M"/>
+                    <constraint firstItem="z3i-f8-ybf" firstAttribute="leading" secondItem="YVX-tr-Y24" secondAttribute="trailing" id="Bnn-29-WCQ"/>
+                    <constraint firstAttribute="trailing" secondItem="FJH-5V-Ebe" secondAttribute="trailing" id="U87-oW-ut9"/>
+                    <constraint firstItem="sFf-GJ-8Nd" firstAttribute="leading" secondItem="YVX-tr-Y24" secondAttribute="trailing" id="UQO-Z7-4cI"/>
+                    <constraint firstItem="FJH-5V-Ebe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="Wug-XT-EzD"/>
+                    <constraint firstItem="YVX-tr-Y24" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="YEd-V3-WWF"/>
+                    <constraint firstAttribute="bottom" secondItem="z3i-f8-ybf" secondAttribute="bottom" constant="2" id="cK3-Hi-mY2"/>
+                    <constraint firstItem="Vxd-f3-aUM" firstAttribute="leading" secondItem="sFf-GJ-8Nd" secondAttribute="trailing" constant="1" id="eOF-VL-qSf"/>
+                    <constraint firstItem="Vxd-f3-aUM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="hIn-pi-qqR"/>
+                    <constraint firstAttribute="trailing" secondItem="z3i-f8-ybf" secondAttribute="trailing" id="lFR-cI-dZZ"/>
+                    <constraint firstItem="sFf-GJ-8Nd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="unv-rD-BdF"/>
+                    <constraint firstAttribute="trailing" secondItem="YVX-tr-Y24" secondAttribute="trailing" constant="261" id="zac-iO-5s2"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="zac-iO-5s2"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="replyContent" destination="z3i-f8-ybf" id="kep-q2-Tmw"/>
+                <outlet property="replyTime" destination="FJH-5V-Ebe" id="vML-Yb-vSL"/>
+                <outlet property="replyerHead" destination="YVX-tr-Y24" id="tX0-Sc-VL2"/>
+                <outlet property="replyerNickName" destination="sFf-GJ-8Nd" id="3i7-uP-Fjg"/>
+            </connections>
+            <point key="canvasLocation" x="168" y="458"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_acatar_default_r" width="28" height="27"/>
+        <image name="认证-2" width="24" height="24"/>
+    </resources>
+</document>

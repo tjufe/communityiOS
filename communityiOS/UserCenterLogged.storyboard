@@ -78,14 +78,7 @@
                                     <action selector="go2myEnjoyPostList:" destination="0pW-2A-9cI" eventType="touchUpInside" id="Sbb-pY-Hcc"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_my_favorites" translatesAutoresizingMaskIntoConstraints="NO" id="f1K-1I-O7X">
-                                <rect key="frame" x="16" y="272" width="16" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="16" id="8Ad-r9-2cD"/>
-                                    <constraint firstAttribute="height" constant="16" id="QnA-SW-KgE"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mm-sy-k5O">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mm-sy-k5O">
                                 <rect key="frame" x="39" y="265" width="80" height="30"/>
                                 <state key="normal" title="待审核话题">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -134,6 +127,13 @@
                                     <action selector="go2settings:" destination="0pW-2A-9cI" eventType="touchUpInside" id="ftE-dU-GsT"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_my_check" translatesAutoresizingMaskIntoConstraints="NO" id="f1K-1I-O7X">
+                                <rect key="frame" x="16" y="272" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="8Ad-r9-2cD"/>
+                                    <constraint firstAttribute="height" constant="16" id="QnA-SW-KgE"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="DHx-JI-DR4" firstAttribute="leading" secondItem="AgG-MZ-dDL" secondAttribute="leading" id="1G1-cd-zyj"/>
@@ -199,7 +199,7 @@
         <image name="bg_user_centre" width="640" height="1136"/>
         <image name="icon_acatar_default_w" width="37" height="38"/>
         <image name="icon_auth" width="14" height="15"/>
-        <image name="icon_my_favorites" width="16" height="16"/>
+        <image name="icon_my_check" width="32" height="32"/>
         <image name="icon_my_post" width="16" height="14"/>
         <image name="icon_my_takepartin_post" width="16" height="12"/>
         <image name="icon_settings" width="17" height="17"/>

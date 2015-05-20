@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "forumItem.h"
+#import "postItem.h"
+#import "forumSetItem.h"
+
 
 
 
@@ -19,12 +22,15 @@
 
 
 @property(strong,nonatomic)forumItem *forum_item;
+
 @property (weak, nonatomic) IBOutlet UILabel *replyNum;
 @property (weak, nonatomic) IBOutlet UIImageView *replyImage;
 @property(strong,nonatomic) NSArray *forumList;//版块列表
 //@property (strong,nonatomic) NSString *poster_nickname; //用户昵称
 //@property (strong,nonatomic) NSString *Phead_portrait_url; //用户头像
 //@property (strong,nonatomic) NSString *reply_num; //评论数
+
+@property (nonatomic,strong) NSString *postIDFromLun;//从轮播图传来的post_id
 
 
 

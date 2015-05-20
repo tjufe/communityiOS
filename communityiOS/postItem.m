@@ -49,10 +49,12 @@
                              @"reply_num":@"reply_num",
                              @"apply_num":@"apply_num",
                              @"read_num":@"read_num",
+
                              @"open_apply":@"open_apply",
                              @"limit_apply_num":@"limit_apply_num",
                              @"poster_auth":@"poster_auth",
                              @"apply_enough":@"apply_enough"
+
                      
              };
 }

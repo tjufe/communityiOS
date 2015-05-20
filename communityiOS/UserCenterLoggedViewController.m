@@ -12,6 +12,8 @@
 #import "UserCenterLoggedViewController.h"
 #import "PPRevealSideViewController.h"
 #import "UIImageView+WebCache.h"
+#import "PostListViewController.h"
+#import "UserJoinPostListViewController.h"
 
 #import "PostListViewController.h"
 #import "UserJoinPostListViewController.h"
@@ -33,6 +35,9 @@
 - (IBAction)go2myPostList:(id)sender {
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
     poLVC.filter_flag = @"我发起的";
+
+ //   poLVC.pl_go = @"2";//从我的话题页跳转
+
 //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:poLVC];
 //    UIBarButtonItem *leftBtn=[[UIBarButtonItem alloc]initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(go2main)];
 //    poLVC.navigationItem.leftBarButtonItem=leftBtn;
@@ -58,10 +63,20 @@
 
 #pragma mark------我参与的 lx20150505
 - (IBAction)go2myEnjoyPostList:(id)sender {
-//    UncheckPostListViewController *unPLVC = [UncheckPostListViewController
-//        createFromStoryboardName:@"UncheckPostList" withIdentifier:@"uncheck"];
-    UINavigationController  *unPLVC = [UINavigationController createFromStoryboardName:@"UserJoinPostList" withIdentifier:@"myIn"];
-    [self.revealSideViewController popViewControllerWithNewCenterController:unPLVC animated:YES];
+
+    
+    UserJoinPostListViewController *uj_PLVC = [UserJoinPostListViewController createFromStoryboardName:@"UserJoinPostList" withIdentifier:@"join"];
+    UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 20, 10, 20);
+    [btn setImage:[UIImage imageNamed:@"back"] forState: UIControlStateNormal];
+    [btn addTarget:self action:@selector(go2main) forControlEvents:UIControlEventTouchUpInside];
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    UIBarButtonItem *leftBtn =[[UIBarButtonItem alloc]initWithCustomView:btn];
+    uj_PLVC.navigationItem.leftBarButtonItem =leftBtn;
+    
+    [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
+    [nav pushViewController:uj_PLVC animated:YES];
+
 }
 
 #pragma mark------待审核话题 lx20150504
@@ -119,9 +134,13 @@
             NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
             NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
             [self.imgAvatar sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                NSData *imageData = UIImageJPEGRepresentation(image, 1);
-                [self saveImage:imageData WithName:fullPathToFile];
-                [self initPortraitWithImage:image];
+                if (image != nil) {
+                    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                    [self saveImage:imageData WithName:fullPathToFile];
+                    [self initPortraitWithImage:image];
+                }else{
+                    [self initPortraitWithImage:[UIImage imageNamed:@"icon_acatar_default_r"]];
+                }
             }];
         }
         //判断是否是管理员，显示“实名认证”图标
