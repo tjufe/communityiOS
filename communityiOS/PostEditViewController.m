@@ -195,14 +195,24 @@ NSString *num3 ;
                 //包含中文字符的string转换为nsurl
                 NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 if([self.select_image_name isEqualToString:@""] ||[self.select_image_name isEqualToString:@"''"]){
+                    if(!self.select_image){
                     cell.MainImage.hidden = YES;
+                    }else{
+                        cell.MainImage.hidden = NO;
+                        cell.MainImage.image = self.select_image;
+                    }
                 }else{
+                    if(!self.select_image){
                     cell.MainImage.hidden = NO;
                     [cell.MainImage sd_setImageWithURL:iurl placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                         cell.MainImage.image = image;
                     }];
+                    }
+                    else{
+                       cell.MainImage.hidden = NO;
+                       cell.MainImage.image = self.select_image;
+                    }
                 }
-                
                 
             }else{
                
@@ -408,14 +418,18 @@ NSString *num3 ;
         }
 
     }else if(indexPath.row==3){//删图片
+        if(self.select_image_name&&![self.select_image_name isEqualToString:@""]&&![self.select_image_name isEqualToString:@""""]){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除图片？" message:@"您确定删除该图片吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
         self.alert_flag = @"delete_img";
+        }
 
     }else if (indexPath.row==4){//删链接
+        if([self.select_chain isEqualToString:@"是"]){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除外链？" message:@"您确定删除该外链吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
         self.alert_flag = @"delete_chain";
+        }
     }
     
 }
@@ -1003,10 +1017,7 @@ NSString *num3 ;
             if([_ED_FLAG isEqualToString:@"0"]){
         [self.navigationController popToRootViewControllerAnimated:YES];
             }else if([_ED_FLAG isEqualToString:@"1"]){
-//                PostListViewController *PLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
-//                PLVC.forum_item = _forum_item;
-//                PLVC.filter_flag=@"全部";
-//                [self.navigationController pushViewController:PLVC animated:YES];
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }else{
                 
                 
