@@ -1349,6 +1349,8 @@ NSString *num3 ;
         [self.maskview removeFromSuperview];
         self.select_chain_address = chainText.text;
         self.select_chain_context = chainName.text;
+        
+        if([self.select_chain isEqualToString:@"否"]){//排除原来有外链又修改的情况
         if(!self.select_chain_context){
             self.select_chain = @"否";
             self.select_chain_address = @"";
@@ -1358,6 +1360,7 @@ NSString *num3 ;
             if(!self.select_chain_address){
                 self.select_chain_address = @"";
             }
+        }
         }
     }
     //显示在UI中
