@@ -297,20 +297,38 @@ NSInteger page_filter;
 
 
 
-#pragma mark-----视图切换回该页调用
-//-(void)viewWillAppear:(BOOL)animated{
-//     [super viewWillAppear:(BOOL)animated];
-//     page =1;
-//     [self loadData];
-//     
-//}
+#pragma mark-----视图切换回pop该页调用
+-(void)viewWillAppear:(BOOL)animated{
+     [super viewWillAppear:(BOOL)animated];
+     page =1;
+     rows = 5;
+     page_filter = 0;
+     [self.PostListArray removeAllObjects];
+     [postDateData removeAllObjects];
+     [postImageData removeAllObjects];
+     [postTitleData removeAllObjects];
+     [postSetTopData removeAllObjects];
+     [self.Poster_Apply_Array removeAllObjects];
+     [self.Poster_Nic_Array removeAllObjects];
+     [self.Post_Rpply_Array removeAllObjects];
+     [self.Apply removeAllObjects];
+     [self.Reply removeAllObjects];
+     
+     if(![_filter_flag isEqualToString:@"待审核"]){
+          
+          [self loadData];
+     }else{
+          [self loadData2];
+     }
+     
+}
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     page =1;
-     rows = 5;
-     page_filter = 0;
+ //    page =1;
+ //    rows = 5;
+ //    page_filter = 0;
      
      //获取当前用户信息
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -455,12 +473,12 @@ NSInteger page_filter;
      
     //请求数据
      
-     if(![_filter_flag isEqualToString:@"待审核"]){
-     
-          [self loadData];
-     }else{
-          [self loadData2];
-     }
+//     if(![_filter_flag isEqualToString:@"待审核"]){
+//     
+//          [self loadData];
+//     }else{
+//          [self loadData2];
+//     }
    
 
     // Do any additional setup after loading the view.

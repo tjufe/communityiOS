@@ -93,7 +93,7 @@
 
 @implementation PostDetailViewController
 int count=0;//用于菜单点击计数
-
+int pop_code;//用于跳转标志
 
 int alert = 0;//用于警告框UIAlertView计数
 
@@ -356,6 +356,20 @@ bool isModerator = NO;//是否是版主
 }
 
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:(BOOL)animated];
+    if(pop_code==1){
+        [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
+            self.post_item = (postItem *)object;
+            [self.tableview reloadData];
+        } failurs:^(NSError *error) {
+            //
+        }];
+    }
+}
+
+
+
 - (void)viewDidLoad {
 //    self.scrollview.frame.size.width = self.view.frame.size.width;
     [super viewDidLoad];
@@ -380,6 +394,8 @@ bool isModerator = NO;//是否是版主
        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    
+    
 
     
 }
@@ -902,6 +918,7 @@ bool isModerator = NO;//是否是版主
 -(void)EditPost{
 //    count++;
     alertcount = false;
+    pop_code = 1;//跳转标志
     PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];
     //通过UIViewController+Create扩展方法创建FourViewController的实例对象
     //传值
