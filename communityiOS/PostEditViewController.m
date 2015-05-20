@@ -852,8 +852,8 @@ NSString *num3 ;
 
         }else{
         
-    //    TitleTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    //    self.select_post_title = cell.Title.text;
+        TitleTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        self.select_post_title = cell.Title.text;
         if([self.select_post_title isEqualToString:@""]||self.select_post_title==nil){
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
@@ -1017,31 +1017,10 @@ NSString *num3 ;
             if([_ED_FLAG isEqualToString:@"0"]){
         [self.navigationController popToRootViewControllerAnimated:YES];
             }else if([_ED_FLAG isEqualToString:@"1"]){
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             }else{
+                [self.navigationController popViewControllerAnimated:YES];
                 
-                
-                 _post_item.post_text = self.select_post_text ;
-                 _post_item.title = self.select_post_title ;
-                 _post_item.main_image_url = self.select_image_name ;
-                 _post_item.chain = self.select_chain;
-                 _post_item.chain_name = self.select_chain_context;
-                 _post_item.chain_url = self.select_chain_address;
-                 _post_item.open_apply =  self.select_open_apply;
-                 _post_item.limit_apply_num = self.select_limit_apply_num;
-                 _post_item.need_check = self.select_need_check;
-                 _post_item.checked = self.select_checked;
-
- //               [PostDetailViewController getPostItem:_post_item];
-//                PostDetailViewController *PDVC = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-//                //协议实现页面传值
-//                self.delegate = PDVC;
-//                if ([self.delegate
-//                     respondsToSelector:@selector(addpostItem3:)]) {
-//                    
-//                    [self.delegate addpostItem3:_post_item];
-//                }
-//                [self.navigationController pushViewController:PDVC animated:YES];
             }
         }
     }else{
