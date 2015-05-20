@@ -28,6 +28,7 @@
 #import "RegistViewController.h"
 
 #import "SlideInfoItem.h"
+#import "PostDetailViewController.h"
 
 
 
@@ -224,8 +225,12 @@ NSArray *forum;
     UIImageView *view = [gestureRecognizer view];
     NSInteger *index = view.tag;
     SlideInfoItem *s = [self.listSlide objectAtIndex:index];
-    NSString *postID = s.post_id;
-    NSLog(@"%@",postID);
+    //往帖子详情页跳转
+    PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+    PDVC.postIDFromLun = s.post_id;
+    NSString *str = s.post_id;
+    [self.navigationController pushViewController:PDVC animated:YES];
+
 }
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {

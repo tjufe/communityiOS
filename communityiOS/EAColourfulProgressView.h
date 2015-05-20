@@ -26,7 +26,6 @@ IB_DESIGNABLE
 @property (nonatomic, strong) IBInspectable UIColor *oneThirdFillColor;
 @property (nonatomic, strong) IBInspectable UIColor *twoThirdsFillColor;
 @property (nonatomic, strong) IBInspectable UIColor *finalFillColor;
-
 /**
  *  The container colour used as background colour for the progress view.
  */

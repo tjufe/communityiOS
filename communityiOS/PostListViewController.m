@@ -229,6 +229,7 @@ NSInteger page_filter;
      PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
      //全局变量传值
      PDVC.forum_item = _forum_item;
+     PDVC.forumList = _forumlist;
 
     //协议实现页面传值
     self.delegate = PDVC;

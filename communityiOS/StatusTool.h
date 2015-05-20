@@ -81,5 +81,8 @@ typedef void(^StatusFailurs)(NSError * error);
 //hmx05181051 加载轮播图
 +(void)statusToolGetSlideListWithCommunityID:(NSString *)community_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
+//post_id加载帖子详情
++(void)statusToolGetPostInfoWithPostID:(NSString *)post_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
 
 @end

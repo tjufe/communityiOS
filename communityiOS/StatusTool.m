@@ -622,6 +622,32 @@
     }];
 }
 
+//post_id加载帖子详情
++(void)statusToolGetPostInfoWithPostID:(NSString *)post_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    NSMutableDictionary *fir = [[NSMutableDictionary alloc]init];
+    [fir setObject:post_id forKey:@"post_id"];
+    NSMutableDictionary *sec = [[NSMutableDictionary alloc]init];
+    [sec setObject:fir forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:sec forKey:@"param"];
+    [thirdDic setObject:@"LoadPostInfo" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *dic1 = [[NSDictionary alloc]init];
+        dic1 = [dic valueForKey:@"data"];
+        NSDictionary *dic2 = [[NSDictionary alloc]init];
+        dic2 = [dic1 valueForKey:@"postinfo"];
+        postItem *post_item = [postItem createItemWitparametes:dic2];
+        success(post_item);
+        
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+
+}
+
 
 @end
 
