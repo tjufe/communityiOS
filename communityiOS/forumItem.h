@@ -19,6 +19,7 @@
 @property (nonatomic,strong)NSArray *ForumSetlist;
 @property (nonatomic,strong)NSString *first_post_context;
 @property (nonatomic,strong)NSString *first_post_date;
+@property (nonatomic,strong)NSString *display_type;
 
 +(forumItem *)createItemWitparametes:(NSDictionary*)dic;
 

@@ -203,8 +203,9 @@ int reply_page_filter = 0;
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{//绘制行高
-    UITableViewCell *cell = [self tableView:self.replyListTable cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+//    UITableViewCell *cell = [self tableView:self.replyListTable cellForRowAtIndexPath:indexPath];
+//    return cell.frame.size.height;
+    return 80;
 }
 
 #pragma mark-

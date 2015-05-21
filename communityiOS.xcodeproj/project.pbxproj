@@ -110,6 +110,8 @@
 		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
 		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
+		8ED353121B0D87280017F2F6 /* MainTableViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED353101B0D87280017F2F6 /* MainTableViewHeaderCell.m */; };
+		8ED353131B0D87280017F2F6 /* MainTableViewHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED353111B0D87280017F2F6 /* MainTableViewHeaderCell.xib */; };
 		8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */; };
 		8EEB4BF31B098E9A00B77265 /* SlideInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB4BF21B098E9A00B77265 /* SlideInfoItem.m */; };
 		8EEB4BF61B098F7D00B77265 /* SlideInfoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB4BF51B098F7D00B77265 /* SlideInfoList.m */; };
@@ -319,6 +321,9 @@
 		265117CBD0FCA383D4E565E6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		735E3463C69F5339C7061D88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7E639B0AA95704A9F1BEA0E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8ED3530F1B0D87280017F2F6 /* MainTableViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewHeaderCell.h; sourceTree = "<group>"; };
+		8ED353101B0D87280017F2F6 /* MainTableViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewHeaderCell.m; sourceTree = "<group>"; };
+		8ED353111B0D87280017F2F6 /* MainTableViewHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewHeaderCell.xib; sourceTree = "<group>"; };
 		8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
 		8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		8EEB4BF11B098E9A00B77265 /* SlideInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideInfoItem.h; sourceTree = "<group>"; };
@@ -463,6 +468,9 @@
 				8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */,
 				13C58BE61AB9550600090157 /* Main.storyboard */,
 				13C58BEB1AB9550600090157 /* LaunchScreen.xib */,
+				8ED3530F1B0D87280017F2F6 /* MainTableViewHeaderCell.h */,
+				8ED353101B0D87280017F2F6 /* MainTableViewHeaderCell.m */,
+				8ED353111B0D87280017F2F6 /* MainTableViewHeaderCell.xib */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1011,6 +1019,7 @@
 				13B1C2E31ACB7DC5005C179C /* MJRefresh.bundle in Resources */,
 				13B1C2CB1ACA6E7C005C179C /* userCenter.xcassets in Resources */,
 				13B1C2BB1ACA5956005C179C /* demo.xcassets in Resources */,
+				8ED353131B0D87280017F2F6 /* MainTableViewHeaderCell.xib in Resources */,
 				8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */,
 				8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */,
 				13B1C3511AD4D6ED005C179C /* PosterTableViewCell.xib in Resources */,
@@ -1130,6 +1139,7 @@
 				13B1C3741AD4D80B005C179C /* postItem.m in Sources */,
 				13B1C34D1AD4D6ED005C179C /* PostDetailViewController.m in Sources */,
 				137D80DE1B06FC24001E8CDA /* EditApplyTableViewCell.m in Sources */,
+				8ED353121B0D87280017F2F6 /* MainTableViewHeaderCell.m in Sources */,
 				13B1C2E51ACB7DC5005C179C /* MJRefreshBaseView.m in Sources */,
 				13C58BDF1AB9550600090157 /* main.m in Sources */,
 				184B42A91B098D2A004CD398 /* ReplyTableViewCell.m in Sources */,

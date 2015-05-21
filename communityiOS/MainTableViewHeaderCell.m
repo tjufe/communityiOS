@@ -7,6 +7,7 @@
 //
 
 #import "MainTableViewHeaderCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation MainTableViewHeaderCell
 
@@ -20,4 +21,10 @@
     // Configure the view for the selected state
 }
 
+-(void)setForumIconURLStr:(NSString *)forumIconURLStr{
+    [self.forumIconImageView sd_setImageWithURL:[NSURL URLWithString:[forumIconURLStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        self.forumIconImageView.image = image;
+    }];
+
+}
 @end

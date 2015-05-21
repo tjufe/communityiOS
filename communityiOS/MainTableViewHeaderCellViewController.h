@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainTableViewHeaderCellViewController : UIViewController
+@interface MainTableViewHeaderCellViewController : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *forumIconImage;
+@property (weak, nonatomic) IBOutlet UILabel *forumNameLabel;
 
 @end

@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface MainTableViewHeaderCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *forumNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *breakLineImage;
+@property (weak, nonatomic) IBOutlet UIImageView *forumIconImageView;
+
+@property (weak, nonatomic) NSString *forumIconURLStr;
 
 @end
