@@ -303,7 +303,7 @@
     [firstDic setObject:post_title forKey:@"post_title"];
     [firstDic setObject:post_text forKey:@"post_text"];
     [firstDic setObject:img_url forKey:@"main_image_url"];
-    [firstDic setObject:chain forKey:@"chain_flag"];
+    [firstDic setObject:chain forKey:@"chain"];
     [firstDic setObject:chain_name forKey:@"chain_name"];
     [firstDic setObject:chain_url forKey:@"chain_url"];
     [firstDic setObject:apply forKey:@"open_apply"];
@@ -434,6 +434,7 @@
     [thirdDic setObject:@"PostReply" forKey:@"method"];
     
     [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
+        
         success(responseObject);
         
     } failure:^(NSError *error) {

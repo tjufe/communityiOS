@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "EAColourfulProgressView.h"
 @interface ApplyTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet EAColourfulProgressView *pvApply;
 @property (weak, nonatomic) IBOutlet UILabel *applyNum;
 @property (weak, nonatomic) IBOutlet UILabel *limitApplyNum;
 
-@property (strong, nonatomic) IBOutlet EAColourfulProgressView *pvApply;
 
-- (IBAction)ApplyOnClick:(id)sender;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *btApply;
 

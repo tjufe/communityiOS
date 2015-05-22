@@ -29,6 +29,7 @@
 
 #import "SlideInfoItem.h"
 #import "PostDetailViewController.h"
+#import "MainTableViewHeaderCell.h"
 
 
 
@@ -228,6 +229,7 @@ NSArray *forum;
     //往帖子详情页跳转
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
     PDVC.postIDFromOutside = s.post_id;
+
     NSString *str = s.post_id;
     [self.navigationController pushViewController:PDVC animated:YES];
 
@@ -325,47 +327,6 @@ NSArray *forum;
     
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_listForumItem count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ForumTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if(!cell){
-        cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
-    }
-    //    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
-    //    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
-    //    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
-    forumItem *item = [_listForumItem objectAtIndex:indexPath.row];
-    [cell setForumName:item.forum_name];
-    //lx 20150508
-//    NSString *main_img_url = [URL_SERVICE stringByAppendingString:TOPIC_PIC_PATH];
-//    main_img_url = [main_img_url stringByAppendingString:@"/"];
-//    main_img_url = [main_img_url stringByAppendingString:item.image_url];
-
-    NSString *main_img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,item.image_url];//字符串拼接
-    [cell setForumIconImage:main_img_url];
-    
-    //lx 20150513
-    NSString *lastnew_context = item.first_post_context;
-    if(lastnew_context.length > 11){
-        lastnew_context=[lastnew_context substringToIndex:11];
-    }
-    if(item.first_post_context!=nil){
-        [cell setLastNewContent:lastnew_context];
-    }else{
-        cell.lastNewContentLabel.hidden = YES;
-    }
-    if(item.first_post_date!=nil){
-      [cell setLast_new_date:[self twoDateDistants:item.first_post_date]];
-    }else{
-        cell.lastNewDate.hidden = YES;
-    }
-    
-
-    return cell;
-}
 
 #pragma mark------日期处理
 -(NSString *)twoDateDistants:(NSString *)date{
@@ -693,6 +654,124 @@ NSArray *forum;
         [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft animated:YES];
     }
 }
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSInteger forumcount =[_listForumItem count];
+    for(forumItem *row in self.listForumItem){
+        if([row.display_type rangeOfString:@"横向"].location!=NSNotFound){
+            forumcount--;
+        }
+    }
+    return forumcount;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ForumTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if(!cell){
+        cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
+    }
+    //    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
+    //    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
+    //    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
+    forumItem *item = [_listForumItem objectAtIndex:indexPath.row];
+    [cell setForumName:item.forum_name];
+    //lx 20150508
+    //    NSString *main_img_url = [URL_SERVICE stringByAppendingString:TOPIC_PIC_PATH];
+    //    main_img_url = [main_img_url stringByAppendingString:@"/"];
+    //    main_img_url = [main_img_url stringByAppendingString:item.image_url];
+    
+    NSString *main_img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,item.image_url];//字符串拼接
+    [cell setForumIconImage:main_img_url];
+    
+    //lx 20150513
+    NSString *lastnew_context = item.first_post_context;
+    if(lastnew_context.length > 11){
+        lastnew_context=[lastnew_context substringToIndex:11];
+    }
+    if(item.first_post_context!=nil){
+        [cell setLastNewContent:lastnew_context];
+    }else{
+        cell.lastNewContentLabel.hidden = YES;
+    }
+    if(item.first_post_date!=nil){
+        [cell setLast_new_date:[self twoDateDistants:item.first_post_date]];
+    }else{
+        cell.lastNewDate.hidden = YES;
+    }
+ 
+    return cell;
+    
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 80;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
+    CGFloat iconsCountPerPage = 3.5;
+    CGFloat w = self.view.frame.size.width;
+    CGFloat h = 80;
+    UIScrollView *scrollView = [[UIScrollView alloc]init];
+    scrollView.frame = CGRectMake(0, 0, w, h);
+    scrollView.backgroundColor = [UIColor whiteColor];
+    int i = 0;
+    int j = 0;
+    for(forumItem *row in self.listForumItem){
+        if([row.display_type rangeOfString:@"横向"].location!=NSNotFound){
+            MainTableViewHeaderCell
+            *cell =[[[NSBundle mainBundle] loadNibNamed:@"MainTableViewHeaderCell" owner:self options:nil] objectAtIndex:0];
+            cell.frame = CGRectMake(w/iconsCountPerPage*i, 0, w/iconsCountPerPage, h);
+            cell.forumNameLabel.text = row.forum_name;
+            
+            //设置版块主图URL
+            NSString *main_img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,row.image_url];//字符串拼接
+            cell.forumIconURLStr = main_img_url;
+            
+            [scrollView addSubview:cell];
+            
+            [cell setUserInteractionEnabled:YES];
+            [cell setTag:j];
+            UITapGestureRecognizer *singleTap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(GoThisRepairReportForum:)];
+            [cell addGestureRecognizer:singleTap3];
+            
+            i++;
+        }
+        j++;
+    }
+    //不显示滚动条
+    scrollView.showsHorizontalScrollIndicator = NO;
+    //设置scrollview的滚动范围
+    CGFloat contentW = i * w / iconsCountPerPage;
+    //不允许在垂直方向上进行滚动
+    scrollView.contentSize = CGSizeMake(contentW, 0);
+    //找到scrollview中最后一个子视图
+    MainTableViewHeaderCell
+    *cell =scrollView.subviews.lastObject;
+    //将最后一个子视图的分割线设置为隐藏
+    cell.breakLineImage.hidden = YES;
+    
+    return scrollView;
+}
+
+-(void)GoThisRepairReportForum:(UIGestureRecognizer *)gestureRecognizer
+{
+    MainTableViewHeaderCell *view = [gestureRecognizer view];
+    NSInteger *index = view.tag;
+    forumItem *f = [self.listForumItem objectAtIndex:index];
+    NSLog(@"%@",f.forum_name);
+    PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
+    poLVC.forumlist = self.listForumItem;
+    poLVC.forum_item = [self.listForumItem objectAtIndex:index];
+    poLVC.filter_flag = @"全部";
+    
+    [self.navigationController pushViewController:poLVC animated:YES];
+    
+    NSLog(@"%@",@"hmx");
+}
+
 
 
 @end

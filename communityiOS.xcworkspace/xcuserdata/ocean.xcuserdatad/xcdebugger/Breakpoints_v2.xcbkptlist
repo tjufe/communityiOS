@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "463"
             endingLineNumber = "463"
-            landmarkName = "+statusToolNewPostWithcID:fID:PosterID:postTitle:postText:imgURL:chain:chainName:chainURL:apply:limApplyNum:needCheck:Checked:Success:failurs:"
+            landmarkName = "+statusToolRefreshUserImageWithUserID:ImageGUID:Success:failurs:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

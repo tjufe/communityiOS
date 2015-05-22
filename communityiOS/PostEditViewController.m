@@ -195,14 +195,24 @@ NSString *num3 ;
                 //包含中文字符的string转换为nsurl
                 NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 if([self.select_image_name isEqualToString:@""] ||[self.select_image_name isEqualToString:@"''"]){
+                    if(!self.select_image){
                     cell.MainImage.hidden = YES;
+                    }else{
+                        cell.MainImage.hidden = NO;
+                        cell.MainImage.image = self.select_image;
+                    }
                 }else{
+                    if(!self.select_image){
                     cell.MainImage.hidden = NO;
                     [cell.MainImage sd_setImageWithURL:iurl placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                         cell.MainImage.image = image;
                     }];
+                    }
+                    else{
+                       cell.MainImage.hidden = NO;
+                       cell.MainImage.image = self.select_image;
+                    }
                 }
-                
                 
             }else{
                
@@ -408,14 +418,18 @@ NSString *num3 ;
         }
 
     }else if(indexPath.row==3){//删图片
+        if(self.select_image_name&&![self.select_image_name isEqualToString:@""]&&![self.select_image_name isEqualToString:@""""]){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除图片？" message:@"您确定删除该图片吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
         self.alert_flag = @"delete_img";
+        }
 
     }else if (indexPath.row==4){//删链接
+        if([self.select_chain isEqualToString:@"是"]){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除外链？" message:@"您确定删除该外链吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
         self.alert_flag = @"delete_chain";
+        }
     }
     
 }
@@ -838,8 +852,8 @@ NSString *num3 ;
 
         }else{
         
-    //    TitleTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    //    self.select_post_title = cell.Title.text;
+        TitleTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        self.select_post_title = cell.Title.text;
         if([self.select_post_title isEqualToString:@""]||self.select_post_title==nil){
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
@@ -1003,34 +1017,10 @@ NSString *num3 ;
             if([_ED_FLAG isEqualToString:@"0"]){
         [self.navigationController popToRootViewControllerAnimated:YES];
             }else if([_ED_FLAG isEqualToString:@"1"]){
-//                PostListViewController *PLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
-//                PLVC.forum_item = _forum_item;
-//                PLVC.filter_flag=@"全部";
-//                [self.navigationController pushViewController:PLVC animated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             }else{
+                [self.navigationController popViewControllerAnimated:YES];
                 
-                
-                 _post_item.post_text = self.select_post_text ;
-                 _post_item.title = self.select_post_title ;
-                 _post_item.main_image_url = self.select_image_name ;
-                 _post_item.chain = self.select_chain;
-                 _post_item.chain_name = self.select_chain_context;
-                 _post_item.chain_url = self.select_chain_address;
-                 _post_item.open_apply =  self.select_open_apply;
-                 _post_item.limit_apply_num = self.select_limit_apply_num;
-                 _post_item.need_check = self.select_need_check;
-                 _post_item.checked = self.select_checked;
-
- //               [PostDetailViewController getPostItem:_post_item];
-//                PostDetailViewController *PDVC = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-//                //协议实现页面传值
-//                self.delegate = PDVC;
-//                if ([self.delegate
-//                     respondsToSelector:@selector(addpostItem3:)]) {
-//                    
-//                    [self.delegate addpostItem3:_post_item];
-//                }
-//                [self.navigationController pushViewController:PDVC animated:YES];
             }
         }
     }else{
@@ -1359,6 +1349,8 @@ NSString *num3 ;
         [self.maskview removeFromSuperview];
         self.select_chain_address = chainText.text;
         self.select_chain_context = chainName.text;
+        
+        if([self.select_chain isEqualToString:@"否"]){//排除原来有外链又修改的情况
         if(!self.select_chain_context){
             self.select_chain = @"否";
             self.select_chain_address = @"";
@@ -1368,6 +1360,7 @@ NSString *num3 ;
             if(!self.select_chain_address){
                 self.select_chain_address = @"";
             }
+        }
         }
     }
     //显示在UI中
