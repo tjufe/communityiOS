@@ -100,16 +100,10 @@
         if (self.shouldJumpToPostDetail) {
             NSString *post_id = [[NSString alloc] initWithString:userInfo[@"post_id"]];
             PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-//            postVc.post_id = post_id;
+            postVc.postIDFromOutside = post_id;
             [self.window.rootViewController.navigationController pushViewController:postVc animated:YES];
         }
         self.shouldJumpToPostDetail = NO;
-    }
-    if ([type isEqualToString:@"001"]) {
-        if (self.shouldJumpToPostReply) {
-          //这里是向PostReplyVewController跳转
-
-        }
     }
     
     
