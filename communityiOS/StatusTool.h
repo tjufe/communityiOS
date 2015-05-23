@@ -59,7 +59,7 @@ typedef void(^StatusFailurs)(NSError * error);
 +(void)statusToolGetReplyListWithPostID:(NSString *)postID Page:(NSNumber *)page Rows:(NSNumber *)rows  Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 //请求发送回复
-+(void)statusToolPostReplyWithReplyText:(NSString *)reply_text communityID:(NSString*)community_id forumID:(NSString*)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
++(void)statusToolPostReplyWithReplyText:(NSString *)reply_text CommunityID:(NSString*)community_id ForumID:(NSString*)forum_id PostID:(NSString*)post_id UserID:(NSString*)user_id Date:(NSString *)date ReplyID:(NSString*)reply_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 //刷新数据库，更新上传图片
 +(void)statusToolRefreshUserImageWithUserID:(NSString *)user_id ImageGUID:(NSString *)image_guid Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
@@ -80,6 +80,9 @@ typedef void(^StatusFailurs)(NSError * error);
 
 //hmx05181051 加载轮播图
 +(void)statusToolGetSlideListWithCommunityID:(NSString *)community_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
+//请求删除回复
++(void)statusToolPostDeleteReplyWithUserID:(NSString *)user_id Reply_id:(NSString *)post_reply_id PostID:(NSString*)post_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 //post_id加载帖子详情
 +(void)statusToolGetPostInfoWithPostID:(NSString *)post_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;

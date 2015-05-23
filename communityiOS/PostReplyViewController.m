@@ -49,7 +49,7 @@
 @implementation PostReplyViewController
 
 int reply_page = 1;
-int reply_rows = 5;
+int reply_rows = 6;
 int reply_page_filter = 0;
 
 
@@ -93,7 +93,7 @@ int reply_page_filter = 0;
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
     gesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gesture];
-
+    
 }
 #pragma mark-
 #pragma mark----------------------防止键盘遮盖---------------------------
@@ -206,6 +206,38 @@ int reply_page_filter = 0;
 //    UITableViewCell *cell = [self tableView:self.replyListTable cellForRowAtIndexPath:indexPath];
 //    return cell.frame.size.height;
     return 80;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        replyInfoItem *delete_item = [self.replyListArray objectAtIndex:indexPath.row];
+        if (![delete_item.post_reply_man_id isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
+            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:hud];
+            hud.labelText = @"您只能删除自己的回复";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [hud removeFromSuperview];
+            }];
+        }else{
+            [self.replyListArray removeObjectAtIndex:indexPath.row];
+            [self.replyListTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [StatusTool statusToolPostDeleteReplyWithUserID:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"] Reply_id:delete_item.post_reply_id PostID:self.postItem.post_id Success:^(id object) {
+                // do nothing
+            } failurs:^(NSError *error) {
+                // do nothing
+            }];
+        }
+        
+    }
+    
 }
 
 #pragma mark-
@@ -410,10 +442,15 @@ int reply_page_filter = 0;
 
 - (IBAction)replyAction:(id)sender {
     
+    //获取当前时间
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *curDate = [formatter stringFromDate:[NSDate date]];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text communityID:self.postItem.belong_community_id forumID:self.postItem.belong_forum_id postID:self.postItem.post_id userID:[defaults valueForKey:@"UserID"] Success:^(id object) {
-        
-        if (object != nil){
+    NSString *str = [self genUUID];
+    [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.postItem.belong_community_id ForumID:self.postItem.belong_forum_id PostID:self.postItem.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
+        if (object != nil) {
+            
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
             hud.labelText = @"回复成功";
@@ -426,6 +463,7 @@ int reply_page_filter = 0;
             } completionBlock:^{
                 [hud removeFromSuperview];
             }];
+
         }else{
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
@@ -436,12 +474,24 @@ int reply_page_filter = 0;
             } completionBlock:^{
                 [hud removeFromSuperview];
             }];
+            
         }
+
     } failurs:^(NSError *error) {
-        //to do wrong
+        //to do
     }];
- 
 }
 #pragma mark-
+#pragma mark -----------------------------生成UUID-----------------------------------
+- (NSString *) genUUID {
+    CFUUIDRef uuid_ref = CFUUIDCreate(NULL);
+    CFStringRef uuid_string_ref= CFUUIDCreateString(NULL, uuid_ref);
+    CFRelease(uuid_ref);
+    NSString *uuid = [NSString stringWithString:(__bridge NSString*)uuid_string_ref];
+    CFRelease(uuid_string_ref);
+    return uuid;
+}
 
 @end
+
+
