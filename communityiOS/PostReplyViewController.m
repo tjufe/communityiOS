@@ -9,6 +9,7 @@
 #import "PostReplyViewController.h"
 #import "UIViewController+Create.h"
 #import "ReplyTableViewCell.h"
+#import "MyReplyTableViewCell.h"
 
 #import "replyInfoListItem.h"
 #import "replyInfoItem.h"
@@ -128,14 +129,17 @@ int reply_page_filter = 0;
                                                   object:nil];
     
 }
+
 - (void)keyboardWillShow:(NSNotification *)aNotification{
     NSDictionary *userInfo = [aNotification userInfo];
     CGRect keyboardRect = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]
                            CGRectValue];
-    NSTimeInterval animationDuration = [[userInfo
-                                         objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//    NSTimeInterval animationDuration = [[userInfo
+//                                         objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    NSTimeInterval animationDuration = 0.50f;//
     CGRect newFrame = self.view.frame;
-    newFrame.size.height -= keyboardRect.size.height;
+//    CGFloat viewBottom = self.replyContentField.frame.origin.y + self.replyContentField.frame.size.height;
+    newFrame.size.height -= keyboardRect.size.height ;
     [UIView beginAnimations:@"ResizeTextView" context:nil];
     [UIView setAnimationDuration:animationDuration];
     self.view.frame = newFrame;
@@ -169,43 +173,74 @@ int reply_page_filter = 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if(!cell){
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"ReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
-    }
-    //填装数据
-    cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row];
-    cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row];
-    [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
-    //图片
-    NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
-    NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
-    NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
-    [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (image != nil) {
-            cell.replyerHead.layer.masksToBounds =YES;
-            [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-            cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-            cell.replyerHead.image = image;
-        }else{
-            cell.replyerHead.layer.masksToBounds =YES;
-            [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-            cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-            cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
-            
-            
-        }
-    }];
     
-    return cell;
+    if ([[self.replyIDData objectAtIndex:indexPath.row]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
+        MyReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        if(!cell){
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"MyReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        
+        //填装数据
+        cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row];
+        cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row];
+        [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
+        //图片
+        NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
+        NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+        NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+        [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image != nil) {
+                cell.replyerHead.layer.masksToBounds =YES;
+                [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+                cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+                cell.replyerHead.image = image;
+            }else{
+                cell.replyerHead.layer.masksToBounds =YES;
+                [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+                cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+                cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
+            }
+        }];
+
+        return cell;
+    }else{
+        ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        if(!cell){
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"ReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        //填装数据
+        cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row];
+        cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row];
+        [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
+        //图片
+        NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
+        NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+        NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+        [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image != nil) {
+                cell.replyerHead.layer.masksToBounds =YES;
+                [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+                cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+                cell.replyerHead.image = image;
+            }else{
+                cell.replyerHead.layer.masksToBounds =YES;
+                [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+                cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+                cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
+            }
+        }];
+        return cell;
+    }
+    
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{//绘制行高
-//    UITableViewCell *cell = [self tableView:self.replyListTable cellForRowAtIndexPath:indexPath];
-//    return cell.frame.size.height;
-    return 80;
+//绘制行高
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [self tableView:self.replyListTable cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
+//    return 80;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -341,6 +376,12 @@ int reply_page_filter = 0;
 }
 
 -(void)getEveryPartData{
+    //获得回复人ID
+    if (self.reply_info_item.post_reply_man_id != nil) {
+        [self.replyIDData addObject:self.reply_info_item.post_reply_man_id];
+    }else{
+        [self.replyIDData addObject:@""];
+    }
     //为数据源加内容
     if (self.reply_info_item.reply_text != nil) {
         [self.replyContentData addObject:self.reply_info_item.reply_text];
@@ -448,38 +489,51 @@ int reply_page_filter = 0;
     NSString *curDate = [formatter stringFromDate:[NSDate date]];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *str = [self genUUID];
-    [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.postItem.belong_community_id ForumID:self.postItem.belong_forum_id PostID:self.postItem.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
-        if (object != nil) {
-            
-            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
-            [self.view addSubview:hud];
-            hud.labelText = @"回复成功";
-            hud.mode = MBProgressHUDModeText;
-            [hud showAnimated:YES whileExecutingBlock:^{
-                sleep(1);
-                reply_page = 1;
-                reply_page_filter = 0;
-                [self loadReplyListData];
-            } completionBlock:^{
-                [hud removeFromSuperview];
-            }];
+    if ([self.replyContentField.text isEqualToString:@""]) {
+        MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+        [self.view addSubview:hud];
+        hud.labelText = @"内容不能为空";
+        hud.mode = MBProgressHUDModeText;
+        [hud showAnimated:YES whileExecutingBlock:^{
+            sleep(1);
+        } completionBlock:^{
+            [hud removeFromSuperview];
+        }];
+    }else{
+        [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.postItem.belong_community_id ForumID:self.postItem.belong_forum_id PostID:self.postItem.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
+            if (object != nil) {
+                MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+                [self.view addSubview:hud];
+                hud.labelText = @"回复成功";
+                hud.mode = MBProgressHUDModeText;
+                [hud showAnimated:YES whileExecutingBlock:^{
+                    sleep(1);
+                    reply_page = 1;
+                    reply_page_filter = 0;
+                    [self loadReplyListData];
+                } completionBlock:^{
+                    [hud removeFromSuperview];
+                }];
+                
+                [self.replyContentField resignFirstResponder];
 
-        }else{
-            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
-            [self.view addSubview:hud];
-            hud.labelText = @"请查看您的网络";
-            hud.mode = MBProgressHUDModeText;
-            [hud showAnimated:YES whileExecutingBlock:^{
-                sleep(1);
-            } completionBlock:^{
-                [hud removeFromSuperview];
-            }];
-            
-        }
+            }else{
+                MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+                [self.view addSubview:hud];
+                hud.labelText = @"请查看您的网络";
+                hud.mode = MBProgressHUDModeText;
+                [hud showAnimated:YES whileExecutingBlock:^{
+                    sleep(1);
+                } completionBlock:^{
+                    [hud removeFromSuperview];
+                }];
+                
+            }
 
-    } failurs:^(NSError *error) {
-        //to do
-    }];
+        } failurs:^(NSError *error) {
+            //to do
+        }];
+    }
 }
 #pragma mark-
 #pragma mark -----------------------------生成UUID-----------------------------------

@@ -56,6 +56,7 @@
                                     <constraint firstAttribute="trailing" secondItem="PUa-qb-as0" secondAttribute="trailing" id="iIh-ym-vwB"/>
                                     <constraint firstItem="XoT-pf-sl0" firstAttribute="top" secondItem="dNM-sv-Snu" secondAttribute="bottom" id="iUT-ne-bu2"/>
                                     <constraint firstAttribute="bottom" secondItem="XoT-pf-sl0" secondAttribute="bottom" constant="4" id="nxs-Pt-Dvb"/>
+                                    <constraint firstAttribute="height" constant="40" id="pqa-cV-TWD"/>
                                     <constraint firstAttribute="bottom" secondItem="PUa-qb-as0" secondAttribute="bottom" id="ygG-fE-5JW"/>
                                 </constraints>
                             </view>
@@ -79,6 +80,11 @@
                             <constraint firstItem="3iT-Pr-VXI" firstAttribute="leading" secondItem="lTV-Qs-kur" secondAttribute="leading" id="miU-hj-m81"/>
                             <constraint firstItem="rbP-Yb-pUH" firstAttribute="top" secondItem="3iT-Pr-VXI" secondAttribute="bottom" id="nBw-h9-AUC"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fWr-G9-hqw"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

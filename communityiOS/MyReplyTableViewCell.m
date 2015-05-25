@@ -1,14 +1,14 @@
 //
-//  ReplyTableViewCell.m
+//  MyReplyTableViewCell.m
 //  communityiOS
 //
-//  Created by Sunxiaoyuan on 15/5/13.
+//  Created by Sunxiaoyuan on 15/5/23.
 //  Copyright (c) 2015年 &#20309;&#33538;&#39336;. All rights reserved.
 //
 
-#import "ReplyTableViewCell.h"
+#import "MyReplyTableViewCell.h"
 
-@implementation ReplyTableViewCell
+@implementation MyReplyTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -19,7 +19,6 @@
 
     // Configure the view for the selected state
 }
-
 
 -(void)setReplyContentText:(NSString *)text{
     //获得当前cell高度
@@ -34,7 +33,8 @@
     //计算出自适应高度
     frame.size.height = labelSize.height + 50;
     self.frame = frame;
-
+    
+    
 }
 
 @end
