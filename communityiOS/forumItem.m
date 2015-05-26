@@ -30,8 +30,8 @@
                              @"open_status":@"open_status",
                              @"ForumSetlist":@"ForumSetlist",
                              @"new_post_context":@"first_post_context",
-                             @"new_post_date":@"first_post_date"
-                             
+                             @"new_post_date":@"first_post_date",
+                             @"display_type":@"display_type"
                 
              };
     

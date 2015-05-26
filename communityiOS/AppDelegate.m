@@ -13,7 +13,6 @@
 #import "APService.h"
 #import "PostReplyViewController.h"
 
-
 #import "DemoViewController.h"
 
 
@@ -40,6 +39,7 @@
 //    //新建PPRevealSideViewController,并设置根视图（主页面的导航视图）
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
+    
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
@@ -100,16 +100,10 @@
         if (self.shouldJumpToPostDetail) {
             NSString *post_id = [[NSString alloc] initWithString:userInfo[@"post_id"]];
             PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-//            postVc.post_id = post_id;
+            postVc.postIDFromOutside = post_id;
             [self.window.rootViewController.navigationController pushViewController:postVc animated:YES];
         }
         self.shouldJumpToPostDetail = NO;
-    }
-    if ([type isEqualToString:@"001"]) {
-        if (self.shouldJumpToPostReply) {
-          //这里是向PostReplyVewController跳转
-
-        }
     }
     
     

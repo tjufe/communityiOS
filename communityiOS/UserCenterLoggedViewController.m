@@ -14,7 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "PostListViewController.h"
 #import "UserJoinPostListViewController.h"
-
+#import "FirstSettingsViewController.h"
 #import "PostListViewController.h"
 #import "UserJoinPostListViewController.h"
 
@@ -143,6 +143,15 @@
                 }
             }];
         }
+        // lx 20150520
+        //为头像添加单击手势
+        self.imgAvatar.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleOnClick)];
+        [self.imgAvatar addGestureRecognizer:tap];
+        
+
+        
+        
         //判断是否是管理员，显示“实名认证”图标
 //        if ([[NSString stringWithString:[defaults valueForKey:@"UserPermission"]]isEqualToString:@"管理员"]) {
 //            self.authIcon.hidden = NO;
@@ -150,6 +159,22 @@
 //        }
 
     }
+}
+
+#pragma mark----------单击头像
+-(void)singleOnClick{
+    FirstSettingsViewController *FSVC = [FirstSettingsViewController createFromStoryboardName:@"Settings" withIdentifier:@"CustomSettings"];
+    
+    UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 20, 10, 20);
+    [btn setImage:[UIImage imageNamed:@"back"] forState: UIControlStateNormal];
+    [btn addTarget:self action:@selector(go2main) forControlEvents:UIControlEventTouchUpInside];
+    UINavigationController *nav = [[UINavigationController alloc]init];
+    UIBarButtonItem *leftBtn =[[UIBarButtonItem alloc]initWithCustomView:btn];
+    FSVC.navigationItem.leftBarButtonItem =leftBtn;
+    FSVC.navigationItem.title = @"个人设置";
+    [self.revealSideViewController popViewControllerWithNewCenterController:nav animated:YES];
+    [nav pushViewController:FSVC animated:YES];
 }
 
 #pragma mark---------------将头像切割成圆形

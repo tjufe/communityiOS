@@ -376,9 +376,9 @@ bool isModerator = NO;//是否是版主
     //start by wangyao 0513
     //
     if(self.post_item == nil){
-//        self.post_id = self.postIDFromLun;
-          NSString *str = self.postIDFromLun;
-          [self loadPostInfo:self.postIDFromLun];
+        
+        [self loadPostInfo:self.postIDFromOutside];
+
     }else{
         [self setData_2];
 //        [self.tableview reloadData];
