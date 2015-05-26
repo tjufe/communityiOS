@@ -42,6 +42,9 @@
                                         <rect key="frame" x="13" y="0.0" width="245" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Dz0-B5-AkS" id="1a7-dA-4vf"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -94,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Z2-uc-w4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1017" y="338"/>
+            <point key="canvasLocation" x="979" y="340"/>
         </scene>
     </scenes>
 </document>

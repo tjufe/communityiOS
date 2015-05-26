@@ -13,7 +13,6 @@
 #import "APService.h"
 #import "PostReplyViewController.h"
 
-
 #import "DemoViewController.h"
 
 
@@ -40,6 +39,7 @@
 //    //新建PPRevealSideViewController,并设置根视图（主页面的导航视图）
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
+    
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
