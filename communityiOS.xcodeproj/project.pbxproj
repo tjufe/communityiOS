@@ -112,6 +112,10 @@
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
 		8ED353121B0D87280017F2F6 /* MainTableViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED353101B0D87280017F2F6 /* MainTableViewHeaderCell.m */; };
 		8ED353131B0D87280017F2F6 /* MainTableViewHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED353111B0D87280017F2F6 /* MainTableViewHeaderCell.xib */; };
+		8EE5A4621B0ECE6A00F05A12 /* NewPostEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE5A4601B0ECE6A00F05A12 /* NewPostEditViewController.m */; };
+		8EE5A4631B0ECE6A00F05A12 /* NewPostEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE5A4611B0ECE6A00F05A12 /* NewPostEditViewController.xib */; };
+		8EE5A4661B0F2B8F00F05A12 /* RepairList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE5A4651B0F2B8F00F05A12 /* RepairList.m */; };
+		8EE5A4691B0F2CA900F05A12 /* RepairInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE5A4681B0F2CA900F05A12 /* RepairInfo.m */; };
 		8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */; };
 		8EEB4BF31B098E9A00B77265 /* SlideInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB4BF21B098E9A00B77265 /* SlideInfoItem.m */; };
 		8EEB4BF61B098F7D00B77265 /* SlideInfoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EEB4BF51B098F7D00B77265 /* SlideInfoList.m */; };
@@ -123,6 +127,7 @@
 		8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEC48911AD90B17002E70DA /* DChainTableViewCell.xib */; };
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
+		8EF6F38B1B12DE2D00ABAEF9 /* PostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF6F38A1B12DE2D00ABAEF9 /* PostInfo.m */; };
 		A0539A641B05E65800DC33BB /* newPostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0539A631B05E65800DC33BB /* newPostItem.m */; };
 		A05C7D3A1AF86D7400838247 /* UserJoinPostList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */; };
 		A0CA6DEF1AFC5E3400F88237 /* UserJoinPostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */; };
@@ -324,6 +329,13 @@
 		8ED3530F1B0D87280017F2F6 /* MainTableViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewHeaderCell.h; sourceTree = "<group>"; };
 		8ED353101B0D87280017F2F6 /* MainTableViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewHeaderCell.m; sourceTree = "<group>"; };
 		8ED353111B0D87280017F2F6 /* MainTableViewHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewHeaderCell.xib; sourceTree = "<group>"; };
+		8EE5A45F1B0ECE6A00F05A12 /* NewPostEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostEditViewController.h; sourceTree = "<group>"; };
+		8EE5A4601B0ECE6A00F05A12 /* NewPostEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPostEditViewController.m; sourceTree = "<group>"; };
+		8EE5A4611B0ECE6A00F05A12 /* NewPostEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewPostEditViewController.xib; sourceTree = "<group>"; };
+		8EE5A4641B0F2B8F00F05A12 /* RepairList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairList.h; sourceTree = "<group>"; };
+		8EE5A4651B0F2B8F00F05A12 /* RepairList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairList.m; sourceTree = "<group>"; };
+		8EE5A4671B0F2CA900F05A12 /* RepairInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairInfo.h; sourceTree = "<group>"; };
+		8EE5A4681B0F2CA900F05A12 /* RepairInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairInfo.m; sourceTree = "<group>"; };
 		8EE9EE801AD653CD00377802 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
 		8EE9EE811AD653CD00377802 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		8EEB4BF11B098E9A00B77265 /* SlideInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideInfoItem.h; sourceTree = "<group>"; };
@@ -344,6 +356,8 @@
 		8EF3F74D1AD54F1D00924975 /* PostReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostReplyViewController.h; sourceTree = "<group>"; };
 		8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostReplyViewController.m; sourceTree = "<group>"; };
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
+		8EF6F3891B12DE2D00ABAEF9 /* PostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostInfo.h; sourceTree = "<group>"; };
+		8EF6F38A1B12DE2D00ABAEF9 /* PostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostInfo.m; sourceTree = "<group>"; };
 		A0539A621B05E65800DC33BB /* newPostItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newPostItem.h; sourceTree = "<group>"; };
 		A0539A631B05E65800DC33BB /* newPostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newPostItem.m; sourceTree = "<group>"; };
 		A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserJoinPostList.storyboard; sourceTree = "<group>"; };
@@ -747,6 +761,10 @@
 				8EEB4BF21B098E9A00B77265 /* SlideInfoItem.m */,
 				8EEB4BF41B098F7D00B77265 /* SlideInfoList.h */,
 				8EEB4BF51B098F7D00B77265 /* SlideInfoList.m */,
+				8EE5A4641B0F2B8F00F05A12 /* RepairList.h */,
+				8EE5A4651B0F2B8F00F05A12 /* RepairList.m */,
+				8EE5A4671B0F2CA900F05A12 /* RepairInfo.h */,
+				8EE5A4681B0F2CA900F05A12 /* RepairInfo.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -894,6 +912,11 @@
 				13D2471D1B048C8C00717780 /* ChainToWebViewController.h */,
 				13D2471E1B048C8C00717780 /* ChainToWebViewController.m */,
 				13D247201B048CCE00717780 /* chainToWeb.storyboard */,
+				8EE5A45F1B0ECE6A00F05A12 /* NewPostEditViewController.h */,
+				8EE5A4601B0ECE6A00F05A12 /* NewPostEditViewController.m */,
+				8EE5A4611B0ECE6A00F05A12 /* NewPostEditViewController.xib */,
+				8EF6F3891B12DE2D00ABAEF9 /* PostInfo.h */,
+				8EF6F38A1B12DE2D00ABAEF9 /* PostInfo.m */,
 			);
 			name = post;
 			sourceTree = "<group>";
@@ -1009,6 +1032,7 @@
 				A05C7D3A1AF86D7400838247 /* UserJoinPostList.storyboard in Resources */,
 				137D80DF1B06FC24001E8CDA /* EditApplyTableViewCell.xib in Resources */,
 				13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */,
+				8EE5A4631B0ECE6A00F05A12 /* NewPostEditViewController.xib in Resources */,
 				13D247211B048CCE00717780 /* chainToWeb.storyboard in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
 				A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */,
@@ -1079,6 +1103,7 @@
 				13BE56821ABA7F3D00379ACD /* LoginViewController.m in Sources */,
 				A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */,
 				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
+				8EF6F38B1B12DE2D00ABAEF9 /* PostInfo.m in Sources */,
 				13D247141B0436E400717780 /* ChainToWebView.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
@@ -1114,6 +1139,7 @@
 				13B1C2C91ACA690E005C179C /* UserCenterUnloggedViewController.m in Sources */,
 				13B1C3221AD4D6B3005C179C /* FSCollectionViewController.m in Sources */,
 				A0539A641B05E65800DC33BB /* newPostItem.m in Sources */,
+				8EE5A4661B0F2B8F00F05A12 /* RepairList.m in Sources */,
 				13B1C3551AD4D6ED005C179C /* PostTextTableViewCell.m in Sources */,
 				13B1C34B1AD4D6ED005C179C /* mypickview.m in Sources */,
 				13D2471C1B043DE200717780 /* EAColourfulProgressView.m in Sources */,
@@ -1123,6 +1149,7 @@
 				13B1C3201AD4D6B3005C179C /* FSCollectionView.m in Sources */,
 				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
 				1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */,
+				8EE5A4691B0F2CA900F05A12 /* RepairInfo.m in Sources */,
 				13B1C37A1AD4D817005C179C /* regItem.m in Sources */,
 				A0D39DFA1AF76419007DEFA0 /* uncheckPostListItem.m in Sources */,
 				13BE56721ABA6F0E00379ACD /* UIViewController+Create.m in Sources */,
@@ -1143,6 +1170,7 @@
 				13B1C2E51ACB7DC5005C179C /* MJRefreshBaseView.m in Sources */,
 				13C58BDF1AB9550600090157 /* main.m in Sources */,
 				184B42A91B098D2A004CD398 /* ReplyTableViewCell.m in Sources */,
+				8EE5A4621B0ECE6A00F05A12 /* NewPostEditViewController.m in Sources */,
 				A0CA6DEF1AFC5E3400F88237 /* UserJoinPostListViewController.m in Sources */,
 				13BE566D1ABA574700379ACD /* ForumTableViewCell.m in Sources */,
 				13B1C2E61ACB7DC5005C179C /* MJRefreshConst.m in Sources */,
