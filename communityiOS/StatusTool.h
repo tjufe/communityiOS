@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PostInfo.h"
 
 
 //请求板块列表
@@ -87,5 +88,10 @@ typedef void(^StatusFailurs)(NSError * error);
 //post_id加载帖子详情
 +(void)statusToolGetPostInfoWithPostID:(NSString *)post_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
+//hmx05221712 加载报修类型
++(void)statusToolLoadRepairTypeWithCommunityID:(NSString *)community_id ForumID:(NSString *)forum_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
+//发帖子 hmx201505251232
++(void)statusToolNewPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 @end

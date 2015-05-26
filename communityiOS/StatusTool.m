@@ -21,13 +21,15 @@
 
 #import "SlideInfoList.h"
 #import "SlideInfoItem.h"
+#import "RepairList.h"
+#import "RepairInfo.h"
 
 #import "replyInfoListItem.h"
 #import "editPostItem.h"
 #import "ifApplyItem.h"
 #import "postApplyItem.h"
 
-
+#import <objc/runtime.h>
 
 @implementation StatusTool
 
@@ -669,6 +671,73 @@
 
 }
 
++(void)statusToolLoadRepairTypeWithCommunityID:(NSString *)community_id ForumID:(NSString *)forum_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:community_id forKey:@"community_id"];
+    [firstDic setObject:forum_id forKey:@"forum_id"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"LoadRepairType" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        RepairList *list = [RepairList createItemWitparametes:dic];
+        NSMutableArray *ListArray = [NSMutableArray array];
+        
+        for(NSDictionary *dic in list.RepairList){
+            [ListArray addObject:[RepairInfo createItemWitparametes:dic]];
+        }
+        success(ListArray);
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+}
+
++(void)statusToolNewPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+
+    NSString *className = NSStringFromClass([PostInfo class]);
+    const char * cClassName = [className UTF8String];
+    id classM = objc_getClass(cClassName);
+    // i 计数 、  outCount 放我们的属性个数
+    unsigned int outCount, i;
+    // 反射得到属性的个数 、
+    objc_property_t * properties = class_copyPropertyList(classM, &outCount);
+    for (i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        // 获得属性名称
+        NSString * attributeName = [NSString stringWithUTF8String:property_getName(property)];
+        // 获得属性的值
+        id value = [postInfo valueForKey:attributeName];
+        if(value){
+            [firstDic setObject:value forKey:attributeName];
+        }
+    }
+    
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    
+    [thirdDic setObject:@"NewPost" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic
+                     success:^(id responseObject) {
+                         // no response
+                         NSData *data = [[NSData alloc]initWithData:responseObject];
+                         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                         newPostItem *new_post_item = [newPostItem createItemWitparametes:dic];
+                         success(new_post_item);
+                     } failure:^(NSError *error) {
+                         if (failure == nil) return;
+                         failure(error);
+                     }];
+}
 
 @end
 
