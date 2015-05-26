@@ -107,6 +107,8 @@
 		1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1842AE6C1ADB77290022D2CB /* PushConfig.plist */; };
 		184B42A91B098D2A004CD398 /* ReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B42A71B098D2A004CD398 /* ReplyTableViewCell.m */; };
 		184B42AA1B098D2A004CD398 /* ReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184B42A81B098D2A004CD398 /* ReplyTableViewCell.xib */; };
+		18628CB81B10750D00E81A8B /* MyReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18628CB61B10750D00E81A8B /* MyReplyTableViewCell.m */; };
+		18628CB91B10750D00E81A8B /* MyReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18628CB71B10750D00E81A8B /* MyReplyTableViewCell.xib */; };
 		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
 		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
@@ -318,6 +320,9 @@
 		184B42A61B098D2A004CD398 /* ReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyTableViewCell.h; sourceTree = "<group>"; };
 		184B42A71B098D2A004CD398 /* ReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyTableViewCell.m; sourceTree = "<group>"; };
 		184B42A81B098D2A004CD398 /* ReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyTableViewCell.xib; sourceTree = "<group>"; };
+		18628CB51B10750D00E81A8B /* MyReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyReplyTableViewCell.h; sourceTree = "<group>"; };
+		18628CB61B10750D00E81A8B /* MyReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyReplyTableViewCell.m; sourceTree = "<group>"; };
+		18628CB71B10750D00E81A8B /* MyReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyReplyTableViewCell.xib; sourceTree = "<group>"; };
 		188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
 		188933881AFB580F006329D8 /* AuthTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTableViewController.h; sourceTree = "<group>"; };
 		188933891AFB580F006329D8 /* AuthTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTableViewController.m; sourceTree = "<group>"; };
@@ -706,6 +711,9 @@
 				184B42A61B098D2A004CD398 /* ReplyTableViewCell.h */,
 				184B42A71B098D2A004CD398 /* ReplyTableViewCell.m */,
 				184B42A81B098D2A004CD398 /* ReplyTableViewCell.xib */,
+				18628CB51B10750D00E81A8B /* MyReplyTableViewCell.h */,
+				18628CB61B10750D00E81A8B /* MyReplyTableViewCell.m */,
+				18628CB71B10750D00E81A8B /* MyReplyTableViewCell.xib */,
 			);
 			name = replyList;
 			sourceTree = "<group>";
@@ -1027,6 +1035,7 @@
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
 				13C58BE81AB9550600090157 /* Main.storyboard in Resources */,
 				1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */,
+				18628CB91B10750D00E81A8B /* MyReplyTableViewCell.xib in Resources */,
 				188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
 				A05C7D3A1AF86D7400838247 /* UserJoinPostList.storyboard in Resources */,
@@ -1169,6 +1178,7 @@
 				8ED353121B0D87280017F2F6 /* MainTableViewHeaderCell.m in Sources */,
 				13B1C2E51ACB7DC5005C179C /* MJRefreshBaseView.m in Sources */,
 				13C58BDF1AB9550600090157 /* main.m in Sources */,
+				18628CB81B10750D00E81A8B /* MyReplyTableViewCell.m in Sources */,
 				184B42A91B098D2A004CD398 /* ReplyTableViewCell.m in Sources */,
 				8EE5A4621B0ECE6A00F05A12 /* NewPostEditViewController.m in Sources */,
 				A0CA6DEF1AFC5E3400F88237 /* UserJoinPostListViewController.m in Sources */,

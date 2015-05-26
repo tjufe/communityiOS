@@ -18,7 +18,7 @@
     [[APIClient sharedClient] POST:@"index.php/Home/Index/index4ios/"
                   parameters:params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
+                
                        success(responseObject);
                                
                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

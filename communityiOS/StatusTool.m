@@ -421,21 +421,23 @@
 }
 
 //请求发送回复
-+(void)statusToolPostReplyWithReplyText:(NSString *)reply_text communityID:(NSString*)community_id forumID:(NSString*)forum_id postID:(NSString *)post_id userID:(NSString *)user_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
-    
++(void)statusToolPostReplyWithReplyText:(NSString *)reply_text CommunityID:(NSString*)community_id ForumID:(NSString*)forum_id PostID:(NSString*)post_id UserID:(NSString*)user_id Date:(NSString *)date ReplyID:(NSString*)reply_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
-    [firstDic setObject:reply_text forKey:@"reply_text"];
-    [firstDic setObject:community_id forKey:@"community_id"];
-    [firstDic setObject:forum_id forKey:@"forum_id"];
-    [firstDic setObject:post_id forKey:@"post_id"];
-    [firstDic setObject:user_id forKey:@"user_id"];
+    [firstDic setObject:reply_text forKey:@"content"];
+    [firstDic setObject:community_id forKey:@"belong_community_id"];
+    [firstDic setObject:forum_id forKey:@"belong_forum_id"];
+    [firstDic setObject:post_id forKey:@"id"];
+    [firstDic setObject:user_id forKey:@"name"];
+    [firstDic setObject:reply_id forKey:@"reply_id"];
+    [firstDic setObject:date forKey:@"date"];
     NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
     [secondDic  setObject:firstDic forKey:@"Data"];
     NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
     [thirdDic setObject:secondDic forKey:@"param"];
-    [thirdDic setObject:@"PostReply" forKey:@"method"];
+    [thirdDic setObject:@"AddContent" forKey:@"method"];
     
-    [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        
         success(responseObject);
         
     } failure:^(NSError *error) {
@@ -622,6 +624,25 @@
         if (failure == nil) return ;
         failure(error);
     }];
+}
+//请求删除回复
++(void)statusToolPostDeleteReplyWithUserID:(NSString *)user_id Reply_id:(NSString *)post_reply_id PostID:(NSString*)post_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    NSMutableDictionary *fir = [[NSMutableDictionary alloc]init];
+    [fir setObject:user_id forKey:@"user_id"];
+    [fir setObject:post_reply_id forKey:@"post_reply_id"];
+    [fir setObject:post_id forKey:@"post_id"];
+    NSMutableDictionary *sec = [[NSMutableDictionary alloc]init];
+    [sec setObject:fir forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:sec forKey:@"param"];
+    [thirdDic setObject:@"DeleteItem" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        success(responseObject);
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+
 }
 
 //post_id加载帖子详情

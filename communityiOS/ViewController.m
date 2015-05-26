@@ -228,7 +228,8 @@ NSArray *forum;
     SlideInfoItem *s = [self.listSlide objectAtIndex:index];
     //往帖子详情页跳转
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-    PDVC.postIDFromLun = s.post_id;  //携带参数跳转
+    PDVC.postIDFromOutside = s.post_id;
+
     NSString *str = s.post_id;
     [self.navigationController pushViewController:PDVC animated:YES];
 
