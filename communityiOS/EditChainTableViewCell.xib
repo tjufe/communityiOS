@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -64,6 +64,12 @@
                     <constraint firstItem="eMf-hh-Fm5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="xsM-I7-cZn"/>
                     <constraint firstItem="E4F-cB-Ted" firstAttribute="leading" secondItem="eMf-hh-Fm5" secondAttribute="trailing" constant="1" id="yz7-Aj-BfH"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="vbx-B5-vPN"/>
+                        <exclude reference="yz7-Aj-BfH"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="chainName" destination="cEz-9s-xBO" id="Nuv-Yg-n8f"/>
