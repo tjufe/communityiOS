@@ -47,6 +47,20 @@ NSString * const KEY_SITE_VALUE_YES = @"是";
     [self initNavigationBar];
     [self initMainScrollView];
     [self initFooterToolbar];
+    
+    //添加手势，点击屏幕其他区域关闭键盘的操作
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gesture];
+}
+
+//点击屏幕别处键盘收起
+-(void)hidenKeyboard
+{
+    [self.postTitleTextField resignFirstResponder];
+    [self.postLocationTextField resignFirstResponder];
+    [self.reporterNameTextField resignFirstResponder];
+    [self.reporterPhoneTextField resignFirstResponder];
 }
 
 - (void)initFooterToolbar {
@@ -102,6 +116,13 @@ NSString * const KEY_SITE_VALUE_YES = @"是";
 }
 
 - (void)initMainScrollView {
+    
+    int t = self.navigationController.view.frame.size.width;;
+    CGRect frame = self.view.frame;
+    frame.size.width = t ;
+    self.view.frame = frame;
+    self.mainScrollView.frame = CGRectMake(self.mainScrollView.frame.origin.x , self.mainScrollView.frame.origin.y , self.view.frame.size.width, self.mainScrollView.frame.size.height);
+    
     [self initForumName];
     [self initPostTitle];
     [self initLocation];
@@ -119,6 +140,7 @@ NSString * const KEY_SITE_VALUE_YES = @"是";
     [self.mainScrollView addSubview:self.postContentTextView];
     [self.mainScrollView addSubview:self.v2];
     [self.mainScrollView addSubview:self.postMainPicImageView];
+    
     
     self.mainScrollView.contentSize = CGSizeMake(0, self.postMainPicImageView.frame.origin.y+self.postMainPicImageView.frame.size.height);
 
@@ -323,5 +345,6 @@ NSString * const KEY_SITE_VALUE_YES = @"是";
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

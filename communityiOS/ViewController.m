@@ -144,8 +144,16 @@ NSArray *forum;
     [self reloadData];
     [self autoLogin];
     
-    
+    [self clearExtraLine:self.mainTableView];
 }
+#pragma mark-
+#pragma mark--------------------去掉多余的线----------------------------
+-(void)clearExtraLine:(UITableView *)tableView{
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [self.mainTableView setTableFooterView:view];
+}
+#pragma mark-
 
 #pragma mark --初始化轮播图
 -(void)initSlide{
