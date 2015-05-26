@@ -57,19 +57,30 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XNb-7L-lbH">
                     <rect key="frame" x="0.0" y="65" width="320" height="463"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="eWD-oQ-rCw"/>
+                    </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="EbB-rY-j0c" secondAttribute="trailing" id="0d1-XP-PGT"/>
-                <constraint firstItem="EbB-rY-j0c" firstAttribute="top" secondItem="XNb-7L-lbH" secondAttribute="bottom" id="1ck-58-WM3"/>
-                <constraint firstItem="XNb-7L-lbH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5hy-aL-RdV"/>
                 <constraint firstItem="EbB-rY-j0c" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Azd-G1-RNu"/>
-                <constraint firstItem="XNb-7L-lbH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="cYX-Ra-RQM"/>
+                <constraint firstAttribute="centerX" secondItem="XNb-7L-lbH" secondAttribute="centerX" id="UNx-fF-Jzc"/>
+                <constraint firstAttribute="trailing" secondItem="XNb-7L-lbH" secondAttribute="trailing" id="Vp2-G2-jsa"/>
+                <constraint firstAttribute="centerX" secondItem="XNb-7L-lbH" secondAttribute="centerX" id="a2q-es-Zo3"/>
+                <constraint firstItem="EbB-rY-j0c" firstAttribute="top" secondItem="XNb-7L-lbH" secondAttribute="bottom" id="bUi-Sy-k3y"/>
+                <constraint firstItem="XNb-7L-lbH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bZU-X7-lMa"/>
                 <constraint firstAttribute="bottom" secondItem="EbB-rY-j0c" secondAttribute="bottom" id="dHT-Md-Mc5"/>
-                <constraint firstAttribute="trailing" secondItem="XNb-7L-lbH" secondAttribute="trailing" id="uM2-uB-Xe5"/>
+                <constraint firstItem="XNb-7L-lbH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="oeG-wy-vjv"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="UNx-fF-Jzc"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="116" y="405"/>
         </view>
     </objects>
     <resources>

@@ -331,6 +331,8 @@ NSInteger page_filter;
  //    page =1;
  //    rows = 5;
  //    page_filter = 0;
+     //去除多余的线
+     [self clearExtraLine:self.pltable];
      
      //获取当前用户信息
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -485,6 +487,14 @@ NSInteger page_filter;
 
     // Do any additional setup after loading the view.
 }
+#pragma mark-
+#pragma mark--------------------去掉多余的线----------------------------
+-(void)clearExtraLine:(UITableView *)tableView{
+     UIView *view = [[UIView alloc]init];
+     view.backgroundColor = [UIColor clearColor];
+     [self.pltable setTableFooterView:view];
+}
+#pragma mark-
 
 
 #pragma mark-----获取版块设置
@@ -1096,6 +1106,8 @@ NSInteger page_filter;
           NewPostEditViewController *PEVC2 = [[NewPostEditViewController alloc] initWithNibName:@"NewPostEditViewController" bundle:nil];
           PEVC2.forum_item = _forum_item;
           PEVC2.ED_FLAG =@"1";// 当前版块下发帖
+     
+          PEVC2.mainScrollView.frame = CGRectMake(PEVC2.mainScrollView.frame.origin.x , PEVC2.mainScrollView.frame.origin.y , self.view.frame.size.width , PEVC2.mainScrollView.frame.size.height);;
           [self.navigationController pushViewController:PEVC2 animated:YES];
      }
 }

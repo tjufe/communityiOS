@@ -52,6 +52,7 @@
 int reply_page = 1;
 int reply_rows = 6;
 int reply_page_filter = 0;
+int screenHeight = 0;
 
 
 - (void)viewDidLoad {
@@ -94,8 +95,19 @@ int reply_page_filter = 0;
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
     gesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gesture];
-    
+    //设置textFeild代理
     self.replyContentField.delegate = self;
+    //获取屏幕高度
+    screenHeight = self.view.frame.size.height;
+    //清楚多余的表
+    [self clearExtraLine:self.replyListTable];
+}
+#pragma mark-
+#pragma mark--------------------去掉多余的线----------------------------
+-(void)clearExtraLine:(UITableView *)tableView{
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [self.replyListTable setTableFooterView:view];
 }
 #pragma mark-
 #pragma mark----------------------防止键盘遮盖---------------------------
@@ -106,22 +118,17 @@ int reply_page_filter = 0;
     [self.replyContentField resignFirstResponder];
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    
-//    float textY = self.replyContentField.superview.frame.origin.y;
-//    float screenHeight = self.view.frame.size.height;
-//    int offset = textY + 40 - (screenHeight - 216.0);//键盘高度216
-    CGRect newFrame = self.view.frame;
-    newFrame.size.height -= 216 ;
-    NSTimeInterval animationDuration = 0.50f;
-    [UIView beginAnimations:@"ResizeTextView" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-//    if(offset > 0)
-//        self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
-    self.view.frame = newFrame;
-    [UIView commitAnimations];
-
-}
+//-(void)textFieldDidBeginEditing:(UITextField *)textField{
+//    
+//    CGRect newFrame = self.view.frame;
+//    newFrame.size.height -= kbHeight ;
+//    NSTimeInterval animationDuration = 0.50f;
+//    [UIView beginAnimations:@"ResizeTextView" context:nil];
+//    [UIView setAnimationDuration:animationDuration];
+//    self.view.frame = newFrame;
+//    [UIView commitAnimations];
+//
+//}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -129,64 +136,57 @@ int reply_page_filter = 0;
     return YES;
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height +216);
+//-(void)textFieldDidEndEditing:(UITextField *)textField
+//{
+//    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height +kbHeight);
+//    
+//}
+
+//注册监听
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+//取消监听
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
 }
 
-////注册监听
-//-(void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillShow:)
-//                                                 name:UIKeyboardWillShowNotification
-//                                               object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillHide:)
-//                                                 name:UIKeyboardWillHideNotification
-//                                               object:nil];
-//}
-////取消监听
-//-(void)viewWillDisappear:(BOOL)animated{
-//    
-//    [super viewDidDisappear:animated];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self
-//                                                    name:UIKeyboardWillHideNotification
-//                                                  object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self
-//                                                    name:UIKeyboardWillShowNotification
-//                                                  object:nil];
-//    
-//}
-//
-//- (void)keyboardWillShow:(NSNotification *)aNotification{
-//    NSDictionary *userInfo = [aNotification userInfo];
-//    CGRect keyboardRect = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]
-//                           CGRectValue];
-////    NSTimeInterval animationDuration = [[userInfo
-////                                         objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-//    NSTimeInterval animationDuration = 0.50f;//
-//    CGRect newFrame = self.view.frame;
-////    CGFloat viewBottom = self.replyContentField.frame.origin.y + self.replyContentField.frame.size.height;
-//    newFrame.size.height -= keyboardRect.size.height ;
-//    [UIView beginAnimations:@"ResizeTextView" context:nil];
-//    [UIView setAnimationDuration:animationDuration];
-//    self.view.frame = newFrame;
-//    [UIView commitAnimations];
-//}
-//- (void)keyboardWillHide:(NSNotification *)aNotification{
-//    NSDictionary *userInfo = [aNotification userInfo];
-//    CGRect keyboardRect = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey]
-//                           CGRectValue];
-//    NSTimeInterval animationDuration = [[userInfo
-//                                         objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-//    CGRect newFrame = self.view.frame;
-//    newFrame.size.height += keyboardRect.size.height;
-//    [UIView beginAnimations:@"ResizeTextView" context:nil];
-//    [UIView setAnimationDuration:animationDuration];
-//    self.view.frame = newFrame;
-//    [UIView commitAnimations];
-//}
+- (void)keyboardWillShow:(NSNotification *)aNotification{
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    CGRect newFrame = self.view.frame;
+    newFrame.size.height = screenHeight - keyboardRect.size.height;
+    NSTimeInterval animationDuration = 0.50f;
+    [UIView beginAnimations:@"ResizeTextView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.view.frame = newFrame;
+    [UIView commitAnimations];
+}
+- (void)keyboardWillHide:(NSNotification *)aNotification{
+    NSTimeInterval animationDuration = 0.50f;
+    [UIView beginAnimations:@"ResizeTextView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, screenHeight);
+    [UIView commitAnimations];
+}
 
 
 #pragma mark-
@@ -531,6 +531,7 @@ int reply_page_filter = 0;
         }];
     }else{
         [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.postItem.belong_community_id ForumID:self.postItem.belong_forum_id PostID:self.postItem.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
+            self.replyContentField.text =  @"";
             if (object != nil) {
                 MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
                 [self.view addSubview:hud];
