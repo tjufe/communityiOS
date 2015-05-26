@@ -12,7 +12,7 @@
 #import "forumItem.h"
 
 
-@interface PostReplyViewController : UIViewController
+@interface PostReplyViewController : UIViewController<UITextFieldDelegate>
 
 @property (strong ,nonatomic) NSArray *replyList;
 @property(strong ,nonatomic) postItem *postItem;

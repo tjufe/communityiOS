@@ -22,7 +22,7 @@
 
 
 
-@interface PostReplyViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface PostReplyViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 - (IBAction)replyAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *replyContentField;
@@ -111,14 +111,14 @@ int reply_page_filter = 0;
 //    float textY = self.replyContentField.superview.frame.origin.y;
 //    float screenHeight = self.view.frame.size.height;
 //    int offset = textY + 40 - (screenHeight - 216.0);//键盘高度216
-//    CGRect newFrame = self.view.frame;
-//    newFrame.size.height -= 216 ;
+    CGRect newFrame = self.view.frame;
+    newFrame.size.height -= 216 ;
     NSTimeInterval animationDuration = 0.50f;
     [UIView beginAnimations:@"ResizeTextView" context:nil];
     [UIView setAnimationDuration:animationDuration];
 //    if(offset > 0)
 //        self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
-//    self.view.frame = newFrame;
+    self.view.frame = newFrame;
     [UIView commitAnimations];
 
 }
@@ -131,7 +131,7 @@ int reply_page_filter = 0;
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height +216);
 }
 
 ////注册监听
