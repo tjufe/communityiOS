@@ -1087,16 +1087,17 @@ NSInteger page_filter;
 
 #pragma mark------当前版块下发帖
 -(void)NewPost{
-//    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
-//    PEVC.forum_item = _forum_item;
-//    PEVC.ED_FLAG =@"1";// 当前版块下发帖
-//    [self.navigationController pushViewController:PEVC animated:YES];
-
-     NewPostEditViewController *PEVC2 = [[NewPostEditViewController alloc] initWithNibName:@"NewPostEditViewController" bundle:nil];
-     PEVC2.forum_item = _forum_item;
-     PEVC2.ED_FLAG =@"1";// 当前版块下发帖
-     
-     [self.navigationController pushViewController:PEVC2 animated:YES];
+     if ([self.forum_item.display_type isEqualToString:@"纵向"]) {
+         PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
+         PEVC.forum_item = _forum_item;
+         PEVC.ED_FLAG =@"1";// 当前版块下发帖
+         [self.navigationController pushViewController:PEVC animated:YES];
+     }else{
+          NewPostEditViewController *PEVC2 = [[NewPostEditViewController alloc] initWithNibName:@"NewPostEditViewController" bundle:nil];
+          PEVC2.forum_item = _forum_item;
+          PEVC2.ED_FLAG =@"1";// 当前版块下发帖
+          [self.navigationController pushViewController:PEVC2 animated:YES];
+     }
 }
 
 

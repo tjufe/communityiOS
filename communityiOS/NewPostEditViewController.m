@@ -145,6 +145,7 @@ NSString * const KEY_SITE_VALUE_YES = @"是";
         postInfo.poster_id =[defaults valueForKey:@"UserID"];
         postInfo.post_title = post_title;
         postInfo.main_image_url = @"";
+        postInfo.post_text = post_text;
         postInfo.post_text_1 = post_text_1;
         postInfo.post_text_2 = post_text_2;
         postInfo.post_text_3 = post_text_3;
@@ -155,7 +156,7 @@ NSString * const KEY_SITE_VALUE_YES = @"是";
         postInfo.need_check = @"否";
         postInfo.checked = @"是";
         [StatusTool statusToolNewPostWithPostInfo:postInfo Success:^(id result){
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }failurs:^(NSError *error) {
             
         }];
@@ -305,7 +306,7 @@ NSString * const KEY_SITE_VALUE_YES = @"是";
 - (void)initPostMainPic {
     self.postMainPicImageView = [[UIImageView alloc]init];
     self.postMainPicImageView.frame = CGRectMake(0, self.v2.frame.origin.y+self.v2.frame.size.height, self.view.frame.size.width, 158);
-    self.postMainPicImageView.image = [UIImage imageNamed:@"image_01"];
+//    self.postMainPicImageView.image = [UIImage imageNamed:@"image_01"];
 }
 
 - (void)didReceiveMemoryWarning {
