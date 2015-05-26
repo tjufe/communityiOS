@@ -62,11 +62,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "communityiOS/StatusTool.m"
-            timestampString = "454239584.503091"
+            timestampString = "454295486.852525"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "711"
-            endingLineNumber = "711"
+            startingLineNumber = "729"
+            endingLineNumber = "729"
             landmarkName = "+statusToolNewPostWithPostInfo:Success:failurs:"
             landmarkType = "5">
          </BreakpointContent>
@@ -78,11 +78,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "communityiOS/StatusTool.m"
-            timestampString = "454239586.866755"
+            timestampString = "454295643.473015"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "717"
-            endingLineNumber = "717"
+            startingLineNumber = "737"
+            endingLineNumber = "737"
             landmarkName = "+statusToolNewPostWithPostInfo:Success:failurs:"
             landmarkType = "5">
          </BreakpointContent>
@@ -94,11 +94,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "communityiOS/StatusTool.m"
-            timestampString = "454239629.128226"
+            timestampString = "454295850.968178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "708"
-            endingLineNumber = "708"
+            startingLineNumber = "732"
+            endingLineNumber = "732"
+            landmarkName = "+statusToolNewPostWithPostInfo:Success:failurs:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "communityiOS/StatusTool.m"
+            timestampString = "454295856.120331"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "735"
+            endingLineNumber = "735"
             landmarkName = "+statusToolNewPostWithPostInfo:Success:failurs:"
             landmarkType = "5">
          </BreakpointContent>
