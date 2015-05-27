@@ -27,25 +27,24 @@
     self.replyContent.text = text;
     //设置label的最大行数
     self.replyContent.numberOfLines = 10;
-    CGSize size = CGSizeMake(254, 1000);
-    CGSize labelSize = [self.replyContent.text sizeWithFont:self.replyContent.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
-    self.replyContent.frame = CGRectMake(self.replyContent.frame.origin.x, self.replyContent.frame.origin.y, labelSize.width, labelSize.height);
+    CGSize size = CGSizeMake(200, 1000);
+    CGSize labelSize = [self.replyContent.text sizeWithFont:self.replyContent.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    self.replyContent.frame = CGRectMake(self.replyContent.frame.origin.x, self.replyContent.frame.origin.y+5, labelSize.width, labelSize.height);
     //计算出自适应高度
     frame.size.height = labelSize.height + 50;
     self.frame = frame;
     
-    int offset = self.replyerNickName.frame.size.width - self.replyContent.frame.size.width;
-    CGRect backFrame;
-    int t = self.replyerNickName.frame.size.width;
-    if (offset > 0) {
-        backFrame = CGRectMake(self.replyerNickName.frame.origin.x -15, self.replyerNickName.frame.origin.y-6, self.replyerNickName.frame.size.width+10, labelSize.height + self.replyerNickName.frame.size.height + 20 );
-    }else{
-        backFrame = CGRectMake(self.replyerNickName.frame.origin.x-15, self.replyerNickName.frame.origin.y-6, self.replyContent.frame.size.width+10, labelSize.height + self.replyerNickName.frame.size.height + 20);
-    }
+//    int offset = self.replyerNickName.frame.size.width - self.replyContent.frame.size.width;
+//    CGRect backFrame ;
+//    if (offset > 0) {
+//        backFrame = CGRectMake(self.replyContent.frame.origin.x -15, self.replyContent.frame.origin.y-6, self.replyerNickName.frame.size.width, labelSize.height + self.replyerNickName.frame.size.height );
+//    }else{
+//        backFrame = CGRectMake(self.replyContent.frame.origin.x-15, self.replyContent.frame.origin.y-6, self.replyContent.frame.size.width, labelSize.height + self.replyerNickName.frame.size.height);
+//    }
     
-    UIImage *bubble = [UIImage imageNamed:@"Receiver"];
+    UIImage *bubble = [UIImage imageNamed:@"ReceiverVoiceNodeDownloading"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
-    bubbleImageView.frame = backFrame;
+    bubbleImageView.frame = CGRectMake(self.replyContent.frame.origin.x - 15, self.replyContent.frame.origin.y - 7, labelSize.width + 50, labelSize.height + 20);
     [self.contentView insertSubview:bubbleImageView atIndex:0];
    
 }

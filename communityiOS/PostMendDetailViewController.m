@@ -369,7 +369,7 @@ int mend_screenHeight = 0;
         }else{
             
             UITableViewCell *cell = [self tableView:self.tableview cellForRowAtIndexPath:indexPath];
-            return cell.frame.size.height + 30;
+            return cell.frame.size.height + 20;
         }
 
 }
@@ -398,6 +398,15 @@ int mend_screenHeight = 0;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:(BOOL)animated];
+    //注册监听
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
     if(mend_pop_code==1){
         [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
             self.post_item = (postItem *)object;
@@ -438,11 +447,83 @@ int mend_screenHeight = 0;
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
     
     [self.tableview.tableHeaderView setHidden:YES];
-    
-    //[self setupRefreshing];
+
+    [self setupRefreshing];
     [self loadReplyListData];
     
+    //添加手势，点击屏幕其他区域关闭键盘的操作
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gesture];
+    //设置textFeild代理
+    self.replyContentField.delegate = self;
+    //获取屏幕高度
+    mend_screenHeight = self.view.frame.size.height;
+    //清楚多余的表
+    [self clearExtraLine:self.tableview];
+    
 }
+#pragma mark-
+#pragma mark--------------------去掉多余的线----------------------------
+-(void)clearExtraLine:(UITableView *)tableView{
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [self.tableview setTableFooterView:view];
+}
+#pragma mark-
+#pragma mark----------------------防止键盘遮盖---------------------------
+
+//点击屏幕别处键盘收起
+-(void)hidenKeyboard
+{
+    [self.replyContentField resignFirstResponder];
+}
+
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+//取消监听
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
+}
+
+- (void)keyboardWillShow:(NSNotification *)aNotification{
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    CGRect newFrame = self.view.frame;
+    newFrame.size.height = mend_screenHeight - keyboardRect.size.height;
+    NSTimeInterval animationDuration = 0.50f;
+    [UIView beginAnimations:@"ResizeTextView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.view.frame = newFrame;
+    [UIView commitAnimations];
+}
+- (void)keyboardWillHide:(NSNotification *)aNotification{
+    NSTimeInterval animationDuration = 0.20f;
+    [UIView beginAnimations:@"ResizeTextView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, mend_screenHeight);
+    [UIView commitAnimations];
+}
+
+
+#pragma mark-
+
 
 -(void)loadPostInfo:(NSString *)postID{
     [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
@@ -857,29 +938,29 @@ int mend_screenHeight = 0;
 
 #pragma mark-
 #pragma mark---------------------------------设置刷新控件---------------------------
-//-(void)setupRefreshing{
-//    [self.tableview addHeaderWithTarget:self action:@selector(headerRefreshing)];
-//    [self.tableview addFooterWithTarget:self action:@selector(footerRefreshing)];
-//}
-//
-//-(void)headerRefreshing{//下拉
-//    mend_page_filter = 1;
-//    mend_reply_page =1;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int16_t)(2.0*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self loadReplyListData];
-//        [self.tableview headerEndRefreshing];
-//    });
-//}
-//
-//-(void)footerRefreshing{//上拉
-//    mend_page_filter = 2;
-//    mend_reply_page++;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int16_t)(2.0*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self loadReplyListData];
-//        [self.tableview footerEndRefreshing];
-//    });
-//    
-//}
+-(void)setupRefreshing{
+    [self.tableview addHeaderWithTarget:self action:@selector(headerRefreshing)];
+    [self.tableview addFooterWithTarget:self action:@selector(footerRefreshing)];
+}
+
+-(void)headerRefreshing{//下拉
+    mend_page_filter = 1;
+    mend_reply_page =1;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int16_t)(2.0*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self loadReplyListData];
+        [self.tableview headerEndRefreshing];
+    });
+}
+
+-(void)footerRefreshing{//上拉
+    mend_page_filter = 2;
+    mend_reply_page++;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int16_t)(2.0*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self loadReplyListData];
+        [self.tableview footerEndRefreshing];
+    });
+    
+}
 #pragma mark-
 #pragma mark------------------------------加载回复列表的数据----------------------
 -(void)loadReplyListData{
