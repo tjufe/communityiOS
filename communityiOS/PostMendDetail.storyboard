@@ -147,10 +147,18 @@
                             <constraint firstItem="Iaf-KS-dXV" firstAttribute="top" secondItem="ii0-YQ-wbY" secondAttribute="bottom" id="S00-tr-2Zz"/>
                             <constraint firstItem="ii0-YQ-wbY" firstAttribute="leading" secondItem="MHX-RP-wqF" secondAttribute="leading" id="W8e-La-wdq"/>
                             <constraint firstAttribute="trailing" secondItem="kr7-t2-r31" secondAttribute="trailing" id="cPj-Nd-oy9"/>
+                            <constraint firstItem="ii0-YQ-wbY" firstAttribute="top" secondItem="MHX-RP-wqF" secondAttribute="top" constant="149" id="cSP-y4-ecd"/>
+                            <constraint firstItem="kr7-t2-r31" firstAttribute="top" secondItem="MHX-RP-wqF" secondAttribute="top" constant="60" id="gW9-R9-bGj"/>
                             <constraint firstItem="Iaf-KS-dXV" firstAttribute="leading" secondItem="MHX-RP-wqF" secondAttribute="leading" id="mU8-Lr-1Rb"/>
                             <constraint firstAttribute="trailing" secondItem="ii0-YQ-wbY" secondAttribute="trailing" id="uT5-oD-hvR"/>
                             <constraint firstItem="kr7-t2-r31" firstAttribute="top" secondItem="fG0-Ec-Ofi" secondAttribute="bottom" constant="40" id="ugB-u4-1Qt"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ugB-u4-1Qt"/>
+                                <exclude reference="9W1-36-qcS"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
