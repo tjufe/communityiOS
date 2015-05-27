@@ -94,6 +94,12 @@
 		13D2471C1B043DE200717780 /* EAColourfulProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D2471B1B043DE200717780 /* EAColourfulProgressView.m */; };
 		13D2471F1B048C8C00717780 /* ChainToWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D2471E1B048C8C00717780 /* ChainToWebViewController.m */; };
 		13D247211B048CCE00717780 /* chainToWeb.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13D247201B048CCE00717780 /* chainToWeb.storyboard */; };
+		183FCD481B1483AB0050D5B6 /* PostMendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FCD471B1483AB0050D5B6 /* PostMendDetailViewController.m */; };
+		183FCD4A1B1483CF0050D5B6 /* PostMendDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183FCD491B1483CF0050D5B6 /* PostMendDetail.storyboard */; };
+		183FCD4F1B1577B80050D5B6 /* MendRplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FCD4D1B1577B80050D5B6 /* MendRplyTableViewCell.m */; };
+		183FCD501B1577B80050D5B6 /* MendRplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183FCD4E1B1577B80050D5B6 /* MendRplyTableViewCell.xib */; };
+		183FCD541B158AF80050D5B6 /* MyMendReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FCD521B158AF80050D5B6 /* MyMendReplyTableViewCell.m */; };
+		183FCD551B158AF80050D5B6 /* MyMendReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183FCD531B158AF80050D5B6 /* MyMendReplyTableViewCell.xib */; };
 		1842ADE21ADB5F6F0022D2CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */; };
 		1842ADE41ADB5F7A0022D2CB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */; };
 		1842ADE61ADB5F830022D2CB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */; };
@@ -305,6 +311,15 @@
 		13D2471D1B048C8C00717780 /* ChainToWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChainToWebViewController.h; sourceTree = "<group>"; };
 		13D2471E1B048C8C00717780 /* ChainToWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChainToWebViewController.m; sourceTree = "<group>"; };
 		13D247201B048CCE00717780 /* chainToWeb.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = chainToWeb.storyboard; sourceTree = "<group>"; };
+		183FCD461B1483AB0050D5B6 /* PostMendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostMendDetailViewController.h; sourceTree = "<group>"; };
+		183FCD471B1483AB0050D5B6 /* PostMendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMendDetailViewController.m; sourceTree = "<group>"; };
+		183FCD491B1483CF0050D5B6 /* PostMendDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostMendDetail.storyboard; sourceTree = "<group>"; };
+		183FCD4C1B1577B80050D5B6 /* MendRplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MendRplyTableViewCell.h; sourceTree = "<group>"; };
+		183FCD4D1B1577B80050D5B6 /* MendRplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MendRplyTableViewCell.m; sourceTree = "<group>"; };
+		183FCD4E1B1577B80050D5B6 /* MendRplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MendRplyTableViewCell.xib; sourceTree = "<group>"; };
+		183FCD511B158AF80050D5B6 /* MyMendReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMendReplyTableViewCell.h; sourceTree = "<group>"; };
+		183FCD521B158AF80050D5B6 /* MyMendReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMendReplyTableViewCell.m; sourceTree = "<group>"; };
+		183FCD531B158AF80050D5B6 /* MyMendReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMendReplyTableViewCell.xib; sourceTree = "<group>"; };
 		1842ADE11ADB5F6F0022D2CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1842ADE31ADB5F7A0022D2CB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		1842ADE51ADB5F830022D2CB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -466,6 +481,7 @@
 		13B1C2AB1ACA4B26005C179C /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				183FCD4B1B1577060050D5B6 /* mendRply */,
 				1855840A1B031E480025B66D /* replyList */,
 				8EF3F74C1AD50B5000924975 /* postEdit */,
 				8EF3F74B1AD50B3600924975 /* forumList */,
@@ -705,6 +721,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		183FCD4B1B1577060050D5B6 /* mendRply */ = {
+			isa = PBXGroup;
+			children = (
+				183FCD4C1B1577B80050D5B6 /* MendRplyTableViewCell.h */,
+				183FCD4D1B1577B80050D5B6 /* MendRplyTableViewCell.m */,
+				183FCD4E1B1577B80050D5B6 /* MendRplyTableViewCell.xib */,
+				183FCD511B158AF80050D5B6 /* MyMendReplyTableViewCell.h */,
+				183FCD521B158AF80050D5B6 /* MyMendReplyTableViewCell.m */,
+				183FCD531B158AF80050D5B6 /* MyMendReplyTableViewCell.xib */,
+			);
+			name = mendRply;
+			sourceTree = "<group>";
+		};
 		1855840A1B031E480025B66D /* replyList */ = {
 			isa = PBXGroup;
 			children = (
@@ -895,6 +924,9 @@
 				13B1C32F1AD4D6ED005C179C /* PostDetailStoryboard.storyboard */,
 				13B1C3301AD4D6ED005C179C /* PostDetailViewController.h */,
 				13B1C3311AD4D6ED005C179C /* PostDetailViewController.m */,
+				183FCD491B1483CF0050D5B6 /* PostMendDetail.storyboard */,
+				183FCD461B1483AB0050D5B6 /* PostMendDetailViewController.h */,
+				183FCD471B1483AB0050D5B6 /* PostMendDetailViewController.m */,
 				13B1C3321AD4D6ED005C179C /* PostEdit.storyboard */,
 				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
 				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
@@ -1033,10 +1065,12 @@
 				13B1C3211AD4D6B3005C179C /* FSCollectionView.storyboard in Resources */,
 				13B1C3171AD4D674005C179C /* ForumSelectTableViewCell.xib in Resources */,
 				13B1C3561AD4D6ED005C179C /* PostTextTableViewCell.xib in Resources */,
+				183FCD551B158AF80050D5B6 /* MyMendReplyTableViewCell.xib in Resources */,
 				13C58BE81AB9550600090157 /* Main.storyboard in Resources */,
 				1842AE6D1ADB77290022D2CB /* PushConfig.plist in Resources */,
 				18628CB91B10750D00E81A8B /* MyReplyTableViewCell.xib in Resources */,
 				188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */,
+				183FCD501B1577B80050D5B6 /* MendRplyTableViewCell.xib in Resources */,
 				13C58BED1AB9550600090157 /* LaunchScreen.xib in Resources */,
 				A05C7D3A1AF86D7400838247 /* UserJoinPostList.storyboard in Resources */,
 				137D80DF1B06FC24001E8CDA /* EditApplyTableViewCell.xib in Resources */,
@@ -1059,6 +1093,7 @@
 				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
 				137D80E41B06FD25001E8CDA /* EditChainTableViewCell.xib in Resources */,
+				183FCD4A1B1483CF0050D5B6 /* PostMendDetail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,7 +1162,9 @@
 				13B1C2BE1ACA5A27005C179C /* KZPropertyMapper.m in Sources */,
 				13B1C35D1AD4D6ED005C179C /* TitleTableViewCell.m in Sources */,
 				13D2471F1B048C8C00717780 /* ChainToWebViewController.m in Sources */,
+				183FCD541B158AF80050D5B6 /* MyMendReplyTableViewCell.m in Sources */,
 				13B1C35B1AD4D6ED005C179C /* TextTableViewCell.m in Sources */,
+				183FCD4F1B1577B80050D5B6 /* MendRplyTableViewCell.m in Sources */,
 				13B1C2E41ACB7DC5005C179C /* MJRefreshBaseView+CustomActivityIndicator.m in Sources */,
 				13B1C36F1AD4D80B005C179C /* forumListItem.m in Sources */,
 				A0CB290B1B09BB2900082FF0 /* editPostItem.m in Sources */,
@@ -1154,6 +1191,7 @@
 				13D2471C1B043DE200717780 /* EAColourfulProgressView.m in Sources */,
 				13B1C30A1ACCFE98005C179C /* GGAddressPickerHelper.m in Sources */,
 				13B1C2E81ACB7DC5005C179C /* MJRefreshHeaderView.m in Sources */,
+				183FCD481B1483AB0050D5B6 /* PostMendDetailViewController.m in Sources */,
 				8EEB4BF61B098F7D00B77265 /* SlideInfoList.m in Sources */,
 				13B1C3201AD4D6B3005C179C /* FSCollectionView.m in Sources */,
 				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
