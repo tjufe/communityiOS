@@ -433,14 +433,13 @@
     [thirdDic setObject:secondDic forKey:@"param"];
     [thirdDic setObject:@"PostReply" forKey:@"method"];
     
-    [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
-        success(responseObject);
-        
-    } failure:^(NSError *error) {
-        if (failure == nil) return;
-        failure(error);
-    }];
-    
+   [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+       success(responseObject);
+   } failure:^(NSError *error) {
+       if(!failure)
+           return ;
+       failure(error);
+   }];
 }
 
 //刷新数据库，更新上传图片

@@ -105,6 +105,13 @@ NSString *num2 ;
 NSString *num3 ;
 
 
+#pragma mark------当点击view的区域就会触发这个事件
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+    
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
     
