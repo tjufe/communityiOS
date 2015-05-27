@@ -144,8 +144,16 @@ NSArray *forum;
     [self reloadData];
     [self autoLogin];
     
-    
+    [self clearExtraLine:self.mainTableView];
 }
+#pragma mark-
+#pragma mark--------------------去掉多余的线----------------------------
+-(void)clearExtraLine:(UITableView *)tableView{
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [self.mainTableView setTableFooterView:view];
+}
+#pragma mark-
 
 #pragma mark --初始化轮播图
 -(void)initSlide{
@@ -228,7 +236,8 @@ NSArray *forum;
     SlideInfoItem *s = [self.listSlide objectAtIndex:index];
     //往帖子详情页跳转
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-    PDVC.postIDFromLun = s.post_id;  //携带参数跳转
+    PDVC.postIDFromOutside = s.post_id;
+
     NSString *str = s.post_id;
     [self.navigationController pushViewController:PDVC animated:YES];
 
