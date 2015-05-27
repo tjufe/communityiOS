@@ -513,58 +513,71 @@ int screenHeight = 0;
 
 - (IBAction)replyAction:(id)sender {
     
-    //获取当前时间
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *curDate = [formatter stringFromDate:[NSDate date]];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *str = [self genUUID];
-    if ([self.replyContentField.text isEqualToString:@""]) {
+    if ( ! self.havePower) {
         MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
         [self.view addSubview:hud];
-        hud.labelText = @"内容不能为空";
+        hud.labelText = @"您没有权限回复";
         hud.mode = MBProgressHUDModeText;
         [hud showAnimated:YES whileExecutingBlock:^{
             sleep(1);
         } completionBlock:^{
             [hud removeFromSuperview];
         }];
+
     }else{
-        [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.postItem.belong_community_id ForumID:self.postItem.belong_forum_id PostID:self.postItem.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
-            self.replyContentField.text =  @"";
-            if (object != nil) {
-                MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
-                [self.view addSubview:hud];
-                hud.labelText = @"回复成功";
-                hud.mode = MBProgressHUDModeText;
-                [hud showAnimated:YES whileExecutingBlock:^{
-                    sleep(1);
-                    reply_page = 1;
-                    reply_page_filter = 0;
-                    [self loadReplyListData];
-                } completionBlock:^{
-                    [hud removeFromSuperview];
-                }];
-                
-                [self.replyContentField resignFirstResponder];
+        //获取当前时间
+        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *curDate = [formatter stringFromDate:[NSDate date]];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *str = [self genUUID];
+        if ([self.replyContentField.text isEqualToString:@""]) {
+            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:hud];
+            hud.labelText = @"内容不能为空";
+            hud.mode = MBProgressHUDModeText;
+            [hud showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [hud removeFromSuperview];
+            }];
+        }else{
+            [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.postItem.belong_community_id ForumID:self.postItem.belong_forum_id PostID:self.postItem.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
+                self.replyContentField.text =  @"";
+                if (object != nil) {
+                    MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+                    [self.view addSubview:hud];
+                    hud.labelText = @"回复成功";
+                    hud.mode = MBProgressHUDModeText;
+                    [hud showAnimated:YES whileExecutingBlock:^{
+                        sleep(1);
+                        reply_page = 1;
+                        reply_page_filter = 0;
+                        [self loadReplyListData];
+                    } completionBlock:^{
+                        [hud removeFromSuperview];
+                    }];
+                    
+                    [self.replyContentField resignFirstResponder];
 
-            }
-                else{
-                MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
-                [self.view addSubview:hud];
-                hud.labelText = @"请查看您的网络";
-                hud.mode = MBProgressHUDModeText;
-                [hud showAnimated:YES whileExecutingBlock:^{
-                    sleep(1);
-                } completionBlock:^{
-                    [hud removeFromSuperview];
-                }];
-                
-            }
+                }
+                    else{
+                    MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+                    [self.view addSubview:hud];
+                    hud.labelText = @"请查看您的网络";
+                    hud.mode = MBProgressHUDModeText;
+                    [hud showAnimated:YES whileExecutingBlock:^{
+                        sleep(1);
+                    } completionBlock:^{
+                        [hud removeFromSuperview];
+                    }];
+                    
+                }
 
-        } failurs:^(NSError *error) {
-            //to do
-        }];
+            } failurs:^(NSError *error) {
+                //to do
+            }];
+        }
     }
 }
 #pragma mark-
