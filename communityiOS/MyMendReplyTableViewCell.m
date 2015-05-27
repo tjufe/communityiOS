@@ -1,18 +1,17 @@
 //
-//  ReplyTableViewCell.m
+//  MyMendReplyTableViewCell.m
 //  communityiOS
 //
-//  Created by Sunxiaoyuan on 15/5/13.
+//  Created by Sunxiaoyuan on 15/5/27.
 //  Copyright (c) 2015年 &#20309;&#33538;&#39336;. All rights reserved.
 //
 
-#import "ReplyTableViewCell.h"
+#import "MyMendReplyTableViewCell.h"
 
-@implementation ReplyTableViewCell
+@implementation MyMendReplyTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -20,7 +19,6 @@
 
     // Configure the view for the selected state
 }
-
 
 -(void)setReplyContentText:(NSString *)text{
     //获得当前cell高度
@@ -35,7 +33,19 @@
     //计算出自适应高度
     frame.size.height = labelSize.height + 50;
     self.frame = frame;
-
+    
+    int offset = self.replyerNickName.frame.size.width - labelSize.width;
+    CGRect backFrame;
+    if (offset > 0) {
+        backFrame = CGRectMake(self.replyerNickName.frame.origin.x - 2, self.replyerNickName.frame.origin.y-2, self.replyerNickName.frame.size.width+2, labelSize.height + self.replyerNickName.frame.size.height -5);
+    }else{
+        backFrame = CGRectMake(self.replyerNickName.frame.origin.x, self.replyerNickName.frame.origin.y-2, labelSize.width+2, labelSize.height + self.replyerNickName.frame.size.height -5);
+    }
+    self.backBubble.layer.cornerRadius = 10;
+    self.backBubble.frame = backFrame;
+    
 }
+
+
 
 @end
