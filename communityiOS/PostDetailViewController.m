@@ -208,7 +208,7 @@ bool isModerator = NO;//是否是版主
             //主图显示情况
             if (self.main_image_url!=nil && ![self.main_image_url isEqualToString:@""]) {
                 [self loadMainImage];
-                imageHeight = 150;
+                imageHeight = 174;
                 self.postImageCell.hidden = NO;
 //                self.postImageCell.MainImage.contentMode=UIViewContentModeScaleAspectFill;
             }else{
@@ -577,6 +577,8 @@ bool isModerator = NO;//是否是版主
 
 -(void)setUserInit{
     [self.postTitle setText:self.post_title];
+    self.postTitle .numberOfLines = 0;
+//    [label setFrame:CGRectMake(10,50, size01.width, size01.height)];
 //    if(self.post_date!=nil){
 //        self.posterCell.postDate.text = [self.post_date substringToIndex:16];
 //    }

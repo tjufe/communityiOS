@@ -57,6 +57,7 @@
 @property (strong,nonatomic)NSString *ISMAINIMG;
 @property (strong,nonatomic)NSString *ISCHECK;
 //@property (strong,nonatomic)NSString *ISNEWPOST;
+@property (nonatomic)BOOL *select_forum_dropdown_isonshowing;//选择板块下拉列表处于正在显示状态
 
 
 @property (strong,nonatomic)NSString *select_forum_id;//选择的版块id
@@ -105,6 +106,7 @@ NSString *num2 ;
 NSString *num3 ;
 
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
     
@@ -117,6 +119,7 @@ NSString *num3 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    _select_forum_dropdown_isonshowing = NO;
         if (indexPath.row== 0 ) {
         ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
             
@@ -365,56 +368,54 @@ NSString *num3 ;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row==0){
-
-        
-        if([_ED_FLAG isEqualToString:@"0"]){
-
-        //collectionview布局
-        UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
-        flowlayout.minimumInteritemSpacing = 0;
-        flowlayout.minimumLineSpacing = 2;
-        [flowlayout setItemSize:CGSizeMake(100, 40)];
-        
-        //初始化colletionview
-        self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
-
-        //传值
-        self.fs.select_forum = self.select_forum;
-        self.fs.Addpic = self.addpic;
-        self.fs.Apply = self.apply;
-        self.fs.Chain = self.chain;
-           
-
-        self.fs.alpha = 0;
-
-        
-        self.fs.backgroundColor= [UIColor whiteColor];
-       
-        self.fs.dataSource = self.fs;
-        self.fs.delegate = self.fs;
-        //在collectionview注册collectionviewcell；
-        [self.fs  registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell11"];
-
-        [self.PEtableview addSubview:self.fs];
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            self.fs.frame= CGRectMake(self.view.frame.size.width/2 - 100, 50, 202, 200) ;
-            self.fs.alpha = 1;
-            [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
-        }];
-
-            [self.fs getcelltext:indexPath:self.PEtableview];
-            
-            
-            //获取选择的版块
-//            NSMutableArray *select = [self.fs GetSelectedResult];
-//            self.select_forum_id = [select objectAtIndex:1];
-//            self.select_forum_name =[select objectAtIndex:2];
-//            self.select_row = [select objectAtIndex:0];
-
-//            
-
-            
+        if(!_select_forum_dropdown_isonshowing){
+            if([_ED_FLAG isEqualToString:@"0"]){
+                
+                //collectionview布局
+                UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
+                flowlayout.minimumInteritemSpacing = 0;
+                flowlayout.minimumLineSpacing = 2;
+                [flowlayout setItemSize:CGSizeMake(100, 40)];
+                
+                //初始化colletionview
+                self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
+                
+                //传值
+                self.fs.select_forum = self.select_forum;
+                self.fs.Addpic = self.addpic;
+                self.fs.Apply = self.apply;
+                self.fs.Chain = self.chain;
+                self.fs.alpha = 0;
+                
+                
+                
+                
+                self.fs.backgroundColor= [UIColor whiteColor];
+                
+                self.fs.dataSource = self.fs;
+                self.fs.delegate = self.fs;
+                //在collectionview注册collectionviewcell；
+                [self.fs  registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell11"];
+                
+                [self.PEtableview addSubview:self.fs];
+                
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.fs.frame= CGRectMake(self.view.frame.size.width/2 - 100, 50, 202, 200) ;
+                    self.fs.alpha = 1;
+                    [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
+                }];
+                
+                [self.fs getcelltext:indexPath:self.PEtableview];
+                _select_forum_dropdown_isonshowing = YES;
+                
+                //获取选择的版块
+                //            NSMutableArray *select = [self.fs GetSelectedResult];
+                //            self.select_forum_id = [select objectAtIndex:1];
+                //            self.select_forum_name =[select objectAtIndex:2];
+                //            self.select_row = [select objectAtIndex:0];
+                
+                //
+            }
         }
 
     }else if(indexPath.row==3){//删图片
