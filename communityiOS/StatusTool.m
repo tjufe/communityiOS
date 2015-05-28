@@ -739,5 +739,53 @@
                      }];
 }
 
+//发送报修的评价
++(void)statusToolPostMendScoreWithPostID:(NSString *)post_id User_ID:(NSString*)user_id Score:(NSString*)score Evaluate:(NSString *)evaluate Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:post_id forKey:@"post_id"];
+    [firstDic setObject:user_id forKey:@"user_id"];
+    [firstDic setObject:score forKey:@"score"];
+    [firstDic setObject:evaluate forKey:@"evaluate"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"EndRepair" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        success(dic);
+        
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+}
+
+//下载到评价的类型
++(void)statusToolGetScoreTypeWithCommunityID:(NSString *)community_id ForumID:(NSString *)forum_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    [firstDic setObject:community_id forKey:@"community_id"];
+    [firstDic setObject:forum_id forKey:@"forum_id"];
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    [thirdDic setObject:@"LoadScoreType" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        
+        success(responseObject);
+        
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+    
+}
 @end
 

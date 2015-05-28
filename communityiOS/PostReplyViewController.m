@@ -209,6 +209,7 @@ int screenHeight = 0;
             if(!cell){
                 cell = [[[NSBundle mainBundle]loadNibNamed:@"MyReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //填装数据
             cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row];
             cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row];

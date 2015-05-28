@@ -1163,9 +1163,6 @@ NSString *num3 ;
     self.maskview.alpha = 0.3;
     [self.view addSubview:self.maskview];
     
-    
-
-    
     //实例化一个view
     self.addpush =[[UIView alloc]init];
     self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height, 300, 220);
@@ -1176,8 +1173,6 @@ NSString *num3 ;
         self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-110, 300, 220);
         [self.addpush.layer setCornerRadius:self.addpush.frame.size.height/20];
     }];
-    
-    
     [self.view addSubview:self.addpush];
     
     
@@ -1299,8 +1294,6 @@ NSString *num3 ;
     self.pickview.dataSource = self;
     
     [self.addapply addSubview:self.pickview];
-    
-    
     
     //
     UIView *vi3 = [[UIView alloc]initWithFrame:CGRectMake(0, 280, 300, 1)];

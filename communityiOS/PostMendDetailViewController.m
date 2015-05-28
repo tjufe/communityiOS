@@ -31,6 +31,7 @@
 #import "replyInfoListItem.h"
 #import "replyInfoItem.h"
 #import "MJRefresh.h"
+#import "RatingBar.h"
 
 @interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 - (IBAction)replyAction:(id)sender;
@@ -90,9 +91,8 @@
 @property (strong,nonatomic) UIBarButtonItem *rightItem;
 
 @property (strong,nonatomic) UIButton * editbutton;
-@property (strong,nonatomic) UIButton * endApplyButton;
 @property (strong,nonatomic) UIButton * delebutton;
-
+@property (strong,nonatomic) UIButton * endMendBtn;
 
 @property (strong,nonatomic) NSMutableArray *replyListArray;
 //cell数据源
@@ -106,6 +106,11 @@
 @property (strong,nonatomic) NSNumber *Page;
 @property (strong,nonatomic) NSNumber *Rows;
 @property (nonatomic,strong) NSMutableArray *forumSetArray;
+
+@property (strong,nonatomic)UIView *maskView;
+@property (strong,nonatomic)UIView *assessView;
+@property (strong,nonatomic)NSString *evaluateStr;
+
 
 @end
 
@@ -122,9 +127,10 @@ NSInteger mend_menuHeight ;//menu的高度
 bool mend_isModerator = NO;//是否是版主
 
 int mend_reply_page = 1;
-int mend_reply_rows = 6;
+int mend_reply_rows = 1000;
 int mend_page_filter = 0;
 int mend_screenHeight = 0;
+float mend_score = 0;
 
 #pragma mark-
 #pragma mark----------------当点击view的区域就会触发这个事件----------------------
@@ -245,7 +251,6 @@ int mend_screenHeight = 0;
                             
                             mend_applyHeight = 40;
                             self.applyCell.hidden = NO;
-                            
                             //nsstring change to nsinteger
                             NSInteger limit = [self.limit_apply_num intValue];
                             NSInteger apply = [self.apply_num intValue];
@@ -273,7 +278,6 @@ int mend_screenHeight = 0;
                                     //开启用户点击
                                     self.applyCell.btApply.userInteractionEnabled = YES;
                                     [self.applyCell.btApply addTarget:self action:@selector(applyOnLine) forControlEvents:UIControlEventTouchUpInside];
-                                    
                                 }
                             }
                         }
@@ -347,10 +351,7 @@ int mend_screenHeight = 0;
             }];
             return cell;
       }
-    
-    
-    
-    
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -448,7 +449,7 @@ int mend_screenHeight = 0;
     
     [self.tableview.tableHeaderView setHidden:YES];
 
-    [self setupRefreshing];
+  //  [self setupRefreshing];
     [self loadReplyListData];
     
     //添加手势，点击屏幕其他区域关闭键盘的操作
@@ -536,13 +537,6 @@ int mend_screenHeight = 0;
     }];
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark------------------------赋值函数------------------------------
 -(void)setData_2{
     self.head_portrait_url = self.post_item.poster_head;
@@ -588,7 +582,6 @@ int mend_screenHeight = 0;
     self.AccountStatus = [defaults objectForKey:@"AccountStatus"];
     self.HeadPortraitUrl = [defaults objectForKey:@"HeadPortraitUrl"];//当前用户头像url 不同于 head——portrait－url
     self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
-    
     mend_menuHeight = 0;
     
     
@@ -648,13 +641,12 @@ int mend_screenHeight = 0;
     [self.editbutton addTarget:self action:@selector(EditPost) forControlEvents:UIControlEventTouchUpInside];
     [self.editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
-    //结束报名按钮
-    self.endApplyButton = [[UIButton alloc]init];
-    self.endApplyButton.frame = CGRectMake(25, 100, 50, 50);
-    
-    [self.endApplyButton setTitle:@"结束报名" forState:UIControlStateNormal];
-    [self.endApplyButton addTarget:self action:@selector(endapply) forControlEvents:UIControlEventTouchUpInside];
-    [self.endApplyButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    //结束保修按钮
+    self.endMendBtn = [[UIButton alloc]init];
+    self.endMendBtn.frame = CGRectMake(25, 100, 50, 50);
+    [self.endMendBtn setTitle:@"结束报修" forState:UIControlStateNormal];
+    [self.endMendBtn addTarget:self action:@selector(endMend) forControlEvents:UIControlEventTouchUpInside];
+    [self.endMendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     //删除按钮
     self.delebutton = [[UIButton alloc]init];
@@ -712,22 +704,29 @@ int mend_screenHeight = 0;
         mend_menuHeight++;
         
     }
-    //结束报名按钮
-    for(int i=0 ; i< self.forum_item.ForumSetlist.count ; i++){
-        forumSetItem *forumset = [forumSetItem createItemWitparametes:[self.forum_item.ForumSetlist objectAtIndex:i]];
-        if ([forumset.site_name isEqualToString:@"是否提供报名功能"]) {
-            if ([forumset.site_value isEqualToString:@"是"]) {
-                if ([self.open_apply isEqualToString:@"是"] && [self.user_id isEqualToString:self.poster_id] && [self.post_over isEqualToString:@"否"]) {
-                    [self.operlist addSubview:self.endApplyButton];
-                    self.endApplyButton.frame = CGRectMake(25, 50*mend_menuHeight, 50, 50);
-                    mend_menuHeight++;
-                }
-                
-            }
-            break;
-        }
-        
+    
+    //结束报修按钮
+    if ([self.post_over isEqualToString:@"否"]) {
+        [self.operlist addSubview:self.endMendBtn];
+        self.endMendBtn.frame = CGRectMake(25, 50*mend_menuHeight, 50, 50);
+        mend_menuHeight++;
     }
+    
+    //结束报名
+//    for(int i=0 ; i< self.forum_item.ForumSetlist.count ; i++){
+//        forumSetItem *forumset = [forumSetItem createItemWitparametes:[self.forum_item.ForumSetlist objectAtIndex:i]];
+//        if ([forumset.site_name isEqualToString:@"是否提供报名功能"]) {
+//            if ([forumset.site_value isEqualToString:@"是"]) {
+//                if ([self.open_apply isEqualToString:@"是"] && [self.user_id isEqualToString:self.poster_id] && [self.post_over isEqualToString:@"否"]) {
+//                    [self.operlist addSubview:self.endApplyButton];
+//                    self.endApplyButton.frame = CGRectMake(25, 50*mend_menuHeight, 50, 50);
+//                    mend_menuHeight++;
+//                }
+//                
+//            }
+//            break;
+//        }
+//    }
     //delete button
     if ([self.user_auth containsString:@"/系统管理员/"] || [self.moderator_of_forum_list containsObject:self.forum_id] || [self.user_id isEqualToString:self.poster_id]) {
         [self.operlist addSubview:self.delebutton];
@@ -755,6 +754,7 @@ int mend_screenHeight = 0;
             }
         }
     }
+    
 }
 -(void)loadPosterHead{
     NSString *url = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,self.head_portrait_url];
@@ -829,29 +829,143 @@ int mend_screenHeight = 0;
     
     
 }
--(void)endapply{
-    [StatusTool statusToolEndApplyWithcommunity_id:self.community_id forum_id:self.forum_id post_id:self.post_id user_id:self.user_id Success:^(id object) {
-        //提示结束报名成功
-        MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
-        [self.view addSubview:hud];
-        hud.labelText = @"结束报名成功！";
-        hud.mode = MBProgressHUDModeText;
-        [hud showAnimated:YES whileExecutingBlock:^{
-            sleep(1);
-        } completionBlock:^{
-            [hud removeFromSuperview];
-        }];
-        [self.operlist removeFromSuperview];
-        mend_count = 0;
+//-(void)endapply{
+//    [StatusTool statusToolEndApplyWithcommunity_id:self.community_id forum_id:self.forum_id post_id:self.post_id user_id:self.user_id Success:^(id object) {
+//        //提示结束报名成功
+//        MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+//        [self.view addSubview:hud];
+//        hud.labelText = @"结束报名成功！";
+//        hud.mode = MBProgressHUDModeText;
+//        [hud showAnimated:YES whileExecutingBlock:^{
+//            sleep(1);
+//        } completionBlock:^{
+//            [hud removeFromSuperview];
+//        }];
+//        [self.operlist removeFromSuperview];
+//        mend_count = 0;
+//        
+//    } failurs:^(NSError *error) {
+//        NSLog(@"%@",error);
+//        [self.operlist removeFromSuperview];
+//        
+//    }];
+//    
+//}
+-(void)endMend{
+    //下载评分的类型
+    [StatusTool statusToolGetScoreTypeWithCommunityID:self.community_id ForumID:self.forum_id Success:^(id object) {
         
+        NSLog(@"%@",object[@"score_text"]);
+       //
     } failurs:^(NSError *error) {
-        NSLog(@"%@",error);
-        [self.operlist removeFromSuperview];
-        
+        //
     }];
     
+    //添加蒙版
+    self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.maskView.backgroundColor = [UIColor blackColor];
+    self.maskView.alpha = 0.3;
+    [self.view addSubview:self.maskView];
+    //评价的对话框
+    self.assessView =[[UIView alloc]init];
+    self.assessView.frame = CGRectMake(self.tableview.center.x-150, self.view.frame.size.height, 300, 220);
+    self.assessView.alpha = 0;
+    self.assessView.backgroundColor = [UIColor whiteColor];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.assessView.alpha = 1;
+        self.assessView.frame = CGRectMake(self.tableview.center.x-150, self.tableview.center.y-110, 300, 220);
+        [self.assessView.layer setCornerRadius:self.assessView.frame.size.height/20];
+    }];
+    [self.view addSubview:self.assessView];
+    
+    //推送
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 30)];
+    title.text = @"推送";
+    title.textColor = [UIColor redColor];
+    title.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
+    [self.assessView addSubview:title];
+    //红线
+    UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 300, 2)];
+    [vi setBackgroundColor:[UIColor redColor]];
+    [self.assessView  addSubview:vi];
+    
+    //第一行文字
+    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 70, 130, 50)];
+    tlabel.text = @"请为本次报修打分:";
+    tlabel.textAlignment = UITextAlignmentLeft;
+    tlabel.lineBreakMode = UILineBreakModeWordWrap;
+    tlabel.numberOfLines = 0;
+    tlabel.textColor = [UIColor grayColor];
+    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    [self.assessView addSubview:tlabel];
+    //第一行评价语句
+    UILabel *assessLabel = [[UILabel alloc]initWithFrame:CGRectMake(tlabel.frame.origin.x+30, 70, 130, 15)];
+    assessLabel.text = @"Welcome";
+    assessLabel.textColor = [UIColor grayColor];
+    assessLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    [self.assessView addSubview:assessLabel];
+    //星星
+    RatingBar *ratingBar = [[RatingBar alloc]init];
+    ratingBar.frame = CGRectMake(tlabel.frame.origin.x+30, assessLabel.frame.origin.y+assessLabel.frame.size.height, 180, 35);
+    [ratingBar setImageDeselected:@"unselected" halfSelected:@"halfselected" fullSelected:@"selected" andDelegate:self];
+    [self.assessView addSubview:ratingBar];
+    mend_score = [ratingBar rating];
+    
+    //第二行文字
+    UILabel *flabel = [[UILabel alloc]initWithFrame:CGRectMake(10, tlabel.frame.origin.y+tlabel.frame.size.height, 130, 15)];
+    flabel.text = @"请给我们留言:";
+    flabel.textAlignment = UITextAlignmentLeft;
+    flabel.textColor = [UIColor grayColor];
+    flabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    [self.assessView addSubview:flabel];
+    //留言文本框
+    UITextField *messageField = [[UITextField alloc]init];
+    messageField.frame = CGRectMake(tlabel.frame.origin.x+30, ratingBar.frame.origin.y+ratingBar.frame.size.height, 180, 13);
+    [messageField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self.assessView addSubview:messageField];
+    
+    UIView *vii = [[UIView alloc]initWithFrame:CGRectMake(tlabel.frame.origin.x+30, messageField.frame.origin.y+messageField.frame.size.height, 180, 1)];
+    [vii setBackgroundColor:[UIColor redColor]];
+    [self.assessView  addSubview:vii];
+    
+    //按钮
+    UIButton *sureBtn = [[UIButton alloc]init];
+    sureBtn .frame = CGRectMake(tlabel.frame.origin.x+30, flabel.frame.origin.y+flabel.frame.size.height+10, 145, 40);
+    sureBtn.titleLabel.text = @"确定";
+    sureBtn.backgroundColor = [UIColor lightGrayColor];
+    [sureBtn addTarget:self action:@selector(assessAndClose) forControlEvents:UIControlEventTouchUpInside];
+    [self.assessView addSubview:sureBtn];
+    UIButton *cancelBtn = [[UIButton alloc]init];
+    cancelBtn.frame = CGRectMake(sureBtn.frame.origin.x+10, flabel.frame.origin.y+flabel.frame.size.height+10, 145, 40);
+    cancelBtn.titleLabel.text = @"取消";
+    cancelBtn.backgroundColor = [UIColor lightGrayColor];
+    [cancelBtn addTarget:self action:@selector(justClose) forControlEvents:UIControlEventTouchUpInside];
+    [self.assessView addSubview:cancelBtn];
+
+}
+
+
+-(void)textFieldEditChanged:(UITextField *)textField{
+    
+    self.evaluateStr = textField.text;
+}
+
+-(void)assessAndClose{
+    //发送评分
+    [StatusTool statusToolPostMendScoreWithPostID:self.post_id User_ID:self.user_id Score:[NSString stringWithFormat:@"%f",mend_score] Evaluate:self.evaluateStr Success:^(id object) {
+        if (![[object valueForKey:@"status"] isEqualToString:@""]) {
+             [self justClose];
+        }
+    } failurs:^(NSError *error) {
+        //
+    }];
     
 }
+-(void)justClose{
+    self.assessView.hidden =YES;
+    [self.maskView removeFromSuperview];
+}
+
 -(void)toReplyList{
     
     PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
@@ -1020,7 +1134,8 @@ int mend_screenHeight = 0;
 #pragma mark-----------------------------加载回复详情的数据----------------------------
 -(void)getReplyData{
     for (int i = 0; i < [self.reply_list_item.contentList count]; i++) {
-        self.reply_info_item = [replyInfoItem createItemWitparametes:[self.reply_list_item.contentList objectAtIndex:i]];
+        int t = (int )[self.reply_list_item.contentList count] - i - 1;
+        self.reply_info_item = [replyInfoItem createItemWitparametes:[self.reply_list_item.contentList objectAtIndex:t]];
         if (mend_page_filter == 2) {
             if (![self.replyListArray containsObject:self.reply_info_item]) {
                 [self.replyListArray addObject:self.reply_info_item];

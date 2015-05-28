@@ -228,20 +228,7 @@ NSInteger page_filter;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
      
-     if ([self.forum_item.display_type isEqualToString:@"纵向"]) {
-          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
-          PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-          //全局变量传值
-          PDVC.forum_item = _forum_item;
-          PDVC.forumList = _forumlist;
-          //协议实现页面传值
-          self.delegate = PDVC;
-          if ([self.delegate
-               respondsToSelector:@selector(addpostItem:)]) {
-               [self.delegate addpostItem:_PostItem];
-          }
-          [self.navigationController pushViewController:PDVC animated:YES];
-     }else{
+     if ([self.forum_item.forum_name containsString:@"保修"]) {
           _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
           PostMendDetailViewController *PDVC = [ PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
           //全局变量传值
@@ -255,6 +242,19 @@ NSInteger page_filter;
           }
           [self.navigationController pushViewController:PDVC animated:YES];
 
+     }else{
+          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
+          PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+          //全局变量传值
+          PDVC.forum_item = _forum_item;
+          PDVC.forumList = _forumlist;
+          //协议实现页面传值
+          self.delegate = PDVC;
+          if ([self.delegate
+               respondsToSelector:@selector(addpostItem:)]) {
+               [self.delegate addpostItem:_PostItem];
+          }
+          [self.navigationController pushViewController:PDVC animated:YES];
      }
      
 }

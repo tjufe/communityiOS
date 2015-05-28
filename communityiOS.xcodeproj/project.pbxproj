@@ -115,6 +115,7 @@
 		184B42AA1B098D2A004CD398 /* ReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184B42A81B098D2A004CD398 /* ReplyTableViewCell.xib */; };
 		18628CB81B10750D00E81A8B /* MyReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18628CB61B10750D00E81A8B /* MyReplyTableViewCell.m */; };
 		18628CB91B10750D00E81A8B /* MyReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18628CB71B10750D00E81A8B /* MyReplyTableViewCell.xib */; };
+		188160531B16E97600191342 /* RatingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 188160521B16E97600191342 /* RatingBar.m */; };
 		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
 		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
 		1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E3EC1ADBFAAD008A75B1 /* FirstSettingsViewController.m */; };
@@ -338,6 +339,8 @@
 		18628CB51B10750D00E81A8B /* MyReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyReplyTableViewCell.h; sourceTree = "<group>"; };
 		18628CB61B10750D00E81A8B /* MyReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyReplyTableViewCell.m; sourceTree = "<group>"; };
 		18628CB71B10750D00E81A8B /* MyReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyReplyTableViewCell.xib; sourceTree = "<group>"; };
+		188160511B16E97600191342 /* RatingBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingBar.h; sourceTree = "<group>"; };
+		188160521B16E97600191342 /* RatingBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingBar.m; sourceTree = "<group>"; };
 		188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
 		188933881AFB580F006329D8 /* AuthTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTableViewController.h; sourceTree = "<group>"; };
 		188933891AFB580F006329D8 /* AuthTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTableViewController.m; sourceTree = "<group>"; };
@@ -927,6 +930,8 @@
 				183FCD491B1483CF0050D5B6 /* PostMendDetail.storyboard */,
 				183FCD461B1483AB0050D5B6 /* PostMendDetailViewController.h */,
 				183FCD471B1483AB0050D5B6 /* PostMendDetailViewController.m */,
+				188160511B16E97600191342 /* RatingBar.h */,
+				188160521B16E97600191342 /* RatingBar.m */,
 				13B1C3321AD4D6ED005C179C /* PostEdit.storyboard */,
 				13B1C3331AD4D6ED005C179C /* PostEditViewController.h */,
 				13B1C3341AD4D6ED005C179C /* PostEditViewController.m */,
@@ -1148,6 +1153,7 @@
 				A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */,
 				8EEC48841AD8BAB9002E70DA /* replyInfoItem.m in Sources */,
 				8EF6F38B1B12DE2D00ABAEF9 /* PostInfo.m in Sources */,
+				188160531B16E97600191342 /* RatingBar.m in Sources */,
 				13D247141B0436E400717780 /* ChainToWebView.m in Sources */,
 				8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */,
 				13B1C34F1AD4D6ED005C179C /* PostEditViewController.m in Sources */,
