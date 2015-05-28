@@ -78,7 +78,7 @@
                 <outlet property="replyerHead" destination="YVX-tr-Y24" id="tX0-Sc-VL2"/>
                 <outlet property="replyerNickName" destination="sFf-GJ-8Nd" id="3i7-uP-Fjg"/>
             </connections>
-            <point key="canvasLocation" x="533" y="893"/>
+            <point key="canvasLocation" x="575" y="944"/>
         </tableViewCell>
     </objects>
     <resources>
