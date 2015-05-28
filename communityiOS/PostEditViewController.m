@@ -386,6 +386,7 @@ NSString *num3 ;
         self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
 
         //传值
+       // self.fs.PEVC = self;
         self.fs.select_forum = self.select_forum;
         self.fs.Addpic = self.addpic;
         self.fs.Apply = self.apply;
@@ -450,6 +451,14 @@ NSString *num3 ;
     //刷新指定行
     [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+#pragma mark-----收键盘
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+
 #pragma mark----text
 - (void)textViewDidEndEditing:(UITextView *)textView{
     self.select_post_text = textView.text;
@@ -458,6 +467,7 @@ NSString *num3 ;
     NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
     //刷新指定行
     [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+    [textView resignFirstResponder];//失去响应，收起键盘
 }
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -800,6 +810,7 @@ NSString *num3 ;
     user_status = [user_status stringByAppendingString:self.UserPermission];
         for(int j=0;j<[_forum_list_item count];j++){
             forumItem *fitem = [_forum_list_item objectAtIndex:j];
+            if([fitem.display_type isEqualToString:@"纵向"]){
             if(fitem.ForumSetlist!=nil){
                 for(int m=0;m<[fitem.ForumSetlist count];m++){
                     forumSetItem *fs_item = [forumSetItem createItemWitparametes:[fitem.ForumSetlist objectAtIndex:m]];
@@ -826,7 +837,7 @@ NSString *num3 ;
                     }
                 }
             }
-
+            }
         }
 
 }
@@ -1117,7 +1128,11 @@ NSString *num3 ;
     [self.addchain addSubview:tlabel];
     //qingshuru
     UITextField *ctfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 80, 200, 30)];
-    ctfield.placeholder = @"请输入外联文字";
+    if(self.select_chain_context!=nil&&![self.select_chain_context isEqualToString:@""]){
+        ctfield.text = self.select_chain_context;
+    }else{
+        ctfield.placeholder = @"请输入外联文字";
+    }
     ctfield.borderStyle = UITextBorderStyleNone;
     ctfield.textColor = [UIColor grayColor];
     ctfield.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
@@ -1137,7 +1152,12 @@ NSString *num3 ;
     [self.addchain addSubview:wlabel];
     //qingshuru
     UITextField *wtfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 140, 200, 30)];
-    wtfield.placeholder = @"请输入外联网址";
+    
+    if(self.select_chain_address!=nil&&![self.select_chain_address isEqualToString:@""]){
+        wtfield.text = self.select_chain_address;
+    }else{
+        wtfield.placeholder = @"请输入外联网址";
+    }
     wtfield.borderStyle = UITextBorderStyleNone;
     wtfield.textColor = [UIColor grayColor];
     wtfield.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];

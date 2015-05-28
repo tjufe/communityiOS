@@ -20,5 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img_reply;
 @property (weak, nonatomic) IBOutlet UIImageView *img_apply;
 @property (weak, nonatomic) IBOutlet UILabel *post_apply_num;
+@property (weak, nonatomic) IBOutlet UIImageView *img_finish;
 
 @end

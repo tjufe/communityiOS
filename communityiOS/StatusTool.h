@@ -91,7 +91,10 @@ typedef void(^StatusFailurs)(NSError * error);
 //hmx05221712 加载报修类型
 +(void)statusToolLoadRepairTypeWithCommunityID:(NSString *)community_id ForumID:(NSString *)forum_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
-//发帖子 hmx201505251232
+//发报修帖子 hmx201505251232
 +(void)statusToolNewPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
+//修改报修帖子 lx20150527
++(void)statusToolEditPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
 @end
