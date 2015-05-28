@@ -45,8 +45,11 @@
 @property (nonatomic,strong)NSString *limit_apply_num;
 @property (nonatomic,strong)NSString *poster_auth;
 @property (nonatomic,strong)NSString *apply_enough;
-
-
+@property (nonatomic,strong)NSString *post_text_1;
+@property (nonatomic,strong)NSString *post_text_2;
+@property (nonatomic,strong)NSString *post_text_3;
+@property (nonatomic,strong)NSString *post_text_4;
+@property (nonatomic,strong)NSString *post_text_5;
 
 
 +(postItem *)createItemWitparametes:(NSDictionary*)dic;

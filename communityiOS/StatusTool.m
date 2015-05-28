@@ -436,6 +436,7 @@
     [thirdDic setObject:secondDic forKey:@"param"];
     [thirdDic setObject:@"AddContent" forKey:@"method"];
     
+
     [HttpTool postWithparams:thirdDic success:^(id responseObject) {
         
         success(responseObject);
@@ -445,6 +446,7 @@
         failure(error);
     }];
     
+
 }
 
 //刷新数据库，更新上传图片
@@ -696,7 +698,7 @@
         failure(error);
     }];
 }
-
+//报修发帖
 +(void)statusToolNewPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
     
     NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
@@ -738,6 +740,52 @@
                          failure(error);
                      }];
 }
+//编辑报修帖子 lx20150527
++(void)statusToolEditPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    NSMutableDictionary *firstDic = [[NSMutableDictionary alloc]init];
+    
+    NSString *className = NSStringFromClass([PostInfo class]);
+    const char * cClassName = [className UTF8String];
+    id classM = objc_getClass(cClassName);
+    // i 计数 、  outCount 放我们的属性个数
+    unsigned int outCount, i;
+    // 反射得到属性的个数 、
+    objc_property_t * properties = class_copyPropertyList(classM, &outCount);
+    for (i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        // 获得属性名称
+        NSString * attributeName = [NSString stringWithUTF8String:property_getName(property)];
+        // 获得属性的值
+        id value = [postInfo valueForKey:attributeName];
+        if(value){
+            [firstDic setObject:value forKey:attributeName];
+        }
+    }
+    
+    NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
+    [secondDic  setObject:firstDic forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:secondDic forKey:@"param"];
+    
+    [thirdDic setObject:@"PostEdit" forKey:@"method"];
+    
+    [HttpTool postWithparams:thirdDic  success:^(id responseObject) {
+        // no response
+        NSData *data = [[NSData alloc]initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        editPostItem *edit_post_item = [editPostItem createItemWitparametes:dic];
+        success(edit_post_item);
+        
+    } failure:^(NSError *error) {
+        if (failure == nil) return;
+        failure(error);
+    }];
+
+}
+
+
+
+
 
 //发送报修的评价
 +(void)statusToolPostMendScoreWithPostID:(NSString *)post_id User_ID:(NSString*)user_id Score:(NSString*)score Evaluate:(NSString *)evaluate Success:(StatusSuccess)success failurs:(StatusFailurs)failure{

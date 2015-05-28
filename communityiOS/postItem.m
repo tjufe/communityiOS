@@ -53,7 +53,12 @@
                              @"open_apply":@"open_apply",
                              @"limit_apply_num":@"limit_apply_num",
                              @"poster_auth":@"poster_auth",
-                             @"apply_enough":@"apply_enough"
+                             @"apply_enough":@"apply_enough",
+                             @"post_text_1": @"post_text_1",
+                             @"post_text_2": @"post_text_2",
+                             @"post_text_3": @"post_text_3",
+                             @"post_text_4": @"post_text_4",
+                             @"post_text_5": @"post_text_5"
 
                      
              };
