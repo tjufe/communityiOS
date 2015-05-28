@@ -199,7 +199,12 @@ NSInteger page_filter1 ;
     else{
         cell.setTop.hidden = YES;
     }
-    //
+    //是否结贴
+    if([ptiem1.post_overed isEqualToString:@"是"]){
+        cell.img_finish.hidden = NO;
+    }else{
+        cell.img_finish.hidden = YES;
+    }
     
     return cell;
 }

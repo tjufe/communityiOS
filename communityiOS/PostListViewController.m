@@ -33,6 +33,7 @@
     NSMutableArray *postImageData;
     NSMutableArray *postDateData;
     NSMutableArray *postSetTopData;
+//    NSMutableArray *postFinishData;
     
 }
 //@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
@@ -193,6 +194,12 @@ NSInteger page_filter;
                cell.PostLabel.hidden = YES;
                cell.setTop.hidden = YES;
           }
+     //是否已经结帖
+     if([p.post_overed isEqualToString:@"是"]){
+          cell.img_finish.hidden = NO;
+     }else{
+           cell.img_finish.hidden = YES;
+     }
 
 //     }
     // if([reply_num isKindOfClass:[NSNull class]]){
@@ -893,12 +900,12 @@ NSInteger page_filter;
      }else{
           [postImageData addObject:@""];
      }
+     //取置顶
      if(self.pitem.set_top!=nil){
           [postSetTopData addObject:self.pitem.set_top];
      }else{
           [postSetTopData addObject:@""];
      }
-     
      //取nickname
      if(self.pitem.poster_nickname!=nil){
           [self.Poster_Nic_Array addObject:self.pitem.poster_nickname];
