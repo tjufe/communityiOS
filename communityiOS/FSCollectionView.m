@@ -49,31 +49,17 @@ ForumSelectTableViewCell *cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self removeFromSuperview ];
-
+    select_forum_dropdown_isonshowing = NO;
     forumItem *f = [_select_forum objectAtIndex:indexPath.row];
     _select_forum_id = f.forum_id;
     _select_forum_name = f.forum_name;
     _select_row = indexPath;//选择的索引号
     
 //    i = (int)indexPath.item;
-    
-//    if([f.display_type isEqualToString:@"横向"]){
-//        
-//        NewPostEditViewController *NPEVC = [[NewPostEditViewController alloc]initWithNibName:@"NewPostEditViewController" bundle:nil];
-//        NPEVC.forum_item = f;
-//        [_PEVC.navigationController pushViewController:NPEVC animated:YES];
-//        
-//    }else{
     cell = [_tb cellForRowAtIndexPath:_index];
     cell.fslabel.text = f.forum_name;
 //    [self.maskView removeFromSuperview];
      [self checkForum:f];
-//    }
-    
-    
-
-
-
 
 }
 

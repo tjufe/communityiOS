@@ -57,7 +57,6 @@
 @property (strong,nonatomic)NSString *ISMAINIMG;
 @property (strong,nonatomic)NSString *ISCHECK;
 //@property (strong,nonatomic)NSString *ISNEWPOST;
-@property (nonatomic)BOOL *select_forum_dropdown_isonshowing;//选择板块下拉列表处于正在显示状态
 
 
 @property (strong,nonatomic)NSString *select_forum_id;//选择的版块id
@@ -110,6 +109,8 @@ NSString *num2 ;
 NSString *num3 ;
 float cellHeight = 1000;
 
+
+
 #pragma mark------当点击view的区域就会触发这个事件
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
@@ -129,7 +130,7 @@ float cellHeight = 1000;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    _select_forum_dropdown_isonshowing = NO;
+    select_forum_dropdown_isonshowing = NO;
         if (indexPath.row== 0 ) {
 //        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
             ForumSelectTableViewCell *cell ;
@@ -379,7 +380,7 @@ float cellHeight = 1000;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row==0){
-        if(!_select_forum_dropdown_isonshowing){
+        if(!select_forum_dropdown_isonshowing){
         
         if([_ED_FLAG isEqualToString:@"0"]){
 
@@ -419,19 +420,8 @@ float cellHeight = 1000;
         }];
 
             [self.fs getcelltext:indexPath:self.PEtableview];
+            select_forum_dropdown_isonshowing = YES;
         }
-//
-//
-//            //获取选择的版块
-////            NSMutableArray *select = [self.fs GetSelectedResult];
-////            self.select_forum_id = [select objectAtIndex:1];
-////            self.select_forum_name =[select objectAtIndex:2];
-////            self.select_row = [select objectAtIndex:0];
-//
-////            
-//
-            
-
         }
 
     }else if(indexPath.row==3){//删图片
