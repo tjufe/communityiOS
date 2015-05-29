@@ -20,7 +20,7 @@
 #import "uncheckPostListItem.h"
 #import "MJRefresh.h"//用于列表下拉刷新第三方集成控件
 #import "MBProgressHUD.h" //刷新的进度条
-
+#import "ViewController.h"
 #import "APIAddress.h"
 
 #import "NewPostEditViewController.h"
@@ -249,9 +249,14 @@ NSInteger page_filter;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+     _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
      
-     if ([self.forum_item.display_type isEqualToString:@"纵向"]) {
-          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
+     if(![_filter_flag isEqualToString:@"全部"]){
+          [self getForumItem:_PostItem];
+     }
+
+     if (![_forum_item.forum_name containsString:@"报修"]) {
+         
           PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
           //全局变量传值
           PDVC.forum_item = _forum_item;
@@ -264,7 +269,7 @@ NSInteger page_filter;
           }
           [self.navigationController pushViewController:PDVC animated:YES];
      }else{
-          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
+//          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
           PostMendDetailViewController *PDVC = [ PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
           //全局变量传值
           PDVC.forum_item = _forum_item;
@@ -279,8 +284,21 @@ NSInteger page_filter;
 
      }
      
+     
 }
 
+
+#pragma mark-----我的话题 获取每个帖子的forumitem
+-(void)getForumItem:(postItem *)postItem{
+     NSArray *forum = [ViewController getForumList];
+     for(int i=0;i<[forum count];i++){
+          forumItem *f = [forum objectAtIndex:i];
+          if([postItem.belong_forum_id isEqualToString:f.forum_id]){
+               _forum_item = f;
+               break;
+          }
+     }
+}
 
 #pragma mark----下拉刷新
 -(void)headerRereshing{
@@ -1131,7 +1149,7 @@ NSInteger page_filter;
 
 #pragma mark------当前版块下发帖
 -(void)NewPost{
-     if ([self.forum_item.display_type isEqualToString:@"纵向"]) {
+     if (![_forum_item.forum_name containsString:@"报修"]) {
          PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
          PEVC.forum_item = _forum_item;
          PEVC.ED_FLAG =@"1";// 当前版块下发帖

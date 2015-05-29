@@ -38,8 +38,9 @@ ForumSelectTableViewCell *cell;
     forumItem *f =[_select_forum objectAtIndex:indexPath.row];
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell11" forIndexPath:indexPath ];
       //cell里面的控件
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 30)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width/2-100, 5, 200, 30)];
     label.text = f.forum_name ;
+    label.textAlignment = UITextAlignmentCenter;
     label.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [cell addSubview:label];
     cell.backgroundColor = [UIColor colorWithRed:246.0/255 green:246.0/255 blue:246.0/255 alpha:1];
@@ -179,10 +180,10 @@ ForumSelectTableViewCell *cell;
 }
 
 
-//定义每个collectionview的cell大小
+////定义每个collectionview的cell大小
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
-//    return CGSizeMake(100, 40);
+//    return CGSizeMake(200, 50);
 //}
 
 /*

@@ -141,7 +141,7 @@ NSArray *forum;
 
     [self initSlide];
     [self addTimer];
-    [self reloadData];
+//    [self reloadData];
     [self autoLogin];
     
     [self clearExtraLine:self.mainTableView];

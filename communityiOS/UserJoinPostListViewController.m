@@ -17,7 +17,7 @@
 #import "postListItem.h"
 #import "postItem.h"
 #import "PostTableViewCell.h"
-
+#import "PostMendDetailViewController.h"
 #import "forumItem.h"
 #import "ViewController.h"
 #import "forumSetItem.h"
@@ -58,6 +58,7 @@ NSInteger page1 ;//页数
 NSInteger rows1 ;//分页请求行数
 NSInteger page_filter1 ;
 
+int pop_code;
 
 #pragma mark------切换我报名的
 - (IBAction)isApply:(id)sender {
@@ -212,6 +213,7 @@ NSInteger page_filter1 ;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if(![self.forumitem.forum_name isEqualToString:@"报修"]){
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
     //全局变量传值
     PDVC.forum_item = self.forumitem;
@@ -225,6 +227,20 @@ NSInteger page_filter1 ;
     
     
     [self.navigationController pushViewController:PDVC animated:YES];
+    }else{
+        PostMendDetailViewController *PDVC = [ PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
+       PDVC.forum_item = self.forumitem;
+        self.delegate = PDVC;
+        if ([self.delegate
+             respondsToSelector:@selector(addpostItem2:)]) {
+            
+            [self.delegate addpostItem2:[postListArray objectAtIndex:indexPath.row]];
+        }
+        
+        
+        [self.navigationController pushViewController:PDVC animated:YES];
+
+    }
 }
 
 
@@ -317,12 +333,17 @@ NSInteger page_filter1 ;
     [self.table addFooterWithTarget:self action:@selector(footerRereshing)];
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:(BOOL)animated];
+    if(pop_code==1){
+        [self loadData];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    pop_code = 1;
     //使下一页的导航栏左边没有文字
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
