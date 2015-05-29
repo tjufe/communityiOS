@@ -174,7 +174,8 @@ NSArray *forum;
         for(SlideInfoItem *row in array){
             if(i<totalCount){
                 UIImageView *imageView = [[UIImageView alloc] init];
-                imageView.contentMode = UIViewContentModeScaleAspectFit;
+//                imageView.contentMode = UIViewContentModeScaleAspectFit;
+                imageView.contentMode = UIViewContentModeScaleAspectFill;
                 //        图片X
                 CGFloat imageX = i * imageW;
                 //        设置frame
@@ -295,7 +296,7 @@ NSArray *forum;
 
 #pragma mark --开启定时器
 - (void)addTimer{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
@@ -720,7 +721,7 @@ NSArray *forum;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
-    CGFloat iconsCountPerPage = 3.5;
+    CGFloat iconsCountPerPage = 4;//一页中显示几个快速通道入口
     CGFloat w = self.view.frame.size.width;
     CGFloat h = 80;
     UIScrollView *scrollView = [[UIScrollView alloc]init];

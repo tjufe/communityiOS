@@ -177,6 +177,21 @@ NSInteger page_filter;
                cell.setTop.hidden = NO;
           }
           else{
+//               CGRect a = cell.PostLabel.frame;
+//               //201505281322hmx
+//               cell.PostLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//               cell.PostLabel.frame = CGRectMake(8, cell.PostLabel.frame.origin.y, cell.PostLabel.frame.size.width, cell.PostLabel.frame.size.height);
+//               CGRect b = cell.PostLabel.frame;
+//               cell.PostLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//               cell.setTop.translatesAutoresizingMaskIntoConstraints = NO;
+////               [cell.PostLabel removeConstraint:cell.postLabelLayoutConstraint];
+//               [cell.PostLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:cell.PostLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:cell.setTop attribute:NSLayoutAttributeRight multiplier:1 constant:-21]];
+               //201505281322hmx
+               UILabel *l = [[UILabel alloc]initWithFrame:CGRectMake(8, 8, cell.PostLabel.frame.size.width, cell.PostLabel.frame.size.height)];
+               l.text = cell.PostLabel.text;
+               l.font = cell.PostLabel.font;
+               [cell addSubview:l];
+               cell.PostLabel.hidden = YES;
                cell.setTop.hidden = YES;
           }
      //是否已经结帖
