@@ -85,6 +85,10 @@
 @property (strong,nonatomic) NSString *select_need_check;//上传的帖子是否需要审核
 @property (strong,nonatomic) NSString *select_checked;//上传的帖子审核状态
 @property (strong,nonatomic) NSMutableDictionary *inputArray;//用来存放输入的控件
+@property (strong,nonatomic) UITextField *title_tf;
+
+
+
 
 @end
 
@@ -103,7 +107,7 @@ NSArray *third_;
 NSString *num1 ;
 NSString *num2 ;
 NSString *num3 ;
-
+float cellHeight = 1000;
 
 #pragma mark------当点击view的区域就会触发这个事件
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -125,7 +129,8 @@ NSString *num3 ;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         if (indexPath.row== 0 ) {
-        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
+//        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
+            ForumSelectTableViewCell *cell ;
             
         
         if (!cell) {
@@ -146,7 +151,8 @@ NSString *num3 ;
         return cell;
        
       }else if (indexPath.row== 1 ) {
-        TitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+//        TitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+          TitleTableViewCell *cell ;
 //          TitleTableViewCell *cell;
         
             if (!cell) {
@@ -154,6 +160,7 @@ NSString *num3 ;
             }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
+          self.title_tf = cell.Title;
           cell.Title.delegate = self;
                 if([_ED_FLAG isEqualToString:@"2"]){
                     //编辑帖子
@@ -169,28 +176,29 @@ NSString *num3 ;
         return cell;
 
     }else if(indexPath.row==2){
-        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
+//        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
+        
 
-
-        if (!cell) {
-            cell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
+        if (!self.textcell) {
+            self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
         }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
             //flag如果是2，表示编辑原有帖子
             if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
-                cell.textview.text = _post_item.post_text;
+                self.textcell.textview.text = _post_item.post_text;
             }
-        
+//        cellHeight = self.textcell.textview.frame.size.height;
 //            }else{
 //                cell.textview.text = self.select_post_text;
 //            }
 
         
-        return cell;
+        return self.textcell;
 
     }else if(indexPath.row==3){
-        PostImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
+//        PostImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
+        PostImageTableViewCell *cell;
         if(!cell){
             cell = [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellEditingStyleNone;
@@ -209,16 +217,11 @@ NSString *num3 ;
                         cell.MainImage.image = self.select_image;
                     }
                 }else{
-                    if(!self.select_image){
                     cell.MainImage.hidden = NO;
                     [cell.MainImage sd_setImageWithURL:iurl placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                         cell.MainImage.image = image;
                     }];
-                    }
-                    else{
-                       cell.MainImage.hidden = NO;
-                       cell.MainImage.image = self.select_image;
-                    }
+                    
                 }
                 
             }else{
@@ -242,7 +245,8 @@ NSString *num3 ;
         
         return cell;
     }else if (indexPath.row==4){
-        EditChainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
+//        EditChainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
+        EditChainTableViewCell *cell;
         if(!cell){
             cell = [[[NSBundle mainBundle]loadNibNamed:@"EditChainTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellEditingStyleNone;
@@ -301,7 +305,8 @@ NSString *num3 ;
         }
         return cell;
     }else{
-        EditApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell5"];
+//        EditApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell5"];
+        EditApplyTableViewCell *cell;
         if(!cell){
             cell = [[[NSBundle mainBundle]loadNibNamed:@"EditApplyTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellEditingStyleNone;
@@ -356,12 +361,12 @@ NSString *num3 ;
     }else if(indexPath.row ==1){
         return 50;
     }else if(indexPath.row ==2){
-    //    return self.PEtableview.frame.size.height - 160;
-        return 150;
+     //   return self.PEtableview.frame.size.height - 160;
+        return cellHeight;
     }else if(indexPath.row ==3){
         return 150;
     }else if(indexPath.row ==4){
-        return 50;
+        return 100;
     }else if(indexPath.row ==5){
         return 50;
     }else{
@@ -380,10 +385,10 @@ NSString *num3 ;
         UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
         flowlayout.minimumInteritemSpacing = 0;
         flowlayout.minimumLineSpacing = 2;
-        [flowlayout setItemSize:CGSizeMake(100, 40)];
+        [flowlayout setItemSize:CGSizeMake(200, 40)];
         
         //初始化colletionview
-        self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
+        self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 200, [self.select_forum count]*40) collectionViewLayout:flowlayout];
 
         //传值
        // self.fs.PEVC = self;
@@ -406,7 +411,7 @@ NSString *num3 ;
         [self.PEtableview addSubview:self.fs];
         
         [UIView animateWithDuration:0.5 animations:^{
-            self.fs.frame= CGRectMake(self.view.frame.size.width/2 - 100, 50, 202, 200) ;
+            self.fs.frame= CGRectMake(self.view.frame.size.width/2 - 100, 50, 200, [self.select_forum count]*40) ;
             self.fs.alpha = 1;
             [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
         }];
@@ -444,16 +449,25 @@ NSString *num3 ;
 
 #pragma mark-----title
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if(textField == self.title_tf){
     self.select_post_title = textField.text;
     //显示在UI中
     NSIndexPath *index = [NSIndexPath indexPathForRow:1 inSection:0];
     NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
     //刷新指定行
     [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 #pragma mark-----收键盘
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
+//    UITextField *chainName= [self.inputArray valueForKey:@"ChainContext"];
+//    UITextField *chainText = [self.inputArray valueForKey:@"ChainAddress"];
+//    if(chainName||chainText){
+//        [chainText resignFirstResponder];
+//        [chainName resignFirstResponder];
+//    }
     return YES;
 }
 
@@ -579,8 +593,8 @@ NSString *num3 ;
     NSIndexPath *index = [NSIndexPath indexPathForRow:3 inSection:0];
     NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
     //刷新指定行
-    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
-   // [self.PEtableview reloadData];
+//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.PEtableview reloadData];
     //上传图片
     [self uploadinitWithImage:chosenImage];
     
@@ -656,7 +670,7 @@ NSString *num3 ;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    cellHeight = self.PEtableview.frame.size.height - 160;
     //初始化
     self.select_image = [[UIImage alloc]init];
     self.select_open_apply = [[NSString alloc]init];
@@ -891,18 +905,22 @@ NSString *num3 ;
             [StatusTool statusToolNewPostWithcID:self.communityID fID:self.select_forum_id PosterID:self.userID postTitle:self.select_post_title postText:self.select_post_text imgURL:self.select_image_name chain:self.select_chain chainName:self.select_chain_context chainURL:self.select_chain_address apply:self.select_open_apply limApplyNum:self.select_limit_apply_num needCheck:self.select_need_check Checked:self.select_checked Success:^(id object) {
                 newPostItem *new = (newPostItem *)object;
                 if([new.msg isEqualToString:@"发送成功"]){
-                UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"发布成功！" message:@"请耐心等待审核..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                alert1.delegate = self;
+                    UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"发布成功！" message:nil delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                    if([self.select_need_check isEqualToString:@"是"]){
+                        alert1.message =@"请耐心等待审核...";
+                    }
+                                    alert1.delegate = self;
+                    
                 [alert1 show];
                 self.alert_flag = @"s";
                 }else{
-                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                     alert2.delegate = self;
                     [alert2 show];
                     self.alert_flag = @"f";
                 }
             } failurs:^(NSError *error) {
-                UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"网络异常..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"网络异常..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                 alert2.delegate = self;
                  [alert2 show];
                 self.alert_flag = @"f";
@@ -911,19 +929,23 @@ NSString *num3 ;
                 [StatusTool statusToolEditPostWithcID:self.communityID fID:self.select_forum_id postID:self.select_post_id PosterID:self.select_poster_id postTitle:self.select_post_title postText:self.select_post_text imgURL:self.select_image_name chain:self.select_chain chainName:self.select_chain_context chainURL:self.select_chain_address apply:self.select_open_apply limApplyNum:self.select_limit_apply_num needCheck:self.select_need_check Checked:self.select_checked Success:^(id object) {
                     editPostItem *new = (editPostItem *)object;
                     if([new.msg isEqualToString:@"编辑成功"]){
-                        UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"编辑成功！" message:@"请耐心等待审核..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"已发布！" message: nil delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                        
+                        if([self.select_need_check isEqualToString:@"是"]){
+                            alert1.message = @"请耐心等待审核...";
+                        }
                         alert1.delegate = self;
                         [alert1 show];
                         self.alert_flag = @"s";
                     }else{
-                        UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                         alert2.delegate = self;
                         [alert2 show];
                         self.alert_flag = @"f";
                     }
 
                 } failurs:^(NSError *error) {
-                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"编辑失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"编辑失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                     alert2.delegate = self;
                     [alert2 show];
                     self.alert_flag = @"f";
@@ -1075,6 +1097,13 @@ NSString *num3 ;
 //    UIView *addpic = [[UIView alloc]initWithFrame:CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 220)];
 //    addpic.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
 //    [self.PEtableview addSubview:addpic];
+    
+    //改变cell的高度需要reload该cell
+    CGSize size = CGSizeMake(300, 1000);
+    CGSize labelSize = [self.textcell.textview.text sizeWithFont:self.textcell.textview.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+    cellHeight = labelSize.height+10;
+    [self.PEtableview reloadData];
+    
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -1092,6 +1121,10 @@ NSString *num3 ;
     self.maskview.alpha = 0.3;
     [self.view addSubview:self.maskview];
     
+    //添加点击手势
+    self.maskview.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
+    [self.maskview addGestureRecognizer:singleTap];
     
     self.addchain =[[UIView alloc]init];
     
@@ -1128,6 +1161,7 @@ NSString *num3 ;
     [self.addchain addSubview:tlabel];
     //qingshuru
     UITextField *ctfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 80, 200, 30)];
+    ctfield.delegate = self;
     if(self.select_chain_context!=nil&&![self.select_chain_context isEqualToString:@""]){
         ctfield.text = self.select_chain_context;
     }else{
@@ -1152,6 +1186,7 @@ NSString *num3 ;
     [self.addchain addSubview:wlabel];
     //qingshuru
     UITextField *wtfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 140, 200, 30)];
+    wtfield.delegate = self;
     
     if(self.select_chain_address!=nil&&![self.select_chain_address isEqualToString:@""]){
         wtfield.text = self.select_chain_address;
@@ -1265,6 +1300,12 @@ NSString *num3 ;
     self.maskview.backgroundColor = [UIColor blackColor];
     self.maskview.alpha = 0.3;
     [self.view addSubview:self.maskview];
+    
+    //添加点击手势
+    self.maskview.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
+    [self.maskview addGestureRecognizer:singleTap];
+
 
     self.addapply =[[UIView alloc]init];
     self.addapply.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height+100, 300, 330);
@@ -1276,7 +1317,6 @@ NSString *num3 ;
     }];
     self.addapply.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.addapply];
-    
     
     
     //baoming
@@ -1350,7 +1390,11 @@ NSString *num3 ;
 //    UISwitch *switch1 = [self.inputArray valueForKey:@"Apply"];
 //     [[NSUserDefaults standardUserDefaults]setBool:switch1.on forKey:@"didRember"];
 //}
-
+-(void)closeView{
+    [self.addapply removeFromSuperview];
+    [self.addchain removeFromSuperview];
+    [self.maskview removeFromSuperview];
+}
 
 #pragma mark------添加外连确定 20150515 lx
 -(void)surea{

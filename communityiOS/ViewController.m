@@ -141,7 +141,7 @@ NSArray *forum;
 
     [self initSlide];
     [self addTimer];
-    [self reloadData];
+//    [self reloadData];
     [self autoLogin];
     
     [self clearExtraLine:self.mainTableView];
@@ -508,6 +508,7 @@ NSArray *forum;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(BOOL)animated];
     [self reloadUserStateBarUI];//刷新用户状态栏UI
+    [self reloadData];
 }
 
 #pragma mark --处理自动登录hmx

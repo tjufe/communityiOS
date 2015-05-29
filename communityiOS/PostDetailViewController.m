@@ -194,7 +194,7 @@ bool isModerator = NO;//是否是版主
         CGSize size = CGSizeMake(300, 1000);
         CGSize labelSize = [self.postTextCell.postText.text sizeWithFont:self.postTextCell.postText.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
             cellheight = labelSize.height+10;
-            NSLog(@"~~~~~~~~~~~~~~~~~%f",cellheight);
+         //   NSLog(@"~~~~~~~~~~~~~~~~~%f",cellheight);
             return self.postTextCell;
 
         }else if(indexPath.row == 2){
@@ -962,7 +962,8 @@ bool isModerator = NO;//是否是版主
 //            PLVC.forum_item = _forum_item;
             
 //        [self.navigationController pushViewController:PLVC animated:YES];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            //0527
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
