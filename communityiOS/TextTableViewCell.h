@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GCPlaceholderTextView.h"
 //#import <Foundation/Foundation.h>
 //@protocal textheight<NSObject>
 //@end
 
 @interface TextTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet GCPlaceholderTextView *textview;
+
+@property (weak, nonatomic) IBOutlet UITextView *textview;
 
 
 

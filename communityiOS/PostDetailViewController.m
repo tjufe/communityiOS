@@ -93,7 +93,7 @@
 
 @implementation PostDetailViewController
 int count=0;//用于菜单点击计数
-int pop_code;//用于跳转标志
+
 
 int alert = 0;//用于警告框UIAlertView计数
 
@@ -363,6 +363,7 @@ bool isModerator = NO;//是否是版主
             self.post_item = (postItem *)object;
             [self setData_2];
             [self.tableview reloadData];
+            [self initUI];
         } failurs:^(NSError *error) {
             //
         }];
@@ -828,6 +829,8 @@ bool isModerator = NO;//是否是版主
 
 }
 -(void)endapply{
+    
+    pop_code = 1;
     [StatusTool statusToolEndApplyWithcommunity_id:self.community_id forum_id:self.forum_id post_id:self.post_id user_id:self.user_id Success:^(id object) {
         //提示结束报名成功
         MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
