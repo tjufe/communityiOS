@@ -14,7 +14,7 @@
 extern NSString *const site_addchain;
 extern NSString *const site_addapply;
 extern NSString *const site_addmainimg;
-
+extern NSString *const site_reply_user;
 extern NSString *const site_newpost_user;
 extern NSString *const site_isreply;
 extern NSString *const site_ischeck;

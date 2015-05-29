@@ -25,7 +25,7 @@
 #import "APIClient.h"
 #import "loginItem.h"
 #import "UIImageView+WebCache.h"
-#import "RegistViewController.h"
+//#import "RegistViewController.h"
 
 #import "SlideInfoItem.h"
 #import "PostDetailViewController.h"
@@ -499,7 +499,7 @@ NSArray *forum;
     [self.navigationController pushViewController:PEVC animated:YES];
     }else{
         if([self.UserPermission isEqualToString:@""]){
-            RegistViewController *RVC = [RegistViewController createFromStoryboardName:@"Login" withIdentifier:@"regist"];
+            LoginViewController *RVC = [LoginViewController createFromStoryboardName:@"Login" withIdentifier:@"Login"];
             [self.navigationController pushViewController:RVC animated:YES];
         }
     }

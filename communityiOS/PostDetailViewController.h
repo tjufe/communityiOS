@@ -11,7 +11,7 @@
 #import "postItem.h"
 #import "forumSetItem.h"
 
-
+int pop_code;//用于跳转标志
 
 
 @interface PostDetailViewController : UIViewController
