@@ -134,7 +134,6 @@ float cellHeight = 1000;
         if (indexPath.row== 0 ) {
 //        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
             ForumSelectTableViewCell *cell ;
-            
         
         if (!cell) {
             cell= [[[NSBundle mainBundle]loadNibNamed:@"ForumSelectTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -179,23 +178,23 @@ float cellHeight = 1000;
         return cell;
 
     }else if(indexPath.row==2){
-//        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
-        
-
+        //        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
         if (!self.textcell) {
             self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            self.textcell.textview.delegate = self;
+            self.textcell.textview.scrollEnabled = NO;
         }
-            self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
-            //flag如果是2，表示编辑原有帖子
-            if([_ED_FLAG isEqualToString:@"2"]){
-                //编辑帖子
-                self.textcell.textview.text = _post_item.post_text;
-            }
-//        cellHeight = self.textcell.textview.frame.size.height;
-//            }else{
-//                cell.textview.text = self.select_post_text;
-//            }
-
+        self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //flag如果是2，表示编辑原有帖子
+        if([_ED_FLAG isEqualToString:@"2"]){
+            //编辑帖子
+            self.textcell.textview.text = _post_item.post_text;
+        }
+        //        cellHeight = self.textcell.textview.frame.size.height;
+        //            }else{
+        //                cell.textview.text = self.select_post_text;
+        //            }
+        
         
         return self.textcell;
 
@@ -367,7 +366,7 @@ float cellHeight = 1000;
      //   return self.PEtableview.frame.size.height - 160;
         return cellHeight;
     }else if(indexPath.row ==3){
-        return 150;
+        return 180;
     }else if(indexPath.row ==4){
         return 100;
     }else if(indexPath.row ==5){
@@ -480,11 +479,18 @@ float cellHeight = 1000;
 - (void)textViewDidChange:(UITextView *)textView
 {
     self.select_post_text = textView.text;
-    //显示在UI中
-    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
-    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
+    CGSize size = CGSizeMake(300, 1000);
+    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+    cellHeight = labelSize.height+10;
+    [self.PEtableview beginUpdates];
+    [self.PEtableview endUpdates];
+
+//    //显示在UI中
+//    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
+//    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
     //刷新指定行
-    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [self.PEtableview reloadData];
 }
 
 
@@ -1096,7 +1102,7 @@ float cellHeight = 1000;
     CGSize size = CGSizeMake(300, 1000);
     CGSize labelSize = [self.textcell.textview.text sizeWithFont:self.textcell.textview.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
     cellHeight = labelSize.height+10;
-    [self.PEtableview reloadData];
+//    [self.PEtableview reloadData];
     
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;

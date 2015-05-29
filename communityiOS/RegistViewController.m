@@ -121,7 +121,7 @@ NSString *strSecondPassword;
 
 #pragma mark --显示登录失败报错hmx
 - (void) showErrMsg: (NSString *)loginErrorMessage {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败" message:loginErrorMessage delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册失败" message:loginErrorMessage delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
     [alert show];
 }
 
