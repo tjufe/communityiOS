@@ -45,7 +45,7 @@
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIPickerView *pickview;
 @property (strong, nonatomic) TextTableViewCell *textcell;
-
+@property (strong,nonatomic) UIBarButtonItem *rightItem;//导航条右侧按钮
 
 @property (strong,nonatomic)NSMutableArray *forumSetList;//帖子设置数组
 @property (strong,nonatomic)forumSetItem *forum_set_item;//帖子的设置
@@ -801,8 +801,8 @@ bool edit;
 //    TextTableViewCell *ttvc = [[TextTableViewCell alloc]init];
     
     //加导航栏右侧按钮
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStyleBordered  target:self action:@selector(NewPost2Web)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    self.rightItem = [[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStyleBordered  target:self action:@selector(NewPost2Web)];
+    self.navigationItem.rightBarButtonItem = self.rightItem;
 
     //设置username输入文本框的监听
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification  object:nil];
@@ -925,6 +925,7 @@ bool edit;
 #pragma mark------发帖 20150515 lx
 -(void)NewPost2Web{
     
+    self.rightItem.enabled = NO;//点完后不可点击
     if([_ED_FLAG isEqualToString:@"0"]){//首页直接发帖
         //版块号
         self.select_forum_id = self.fs.select_forum_id;
@@ -985,17 +986,20 @@ bool edit;
                     
                 [alert1 show];
                 self.alert_flag = @"s";
+                    
                 }else{
                     UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                     alert2.delegate = self;
                     [alert2 show];
                     self.alert_flag = @"f";
+                    self.rightItem.enabled = YES;
                 }
             } failurs:^(NSError *error) {
                 UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"网络异常..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                 alert2.delegate = self;
                  [alert2 show];
                 self.alert_flag = @"f";
+                self.rightItem.enabled = YES;
             }];
             }else{//编辑帖子
                 [StatusTool statusToolEditPostWithcID:self.communityID fID:self.select_forum_id postID:self.select_post_id PosterID:self.select_poster_id postTitle:self.select_post_title postText:self.select_post_text imgURL:self.select_image_name chain:self.select_chain chainName:self.select_chain_context chainURL:self.select_chain_address apply:self.select_open_apply limApplyNum:self.select_limit_apply_num needCheck:self.select_need_check Checked:self.select_checked Success:^(id object) {
@@ -1009,11 +1013,13 @@ bool edit;
                         alert1.delegate = self;
                         [alert1 show];
                         self.alert_flag = @"s";
+                        
                     }else{
                         UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                         alert2.delegate = self;
                         [alert2 show];
                         self.alert_flag = @"f";
+                        self.rightItem.enabled = YES;
                     }
 
                 } failurs:^(NSError *error) {
@@ -1021,6 +1027,7 @@ bool edit;
                     alert2.delegate = self;
                     [alert2 show];
                     self.alert_flag = @"f";
+                    self.rightItem.enabled = YES;
                 }];
                 
             }
