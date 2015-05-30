@@ -289,6 +289,7 @@ NSInteger page_filter;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
      _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
      
+
      if(![_filter_flag isEqualToString:@"全部"]){
           [self getForumItem:_PostItem];
      }
@@ -306,7 +307,9 @@ NSInteger page_filter;
                [self.delegate addpostItem:_PostItem];
           }
           [self.navigationController pushViewController:PDVC animated:YES];
+
      }else{
+
 //          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
           PostMendDetailViewController *PDVC = [ PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
           //全局变量传值
@@ -319,7 +322,6 @@ NSInteger page_filter;
                [self.delegate addpostItem:_PostItem];
           }
           [self.navigationController pushViewController:PDVC animated:YES];
-
      }
      
      
