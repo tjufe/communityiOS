@@ -224,7 +224,8 @@ NSInteger page_filter;
           [cell addSubview:i2];
           x += 21;
      }
-     UILabel *l = [[UILabel alloc]initWithFrame:CGRectMake(x, 8, cell.PostLabel.frame.size.width, 42)];
+//     UILabel *l = [[UILabel alloc]initWithFrame:CGRectMake(x, 8, cell.PostLabel.frame.size.width, 42)];
+     UILabel *l = [[UILabel alloc]initWithFrame:CGRectMake(x, 8, self.navigationController.view.frame.size.width - 132, 42)];
      l.numberOfLines = 2;
      l.text = cell.PostLabel.text;
      l.font = cell.PostLabel.font;
