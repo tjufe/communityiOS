@@ -121,6 +121,7 @@
 @property (strong,nonatomic)NSMutableArray *scoreTypeList;
 @property (strong,nonatomic)RatingBar *ratingBar;
 @property (strong,nonatomic)UILabel *assessLabel;
+@property (strong,nonatomic)UITextField *messageField;
 
 - (IBAction)ViewTouchDown:(id)sender;
 
@@ -312,6 +313,9 @@ int starAmount = 0;
                 self.evaluateCell.messageLabel.text = self.post_text5;
 
             }
+            if (![self.post_item.post_text_4 isEqualToString:@""]||![self.post_item.post_text_5 isEqualToString:@""]) {
+                self.evaluateCell.hidden = NO;
+            }
             
             return self.evaluateCell;
         
@@ -324,6 +328,8 @@ int starAmount = 0;
                     if(!cell){
                         cell = [[[NSBundle mainBundle]loadNibNamed:@"MyMendReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
                     }
+                    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, self.navigationController.view.frame.size.width, cell.frame.size.height);
+
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     //填装数据
                     cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-6];
@@ -489,6 +495,7 @@ int starAmount = 0;
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
     gesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gesture];
+    [self.assessView addGestureRecognizer:gesture];
     //设置textFeild代理
     self.replyContentField.delegate = self;
     //获取屏幕高度
@@ -535,6 +542,7 @@ int starAmount = 0;
 -(void)hidenKeyboard
 {
     [self.replyContentField resignFirstResponder];
+    [self.messageField resignFirstResponder];
 }
 
 
@@ -921,6 +929,7 @@ int starAmount = 0;
 //    }];
 //    
 //}
+
 -(void)endMend{
     
     //添加蒙版
@@ -989,13 +998,13 @@ int starAmount = 0;
     flabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:17];
     [self.assessView addSubview:flabel];
     //留言文本框
-    UITextField *messageField = [[UITextField alloc]init];
-    messageField.frame = CGRectMake(flabel.frame.origin.x+flabel.frame.size.width, flabel.frame.origin.y, 180, 30);
-    [messageField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+    self.messageField = [[UITextField alloc]init];
+    self.messageField.frame = CGRectMake(flabel.frame.origin.x+flabel.frame.size.width, flabel.frame.origin.y, 180, 30);
+    [self.messageField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     // messageField.backgroundColor = [UIColor lightGrayColor];
-    [self.assessView addSubview:messageField];
+    [self.assessView addSubview:self.messageField];
     //留言框黑线
-    UIView *textLine = [[UIView alloc]initWithFrame:CGRectMake(flabel.frame.origin.x+flabel.frame.size.width, messageField.frame.origin.y+messageField.frame.size.height+5, 180, 0.5)];
+    UIView *textLine = [[UIView alloc]initWithFrame:CGRectMake(flabel.frame.origin.x+flabel.frame.size.width, self.messageField.frame.origin.y+self.messageField.frame.size.height+5, 180, 0.5)];
     [textLine setBackgroundColor:[UIColor blackColor]];
     [self.assessView  addSubview:textLine];
     

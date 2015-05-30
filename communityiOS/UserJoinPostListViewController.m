@@ -350,7 +350,7 @@ int pop_code;
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
     
     page1 = 1;
-    rows1 = 5;
+    rows1 = 10;
     page_filter1 = 0;
     
 
@@ -370,7 +370,7 @@ int pop_code;
     //初始化table刷新控件
     [self setupRefresh];
     //请求table数据
-    [self loadData];
+//    [self loadData];
 
 }
 
@@ -404,6 +404,7 @@ int pop_code;
         }else{
             if(page_filter1==0){
             //    self.table.hidden = YES;
+                [self.table reloadData];
             }else{//刷新完成，已无更多
                 page1--;
                 //提示
