@@ -91,6 +91,9 @@ int screenHeight = 0;
         }
          
     }
+    if([self.UserPermission isEqualToString:@""]){
+        self.havePower = false;
+    }
     
     if(!self.havePower){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"对不起，您无权回复！" message:nil delegate:self cancelButtonTitle:@"去实名认证" otherButtonTitles:@"取消", nil];
