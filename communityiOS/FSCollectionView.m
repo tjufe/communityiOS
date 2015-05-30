@@ -38,8 +38,9 @@ ForumSelectTableViewCell *cell;
     forumItem *f =[_select_forum objectAtIndex:indexPath.row];
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell11" forIndexPath:indexPath ];
       //cell里面的控件
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 200, 30)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width/2-100, 5, 200, 30)];
     label.text = f.forum_name ;
+    label.textAlignment = UITextAlignmentCenter;
     label.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [cell addSubview:label];
     cell.backgroundColor = [UIColor colorWithRed:246.0/255 green:246.0/255 blue:246.0/255 alpha:1];
@@ -48,31 +49,17 @@ ForumSelectTableViewCell *cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self removeFromSuperview ];
-
+    select_forum_dropdown_isonshowing = NO;
     forumItem *f = [_select_forum objectAtIndex:indexPath.row];
     _select_forum_id = f.forum_id;
     _select_forum_name = f.forum_name;
     _select_row = indexPath;//选择的索引号
     
 //    i = (int)indexPath.item;
-    
-//    if([f.display_type isEqualToString:@"横向"]){
-//        
-//        NewPostEditViewController *NPEVC = [[NewPostEditViewController alloc]initWithNibName:@"NewPostEditViewController" bundle:nil];
-//        NPEVC.forum_item = f;
-//        [_PEVC.navigationController pushViewController:NPEVC animated:YES];
-//        
-//    }else{
     cell = [_tb cellForRowAtIndexPath:_index];
     cell.fslabel.text = f.forum_name;
 //    [self.maskView removeFromSuperview];
      [self checkForum:f];
-//    }
-    
-    
-
-
-
 
 }
 
@@ -179,10 +166,10 @@ ForumSelectTableViewCell *cell;
 }
 
 
-//定义每个collectionview的cell大小
+////定义每个collectionview的cell大小
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
-//    return CGSizeMake(100, 40);
+//    return CGSizeMake(200, 50);
 //}
 
 /*

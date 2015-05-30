@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "725"
             endingLineNumber = "725"
-            landmarkName = "-MenuAppear"
+            landmarkName = "-setMenu"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1391"
             endingLineNumber = "1391"
-            landmarkName = "-ViewTouchDown:"
+            landmarkName = "-replyAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

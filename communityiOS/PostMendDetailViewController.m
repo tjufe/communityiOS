@@ -34,6 +34,7 @@
 #import "RatingBar.h"
 #import "ScoreTypeList.h"
 #import "EvaluateTableViewCell.h"
+#import "NewPostEditViewController.h"
 
 @interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 - (IBAction)replyAction:(id)sender;
@@ -800,7 +801,12 @@ int starAmount = 0;
     //    [self setMenu];
     self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 50*mend_menuHeight);
     //postdetailmenu显示情况
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
+    self.user_auth =[defaults objectForKey:@"UserPermission"];
+    self.user_id = [defaults objectForKey:@"UserID"];
+    NSLog(@"^^%@ %@ %@ ",self.moderator_of_forum_list,self.user_auth,self.user_id);
+
     if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] && ![self.user_auth isEqualToString:@""]) ){
         //        [self.view addSubview:self.operlist];
         self.navigationItem.rightBarButtonItem = self.rightItem;
@@ -1059,14 +1065,24 @@ int starAmount = 0;
     //    count++;
     mend_alertcount = false;
     mend_pop_code = 1;//跳转标志
-    PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];
     //通过UIViewController+Create扩展方法创建FourViewController的实例对象
     //传值
-    PEVC.ED_FLAG = @"2";//编辑帖子
-    PEVC.post_item = self.post_item;//帖子详情
-    PEVC.forum_item = _forum_item;
+    if ([self.forum_item.forum_name containsString:@"投诉"]) {
+        PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];
+        PEVC.ED_FLAG = @"2";//编辑帖子
+        PEVC.post_item = self.post_item;//帖子详情
+        PEVC.forum_item = _forum_item;
+        [self.navigationController pushViewController:PEVC animated:YES];
+
+    }else{
+        NewPostEditViewController *NPEVC = [[NewPostEditViewController alloc]initWithNibName:@"NewPostEditViewController" bundle:nil];
+        NPEVC.ED_FLAG = @"2";
+        NPEVC.post_item = self.post_item;
+        NPEVC.forum_item = _forum_item;
+        [self.navigationController pushViewController:NPEVC animated:YES];
+    }
+   
     
-    [self.navigationController pushViewController:PEVC animated:YES];
     [self.operlist removeFromSuperview];
     mend_count = 0;
 }
@@ -1101,7 +1117,9 @@ int starAmount = 0;
             //            PLVC.forum_item = _forum_item;
             
             //        [self.navigationController pushViewController:PLVC animated:YES];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            //0527 lx
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }

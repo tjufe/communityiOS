@@ -45,7 +45,7 @@
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIPickerView *pickview;
 @property (strong, nonatomic) TextTableViewCell *textcell;
-
+@property (strong,nonatomic) UIBarButtonItem *rightItem;//导航条右侧按钮
 
 @property (strong,nonatomic)NSMutableArray *forumSetList;//帖子设置数组
 @property (strong,nonatomic)forumSetItem *forum_set_item;//帖子的设置
@@ -85,6 +85,11 @@
 @property (strong,nonatomic) NSString *select_need_check;//上传的帖子是否需要审核
 @property (strong,nonatomic) NSString *select_checked;//上传的帖子审核状态
 @property (strong,nonatomic) NSMutableDictionary *inputArray;//用来存放输入的控件
+@property (strong,nonatomic) UITextField *title_tf;
+@property (strong,nonatomic) UITextView *text_tv;
+
+
+
 
 @end
 
@@ -95,6 +100,7 @@ NSString * const site_isreply = @"是否允许回帖";
 NSString * const site_newpost_user = @"允许发帖的用户";
 NSString * const site_ischeck= @"是否需要审核";
 NSString * const site_isbrowse= @"允许查看帖子的用户";
+NSString * const site_reply_user = @"允许回帖的用户";
 
 @implementation PostEditViewController
 NSArray *activities_;
@@ -103,6 +109,8 @@ NSArray *third_;
 NSString *num1 ;
 NSString *num2 ;
 NSString *num3 ;
+float cellHeight;
+bool edit;
 
 
 #pragma mark------当点击view的区域就会触发这个事件
@@ -124,9 +132,10 @@ NSString *num3 ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    select_forum_dropdown_isonshowing = NO;
         if (indexPath.row== 0 ) {
-        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
-            
+//        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
+            ForumSelectTableViewCell *cell ;
         
         if (!cell) {
             cell= [[[NSBundle mainBundle]loadNibNamed:@"ForumSelectTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -146,14 +155,16 @@ NSString *num3 ;
         return cell;
        
       }else if (indexPath.row== 1 ) {
-        TitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
-//          TitleTableViewCell *cell;
+//        TitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+          TitleTableViewCell *cell ;
+          edit = true;
         
             if (!cell) {
                 cell= [[[NSBundle mainBundle]loadNibNamed:@"TitleTableViewCell" owner:nil options:nil]objectAtIndex:0];
             }
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
+          self.title_tf = cell.Title;
           cell.Title.delegate = self;
                 if([_ED_FLAG isEqualToString:@"2"]){
                     //编辑帖子
@@ -169,28 +180,56 @@ NSString *num3 ;
         return cell;
 
     }else if(indexPath.row==2){
-        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
-
-
-        if (!cell) {
-            cell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
+        //        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
+        if (!self.textcell) {
+            self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            self.textcell.textview.delegate = self;
+            self.textcell.textview.scrollEnabled = NO;
         }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.textcell.textview.delegate = self;
+        self.text_tv = self.textcell.textview;
+        //定义一个toolBar
+        UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+        //设置style
+        [topView setBarStyle:UIBarStyleDefault];
+        
+        //定义两个flexibleSpace的butto，放在toolbar上，这样完成按钮就会在最右边
+        UIBarButtonItem * btn1 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        UIBarButtonItem * btn2 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        
+        //定义完成按钮
+        UIBarButtonItem *donebtn = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(resignKeyboard)];
+        
+        //在toolBar上加上这些按钮
+        NSArray *btnArray = [NSArray arrayWithObjects:btn1,btn2,donebtn,nil];
+        [topView setItems:btnArray];
+        
+        
+        [self.textcell.textview setInputAccessoryView:topView];
+
+        
+        
+      
             //flag如果是2，表示编辑原有帖子
             if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
-                cell.textview.text = _post_item.post_text;
+                self.textcell.textview.text = _post_item.post_text;
             }
-        
-//            }else{
-//                cell.textview.text = self.select_post_text;
+ //               else{
+//                if(![self.select_post_text isEqualToString:@""]){
+//                self.textcell.textview.text = self.select_post_text;
+//                }
 //            }
 
+       cellHeight = self.textcell.textview.frame.size.height;
         
-        return cell;
+        return self.textcell;
 
     }else if(indexPath.row==3){
-        PostImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
+//        PostImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2"];
+        PostImageTableViewCell *cell;
         if(!cell){
             cell = [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellEditingStyleNone;
@@ -209,16 +248,11 @@ NSString *num3 ;
                         cell.MainImage.image = self.select_image;
                     }
                 }else{
-                    if(!self.select_image){
                     cell.MainImage.hidden = NO;
                     [cell.MainImage sd_setImageWithURL:iurl placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                         cell.MainImage.image = image;
                     }];
-                    }
-                    else{
-                       cell.MainImage.hidden = NO;
-                       cell.MainImage.image = self.select_image;
-                    }
+                    
                 }
                 
             }else{
@@ -242,7 +276,8 @@ NSString *num3 ;
         
         return cell;
     }else if (indexPath.row==4){
-        EditChainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
+//        EditChainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell4"];
+        EditChainTableViewCell *cell;
         if(!cell){
             cell = [[[NSBundle mainBundle]loadNibNamed:@"EditChainTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellEditingStyleNone;
@@ -301,7 +336,8 @@ NSString *num3 ;
         }
         return cell;
     }else{
-        EditApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell5"];
+//        EditApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell5"];
+        EditApplyTableViewCell *cell;
         if(!cell){
             cell = [[[NSBundle mainBundle]loadNibNamed:@"EditApplyTableViewCell" owner:nil options:nil]objectAtIndex:0];
             cell.selectionStyle = UITableViewCellEditingStyleNone;
@@ -356,12 +392,12 @@ NSString *num3 ;
     }else if(indexPath.row ==1){
         return 50;
     }else if(indexPath.row ==2){
-    //    return self.PEtableview.frame.size.height - 160;
-        return 150;
+     //   return self.PEtableview.frame.size.height - 160;
+        return cellHeight;
     }else if(indexPath.row ==3){
-        return 150;
+        return 180;
     }else if(indexPath.row ==4){
-        return 50;
+        return 100;
     }else if(indexPath.row ==5){
         return 50;
     }else{
@@ -372,7 +408,7 @@ NSString *num3 ;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row==0){
-
+        if(!select_forum_dropdown_isonshowing){
         
         if([_ED_FLAG isEqualToString:@"0"]){
 
@@ -380,10 +416,10 @@ NSString *num3 ;
         UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
         flowlayout.minimumInteritemSpacing = 0;
         flowlayout.minimumLineSpacing = 2;
-        [flowlayout setItemSize:CGSizeMake(100, 40)];
+        [flowlayout setItemSize:CGSizeMake(200, 40)];
         
         //初始化colletionview
-        self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 202, 200) collectionViewLayout:flowlayout];
+        self.fs  = [[FSCollectionview alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2 - 100, -50, 200, [self.select_forum count]*40) collectionViewLayout:flowlayout];
 
         //传值
        // self.fs.PEVC = self;
@@ -406,24 +442,18 @@ NSString *num3 ;
         [self.PEtableview addSubview:self.fs];
         
         [UIView animateWithDuration:0.5 animations:^{
-            self.fs.frame= CGRectMake(self.view.frame.size.width/2 - 100, 50, 202, 200) ;
+            self.fs.frame= CGRectMake(self.view.frame.size.width/2 - 100, 50, 200, [self.select_forum count]*40) ;
             self.fs.alpha = 1;
             [self.fs.layer setCornerRadius:self.fs.frame.size.height/20];
         }];
 
             [self.fs getcelltext:indexPath:self.PEtableview];
-            
-            
-            //获取选择的版块
-//            NSMutableArray *select = [self.fs GetSelectedResult];
-//            self.select_forum_id = [select objectAtIndex:1];
-//            self.select_forum_name =[select objectAtIndex:2];
-//            self.select_row = [select objectAtIndex:0];
-
-//            
-
-            
+            select_forum_dropdown_isonshowing = YES;
         }
+        }
+    }else if (indexPath.row==2){
+        
+    
 
     }else if(indexPath.row==3){//删图片
         if(self.select_image_name&&![self.select_image_name isEqualToString:@""]&&![self.select_image_name isEqualToString:@""""]){
@@ -442,43 +472,78 @@ NSString *num3 ;
     
 }
 
+
+
+-(void)resignKeyboard{
+    [self.text_tv resignFirstResponder];
+}
+
 #pragma mark-----title
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if(textField == self.title_tf){
     self.select_post_title = textField.text;
     //显示在UI中
     NSIndexPath *index = [NSIndexPath indexPathForRow:1 inSection:0];
     NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
     //刷新指定行
     [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 #pragma mark-----收键盘
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
+//    UITextField *chainName= [self.inputArray valueForKey:@"ChainContext"];
+//    UITextField *chainText = [self.inputArray valueForKey:@"ChainAddress"];
+//    if(chainName||chainText){
+//        [chainText resignFirstResponder];
+//        [chainName resignFirstResponder];
+//    }
     return YES;
 }
 
 
 
 #pragma mark----text
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    //去掉初始的提示文字
+    if(edit){
+    textView.text = nil;
+    textView.textColor = [UIColor blackColor];
+        edit = false;
+    }
+
+    
+}
 - (void)textViewDidEndEditing:(UITextView *)textView{
     self.select_post_text = textView.text;
-    //显示在UI中
-    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
-    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
-    //刷新指定行
-    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
-    [textView resignFirstResponder];//失去响应，收起键盘
-}
-- (void)textViewDidChange:(UITextView *)textView
-{
-    self.select_post_text = textView.text;
-    //显示在UI中
-    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
-    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
-    //刷新指定行
-    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
-}
+    CGSize size = CGSizeMake(300, 1000);
+    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+    cellHeight = labelSize.height+10;
+    [self.PEtableview beginUpdates];
+    [self.PEtableview endUpdates];
 
+//    //显示在UI中
+//    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
+//    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
+    //刷新指定行
+//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [self.PEtableview reloadData];
+    if(![textView.text isEqualToString:@""]){
+    self.textcell.textview.text = textView.text;
+    }else{
+        self.textcell.textview.text = @"请输入内容";
+        textView.textColor = [UIColor grayColor];
+        edit =true;
+    }
+    
+    //显示在UI中
+//    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
+//    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
+//    //刷新指定行
+//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 #pragma mark----长按图片
 -(void)deleteImage{
@@ -579,8 +644,8 @@ NSString *num3 ;
     NSIndexPath *index = [NSIndexPath indexPathForRow:3 inSection:0];
     NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
     //刷新指定行
-    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
-   // [self.PEtableview reloadData];
+//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.PEtableview reloadData];
     //上传图片
     [self uploadinitWithImage:chosenImage];
     
@@ -652,11 +717,37 @@ NSString *num3 ;
 }
 
 
-
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:YES];
+//    //注册通知，监听键盘出现
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleKeyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+//    
+//    //注册通知，监听键盘消失事件
+//     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleKeyboardDidHidden) name:UIKeyboardDidHideNotification object:nil];
+//}
+//
+//#pragma mark-----
+//#pragma mark------监听键盘事件
+//-(void)handleKeyboardDidShow:(NSNotification *)paramNotification{
+//    //获取键盘高度
+//    NSValue *keyboardRectAsObject = [[paramNotification userInfo]objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    CGRect keyboardRect;
+//    [keyboardRectAsObject getValue:&keyboardRect];
+//    self.textcell.textview.contentInset = UIEdgeInsetsMake(0, 0, keyboardRect.size.height, 0);
+//}
+//
+//-(void)handleKeyboardDidHidden{
+//    self.textcell.textview.contentInset = UIEdgeInsetsZero;
+//}
+//#pragma mark-----
+//
+//-(void)viewWillDisappear:(BOOL)animated{
+//    [[NSNotificationCenter defaultCenter]removeObserver:self];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    cellHeight = self.PEtableview.frame.size.height - 160;
     //初始化
     self.select_image = [[UIImage alloc]init];
     self.select_open_apply = [[NSString alloc]init];
@@ -721,8 +812,8 @@ NSString *num3 ;
 //    TextTableViewCell *ttvc = [[TextTableViewCell alloc]init];
     
     //加导航栏右侧按钮
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStyleBordered  target:self action:@selector(NewPost2Web)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    self.rightItem = [[UIBarButtonItem alloc]initWithTitle:@"发布" style:UIBarButtonItemStyleBordered  target:self action:@selector(NewPost2Web)];
+    self.navigationItem.rightBarButtonItem = self.rightItem;
 
     //设置username输入文本框的监听
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification  object:nil];
@@ -845,6 +936,7 @@ NSString *num3 ;
 #pragma mark------发帖 20150515 lx
 -(void)NewPost2Web{
     
+    self.rightItem.enabled = NO;//点完后不可点击
     if([_ED_FLAG isEqualToString:@"0"]){//首页直接发帖
         //版块号
         self.select_forum_id = self.fs.select_forum_id;
@@ -872,6 +964,8 @@ NSString *num3 ;
         
         TitleTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
         self.select_post_title = cell.Title.text;
+            
+            
         if([self.select_post_title isEqualToString:@""]||self.select_post_title==nil){
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
@@ -887,46 +981,64 @@ NSString *num3 ;
         }else{
             TextTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
             self.select_post_text = cell.textview.text;
+            
+            if([self.select_post_text isEqualToString:@"请输入内容"]){
+                self.select_post_text = @"";
+            }
             if(![_ED_FLAG isEqualToString:@"2"]){//发新帖
             [StatusTool statusToolNewPostWithcID:self.communityID fID:self.select_forum_id PosterID:self.userID postTitle:self.select_post_title postText:self.select_post_text imgURL:self.select_image_name chain:self.select_chain chainName:self.select_chain_context chainURL:self.select_chain_address apply:self.select_open_apply limApplyNum:self.select_limit_apply_num needCheck:self.select_need_check Checked:self.select_checked Success:^(id object) {
                 newPostItem *new = (newPostItem *)object;
                 if([new.msg isEqualToString:@"发送成功"]){
-                UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"发布成功！" message:@"请耐心等待审核..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-                alert1.delegate = self;
+                    UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"发布成功！" message:nil delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                    if([self.select_need_check isEqualToString:@"是"]){
+                        alert1.message =@"请耐心等待审核...";
+                    }
+                                    alert1.delegate = self;
+                    
                 [alert1 show];
                 self.alert_flag = @"s";
+                    
                 }else{
-                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                     alert2.delegate = self;
                     [alert2 show];
                     self.alert_flag = @"f";
+                    self.rightItem.enabled = YES;
                 }
             } failurs:^(NSError *error) {
-                UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"网络异常..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"网络异常..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                 alert2.delegate = self;
                  [alert2 show];
                 self.alert_flag = @"f";
+                self.rightItem.enabled = YES;
             }];
             }else{//编辑帖子
                 [StatusTool statusToolEditPostWithcID:self.communityID fID:self.select_forum_id postID:self.select_post_id PosterID:self.select_poster_id postTitle:self.select_post_title postText:self.select_post_text imgURL:self.select_image_name chain:self.select_chain chainName:self.select_chain_context chainURL:self.select_chain_address apply:self.select_open_apply limApplyNum:self.select_limit_apply_num needCheck:self.select_need_check Checked:self.select_checked Success:^(id object) {
                     editPostItem *new = (editPostItem *)object;
                     if([new.msg isEqualToString:@"编辑成功"]){
-                        UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"编辑成功！" message:@"请耐心等待审核..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"已发布！" message: nil delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                        
+                        if([self.select_need_check isEqualToString:@"是"]){
+                            alert1.message = @"请耐心等待审核...";
+                        }
                         alert1.delegate = self;
                         [alert1 show];
                         self.alert_flag = @"s";
+                        
                     }else{
-                        UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                        UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                         alert2.delegate = self;
                         [alert2 show];
                         self.alert_flag = @"f";
+                        self.rightItem.enabled = YES;
                     }
 
                 } failurs:^(NSError *error) {
-                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"编辑失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"编辑失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
                     alert2.delegate = self;
                     [alert2 show];
                     self.alert_flag = @"f";
+                    self.rightItem.enabled = YES;
                 }];
                 
             }
@@ -1075,6 +1187,13 @@ NSString *num3 ;
 //    UIView *addpic = [[UIView alloc]initWithFrame:CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-100, 300, 220)];
 //    addpic.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
 //    [self.PEtableview addSubview:addpic];
+    
+    //改变cell的高度需要reload该cell
+    CGSize size = CGSizeMake(300, 1000);
+    CGSize labelSize = [self.textcell.textview.text sizeWithFont:self.textcell.textview.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+    cellHeight = labelSize.height+10;
+//    [self.PEtableview reloadData];
+    
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -1092,6 +1211,10 @@ NSString *num3 ;
     self.maskview.alpha = 0.3;
     [self.view addSubview:self.maskview];
     
+    //添加点击手势
+    self.maskview.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
+    [self.maskview addGestureRecognizer:singleTap];
     
     self.addchain =[[UIView alloc]init];
     
@@ -1128,6 +1251,7 @@ NSString *num3 ;
     [self.addchain addSubview:tlabel];
     //qingshuru
     UITextField *ctfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 80, 200, 30)];
+    ctfield.delegate = self;
     if(self.select_chain_context!=nil&&![self.select_chain_context isEqualToString:@""]){
         ctfield.text = self.select_chain_context;
     }else{
@@ -1152,6 +1276,7 @@ NSString *num3 ;
     [self.addchain addSubview:wlabel];
     //qingshuru
     UITextField *wtfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 140, 200, 30)];
+    wtfield.delegate = self;
     
     if(self.select_chain_address!=nil&&![self.select_chain_address isEqualToString:@""]){
         wtfield.text = self.select_chain_address;
@@ -1260,6 +1385,12 @@ NSString *num3 ;
     self.maskview.backgroundColor = [UIColor blackColor];
     self.maskview.alpha = 0.3;
     [self.view addSubview:self.maskview];
+    
+    //添加点击手势
+    self.maskview.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
+    [self.maskview addGestureRecognizer:singleTap];
+
 
     self.addapply =[[UIView alloc]init];
     self.addapply.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height+100, 300, 330);
@@ -1271,7 +1402,6 @@ NSString *num3 ;
     }];
     self.addapply.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.addapply];
-    
     
     
     //baoming
@@ -1343,7 +1473,11 @@ NSString *num3 ;
 //    UISwitch *switch1 = [self.inputArray valueForKey:@"Apply"];
 //     [[NSUserDefaults standardUserDefaults]setBool:switch1.on forKey:@"didRember"];
 //}
-
+-(void)closeView{
+    [self.addapply removeFromSuperview];
+    [self.addchain removeFromSuperview];
+    [self.maskview removeFromSuperview];
+}
 
 #pragma mark------添加外连确定 20150515 lx
 -(void)surea{

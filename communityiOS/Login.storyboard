@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +25,7 @@
         <!--登录-->
         <scene sceneID="S2z-Nm-B2a">
             <objects>
-                <viewController id="lOJ-nz-sfY" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="lOJ-nz-sfY" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U0x-ly-RYn"/>
                         <viewControllerLayoutGuide type="bottom" id="GJf-tj-Dj8"/>
@@ -245,7 +245,7 @@
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="确认密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FJx-CD-6uv">
-                                        <rect key="frame" x="8" y="137" width="276" height="45"/>
+                                        <rect key="frame" x="12" y="137" width="272" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="bKj-sJ-naX"/>
                                         </constraints>
@@ -260,7 +260,7 @@
                                 <constraints>
                                     <constraint firstItem="Iaa-PW-Wan" firstAttribute="trailing" secondItem="VuT-dh-u2e" secondAttribute="trailing" id="1sZ-ra-9Pp"/>
                                     <constraint firstAttribute="bottom" secondItem="Ith-Fz-2Kc" secondAttribute="bottom" id="24P-Vz-KmR"/>
-                                    <constraint firstItem="FJx-CD-6uv" firstAttribute="leading" secondItem="bHX-Jq-2hh" secondAttribute="leadingMargin" id="3h6-Ew-KC6"/>
+                                    <constraint firstItem="FJx-CD-6uv" firstAttribute="leading" secondItem="bHX-Jq-2hh" secondAttribute="leadingMargin" constant="4" id="3h6-Ew-KC6"/>
                                     <constraint firstItem="Iaa-PW-Wan" firstAttribute="top" secondItem="VuT-dh-u2e" secondAttribute="top" id="3qD-eS-7GJ"/>
                                     <constraint firstItem="GTN-pl-nXs" firstAttribute="leading" secondItem="bHX-Jq-2hh" secondAttribute="leading" id="6YV-gQ-EnJ"/>
                                     <constraint firstItem="VuT-dh-u2e" firstAttribute="top" secondItem="Ith-Fz-2Kc" secondAttribute="bottom" id="8FK-Cs-XgK"/>
@@ -312,7 +312,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95Z-MX-Phj">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95Z-MX-Phj">
                                 <rect key="frame" x="106" y="409" width="108" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="F2Z-Ds-Erl"/>

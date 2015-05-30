@@ -7,14 +7,15 @@
 //
 
 #import "PostReplyViewController.h"
+#import "PostDetailViewController.h"
 #import "UIViewController+Create.h"
 #import "ReplyTableViewCell.h"
 #import "MyReplyTableViewCell.h"
-
+#import "PostEditViewController.h"
 #import "replyInfoListItem.h"
 #import "replyInfoItem.h"
 #import "StatusTool.h"
-
+#import "AuthViewController.h"
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
@@ -22,7 +23,8 @@
 
 
 
-@interface PostReplyViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface PostReplyViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *reply_btn;
 
 - (IBAction)replyAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *replyContentField;
@@ -66,28 +68,39 @@ int screenHeight = 0;
     self.replyContentData = [[NSMutableArray alloc]init];
     self.Page = [[NSNumber alloc]init];
     self.Rows = [[NSNumber alloc]init];
-    self.havePower = true;
+    self.havePower = false;
     
     //设置标题
     self.navigationItem.title = self.postItem.title;
     //获取当前用户身份
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.UserPermission = [defaults objectForKey:@"UserPermission"];
+    
+    //判断是否允许回帖 lx 0529
     for(int i =0;i<[self.forum_item.ForumSetlist count];i++){
         self.forum_set_item = [forumSetItem createItemWitparametes:[self.forum_item.ForumSetlist objectAtIndex:i]];
         [self.forumSetArray addObject:self.forum_set_item];
     }
     for (int i = 0; i<[self.forumSetArray count]; i++) {
         forumSetItem *tempItem = [self.forumSetArray objectAtIndex:i];
-        if ([tempItem.site_id isEqualToString:@"03"]) {
-            if ([tempItem.site_value rangeOfString:[NSString stringWithFormat:@"/%@",self.UserPermission]].location!=NSNotFound) {
-                self.havePower = false;
+        if ([tempItem.site_name isEqualToString:site_reply_user]) {
+            if ([tempItem.site_value containsString:[NSString stringWithFormat:@"/%@",self.UserPermission]]) {
+                self.havePower = true;
                 break;
             }
-            break;
         }
          
     }
+    
+    if(!self.havePower){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"对不起，您无权回复！" message:nil delegate:self cancelButtonTitle:@"去实名认证" otherButtonTitles:@"取消", nil];
+        alert.delegate = self;
+        [alert show];
+        self.reply_btn.enabled = NO;
+        [self.replyContentField setEnabled:NO];
+    }
+    
+    
     [self setupRefreshing];
     [self loadReplyListData];
     
@@ -102,6 +115,23 @@ int screenHeight = 0;
     //清楚多余的表
     [self clearExtraLine:self.replyListTable];
 }
+
+
+#pragma mark---------对话框点击按钮事件 lx 0529
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex==0){//去实名认证
+        AuthViewController *AVC = [AuthViewController createFromStoryboardName:@"Settings" withIdentifier:@"Auth"];
+        //使下一页的导航栏左边没有文字
+        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
+        temporaryBarButtonItem.title=@"";
+        self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+        [self.navigationController pushViewController:AVC animated:YES];
+    }
+}
+
+
+
+
 #pragma mark-
 #pragma mark--------------------去掉多余的线----------------------------
 -(void)clearExtraLine:(UITableView *)tableView{
@@ -297,6 +327,7 @@ int screenHeight = 0;
             [self.replyListTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [StatusTool statusToolPostDeleteReplyWithUserID:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"] Reply_id:delete_item.post_reply_id PostID:self.postItem.post_id Success:^(id object) {
                 // do nothing
+                pop_code = 1;//跳回detail页刷新
             } failurs:^(NSError *error) {
                 // do nothing
             }];
@@ -514,18 +545,6 @@ int screenHeight = 0;
 
 - (IBAction)replyAction:(id)sender {
     
-    if ( ! self.havePower) {
-        MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
-        [self.view addSubview:hud];
-        hud.labelText = @"您没有权限回复";
-        hud.mode = MBProgressHUDModeText;
-        [hud showAnimated:YES whileExecutingBlock:^{
-            sleep(1);
-        } completionBlock:^{
-            [hud removeFromSuperview];
-        }];
-
-    }else{
         //获取当前时间
         NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -544,6 +563,8 @@ int screenHeight = 0;
             }];
         }else{
             [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.postItem.belong_community_id ForumID:self.postItem.belong_forum_id PostID:self.postItem.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
+                
+                pop_code = 1;//跳回detail页刷新
                 self.replyContentField.text =  @"";
                 if (object != nil) {
                     MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
@@ -579,7 +600,6 @@ int screenHeight = 0;
                 //to do
             }];
         }
-    }
 }
 #pragma mark-
 #pragma mark -----------------------------生成UUID-----------------------------------
