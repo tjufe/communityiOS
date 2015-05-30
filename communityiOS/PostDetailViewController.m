@@ -124,7 +124,10 @@ bool isModerator = NO;//是否是版主
 }
 -(IBAction)ReplyNumOnClick:(id)sender{
     PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
+    PEVC.forum_item = _forum_item;
     PEVC.postItem = self.post_item;
+    
+    
     [self.navigationController pushViewController:PEVC animated:YES];
 
 }
@@ -523,29 +526,30 @@ bool isModerator = NO;//是否是版主
    
     self.menuHeight = 0;
     //下拉菜单
-    self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 40*self.menuHeight)];
+    self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 50*self.menuHeight)];
+
     self.operlist.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     self.operlist.alpha=0;
     //编辑 按钮
     self.editbutton = [[UIButton alloc]init];
-    self.editbutton.frame = CGRectMake(25, 0, 50, 40);
-    self.editbutton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15.0f];
+    self.editbutton.frame = CGRectMake(25, 0, 50, 50);
+    self.editbutton.titleLabel.font = [UIFont fontWithName:@"Arial" size:16.0f];
     [self.editbutton setTitle:@"编辑" forState:UIControlStateNormal];
     [self.editbutton addTarget:self action:@selector(EditPost) forControlEvents:UIControlEventTouchUpInside];
     [self.editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     //删除按钮
     self.delebutton = [[UIButton alloc]init];
-    self.delebutton.frame = CGRectMake(25, 40, 100, 40);
-    self.delebutton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15.0f];
+    self.delebutton.frame = CGRectMake(25, 50, 100, 50);
+    self.delebutton.titleLabel.font = [UIFont fontWithName:@"Arial" size:16.0f];
     [self.delebutton setTitle:@"删除" forState:UIControlStateNormal];
     [self.delebutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.delebutton addTarget:self action:@selector(DelePost) forControlEvents:UIControlEventTouchUpInside];
     
     //结束报名按钮
     self.endApplyButton = [[UIButton alloc]init];
-    self.endApplyButton.frame = CGRectMake(25, 80, 100, 40);
-    self.endApplyButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15.0f];
+    self.endApplyButton.frame = CGRectMake(25, 100, 100, 50);
+    self.endApplyButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:16.0f];
     [self.endApplyButton setTitle:@"结束报名" forState:UIControlStateNormal];
     [self.endApplyButton addTarget:self action:@selector(endapply) forControlEvents:UIControlEventTouchUpInside];
     [self.endApplyButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -558,7 +562,9 @@ bool isModerator = NO;//是否是版主
     if(count==1){//表示menu开着
 //    if(!self.operlist.hidden){//已显示,关上
         [UIView animateWithDuration:0.3 animations:^{
-            self.operlist.frame = CGRectMake(self.view.frame.size.width-100, -90, 100, 40*self.menuHeight);
+
+            self.operlist.frame = CGRectMake(self.view.frame.size.width-100, -90, 100, 50*self.menuHeight);
+
             self.operlist.alpha = 1;
         }];
         count = 0;
@@ -566,7 +572,8 @@ bool isModerator = NO;//是否是版主
         
     }else{ //未显示，弹出
             [UIView animateWithDuration:0.3 animations:^{
-                self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 60, 100, 40*self.menuHeight);
+                self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 60, 100, 50*self.menuHeight);
+
                 self.operlist.alpha = 1;
             }];
             [self.view addSubview:self.operlist];
@@ -614,8 +621,10 @@ bool isModerator = NO;//是否是版主
     //编辑按钮
     if([self.user_id isEqualToString:self.poster_id]){
         [self.operlist addSubview:self.editbutton];
-        self.editbutton.frame = CGRectMake(25, 40*self.menuHeight, 50, 40);
+
+        self.editbutton.frame = CGRectMake(25, 50*self.menuHeight, 50, 50);
         self.menuHeight++;
+
         
     }
     //结束报名按钮
@@ -625,8 +634,9 @@ bool isModerator = NO;//是否是版主
             if ([forumset.site_value isEqualToString:@"是"]) {
                 if ([self.open_apply isEqualToString:@"是"] && [self.user_id isEqualToString:self.poster_id] && [self.post_over isEqualToString:@"否"]) {
                     [self.operlist addSubview:self.endApplyButton];
-                     self.endApplyButton.frame = CGRectMake(0, 40*self.menuHeight, 100, 40);
+                     self.endApplyButton.frame = CGRectMake(0, 50*self.menuHeight, 100, 50);
                     self.menuHeight++;
+
                 }
                 
             }
@@ -637,11 +647,12 @@ bool isModerator = NO;//是否是版主
     //delete button
     if ([self.user_auth containsString:@"/系统管理员/"] || [self.moderator_of_forum_list containsObject:self.forum_id] || [self.user_id isEqualToString:self.poster_id]) {
          [self.operlist addSubview:self.delebutton];
-         self.delebutton.frame = CGRectMake(25, 40*self.menuHeight, 50, 40);
+         self.delebutton.frame = CGRectMake(25, 50*self.menuHeight, 50, 50);
             self.menuHeight++;
     }
 //    [self setMenu];
-    self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 40*self.menuHeight);
+    self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 50*self.menuHeight);
+
     //postdetailmenu显示情况
     
     if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] && ![self.user_auth isEqualToString:@""]) ){
@@ -869,6 +880,7 @@ bool isModerator = NO;//是否是版主
 
     PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
     PEVC.postItem = self.post_item;
+    PEVC.forum_item = _forum_item;
     [self.navigationController pushViewController:PEVC animated:YES];
 
 }
