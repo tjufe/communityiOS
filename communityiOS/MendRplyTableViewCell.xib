@@ -59,7 +59,7 @@
                 <outlet property="replyerHead" destination="BJP-NC-Lla" id="JkU-eG-EI8"/>
                 <outlet property="replyerNickName" destination="4N2-cV-g1N" id="Dio-Hl-gOy"/>
             </connections>
-            <point key="canvasLocation" x="424" y="452"/>
+            <point key="canvasLocation" x="260" y="318"/>
         </tableViewCell>
     </objects>
     <resources>
