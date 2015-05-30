@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "forumItem.h"
+#import "postItem.h"
 
 @interface NewPostEditViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
+
 @property(strong,nonatomic)forumItem *forum_item;
+@property (strong,nonatomic)postItem *post_item;
 @property(strong,nonatomic)NSString *ED_FLAG;
 
 @end

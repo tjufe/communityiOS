@@ -24,6 +24,7 @@
 #import "APIAddress.h"
 
 #import "NewPostEditViewController.h"
+#import "PostMendDetailViewController.h"
 
 
 
@@ -32,6 +33,7 @@
     NSMutableArray *postImageData;
     NSMutableArray *postDateData;
     NSMutableArray *postSetTopData;
+//    NSMutableArray *postFinishData;
     
 }
 //@property (weak, nonatomic) IBOutlet UINavigationBar *ForumName;
@@ -177,6 +179,12 @@ NSInteger page_filter;
           else{
                cell.setTop.hidden = YES;
           }
+     //是否已经结帖
+     if([p.post_overed isEqualToString:@"是"]){
+          cell.img_finish.hidden = NO;
+     }else{
+           cell.img_finish.hidden = YES;
+     }
 
 //     }
     // if([reply_num isKindOfClass:[NSNull class]]){
@@ -226,24 +234,35 @@ NSInteger page_filter;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
-    
-     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-     //全局变量传值
-     PDVC.forum_item = _forum_item;
-     PDVC.forumList = _forumlist;
+     
+     if ([self.forum_item.display_type isEqualToString:@"纵向"]) {
+          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
+          PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+          //全局变量传值
+          PDVC.forum_item = _forum_item;
+          PDVC.forumList = _forumlist;
+          //协议实现页面传值
+          self.delegate = PDVC;
+          if ([self.delegate
+               respondsToSelector:@selector(addpostItem:)]) {
+               [self.delegate addpostItem:_PostItem];
+          }
+          [self.navigationController pushViewController:PDVC animated:YES];
+     }else{
+          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
+          PostMendDetailViewController *PDVC = [ PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
+          //全局变量传值
+          PDVC.forum_item = _forum_item;
+          PDVC.forumList = _forumlist;
+          //协议实现页面传值
+          self.delegate = PDVC;
+          if ([self.delegate
+               respondsToSelector:@selector(addpostItem:)]) {
+               [self.delegate addpostItem:_PostItem];
+          }
+          [self.navigationController pushViewController:PDVC animated:YES];
 
-    //协议实现页面传值
-    self.delegate = PDVC;
-    if ([self.delegate
-         respondsToSelector:@selector(addpostItem:)]) {
-
-    [self.delegate addpostItem:_PostItem];
-    }
-    
-    
-    [self.navigationController pushViewController:PDVC animated:YES];
-    
+     }
      
 }
 
@@ -331,6 +350,8 @@ NSInteger page_filter;
  //    page =1;
  //    rows = 5;
  //    page_filter = 0;
+     //去除多余的线
+     [self clearExtraLine:self.pltable];
      
      //获取当前用户信息
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -485,6 +506,14 @@ NSInteger page_filter;
 
     // Do any additional setup after loading the view.
 }
+#pragma mark-
+#pragma mark--------------------去掉多余的线----------------------------
+-(void)clearExtraLine:(UITableView *)tableView{
+     UIView *view = [[UIView alloc]init];
+     view.backgroundColor = [UIColor clearColor];
+     [self.pltable setTableFooterView:view];
+}
+#pragma mark-
 
 
 #pragma mark-----获取版块设置
@@ -856,12 +885,12 @@ NSInteger page_filter;
      }else{
           [postImageData addObject:@""];
      }
+     //取置顶
      if(self.pitem.set_top!=nil){
           [postSetTopData addObject:self.pitem.set_top];
      }else{
           [postSetTopData addObject:@""];
      }
-     
      //取nickname
      if(self.pitem.poster_nickname!=nil){
           [self.Poster_Nic_Array addObject:self.pitem.poster_nickname];
@@ -1096,6 +1125,8 @@ NSInteger page_filter;
           NewPostEditViewController *PEVC2 = [[NewPostEditViewController alloc] initWithNibName:@"NewPostEditViewController" bundle:nil];
           PEVC2.forum_item = _forum_item;
           PEVC2.ED_FLAG =@"1";// 当前版块下发帖
+     
+          PEVC2.mainScrollView.frame = CGRectMake(PEVC2.mainScrollView.frame.origin.x , PEVC2.mainScrollView.frame.origin.y , self.view.frame.size.width , PEVC2.mainScrollView.frame.size.height);;
           [self.navigationController pushViewController:PEVC2 animated:YES];
      }
 }

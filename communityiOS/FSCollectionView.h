@@ -38,7 +38,7 @@
 @property (strong, nonatomic) NSString *ISCHAIN1;
 @property (strong, nonatomic) NSString *ISCHECK1;
 
-
+//@property (strong,nonatomic) PostEditViewController *PEVC;
 //@property (strong,nonatomic) NSString *UserPermission;//当前用户身份
 //@property (strong,nonatomic) UIAlertView *alert;
 

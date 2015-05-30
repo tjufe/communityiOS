@@ -7,11 +7,11 @@
 //
 
 #import "FSCollectionview.h"
-
+#import "NewPostEditViewController.h"
 #import "ForumSelectTableViewCell.h"
 #import "forumItem.h"
 #import "forumSetItem.h"
-
+#import "UIViewController+Create.h"
 
 
 
@@ -55,10 +55,19 @@ ForumSelectTableViewCell *cell;
     _select_row = indexPath;//选择的索引号
     
 //    i = (int)indexPath.item;
+    
+//    if([f.display_type isEqualToString:@"横向"]){
+//        
+//        NewPostEditViewController *NPEVC = [[NewPostEditViewController alloc]initWithNibName:@"NewPostEditViewController" bundle:nil];
+//        NPEVC.forum_item = f;
+//        [_PEVC.navigationController pushViewController:NPEVC animated:YES];
+//        
+//    }else{
     cell = [_tb cellForRowAtIndexPath:_index];
     cell.fslabel.text = f.forum_name;
 //    [self.maskView removeFromSuperview];
      [self checkForum:f];
+//    }
     
     
 

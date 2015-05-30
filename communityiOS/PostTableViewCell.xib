@@ -104,13 +104,6 @@
                             <constraint firstAttribute="width" constant="12" id="mZV-6u-DuX"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="icon_people" translatesAutoresizingMaskIntoConstraints="NO" id="OQ0-4b-h6b">
-                        <rect key="frame" x="187" y="52" width="15" height="15"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="15" id="ImG-tH-qrB"/>
-                            <constraint firstAttribute="width" constant="15" id="dOs-LI-gkh"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="52" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i17-Ai-lTL">
                         <rect key="frame" x="203" y="51" width="20" height="17"/>
                         <constraints>
@@ -122,7 +115,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="【结伴旅游】版块发帖规范，必看！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uck-wG-uqy">
-                        <rect key="frame" x="30" y="8" width="190" height="20"/>
+                        <rect key="frame" x="52" y="8" width="190" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="QW2-Gg-dwT"/>
                         </constraints>
@@ -130,6 +123,20 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="结" translatesAutoresizingMaskIntoConstraints="NO" id="x70-3Q-rOG">
+                        <rect key="frame" x="30" y="8.5" width="21" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="hC2-X1-hoX"/>
+                            <constraint firstAttribute="width" constant="21" id="ve8-mD-lMW"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="icon_people" translatesAutoresizingMaskIntoConstraints="NO" id="OQ0-4b-h6b">
+                        <rect key="frame" x="187" y="52" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="ImG-tH-qrB"/>
+                            <constraint firstAttribute="width" constant="15" id="dOs-LI-gkh"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="KNs-Fq-5dh" secondAttribute="bottom" constant="9.5" id="2dt-xR-rTR"/>
@@ -141,7 +148,7 @@
                     <constraint firstItem="CRn-aB-vf3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="IDA-KI-Da2"/>
                     <constraint firstItem="OPw-Zh-lHl" firstAttribute="leading" secondItem="d2C-Zk-Aw1" secondAttribute="trailing" constant="9" id="IQD-N9-cFX"/>
                     <constraint firstAttribute="trailing" secondItem="CRn-aB-vf3" secondAttribute="trailing" constant="8" id="J6E-ja-Il7"/>
-                    <constraint firstAttribute="trailing" secondItem="Uck-wG-uqy" secondAttribute="trailing" constant="100" id="JRn-5L-9ns"/>
+                    <constraint firstAttribute="trailing" secondItem="Uck-wG-uqy" secondAttribute="trailing" constant="78" id="JRn-5L-9ns"/>
                     <constraint firstAttribute="bottom" secondItem="CRn-aB-vf3" secondAttribute="bottom" constant="11.5" id="L1s-rf-hUA"/>
                     <constraint firstItem="OQ0-4b-h6b" firstAttribute="leading" secondItem="BYv-HB-RSy" secondAttribute="trailing" constant="8" id="Miv-4T-fmf"/>
                     <constraint firstItem="OPw-Zh-lHl" firstAttribute="leading" secondItem="d2C-Zk-Aw1" secondAttribute="trailing" constant="9" id="Ugr-5c-w4n"/>
@@ -158,7 +165,7 @@
                     <constraint firstItem="BYv-HB-RSy" firstAttribute="leading" secondItem="QBc-jq-W22" secondAttribute="trailing" constant="8" id="ju9-qr-zYs"/>
                     <constraint firstItem="3Qo-FL-jOK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="kBW-sZ-5ah"/>
                     <constraint firstAttribute="bottom" secondItem="IG5-sj-ITr" secondAttribute="bottom" constant="13.5" id="miZ-IB-sO4"/>
-                    <constraint firstItem="Uck-wG-uqy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="qUN-75-AAa"/>
+                    <constraint firstItem="Uck-wG-uqy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="52" id="qUN-75-AAa"/>
                     <constraint firstItem="BYv-HB-RSy" firstAttribute="leading" secondItem="QBc-jq-W22" secondAttribute="trailing" constant="8" id="svm-nR-cAT"/>
                     <constraint firstItem="KNs-Fq-5dh" firstAttribute="leading" secondItem="3Qo-FL-jOK" secondAttribute="trailing" constant="5" id="t0G-fs-uQj"/>
                     <constraint firstAttribute="trailing" secondItem="CRn-aB-vf3" secondAttribute="trailing" constant="8" id="uwF-sE-WQY"/>
@@ -167,6 +174,8 @@
                     <constraint firstItem="i17-Ai-lTL" firstAttribute="leading" secondItem="OQ0-4b-h6b" secondAttribute="trailing" constant="1" id="xkw-SN-fnt"/>
                     <constraint firstItem="OPw-Zh-lHl" firstAttribute="leading" secondItem="d2C-Zk-Aw1" secondAttribute="trailing" constant="9" id="yjS-Jz-Cew"/>
                     <constraint firstItem="IG5-sj-ITr" firstAttribute="leading" secondItem="OPw-Zh-lHl" secondAttribute="trailing" constant="8" symbolic="YES" id="zNA-Is-2Le"/>
+                    <constraint firstItem="x70-3Q-rOG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="zUe-PD-Ah6"/>
+                    <constraint firstItem="x70-3Q-rOG" firstAttribute="leading" secondItem="jIg-yn-zIr" secondAttribute="trailing" constant="1" id="zYR-aO-zi0"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -185,6 +194,7 @@
                 <outlet property="dot_apply" destination="BYv-HB-RSy" id="POc-FO-Cxx"/>
                 <outlet property="dot_reply" destination="OPw-Zh-lHl" id="wdf-Kn-hut"/>
                 <outlet property="img_apply" destination="OQ0-4b-h6b" id="Uw9-Le-Ycq"/>
+                <outlet property="img_finish" destination="x70-3Q-rOG" id="rds-Nx-ZV4"/>
                 <outlet property="img_reply" destination="IG5-sj-ITr" id="NF3-c3-bJx"/>
                 <outlet property="postDate" destination="d2C-Zk-Aw1" id="56v-uI-M4u"/>
                 <outlet property="postImg" destination="CRn-aB-vf3" id="Vyi-Hl-RBJ"/>
@@ -195,11 +205,19 @@
             </connections>
             <point key="canvasLocation" x="303" y="414"/>
         </tableViewCell>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="顶" translatesAutoresizingMaskIntoConstraints="NO" id="PE4-5u-LyE">
+            <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
+            <constraints>
+                <constraint firstAttribute="height" constant="21" id="Sf3-UL-ZyY"/>
+                <constraint firstAttribute="width" constant="21" id="XVW-2k-6jr"/>
+            </constraints>
+        </imageView>
     </objects>
     <resources>
         <image name="icon_03" width="47" height="47"/>
         <image name="icon_people" width="105" height="105"/>
         <image name="list_comment_nt" width="18" height="18"/>
+        <image name="结" width="32" height="32"/>
         <image name="顶" width="32" height="32"/>
     </resources>
 </document>
