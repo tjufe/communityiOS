@@ -278,6 +278,7 @@ NSInteger page_filter;
 //        cell.setTop.hidden = YES;
 //    }
 
+
     return cell;
 
 
@@ -601,7 +602,6 @@ NSInteger page_filter;
           
           NSString *user_status = @"/";
           user_status = [user_status stringByAppendingString:self.UserPermission];
-//          user_status = [user_status stringByAppendingString:self.UserPermission];
           if(_forum_item.ForumSetlist!=nil){
           for(int i=0;i < [_forum_item.ForumSetlist count];i++){
                self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];

@@ -168,7 +168,7 @@ int starAmount = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         if (indexPath.row == 0 ) {
             self.posterCell = [tableView dequeueReusableCellWithIdentifier:nil];
-            
+
             if (!self.posterCell) {
                 self.posterCell= [[[NSBundle mainBundle]loadNibNamed:@"PosterTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 self.posterCell.selectionStyle = UITableViewCellSelectionStyleNone;

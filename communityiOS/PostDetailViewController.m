@@ -86,6 +86,7 @@
 @property (strong,nonatomic) UIButton * editbutton;
 @property (strong,nonatomic) UIButton * endApplyButton;
 @property (strong,nonatomic) UIButton * delebutton;
+@property (assign ,nonatomic) int  menuHeight;
 
 
 
@@ -103,7 +104,7 @@ float cellheight = 0;
 float chainHeight = 0;
 float applyHeight = 0;
 float imageHeight = 0;
-NSInteger menuHeight ;//menu的高度
+//NSInteger menuHeight ;//menu的高度
 
 bool isModerator = NO;//是否是版主
 
@@ -467,7 +468,7 @@ bool isModerator = NO;//是否是版主
     self.HeadPortraitUrl = [defaults objectForKey:@"HeadPortraitUrl"];//当前用户头像url 不同于 head——portrait－url
     self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
 
-    menuHeight = 0;
+//    menuHeight = 0;
 
 
 }
@@ -520,8 +521,9 @@ bool isModerator = NO;//是否是版主
 
 -(void)setMenu{
    
+    self.menuHeight = 0;
     //下拉菜单
-    self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 40*menuHeight)];
+    self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 40*self.menuHeight)];
     self.operlist.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     self.operlist.alpha=0;
     //编辑 按钮
@@ -556,7 +558,7 @@ bool isModerator = NO;//是否是版主
     if(count==1){//表示menu开着
 //    if(!self.operlist.hidden){//已显示,关上
         [UIView animateWithDuration:0.3 animations:^{
-            self.operlist.frame = CGRectMake(self.view.frame.size.width-100, -90, 100, 40*menuHeight);
+            self.operlist.frame = CGRectMake(self.view.frame.size.width-100, -90, 100, 40*self.menuHeight);
             self.operlist.alpha = 1;
         }];
         count = 0;
@@ -564,7 +566,7 @@ bool isModerator = NO;//是否是版主
         
     }else{ //未显示，弹出
             [UIView animateWithDuration:0.3 animations:^{
-                self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 60, 100, 40*menuHeight);
+                self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 60, 100, 40*self.menuHeight);
                 self.operlist.alpha = 1;
             }];
             [self.view addSubview:self.operlist];
@@ -612,8 +614,8 @@ bool isModerator = NO;//是否是版主
     //编辑按钮
     if([self.user_id isEqualToString:self.poster_id]){
         [self.operlist addSubview:self.editbutton];
-        self.editbutton.frame = CGRectMake(25, 40*menuHeight, 50, 40);
-        menuHeight++;
+        self.editbutton.frame = CGRectMake(25, 40*self.menuHeight, 50, 40);
+        self.menuHeight++;
         
     }
     //结束报名按钮
@@ -623,8 +625,8 @@ bool isModerator = NO;//是否是版主
             if ([forumset.site_value isEqualToString:@"是"]) {
                 if ([self.open_apply isEqualToString:@"是"] && [self.user_id isEqualToString:self.poster_id] && [self.post_over isEqualToString:@"否"]) {
                     [self.operlist addSubview:self.endApplyButton];
-                     self.endApplyButton.frame = CGRectMake(0, 40*menuHeight, 100, 40);
-                    menuHeight++;
+                     self.endApplyButton.frame = CGRectMake(0, 40*self.menuHeight, 100, 40);
+                    self.menuHeight++;
                 }
                 
             }
@@ -635,11 +637,11 @@ bool isModerator = NO;//是否是版主
     //delete button
     if ([self.user_auth containsString:@"/系统管理员/"] || [self.moderator_of_forum_list containsObject:self.forum_id] || [self.user_id isEqualToString:self.poster_id]) {
          [self.operlist addSubview:self.delebutton];
-         self.delebutton.frame = CGRectMake(25, 40*menuHeight, 50, 40);
-            menuHeight++;
+         self.delebutton.frame = CGRectMake(25, 40*self.menuHeight, 50, 40);
+            self.menuHeight++;
     }
 //    [self setMenu];
-    self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 40*menuHeight);
+    self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 40*self.menuHeight);
     //postdetailmenu显示情况
     
     if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] && ![self.user_auth isEqualToString:@""]) ){
