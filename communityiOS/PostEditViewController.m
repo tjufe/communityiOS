@@ -109,7 +109,7 @@ NSArray *third_;
 NSString *num1 ;
 NSString *num2 ;
 NSString *num3 ;
-float cellHeight;
+float cellHeight = 1000;
 bool edit;
 
 
@@ -223,7 +223,7 @@ bool edit;
 //                }
 //            }
 
-       cellHeight = self.textcell.textview.frame.size.height;
+    //   cellHeight = self.textcell.textview.frame.size.height;
         
         return self.textcell;
 
@@ -509,21 +509,25 @@ bool edit;
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     //去掉初始的提示文字
     if(edit){
-    textView.text = nil;
-    textView.textColor = [UIColor blackColor];
-        edit = false;
+        if([textView.text isEqualToString:@"请输入内容"]){
+               textView.text = nil;
+               textView.textColor = [UIColor blackColor];
+            
+        }
     }
 
     
 }
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    self.select_post_text = textView.text;
-    CGSize size = CGSizeMake(300, 1000);
-    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
-    cellHeight = labelSize.height+10;
-    [self.PEtableview beginUpdates];
-    [self.PEtableview endUpdates];
-
+//    self.select_post_text = textView.text;
+//    CGSize size = CGSizeMake(300, 1000);
+//    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateCellHeight" object:[NSString stringWithFormat:@"%f",labelSize.height]];
+//   cellHeight = labelSize.height+10;
+//    [self.PEtableview beginUpdates];
+//    [self.PEtableview endUpdates];
+    
+    
 //    //显示在UI中
 //    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
 //    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
@@ -532,17 +536,22 @@ bool edit;
 //    [self.PEtableview reloadData];
     if(![textView.text isEqualToString:@""]){
     self.textcell.textview.text = textView.text;
+        edit = false;
     }else{
         self.textcell.textview.text = @"请输入内容";
         textView.textColor = [UIColor grayColor];
         edit =true;
     }
-    
-    //显示在UI中
-//    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
-//    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
-//    //刷新指定行
-//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+-(void)textViewDidChange:(UITextView *)textView{
+    CGSize size = CGSizeMake(300, 1000);
+    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateCellHeight" object:[NSString stringWithFormat:@"%f",labelSize.height]];
+//    cellHeight = labelSize.height+10;
+//    [self.PEtableview beginUpdates];
+//    [self.PEtableview endUpdates];
+
 }
 
 #pragma mark----长按图片
@@ -740,10 +749,10 @@ bool edit;
 //    self.textcell.textview.contentInset = UIEdgeInsetsZero;
 //}
 //#pragma mark-----
-//
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [[NSNotificationCenter defaultCenter]removeObserver:self];
-//}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -840,10 +849,17 @@ bool edit;
     }
     
     [self.PEtableview reloadData];
-
-
-
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCellHeight:) name:@"UpdateCellHeight" object:nil];
+    
 }
+
+//-(void)updateCellHeight:(NSNotification *)notification{
+//    id height = notification.object;
+//    cellHeight = [height intValue]+10;
+//    [self.PEtableview beginUpdates];
+//    [self.PEtableview endUpdates];
+//}
 
 
 #pragma mark-------获取版块设置
