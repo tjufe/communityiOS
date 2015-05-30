@@ -16,10 +16,12 @@
 #import "APIAddress.h"
 #import "UIImageView+WebCache.h"//加载图片
 #import "AFHTTPRequestOperationManager.h"
+#import "editPostItem.h"
+#import "newPostItem.h"
 
 
 
-@interface NewPostEditViewController ()<UIImagePickerControllerDelegate>
+@interface NewPostEditViewController ()<UIImagePickerControllerDelegate,UITextFieldDelegate>
 
 @property(strong,nonatomic) UIImageView *postMainPicImageView;
 @property(strong,nonatomic) UILabel *forumNameLabel;
@@ -63,7 +65,15 @@ NSString * const m_site_addmainimg = @"主帖是否包含主图";
 NSString * const m_site_needcheck= @"是否需要审核";
 NSString * const KEY_SITE_VALUE_YES = @"是";
 int flag;
+NSString  *alert_flag;
 
+
+
+#pragma mark------收键盘
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return true;
+}
 
 #pragma mark-------UIImagePickerViewController  delegate 20150527 lx
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
@@ -155,6 +165,7 @@ int flag;
         self.select_chain = _post_item.chain;
         self.select_chain_address = _post_item.chain_url;
         self.select_chain_context = _post_item.chain_name;
+        self.select_img_name = _post_item.main_image_url;
     }
     
     [self initNavigationBar];
@@ -212,6 +223,10 @@ int flag;
     self.maskview.alpha = 0.3;
     [self.view addSubview:self.maskview];
     
+    //添加点击手势
+    self.maskview.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
+    [self.maskview addGestureRecognizer:singleTap];
     
     self.addchain =[[UIView alloc]init];
     
@@ -245,6 +260,7 @@ int flag;
     [self.addchain addSubview:tlabel];
     //qingshuru
     UITextField *ctfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 80, 200, 30)];
+    ctfield.delegate = self;
     if(self.select_chain_context!=nil&&![self.select_chain_context isEqualToString:@""]){
         ctfield.text = self.select_chain_context;
     }else{
@@ -270,6 +286,7 @@ int flag;
     [self.addchain addSubview:wlabel];
     //qingshuru
     UITextField *wtfield = [[UITextField alloc ]initWithFrame:CGRectMake(80, 140, 200, 30)];
+    wtfield.delegate = self;
     if(self.select_chain_address!=nil&&![self.select_chain_address isEqualToString:@""]){
         wtfield.text = self.select_chain_address;
     }else{
@@ -298,6 +315,10 @@ int flag;
 
 }
 
+-(void)closeView{
+    [self.addchain removeFromSuperview];
+    [self.maskview removeFromSuperview];
+}
 
 -(void)selectLink{
     //获取输入值
@@ -333,6 +354,12 @@ int flag;
                 }
             }
         }
+    }
+    //显示在UI中
+    if(self.select_chain_context){
+        self.v4.hidden = NO;
+        self.chain_name.text =chainName.text;
+        self.chain_address.text = chainText.text;
     }
 
 }
@@ -435,17 +462,28 @@ int flag;
     }
     
     //外链
-    if([self.isChain isEqualToString:@"Y"]){
-        
+    if(![self.isChain isEqualToString:@"Y"]){
+        self.select_chain = @"否";
+        self.select_chain_address = @"";
+        self.select_chain_context = @"";
+    }
+    if(!self.select_chain_context){
+        self.select_chain = @"否";
+        self.select_chain_address = @"";
+        self.select_chain_context = @"";
     }else{
-        postInfo.chain = @"否";
-        postInfo.chain_name = @"";
-        postInfo.chain_url = @"";
+        self.select_chain = @"是";
+        if(!self.select_chain_address)
+            self.select_chain_address=@"";
     }
     
     //图片
     if([self.isMainImg isEqualToString:@"Y"]){
-        
+        if(!self.select_img_name){
+            postInfo.main_image_url = @"";
+        }else{
+            postInfo.main_image_url = self.select_img_name;
+        }
     }else{
         postInfo.main_image_url = @"";
     }
@@ -454,7 +492,7 @@ int flag;
     postInfo.limit_apply_num = @"";
 }
 
-
+#pragma mark------发帖
 - (void)reqReportRepair {
     NSString *post_title = [self getPostTitle];//帖子标题
     NSString *post_text = [self getPostText];//故障位置
@@ -475,15 +513,101 @@ int flag;
         postInfo.post_text_2 = post_text_2;
         postInfo.post_text_3 = post_text_3;
 
+        if(![_ED_FLAG isEqualToString:@"2"]){
         [StatusTool statusToolNewPostWithPostInfo:postInfo Success:^(id result){
-            [self.navigationController popViewControllerAnimated:YES];
+            newPostItem *new = (newPostItem *)result;
+            if([new.msg isEqualToString:@"发送成功"]){
+                UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"发布成功！" message:nil delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                
+                if([postInfo.need_check isEqualToString:@"是"]){
+                    alert1.message =@"请耐心等待审核...";
+                }
+
+                alert1.delegate = self;
+                [alert1 show];
+                alert_flag = @"s";
+            }else{
+                UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                alert2.delegate = self;
+                [alert2 show];
+                alert_flag = @"f";
+            }
+
         }failurs:^(NSError *error) {
-            
+            UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"网络异常..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+            alert2.delegate = self;
+            [alert2 show];
+            alert_flag = @"f";
         }];
+        }else{
+            [StatusTool statusToolEditPostWithPostInfo:postInfo Success:^(id object) {
+                editPostItem *new = (editPostItem *)object;
+                if([new.msg isEqualToString:@"编辑成功"]){
+                    UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"已发布！" message:nil delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                    if([postInfo.need_check isEqualToString:@"是"]){
+                        alert1.message =@"请耐心等待审核...";
+                    }
+
+                    alert1.delegate = self;
+                    [alert1 show];
+                    alert_flag = @"s";
+                }else{
+                    UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"发布失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                    alert2.delegate = self;
+                    [alert2 show];
+                    alert_flag = @"f";
+                }
+
+            } failurs:^(NSError *error) {
+                UIAlertView *alert2 = [[UIAlertView alloc]initWithTitle:@"编辑失败！" message:@"请稍后再试..." delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+                alert2.delegate = self;
+                [alert2 show];
+                alert_flag = @"f";
+            }];
+        }
     }else{
-        
+        MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+        [self.view addSubview:hud];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"报修信息不能为空！";
+        hud.dimBackground = YES;
+        [hud showAnimated:YES whileExecutingBlock:^{
+            sleep(1);
+        }completionBlock:^{
+            [hud removeFromSuperview];
+        }];
+
     }
 }
+
+#pragma mark------对话框
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex ==0) {
+        if([alert_flag isEqualToString:@"s"]){
+           
+                [self.navigationController popViewControllerAnimated:YES];
+            
+        }
+    }else{
+        if([alert_flag isEqualToString:@"delete_img"]){
+            self.select_img = nil;
+            self.select_img_name = @"";
+            //显示在UI中
+            self.postMainPicImageView.image = nil;
+        }else if([alert_flag isEqualToString:@"delete_chain"]){
+            self.select_chain = @"否";
+            self.select_chain_context = @"";
+            self.select_chain_address = @"";
+            //显示在UI中
+            self.chain_name.text = nil;
+            self.chain_address.text = nil;
+            self.v4.hidden = YES;
+        }
+    }
+}
+
+
 
 - (NSString *)getPostText {
     NSString *str = [self.postLocationTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -534,6 +658,7 @@ int flag;
 
 - (void)initPostTitle {
     self.postTitleTextField = [[UITextField alloc]init];
+    [self.postTitleTextField addTarget:self action:@selector(titleTextField_didEndOnExit) forControlEvents:UIControlEventEditingDidEndOnExit];
     if([_ED_FLAG isEqualToString:@"2"]
         &&![_post_item.title isEqualToString:@""]&&_post_item.title!=nil){//编辑帖子
             self.postTitleTextField.text = _post_item.title;
@@ -550,9 +675,14 @@ int flag;
     [self.v addSubview:self.postTitleTextField];
 }
 
+-(void)titleTextField_didEndOnExit{
+    [self.postLocationTextField becomeFirstResponder];
+}
+
 - (void)initLocation {
     self.postLocationTextField = [[UITextField alloc]init];
     
+    self.postLocationTextField.delegate = self;
     if([_ED_FLAG isEqualToString:@"2"]
        &&![_post_item.post_text isEqualToString:@""]&&_post_item.post_text!=nil){//编辑帖子
         self.postLocationTextField.text = _post_item.post_text;
@@ -594,10 +724,15 @@ int flag;
             for(int i=0;i<[repairTextArr count];i++){
                 if([_post_item.post_text_1 isEqualToString:[repairTextArr objectAtIndex:i]]){
                     self.segmentedController.selectedSegmentIndex = i;//设置初始选中状态
-                }else{
-                    self.segmentedController.selectedSegmentIndex=[repairTextArr count]-1;//其他
                     flag = 1;
                 }
+            }
+            
+            if(flag!=1){
+                
+            self.segmentedController.selectedSegmentIndex=[repairTextArr count]-1;//其他
+                flag = 2;
+               
             }
         }
         
@@ -619,6 +754,7 @@ int flag;
 
 - (void)initPostContent {
     self.postContentTextView = [[UITextView alloc]init];
+    self.postContentTextView.delegate = self;
     self.postContentTextView.font = self.forumNameLabel.font;
     self.postContentTextView.textAlignment = UITextAlignmentLeft;
     self.postContentTextView.frame = CGRectMake(4,self.sv.frame.origin.y+self.sv.frame.size.height, self.view.frame.size.width-4, 30);
@@ -637,6 +773,7 @@ int flag;
 
 - (void)initReporterName {
     self.reporterNameTextField = [[UITextField alloc]init];
+    [self.reporterNameTextField addTarget:self action:@selector(NameTextField_didEndOnExit) forControlEvents:UIControlEventEditingDidEndOnExit];
     if([_ED_FLAG isEqualToString:@"2"]
        &&![_post_item.post_text_2 isEqualToString:@""]&&_post_item.post_text_2!=nil){//编辑帖子
         self.reporterNameTextField.text = _post_item.post_text_2;
@@ -653,8 +790,13 @@ int flag;
     [self.v2 addSubview:self.reporterNameTextField];
 }
 
+-(void)NameTextField_didEndOnExit{
+    [self.reporterPhoneTextField becomeFirstResponder];
+}
+
 - (void)initReporterPhone {
     self.reporterPhoneTextField = [[UITextField alloc]init];
+    self.reporterPhoneTextField.delegate = self;
     if([_ED_FLAG isEqualToString:@"2"]
        &&![_post_item.post_text_3 isEqualToString:@""]&&_post_item.post_text_3!=nil){//编辑帖子
         self.reporterPhoneTextField.text = _post_item.post_text_3;
@@ -674,7 +816,7 @@ int flag;
     self.postMainPicImageView.frame = CGRectMake(0, self.v2.frame.origin.y+self.v2.frame.size.height, self.view.frame.size.width, 158);
     if([_ED_FLAG isEqualToString:@"2"]){
         if(![_post_item.main_image_url isEqualToString:@""]&&_post_item.main_image_url!=nil){
-            NSString *img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,_post_item.main_image_url];
+            NSString *img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.select_img_name];
             
             //包含中文字符的string转换为nsurl
             NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -687,8 +829,26 @@ int flag;
             self.postMainPicImageView.hidden = YES;
         }
     }
+    
+    self.postMainPicImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singletap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(deleteImg)];
+    [self.postMainPicImageView addGestureRecognizer:singletap];
 //    self.postMainPicImageView.image = [UIImage imageNamed:@"image_01"];
 }
+
+#pragma mark------删除图片
+-(void)deleteImg{
+    
+    if(self.postMainPicImageView.image){
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除图片？" message:@"您确定删除该图片吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+    alert_flag = @"delete_img";
+    }
+}
+
+
+
 
 -(void)initLink{
     self.v4 = [[UIView alloc]init];
@@ -713,8 +873,8 @@ int flag;
     
     if([_ED_FLAG isEqualToString:@"2"]){
         if([_post_item.chain isEqualToString:@"是"]){
-            self.chain_name.text = _post_item.chain_name;
-            self.chain_address.text = _post_item.chain_url;
+            self.chain_name.text = self.select_chain_context;
+            self.chain_address.text = self.select_chain_address;
         }else{
             self.v4.hidden = YES;
         }
@@ -722,6 +882,20 @@ int flag;
         self.v4.hidden = YES;
     }
     
+    self.v4.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singletap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(deleteChain)];
+    [self.v4 addGestureRecognizer:singletap];
+}
+
+#pragma mark------删除外链
+-(void)deleteChain{
+    
+    if(self.v4.hidden){
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除外链？" message:@"您确定删除该外链吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+    alert_flag = @"delete_chain";
+    }
+
 }
 
 

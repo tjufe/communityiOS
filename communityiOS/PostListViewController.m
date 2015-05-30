@@ -20,7 +20,7 @@
 #import "uncheckPostListItem.h"
 #import "MJRefresh.h"//用于列表下拉刷新第三方集成控件
 #import "MBProgressHUD.h" //刷新的进度条
-
+#import "ViewController.h"
 #import "APIAddress.h"
 
 #import "NewPostEditViewController.h"
@@ -141,7 +141,7 @@ NSInteger page_filter;
           cell.post_apply_num.text = [self.Poster_Apply_Array objectAtIndex:indexPath.row];
           }else{
                cell.post_apply_num.hidden = YES;
-               cell.img_apply.hidden = YES;
+               cell.img_apply.hidden = YES; 
                cell.dot_apply.hidden = YES;
           }
      }else{
@@ -168,23 +168,76 @@ NSInteger page_filter;
   
           
      }
-          //是否置顶&&审核
-          
-          if([p.need_check isEqualToString:@"是"]&&[p.checked isEqualToString:@"否"]){
-               cell.setTop.image = [UIImage imageNamed:@"待审核"];
-          }
-          else if ([p.set_top isEqualToString:@"是"]){
-               cell.setTop.hidden = NO;
-          }
-          else{
-               cell.setTop.hidden = YES;
-          }
+     //是否置顶&&审核
+     
+     if([p.need_check isEqualToString:@"是"]&&[p.checked isEqualToString:@"否"]){
+          cell.setTop.image = [UIImage imageNamed:@"待审核"];
+     }
+     else if ([p.set_top isEqualToString:@"是"]){
+          cell.setTop.hidden = NO;
+     }
+     else{
+          //               CGRect a = cell.PostLabel.frame;
+          //               //201505281322hmx
+          //               cell.PostLabel.translatesAutoresizingMaskIntoConstraints = NO;
+          //               cell.PostLabel.frame = CGRectMake(8, cell.PostLabel.frame.origin.y, cell.PostLabel.frame.size.width, cell.PostLabel.frame.size.height);
+          //               CGRect b = cell.PostLabel.frame;
+          //               cell.PostLabel.translatesAutoresizingMaskIntoConstraints = NO;
+          //               cell.setTop.translatesAutoresizingMaskIntoConstraints = NO;
+          ////               [cell.PostLabel removeConstraint:cell.postLabelLayoutConstraint];
+          //               [cell.PostLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:cell.PostLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:cell.setTop attribute:NSLayoutAttributeRight multiplier:1 constant:-21]];
+          //201505281322hmx
+//          UILabel *l = [[UILabel alloc]initWithFrame:CGRectMake(8, 8, cell.PostLabel.frame.size.width, cell.PostLabel.frame.size.height)];
+//          l.text = cell.PostLabel.text;
+//          l.font = cell.PostLabel.font;
+//          [cell addSubview:l];
+//          cell.PostLabel.hidden = YES;
+          cell.setTop.hidden = YES;
+     }
      //是否已经结帖
      if([p.post_overed isEqualToString:@"是"]){
           cell.img_finish.hidden = NO;
      }else{
-           cell.img_finish.hidden = YES;
+          cell.img_finish.hidden = YES;
      }
+     
+     cell.setTop.hidden = YES;
+     cell.img_finish.hidden = YES;
+     cell.PostLabel.hidden = YES;
+     float x = 8;
+     if(([p.need_check isEqualToString:@"是"]&&[p.checked isEqualToString:@"否"])||[p.set_top isEqualToString:@"是"]){
+          UIImageView *i1 = [[UIImageView alloc]init];
+          if([p.need_check isEqualToString:@"是"]&&[p.checked isEqualToString:@"否"]){
+               i1.image = [UIImage imageNamed:@"待审核"];
+          }else if([p.set_top isEqualToString:@"是"]){
+               i1.image = [UIImage imageNamed:@"顶"];
+          }
+          i1.frame = CGRectMake(x, 8, 21, 42);
+          i1.contentMode = UIViewContentModeScaleAspectFit;
+          [cell addSubview:i1];
+          x += 21;
+     }
+     if([p.post_overed isEqualToString:@"是"]){
+          UIImageView *i2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"结"]];
+          i2.frame = CGRectMake(x, 8, 21, 42);
+          i2.contentMode = UIViewContentModeScaleAspectFit;
+          [cell addSubview:i2];
+          x += 21;
+     }
+     UILabel *l = [[UILabel alloc]initWithFrame:CGRectMake(x, 8, cell.PostLabel.frame.size.width, 42)];
+     l.numberOfLines = 2;
+     l.text = cell.PostLabel.text;
+     l.font = cell.PostLabel.font;
+     [cell addSubview:l];
+//
+//     UITextView *t = [[UITextView alloc]initWithFrame:CGRectMake(x, 8, cell.PostLabel.frame.size.width, 21)];
+//
+//     t.backgroundColor = nil;
+//     t.text = cell.PostLabel.text;
+//     t.font = cell.PostLabel.font;
+//     [cell addSubview:t];
+
+
 
 //     }
     // if([reply_num isKindOfClass:[NSNull class]]){
@@ -234,9 +287,15 @@ NSInteger page_filter;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+     _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
      
-     if ([self.forum_item.display_type isEqualToString:@"纵向"]) {
-          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
+
+     if(![_filter_flag isEqualToString:@"全部"]){
+          [self getForumItem:_PostItem];
+     }
+
+     if (![_forum_item.forum_name containsString:@"报修"]) {
+         
           PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
           //全局变量传值
           PDVC.forum_item = _forum_item;
@@ -248,8 +307,10 @@ NSInteger page_filter;
                [self.delegate addpostItem:_PostItem];
           }
           [self.navigationController pushViewController:PDVC animated:YES];
+
      }else{
-          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
+
+//          _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
           PostMendDetailViewController *PDVC = [ PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
           //全局变量传值
           PDVC.forum_item = _forum_item;
@@ -261,11 +322,23 @@ NSInteger page_filter;
                [self.delegate addpostItem:_PostItem];
           }
           [self.navigationController pushViewController:PDVC animated:YES];
-
      }
+     
      
 }
 
+
+#pragma mark-----我的话题 获取每个帖子的forumitem
+-(void)getForumItem:(postItem *)postItem{
+     NSArray *forum = [ViewController getForumList];
+     for(int i=0;i<[forum count];i++){
+          forumItem *f = [forum objectAtIndex:i];
+          if([postItem.belong_forum_id isEqualToString:f.forum_id]){
+               _forum_item = f;
+               break;
+          }
+     }
+}
 
 #pragma mark----下拉刷新
 -(void)headerRereshing{
@@ -1116,7 +1189,7 @@ NSInteger page_filter;
 
 #pragma mark------当前版块下发帖
 -(void)NewPost{
-     if ([self.forum_item.display_type isEqualToString:@"纵向"]) {
+     if (![_forum_item.forum_name containsString:@"报修"]) {
          PostEditViewController *PEVC = [ PostEditViewController createFromStoryboardName:@"PostEdit" withIdentifier:@"pe"];//通过UIViewController+Create扩展方法创建FourViewController的实例对象
          PEVC.forum_item = _forum_item;
          PEVC.ED_FLAG =@"1";// 当前版块下发帖
