@@ -328,7 +328,6 @@ int starAmount = 0;
                     if(!cell){
                         cell = [[[NSBundle mainBundle]loadNibNamed:@"MyMendReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
                     }
-                    cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, self.navigationController.view.frame.size.width, cell.frame.size.height);
 
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     //填装数据
