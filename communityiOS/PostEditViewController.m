@@ -185,46 +185,50 @@ bool edit;
             self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
             self.textcell.textview.delegate = self;
             self.textcell.textview.scrollEnabled = NO;
-        }
-
-        self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.textcell.textview.delegate = self;
-        self.text_tv = self.textcell.textview;
-        //定义一个toolBar
-        UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-        //设置style
-        [topView setBarStyle:UIBarStyleDefault];
-        
-        //定义两个flexibleSpace的butto，放在toolbar上，这样完成按钮就会在最右边
-        UIBarButtonItem * btn1 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-        UIBarButtonItem * btn2 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-        
-        //定义完成按钮
-        UIBarButtonItem *donebtn = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(resignKeyboard)];
-        
-        //在toolBar上加上这些按钮
-        NSArray *btnArray = [NSArray arrayWithObjects:btn1,btn2,donebtn,nil];
-        [topView setItems:btnArray];
-        
-        
-        [self.textcell.textview setInputAccessoryView:topView];
-
-        
-        
-      
+            self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
+            self.textcell.textview.delegate = self;
+            self.text_tv = self.textcell.textview;
+            //定义一个toolBar
+            UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+            //设置style
+            [topView setBarStyle:UIBarStyleDefault];
+            
+            //定义两个flexibleSpace的butto，放在toolbar上，这样完成按钮就会在最右边
+            UIBarButtonItem * btn1 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            UIBarButtonItem * btn2 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            
+            //定义完成按钮
+            UIBarButtonItem *donebtn = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(resignKeyboard)];
+            
+            //在toolBar上加上这些按钮
+            NSArray *btnArray = [NSArray arrayWithObjects:btn1,btn2,donebtn,nil];
+            [topView setItems:btnArray];
+            
+            
+            [self.textcell.textview setInputAccessoryView:topView];
+            
+            
+            
+            
             //flag如果是2，表示编辑原有帖子
             if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
                 self.textcell.textview.text = _post_item.post_text;
+                CGRect frame = self.textcell.textview.frame;
+                CGSize constraintSize = CGSizeMake(frame.size.width, MAXFLOAT);
+                CGSize size = [self.textcell.textview sizeThatFits:constraintSize];
+                cellHeight = size.height;
+//                [self.PEtableview beginUpdates];
+//                [self.PEtableview endUpdates];
             }
- //               else{
-//                if(![self.select_post_text isEqualToString:@""]){
-//                self.textcell.textview.text = self.select_post_text;
-//                }
-//            }
-
-    //   cellHeight = self.textcell.textview.frame.size.height;
-        
+            //               else{
+            //                if(![self.select_post_text isEqualToString:@""]){
+            //                self.textcell.textview.text = self.select_post_text;
+            //                }
+            //            }
+            
+            //   cellHeight = self.textcell.textview.frame.size.height;
+        }
         return self.textcell;
 
     }else if(indexPath.row==3){
@@ -756,7 +760,7 @@ bool edit;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    cellHeight = self.PEtableview.frame.size.height - 160;
+//    cellHeight = self.PEtableview.frame.size.height - 160;
     //初始化
     self.select_image = [[UIImage alloc]init];
     self.select_open_apply = [[NSString alloc]init];
@@ -850,16 +854,16 @@ bool edit;
     
     [self.PEtableview reloadData];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCellHeight:) name:@"UpdateCellHeight" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCellHeight:) name:@"UpdateCellHeight" object:nil];
     
 }
 
-//-(void)updateCellHeight:(NSNotification *)notification{
-//    id height = notification.object;
-//    cellHeight = [height intValue]+10;
-//    [self.PEtableview beginUpdates];
-//    [self.PEtableview endUpdates];
-//}
+-(void)updateCellHeight:(NSNotification *)notification{
+    id height = notification.object;
+    cellHeight = [height intValue]+10;
+    [self.PEtableview beginUpdates];
+    [self.PEtableview endUpdates];
+}
 
 
 #pragma mark-------获取版块设置
