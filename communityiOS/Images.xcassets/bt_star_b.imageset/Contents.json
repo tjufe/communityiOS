@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "halfselected.png"
+      "filename" : "bt_star_b.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "bt_star_b@2x.png"
     },
     {
       "idiom" : "universal",

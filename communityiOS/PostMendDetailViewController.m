@@ -32,6 +32,8 @@
 #import "replyInfoItem.h"
 #import "MJRefresh.h"
 #import "RatingBar.h"
+#import "ScoreTypeList.h"
+#import "EvaluateTableViewCell.h"
 
 @interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 - (IBAction)replyAction:(id)sender;
@@ -81,6 +83,10 @@
 @property (weak,nonatomic) NSString* apply_flag;
 @property (weak,nonatomic) NSString* post_over;
 @property (weak,nonatomic) NSString* apply_enough;
+@property (weak,nonatomic) NSString* post_text4;
+@property (weak,nonatomic) NSString* post_text5;
+
+
 
 
 @property (strong,nonatomic) ApplyTableViewCell * applyCell;
@@ -88,6 +94,7 @@
 @property (strong,nonatomic) PosterTableViewCell * posterCell;
 @property (strong,nonatomic) PostTextTableViewCell * postTextCell;
 @property (strong,nonatomic) PostImageTableViewCell * postImageCell;
+@property (strong,nonatomic) EvaluateTableViewCell * evaluateCell;
 @property (strong,nonatomic) UIBarButtonItem *rightItem;
 
 @property (strong,nonatomic) UIButton * editbutton;
@@ -110,6 +117,11 @@
 @property (strong,nonatomic)UIView *maskView;
 @property (strong,nonatomic)UIView *assessView;
 @property (strong,nonatomic)NSString *evaluateStr;
+@property (strong,nonatomic)NSMutableArray *scoreTypeList;
+@property (strong,nonatomic)RatingBar *ratingBar;
+@property (strong,nonatomic)UILabel *assessLabel;
+
+- (IBAction)ViewTouchDown:(id)sender;
 
 
 @end
@@ -130,7 +142,8 @@ int mend_reply_page = 1;
 int mend_reply_rows = 1000;
 int mend_page_filter = 0;
 int mend_screenHeight = 0;
-float mend_score = 0;
+int mend_score = 0;
+int starAmount = 0;
 
 #pragma mark-
 #pragma mark----------------当点击view的区域就会触发这个事件----------------------
@@ -147,7 +160,7 @@ float mend_score = 0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.replyListArray.count + 5;
+    return self.replyListArray.count + 6;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -287,21 +300,36 @@ float mend_score = 0;
             }
             return self.applyCell;
             
+        }else if (indexPath.row == 5){
+            
+            self.evaluateCell = [ tableView dequeueReusableCellWithIdentifier:nil];
+            if (!self.evaluateCell) {
+                self.evaluateCell= [[[NSBundle mainBundle]loadNibNamed:@"EvaluateTableViewCell" owner:nil options:nil]objectAtIndex:0];
+                self.evaluateCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                self.evaluateCell.hidden = YES;
+                self.evaluateCell.scoreLabel.text = self.post_text4;
+                self.evaluateCell.messageLabel.text = self.post_text5;
+
+            }
+            
+            return self.evaluateCell;
+        
+            
         }else {
     
             if ([self.forum_item.display_type isEqualToString:@"横向"]) {
-                if ([[self.replyIDData objectAtIndex:indexPath.row - 5]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
+                if ([[self.replyIDData objectAtIndex:indexPath.row - 6]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
                     MyMendReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
                     if(!cell){
                         cell = [[[NSBundle mainBundle]loadNibNamed:@"MyMendReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
                     }
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     //填装数据
-                    cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-5];
-                    cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row-5];
-                    [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-5]];
+                    cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-6];
+                    cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row-6];
+                    [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-6]];
                     //图片
-                    NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-5]];
+                    NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-6]];
                     NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
                     NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
                     NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
@@ -328,11 +356,11 @@ float mend_score = 0;
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //填装数据
-            cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-5];
-            cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row-5];
-            [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-5]];
+            cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-6];
+            cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row-6];
+            [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-6]];
             //图片
-            NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-5]];
+            NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-6]];
             NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
             NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
             NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
@@ -367,6 +395,9 @@ float mend_score = 0;
             
         }else if (indexPath.row == 4){
             return mend_applyHeight ;
+        }else if (indexPath.row == 5){
+            UITableViewCell *cell = [self tableView:self.tableview cellForRowAtIndexPath:indexPath];
+            return cell.frame.size.height + 10;
         }else{
             
             UITableViewCell *cell = [self tableView:self.tableview cellForRowAtIndexPath:indexPath];
@@ -399,7 +430,7 @@ float mend_score = 0;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:(BOOL)animated];
-    //注册监听
+    //注册监听,实现上推和收起键盘
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -430,6 +461,7 @@ float mend_score = 0;
     self.replyContentData = [[NSMutableArray alloc]init];
     self.Page = [[NSNumber alloc]init];
     self.Rows = [[NSNumber alloc]init];
+    self.scoreTypeList = [[NSMutableArray alloc]init];
 
     if(self.post_item == nil){
         
@@ -463,7 +495,31 @@ float mend_score = 0;
     //清楚多余的表
     [self clearExtraLine:self.tableview];
     
+    //下载评分的类型
+    [StatusTool statusToolGetScoreTypeWithCommunityID:self.community_id ForumID:self.forum_id Success:^(id object) {
+        
+        for (int i = 0; i<[object count]; i++) {
+            [self.scoreTypeList addObject:[object objectAtIndex:i]];
+        }
+        starAmount = (int)[self.scoreTypeList count];
+        
+    } failurs:^(NSError *error) {
+        //
+    }];
+    
+    //注册通知 assessLabel
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLabelText:) name:@"ChangeLabelTextNotification" object:nil];
+    
 }
+
+-(void)changeLabelText:(NSNotification *)notification{
+    
+    id score = notification.object;
+    mend_score = [score intValue];
+    self.assessLabel.text = [self.scoreTypeList objectAtIndex:mend_score-1];
+    
+}
+
 #pragma mark-
 #pragma mark--------------------去掉多余的线----------------------------
 -(void)clearExtraLine:(UITableView *)tableView{
@@ -563,6 +619,8 @@ float mend_score = 0;
     self.poster_auth = self.post_item.poster_auth;
     self.post_over = self.post_item.post_overed;
     self.apply_enough = self.post_item.apply_enough;
+    self.post_text4 = self.post_item.post_text_4;
+    self.post_text5 = self.post_item.post_text_5;
     
     for(int i=0; i<self.forumList.count; i++) {
         forumItem *forumitem = [self.forumList objectAtIndex:i];
@@ -636,22 +694,28 @@ float mend_score = 0;
     self.operlist.alpha=0;
     //编辑 按钮
     self.editbutton = [[UIButton alloc]init];
-    self.editbutton.frame = CGRectMake(25, 0, 50, 50);
+    self.editbutton.frame = CGRectMake(25, 0, 100, 50);
+    self.editbutton.titleLabel.frame = CGRectMake(25, 0, 100, 50);
     [self.editbutton setTitle:@"编辑" forState:UIControlStateNormal];
+    self.editbutton.titleLabel.font = [UIFont systemFontOfSize: 13.0];
     [self.editbutton addTarget:self action:@selector(EditPost) forControlEvents:UIControlEventTouchUpInside];
     [self.editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     //结束保修按钮
     self.endMendBtn = [[UIButton alloc]init];
-    self.endMendBtn.frame = CGRectMake(25, 100, 50, 50);
-    [self.endMendBtn setTitle:@"结束报修" forState:UIControlStateNormal];
+    self.endMendBtn.frame = CGRectMake(25, 100, 100, 50);
+    self.endMendBtn.titleLabel.frame = CGRectMake(25, 0, 100, 50);
+    [self.endMendBtn setTitle: @"结束报修" forState: UIControlStateNormal];
+    self.endMendBtn.titleLabel.font = [UIFont systemFontOfSize: 13.0];
     [self.endMendBtn addTarget:self action:@selector(endMend) forControlEvents:UIControlEventTouchUpInside];
     [self.endMendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     //删除按钮
     self.delebutton = [[UIButton alloc]init];
-    self.delebutton.frame = CGRectMake(25, 50, 50, 50);
+    self.delebutton.frame = CGRectMake(25, 50, 100, 50);
+    self.delebutton.titleLabel.frame = CGRectMake(25, 0, 100, 50);
     [self.delebutton setTitle:@"删除" forState:UIControlStateNormal];
+    self.delebutton.titleLabel.font = [UIFont systemFontOfSize: 13.0];
     [self.delebutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.delebutton addTarget:self action:@selector(DelePost) forControlEvents:UIControlEventTouchUpInside];
     
@@ -852,14 +916,6 @@ float mend_score = 0;
 //    
 //}
 -(void)endMend{
-    //下载评分的类型
-    [StatusTool statusToolGetScoreTypeWithCommunityID:self.community_id ForumID:self.forum_id Success:^(id object) {
-        
-        NSLog(@"%@",object[@"score_text"]);
-       //
-    } failurs:^(NSError *error) {
-        //
-    }];
     
     //添加蒙版
     self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -871,77 +927,100 @@ float mend_score = 0;
     self.assessView.frame = CGRectMake(self.tableview.center.x-150, self.view.frame.size.height, 300, 220);
     self.assessView.alpha = 0;
     self.assessView.backgroundColor = [UIColor whiteColor];
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         self.assessView.alpha = 1;
-        self.assessView.frame = CGRectMake(self.tableview.center.x-150, self.tableview.center.y-110, 300, 220);
+        self.assessView.frame = CGRectMake(self.tableview.center.x-150, self.tableview.center.y-150, 300, 220);
         [self.assessView.layer setCornerRadius:self.assessView.frame.size.height/20];
     }];
     [self.view addSubview:self.assessView];
     
     //推送
-    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 100, 30)];
-    title.text = @"推送";
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 100, 30)];
+    title.text = @"结束报修";
     title.textColor = [UIColor redColor];
     title.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     [self.assessView addSubview:title];
-    //红线
+    //红线1
     UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 300, 2)];
     [vi setBackgroundColor:[UIColor redColor]];
     [self.assessView  addSubview:vi];
     
     //第一行文字
-    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 70, 130, 50)];
+    UILabel *tlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 50, 100, 70)];
     tlabel.text = @"请为本次报修打分:";
+    tlabel.adjustsFontSizeToFitWidth = YES;
     tlabel.textAlignment = UITextAlignmentLeft;
     tlabel.lineBreakMode = UILineBreakModeWordWrap;
     tlabel.numberOfLines = 0;
     tlabel.textColor = [UIColor grayColor];
-    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    tlabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:17];
     [self.assessView addSubview:tlabel];
+    
     //第一行评价语句
-    UILabel *assessLabel = [[UILabel alloc]initWithFrame:CGRectMake(tlabel.frame.origin.x+30, 70, 130, 15)];
-    assessLabel.text = @"Welcome";
-    assessLabel.textColor = [UIColor grayColor];
-    assessLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
-    [self.assessView addSubview:assessLabel];
+    self.assessLabel = [[UILabel alloc]initWithFrame:CGRectMake(tlabel.frame.origin.x+tlabel.frame.size.width+15, 65, 130, 15)];
+    self.assessLabel.text = @"Welcome!";
+    self.assessLabel.textColor = [UIColor grayColor];
+    self.assessLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    [self.assessView addSubview:self.assessLabel];
+    
     //星星
-    RatingBar *ratingBar = [[RatingBar alloc]init];
-    ratingBar.frame = CGRectMake(tlabel.frame.origin.x+30, assessLabel.frame.origin.y+assessLabel.frame.size.height, 180, 35);
-    [ratingBar setImageDeselected:@"unselected" halfSelected:@"halfselected" fullSelected:@"selected" andDelegate:self];
-    [self.assessView addSubview:ratingBar];
-    mend_score = [ratingBar rating];
+    self.ratingBar = [[RatingBar alloc] initWithFrame:CGRectMake(tlabel.frame.origin.x+tlabel.frame.size.width-16, self.assessLabel.frame.origin.y+self.assessLabel.frame.size.height, 180, 35) WithStarAmount:starAmount];
+    [self.assessView addSubview:self.ratingBar];
+    
+    //红线2
+    UIView *vii = [[UIView alloc]initWithFrame:CGRectMake(0, self.ratingBar.frame.origin.y+self.ratingBar.frame.size.height+5, 300, 1)];
+    [vii setBackgroundColor:[UIColor lightGrayColor]];
+    vii.alpha = 0.7;
+    [self.assessView  addSubview:vii];
     
     //第二行文字
-    UILabel *flabel = [[UILabel alloc]initWithFrame:CGRectMake(10, tlabel.frame.origin.y+tlabel.frame.size.height, 130, 15)];
+    UILabel *flabel = [[UILabel alloc]initWithFrame:CGRectMake(10, vii.frame.origin.y+vii.frame.size.height+13, 100, 35)];
     flabel.text = @"请给我们留言:";
     flabel.textAlignment = UITextAlignmentLeft;
+    flabel.numberOfLines = 0;
+    flabel.lineBreakMode = UILineBreakModeWordWrap;
     flabel.textColor = [UIColor grayColor];
-    flabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
+    flabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:17];
     [self.assessView addSubview:flabel];
     //留言文本框
     UITextField *messageField = [[UITextField alloc]init];
-    messageField.frame = CGRectMake(tlabel.frame.origin.x+30, ratingBar.frame.origin.y+ratingBar.frame.size.height, 180, 13);
+    messageField.frame = CGRectMake(flabel.frame.origin.x+flabel.frame.size.width, flabel.frame.origin.y, 180, 30);
     [messageField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
+    // messageField.backgroundColor = [UIColor lightGrayColor];
     [self.assessView addSubview:messageField];
+    //留言框黑线
+    UIView *textLine = [[UIView alloc]initWithFrame:CGRectMake(flabel.frame.origin.x+flabel.frame.size.width, messageField.frame.origin.y+messageField.frame.size.height+5, 180, 0.5)];
+    [textLine setBackgroundColor:[UIColor blackColor]];
+    [self.assessView  addSubview:textLine];
     
-    UIView *vii = [[UIView alloc]initWithFrame:CGRectMake(tlabel.frame.origin.x+30, messageField.frame.origin.y+messageField.frame.size.height, 180, 1)];
-    [vii setBackgroundColor:[UIColor redColor]];
-    [self.assessView  addSubview:vii];
+    //红线3
+    UIView *viii = [[UIView alloc]initWithFrame:CGRectMake(0, flabel.frame.origin.y+flabel.frame.size.height+10, 300, 1)];
+    [viii setBackgroundColor:[UIColor lightGrayColor]];
+    viii.alpha = 0.7;
+    [self.assessView  addSubview:viii];
     
     //按钮
     UIButton *sureBtn = [[UIButton alloc]init];
-    sureBtn .frame = CGRectMake(tlabel.frame.origin.x+30, flabel.frame.origin.y+flabel.frame.size.height+10, 145, 40);
-    sureBtn.titleLabel.text = @"确定";
+    sureBtn .frame = CGRectMake(10, viii.frame.origin.y+viii.frame.size.height+5, 135, 30);
+    [sureBtn setTitle: @"确定" forState: UIControlStateNormal];
+    [sureBtn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
     sureBtn.backgroundColor = [UIColor lightGrayColor];
+    sureBtn.alpha = 0.5;
+    [sureBtn.layer setMasksToBounds:YES];
+    [sureBtn.layer setCornerRadius:5.0];
     [sureBtn addTarget:self action:@selector(assessAndClose) forControlEvents:UIControlEventTouchUpInside];
     [self.assessView addSubview:sureBtn];
     UIButton *cancelBtn = [[UIButton alloc]init];
-    cancelBtn.frame = CGRectMake(sureBtn.frame.origin.x+10, flabel.frame.origin.y+flabel.frame.size.height+10, 145, 40);
-    cancelBtn.titleLabel.text = @"取消";
+    cancelBtn.frame = CGRectMake(sureBtn.frame.origin.x+sureBtn.frame.size.width+10, viii.frame.origin.y+viii.frame.size.height+5, 135, 30);
+    [cancelBtn setTitle: @"取消" forState: UIControlStateNormal];
+    [cancelBtn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
     cancelBtn.backgroundColor = [UIColor lightGrayColor];
+    cancelBtn.alpha = 0.5;
+    [cancelBtn.layer setMasksToBounds:YES];
+    [cancelBtn.layer setCornerRadius:5.0];
     [cancelBtn addTarget:self action:@selector(justClose) forControlEvents:UIControlEventTouchUpInside];
     [self.assessView addSubview:cancelBtn];
-
+    
 }
 
 
@@ -950,9 +1029,10 @@ float mend_score = 0;
     self.evaluateStr = textField.text;
 }
 
+
 -(void)assessAndClose{
     //发送评分
-    [StatusTool statusToolPostMendScoreWithPostID:self.post_id User_ID:self.user_id Score:[NSString stringWithFormat:@"%f",mend_score] Evaluate:self.evaluateStr Success:^(id object) {
+    [StatusTool statusToolPostMendScoreWithPostID:self.post_id User_ID:self.user_id Score:[NSString stringWithFormat:@"%d",mend_score] Evaluate:self.evaluateStr Success:^(id object) {
         if (![[object valueForKey:@"status"] isEqualToString:@""]) {
              [self justClose];
         }
@@ -1306,4 +1386,8 @@ float mend_score = 0;
 }
 
 
+- (IBAction)ViewTouchDown:(id)sender {
+    
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
 @end

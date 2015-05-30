@@ -1,192 +1,120 @@
 //
 //  RatingBar.m
-//  communityiOS
+//  MyRatingBar
 //
-//  Created by Sunxiaoyuan on 15/5/28.
-//  Copyright (c) 2015年 &#20309;&#33538;&#39336;. All rights reserved.
+//  Created by Leaf on 14-8-28.
+//  Copyright (c) 2014年 Leaf. All rights reserved.
 //
 
 #import "RatingBar.h"
+#define ZOOM 0.8f
 
-@interface RatingBar (){
-    float starRating;
-    float lastRating;
-    
-    float height;
-    float width;
-    
-    UIImage *unSelectedImage;
-    UIImage *halfSelectedImage;
-    UIImage *fullSelectedImage;
-}
-
-@property (nonatomic,strong) UIImageView *s1;
-@property (nonatomic,strong) UIImageView *s2;
-@property (nonatomic,strong) UIImageView *s3;
-@property (nonatomic,strong) UIImageView *s4;
-@property (nonatomic,strong) UIImageView *s5;
-
-@property (nonatomic,weak) id<RatingBarDelegate> delegate;
+@interface RatingBar()
+@property (nonatomic,strong) UIView *bottomView;
+@property (nonatomic,strong) UIView *topView;
+@property (nonatomic,assign) CGFloat starWidth;
 
 @end
 
 @implementation RatingBar
 
-/**
- *  初始化设置未选中图片、半选中图片、全选中图片，以及评分值改变的代理（可以用
- *  Block）实现
- *
- *  @param deselectedName   未选中图片名称
- *  @param halfSelectedName 半选中图片名称
- *  @param fullSelectedName 全选中图片名称
- *  @param delegate          代理
- */
--(void)setImageDeselected:(NSString *)deselectedName halfSelected:(NSString *)halfSelectedName fullSelected:(NSString *)fullSelectedName andDelegate:(id<RatingBarDelegate>)delegate{
-    
-    self.delegate = delegate;
-    
-    unSelectedImage = [UIImage imageNamed:deselectedName];
-    halfSelectedImage = halfSelectedName == nil ? unSelectedImage : [UIImage imageNamed:halfSelectedName];
-    fullSelectedImage = [UIImage imageNamed:fullSelectedName];
-    
-    height = 0.0,width = 0.0;
-    
-    if (height < [fullSelectedImage size].height) {
-        height = [fullSelectedImage size].height;
+@synthesize delegate;
+
+
+
+
+- (id)initWithFrame:(CGRect)frame WithStarAmount:(NSInteger)amount
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        self.backgroundColor = [UIColor whiteColor];
+        self.bottomView = [[UIView alloc] initWithFrame:self.bounds];
+        self.topView = [[UIView alloc] initWithFrame:CGRectZero];
+        
+        [self addSubview:self.bottomView];
+        [self addSubview:self.topView];
+        
+        self.topView.clipsToBounds = YES;
+        self.topView.userInteractionEnabled = NO;
+        self.bottomView.userInteractionEnabled = NO;
+        self.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        [self addGestureRecognizer:tap];
+        [self addGestureRecognizer:pan];
+        
+        CGFloat width = frame.size.width/7.0;
+        self.starWidth = width;
+        for(int i = 0;i<amount;i++){
+            UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width*ZOOM, width*ZOOM)];
+            img.center = CGPointMake((i+1.5)*width, frame.size.height/2);
+            img.image = [UIImage imageNamed:@"bt_star_a"];
+            [self.bottomView addSubview:img];
+            UIImageView *img2 = [[UIImageView alloc] initWithFrame:img.frame];
+            img2.center = img.center;
+            img2.image = [UIImage imageNamed:@"bt_star_b"];
+            [self.topView addSubview:img2];
+        }
+        self.enable = YES;
     }
-    if (height < [halfSelectedImage size].height) {
-        height = [halfSelectedImage size].height;
+    return self;
+}
+-(void)setViewColor:(UIColor *)backgroundColor{
+    if(_viewColor!=backgroundColor){
+        self.backgroundColor = backgroundColor;
+        self.topView.backgroundColor = backgroundColor;
+        self.bottomView.backgroundColor = backgroundColor;
     }
-    if (height < [unSelectedImage size].height) {
-        height = [unSelectedImage size].height;
+}
+-(void)setStarNumber:(NSInteger)starNumber{
+    if(_starNumber!=starNumber){
+        _starNumber = starNumber;
+        self.topView.frame = CGRectMake(0, 0, self.starWidth*(starNumber+1), self.bounds.size.height);
     }
-    if (width < [fullSelectedImage size].width) {
-        width = [fullSelectedImage size].width;
+    if([delegate respondsToSelector:@selector(setRating:isHuman:)]){
+        [delegate setRating:_starNumber isHuman:NO];
     }
-    if (width < [halfSelectedImage size].width) {
-        width = [halfSelectedImage size].width;
+}
+-(void)tap:(UITapGestureRecognizer *)gesture{
+    if(self.enable){
+        CGPoint point = [gesture locationInView:self];
+        NSInteger count = (int)(point.x/self.starWidth)+1;
+        self.topView.frame = CGRectMake(0, 0, self.starWidth*count, self.bounds.size.height);
+        if(count>5){
+            _starNumber = 5;
+            
+        }else{
+            _starNumber = count-1;
+            
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeLabelTextNotification" object: [NSString stringWithFormat:@"%ld",(long)_starNumber]];
     }
-    if (width < [unSelectedImage size].width) {
-        width = [unSelectedImage size].width;
+    if([delegate respondsToSelector:@selector(setRating:isHuman:)]){
+        [delegate setRating:_starNumber isHuman:YES];
     }
-    
-    starRating = 0.0;
-    lastRating = 0.0;
-    
-    _s1 = [[UIImageView alloc] initWithImage:unSelectedImage];
-    _s2 = [[UIImageView alloc] initWithImage:unSelectedImage];
-    _s3 = [[UIImageView alloc] initWithImage:unSelectedImage];
-    _s4 = [[UIImageView alloc] initWithImage:unSelectedImage];
-    _s5 = [[UIImageView alloc] initWithImage:unSelectedImage];
-    
-    [_s1 setFrame:CGRectMake(0,         0, width, height)];
-    [_s2 setFrame:CGRectMake(width,     0, width, height)];
-    [_s3 setFrame:CGRectMake(2 * width, 0, width, height)];
-    [_s4 setFrame:CGRectMake(3 * width, 0, width, height)];
-    [_s5 setFrame:CGRectMake(4 * width, 0, width, height)];
-    
-    [_s1 setUserInteractionEnabled:NO];
-    [_s2 setUserInteractionEnabled:NO];
-    [_s3 setUserInteractionEnabled:NO];
-    [_s4 setUserInteractionEnabled:NO];
-    [_s5 setUserInteractionEnabled:NO];
-    
-    [self addSubview:_s1];
-    [self addSubview:_s2];
-    [self addSubview:_s3];
-    [self addSubview:_s4];
-    [self addSubview:_s5];
-    
-    CGRect frame = [self frame];
-    frame.size.width = width * 5;
-    frame.size.height = height;
-    [self setFrame:frame];
-    
 }
 
-/**
- *  设置评分值
- *
- *  @param rating 评分值
- */
--(void)displayRating:(float)rating{
-    [_s1 setImage:unSelectedImage];
-    [_s2 setImage:unSelectedImage];
-    [_s3 setImage:unSelectedImage];
-    [_s4 setImage:unSelectedImage];
-    [_s5 setImage:unSelectedImage];
-    
-    if (rating >= 0.5) {
-        [_s1 setImage:halfSelectedImage];
-    }
-    if (rating >= 1) {
-        [_s1 setImage:fullSelectedImage];
-    }
-    if (rating >= 1.5) {
-        [_s2 setImage:halfSelectedImage];
-    }
-    if (rating >= 2) {
-        [_s2 setImage:fullSelectedImage];
-    }
-    if (rating >= 2.5) {
-        [_s3 setImage:halfSelectedImage];
-    }
-    if (rating >= 3) {
-        [_s3 setImage:fullSelectedImage];
-    }
-    if (rating >= 3.5) {
-        [_s4 setImage:halfSelectedImage];
-    }
-    if (rating >= 4) {
-        [_s4 setImage:fullSelectedImage];
-    }
-    if (rating >= 4.5) {
-        [_s5 setImage:halfSelectedImage];
-    }
-    if (rating >= 5) {
-        [_s5 setImage:fullSelectedImage];
-    }
-    
-    starRating = rating;
-    lastRating = rating;
-    [_delegate ratingChanged:rating];
-}
 
-/**
- *  获取当前的评分值
- *
- *  @return 评分值
- */
--(float)rating{
-    return starRating;
-}
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [super touchesBegan:touches withEvent:event];
-}
-
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    [super touchesEnded:touches withEvent:event];
-}
-
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    if (self.isIndicator) {
-        return;
-    }
-    
-    CGPoint point = [[touches anyObject] locationInView:self];
-    int newRating = (int) (point.x / width) + 1;
-    if (newRating > 5)
-        return;
-    
-    if (point.x < 0) {
-        newRating = 0;
-    }
-    
-    if (newRating != lastRating){
-        [self displayRating:newRating];
+-(void)pan:(UIPanGestureRecognizer *)gesture{
+    if(self.enable){
+        CGPoint point = [gesture locationInView:self];
+        NSInteger count = (int)(point.x/self.starWidth);
+        if(count>=0 && count<=5 && _starNumber!=count){
+            self.topView.frame = CGRectMake(0, 0, self.starWidth*(count+1), self.bounds.size.height);
+            _starNumber = count;
+        }
     }
 }
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
 
 @end

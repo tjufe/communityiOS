@@ -34,14 +34,7 @@
     frame.size.height = labelSize.height + 50;
     self.frame = frame;
     
-//    int offset = self.replyerNickName.frame.size.width - self.replyContent.frame.size.width;
-//    CGRect backFrame ;
-//    if (offset > 0) {
-//        backFrame = CGRectMake(self.replyContent.frame.origin.x -15, self.replyContent.frame.origin.y-6, self.replyerNickName.frame.size.width, labelSize.height + self.replyerNickName.frame.size.height );
-//    }else{
-//        backFrame = CGRectMake(self.replyContent.frame.origin.x-15, self.replyContent.frame.origin.y-6, self.replyContent.frame.size.width, labelSize.height + self.replyerNickName.frame.size.height);
-//    }
-    
+    //绘制对话泡泡
     UIImage *bubble = [UIImage imageNamed:@"ReceiverVoiceNodeDownloading"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
     bubbleImageView.frame = CGRectMake(self.replyContent.frame.origin.x - 15, self.replyContent.frame.origin.y - 7, labelSize.width + 50, labelSize.height + 20);

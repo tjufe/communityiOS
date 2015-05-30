@@ -235,7 +235,7 @@ NSInteger page_filter;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
      
-     if ([self.forum_item.forum_name containsString:@"保修"]) {
+     if ([self.forum_item.forum_name containsString:@"报修"]) {
           _PostItem = [self.PostListArray objectAtIndex:indexPath.row];
           PostMendDetailViewController *PDVC = [ PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
           //全局变量传值

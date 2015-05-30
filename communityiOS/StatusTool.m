@@ -28,7 +28,7 @@
 #import "editPostItem.h"
 #import "ifApplyItem.h"
 #import "postApplyItem.h"
-
+#import "ScoreTypeList.h"
 #import <objc/runtime.h>
 
 @implementation StatusTool
@@ -794,6 +794,9 @@
     [firstDic setObject:post_id forKey:@"post_id"];
     [firstDic setObject:user_id forKey:@"user_id"];
     [firstDic setObject:score forKey:@"score"];
+    if (evaluate == nil) {
+        evaluate = @"";
+    }
     [firstDic setObject:evaluate forKey:@"evaluate"];
     NSMutableDictionary *secondDic = [[NSMutableDictionary  alloc] init];
     [secondDic  setObject:firstDic forKey:@"Data"];
@@ -827,7 +830,11 @@
     
     [HttpTool postWithparams:thirdDic success:^(id responseObject) {
         
-        success(responseObject);
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        ScoreTypeList *scoreTypeList = [ScoreTypeList createItemWitparametes:dic];
+        success(scoreTypeList.scoreType);
+        
         
     } failure:^(NSError *error) {
         if (failure == nil) return ;

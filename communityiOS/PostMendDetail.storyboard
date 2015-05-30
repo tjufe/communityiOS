@@ -13,11 +13,11 @@
                         <viewControllerLayoutGuide type="top" id="fG0-Ec-Ofi"/>
                         <viewControllerLayoutGuide type="bottom" id="AOz-2u-Gbn"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MHX-RP-wqF">
+                    <view key="view" contentMode="scaleToFill" id="MHX-RP-wqF" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.69999999999999973" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kr7-t2-r31">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kr7-t2-r31">
                                 <rect key="frame" x="0.0" y="60" width="320" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是保修的帖子的标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPR-0J-Is6">
@@ -159,6 +159,9 @@
                                 <exclude reference="9W1-36-qcS"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="ViewTouchDown:" destination="4FT-9R-S2J" eventType="touchDown" id="JYZ-29-2cX"/>
+                        </connections>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
