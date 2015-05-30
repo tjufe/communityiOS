@@ -34,14 +34,7 @@
     frame.size.height = labelSize.height + 50;
     self.frame = frame;
     
-//    int s_offset = self.replyerNickName.frame.size.width - self.replyContent.frame.size.width;
-//    CGRect s_backFrame ;
-//    if (s_offset > 0) {
-//        s_backFrame = CGRectMake(self.replyContent.frame.origin.x -15, self.replyContent.frame.origin.y-6, self.replyerNickName.frame.size.width, labelSize.height  );
-//    }else{
-//        s_backFrame = CGRectMake(self.replyContent.frame.origin.x-15, self.replyContent.frame.origin.y-6, self.replyContent.frame.size.width, labelSize.height );
-//    }
-   // NSLineBreakByClipping
+    //绘制对话泡泡
     UIImage *bubble = [UIImage imageNamed:@"SenderTextNodeBkg"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
     bubbleImageView.frame = CGRectMake(self.replyContent.frame.origin.x - 26, self.replyContent.frame.origin.y - 7, labelSize.width + 50, labelSize.height + 20);

@@ -91,6 +91,9 @@ int screenHeight = 0;
         }
          
     }
+    if([self.UserPermission isEqualToString:@""]){
+        self.havePower = false;
+    }
     
     if(!self.havePower){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"对不起，您无权回复！" message:nil delegate:self cancelButtonTitle:@"去实名认证" otherButtonTitles:@"取消", nil];
@@ -234,6 +237,7 @@ int screenHeight = 0;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+
     
 //    if ([self.forum_item.display_type isEqualToString:@"横向"]) {
 //        if ([[self.replyIDData objectAtIndex:indexPath.row]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
@@ -266,6 +270,7 @@ int screenHeight = 0;
 //            return cell;
 //          }
 //    }
+
 
         ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if(!cell){

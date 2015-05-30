@@ -350,7 +350,7 @@ NSInteger page_filter1 ;
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
     
     page1 = 1;
-    rows1 = 5;
+    rows1 = 10;
     page_filter1 = 0;
     
 
@@ -404,6 +404,7 @@ NSInteger page_filter1 ;
         }else{
             if(page_filter1==0){
             //    self.table.hidden = YES;
+                [self.table reloadData];
             }else{//刷新完成，已无更多
                 page1--;
                 //提示

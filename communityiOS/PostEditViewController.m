@@ -109,7 +109,7 @@ NSArray *third_;
 NSString *num1 ;
 NSString *num2 ;
 NSString *num3 ;
-float cellHeight;
+float cellHeight = 1000;
 bool edit;
 
 
@@ -136,7 +136,6 @@ bool edit;
         if (indexPath.row== 0 ) {
 //        ForumSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell0"];
             ForumSelectTableViewCell *cell ;
-            
         
         if (!cell) {
             cell= [[[NSBundle mainBundle]loadNibNamed:@"ForumSelectTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -181,14 +180,15 @@ bool edit;
         return cell;
 
     }else if(indexPath.row==2){
-//        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
-        
-
+        //        TextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3"];
         if (!self.textcell) {
             self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
+            self.textcell.textview.delegate = self;
+            self.textcell.textview.scrollEnabled = NO;
         }
-            self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.textcell.textview.delegate = self;
+
+        self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        self.textcell.textview.delegate = self;
         self.text_tv = self.textcell.textview;
         //定义一个toolBar
         UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
@@ -209,22 +209,23 @@ bool edit;
         
         [self.textcell.textview setInputAccessoryView:topView];
 
-        
+        if(![_ED_FLAG isEqualToString:@"2"]){
+            self.textcell.textview.textColor = [UIColor grayColor];
+        }
         
       
             //flag如果是2，表示编辑原有帖子
- //           if([_ED_FLAG isEqualToString:@"2"]){
+            if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
                 self.textcell.textview.text = self.select_post_text;
-  //          }
- //               else{
-//                if(![self.select_post_text isEqualToString:@""]){
-//                self.textcell.textview.text = self.select_post_text;
-//                }
-//            }
+            }else{
+                if( self.textcell.textview.text!=nil&& ![self.textcell.textview.text isEqualToString:@"请输入内容"]){
+                     self.textcell.textview.text = self.select_post_text;
+                }
+            }
+ //
 
-       cellHeight = self.textcell.textview.frame.size.height;
-
+    //   cellHeight = self.textcell.textview.frame.size.height;
         
         return self.textcell;
 
@@ -400,7 +401,7 @@ bool edit;
      //   return self.PEtableview.frame.size.height - 160;
         return cellHeight;
     }else if(indexPath.row ==3){
-        return 150;
+        return 180;
     }else if(indexPath.row ==4){
         return 100;
     }else if(indexPath.row ==5){
@@ -514,28 +515,49 @@ bool edit;
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     //去掉初始的提示文字
     if(edit){
-    textView.text = nil;
-    textView.textColor = [UIColor blackColor];
-        edit = false;
+        if([textView.text isEqualToString:@"请输入内容"]){
+               textView.text = nil;
+               textView.textColor = [UIColor blackColor];
+            
+        }
     }
 
     
 }
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    self.select_post_text = textView.text;
+//    self.select_post_text = textView.text;
+//    CGSize size = CGSizeMake(300, 1000);
+//    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateCellHeight" object:[NSString stringWithFormat:@"%f",labelSize.height]];
+//   cellHeight = labelSize.height+10;
+//    [self.PEtableview beginUpdates];
+//    [self.PEtableview endUpdates];
+    
+    
+//    //显示在UI中
+//    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
+//    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
+    //刷新指定行
+//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [self.PEtableview reloadData];
     if(![textView.text isEqualToString:@""]){
     self.textcell.textview.text = textView.text;
+        edit = false;
     }else{
         self.textcell.textview.text = @"请输入内容";
         textView.textColor = [UIColor grayColor];
         edit =true;
     }
-    
-    //显示在UI中
-//    NSIndexPath *index = [NSIndexPath indexPathForRow:2 inSection:0];
-//    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
-//    //刷新指定行
-//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+-(void)textViewDidChange:(UITextView *)textView{
+    CGSize size = CGSizeMake(300, 1000);
+    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateCellHeight" object:[NSString stringWithFormat:@"%f",labelSize.height]];
+//    cellHeight = labelSize.height+10;
+//    [self.PEtableview beginUpdates];
+//    [self.PEtableview endUpdates];
+
 }
 
 #pragma mark----长按图片
@@ -733,10 +755,10 @@ bool edit;
 //    self.textcell.textview.contentInset = UIEdgeInsetsZero;
 //}
 //#pragma mark-----
-//
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [[NSNotificationCenter defaultCenter]removeObserver:self];
-//}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -835,10 +857,17 @@ bool edit;
     }
     
     [self.PEtableview reloadData];
-
-
-
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCellHeight:) name:@"UpdateCellHeight" object:nil];
+    
 }
+
+//-(void)updateCellHeight:(NSNotification *)notification{
+//    id height = notification.object;
+//    cellHeight = [height intValue]+10;
+//    [self.PEtableview beginUpdates];
+//    [self.PEtableview endUpdates];
+//}
 
 
 #pragma mark-------获取版块设置
@@ -1189,7 +1218,7 @@ bool edit;
     CGSize size = CGSizeMake(300, 1000);
     CGSize labelSize = [self.textcell.textview.text sizeWithFont:self.textcell.textview.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
     cellHeight = labelSize.height+10;
-    [self.PEtableview reloadData];
+//    [self.PEtableview reloadData];
     
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
@@ -1312,9 +1341,6 @@ bool edit;
     self.maskview.alpha = 0.3;
     [self.view addSubview:self.maskview];
     
-    
-
-    
     //实例化一个view
     self.addpush =[[UIView alloc]init];
     self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.view.frame.size.height, 300, 220);
@@ -1325,8 +1351,6 @@ bool edit;
         self.addpush.frame = CGRectMake(self.PEtableview.center.x-150, self.PEtableview.center.y-110, 300, 220);
         [self.addpush.layer setCornerRadius:self.addpush.frame.size.height/20];
     }];
-    
-    
     [self.view addSubview:self.addpush];
     
     
@@ -1453,8 +1477,6 @@ bool edit;
     self.pickview.dataSource = self;
     
     [self.addapply addSubview:self.pickview];
-    
-    
     
     //
     UIView *vi3 = [[UIView alloc]initWithFrame:CGRectMake(0, 280, 300, 1)];

@@ -130,8 +130,6 @@ NSArray *forum;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     self.navigationController.delegate=self;
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
@@ -612,9 +610,7 @@ NSArray *forum;
     if(phoneNumber!=nil){
         NSString *userNickname = [defaults valueForKey:@"UserNickname"];
         NSString *headPortraitUrl = [defaults valueForKey:@"HeadPortraitUrl"];
-
         NSString *user_id = [defaults valueForKey:@"UserID"];
-
         
         ///20150418 认证标志显示
         NSString *userPermission = [defaults valueForKey:@"UserPermission"];
@@ -633,25 +629,21 @@ NSArray *forum;
         if (fileExits) {
             self.avaterImageView.image = [UIImage imageWithContentsOfFile:fullPathToFile];
         } else {
-            NSString *str = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,headPortraitUrl];
+            NSString *str = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,headPortraitUrl];
             NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)str, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
             NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
             [self.avaterImageView sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                NSData *imageData = UIImageJPEGRepresentation(image, 1);
-                [self saveImage:imageData WithName:fullPathToFile];
+                if (image != nil) {
+                    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                    [imageData writeToFile:fullPathToFile atomically:NO];
+                }
+                
             }];
             
         }
     }
 }
 
-
-#pragma mark---------------保存图片到document
-- (void)saveImage:(NSData *)imageData WithName:(NSString *)imageName{
-    NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
-    [imageData writeToFile:fullPathToFile atomically:NO];
-}
 
 #pragma mark --点击用户状态栏hmx
 - (IBAction)tapItem:(id)sender {

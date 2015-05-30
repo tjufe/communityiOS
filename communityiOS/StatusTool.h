@@ -94,6 +94,13 @@ typedef void(^StatusFailurs)(NSError * error);
 //发报修帖子 hmx201505251232
 +(void)statusToolNewPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
+
+//发送报修的评价
++(void)statusToolPostMendScoreWithPostID:(NSString *)post_id User_ID:(NSString*)user_id Score:(NSString*)score Evaluate:(NSString *)evaluate Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
+//下载到评价的类型
++(void)statusToolGetScoreTypeWithCommunityID:(NSString *)community_id ForumID:(NSString *)forum_id Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
 //修改报修帖子 lx20150527
 +(void)statusToolEditPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
