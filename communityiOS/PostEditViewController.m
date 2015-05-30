@@ -167,13 +167,13 @@ bool edit;
                 cell.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
           self.title_tf = cell.Title;
           cell.Title.delegate = self;
-                if([_ED_FLAG isEqualToString:@"2"]){
+          //      if([_ED_FLAG isEqualToString:@"2"]){
                     //编辑帖子
-                   cell.Title.text = _post_item.title;
+                   cell.Title.text = self.select_post_title;
                     
-                }else{
-                    cell.Title.text = self.select_post_title;
-                }
+ //               }else{
+ //                   cell.Title.text = self.select_post_title;
+ //               }
           
 
           
@@ -213,10 +213,10 @@ bool edit;
         
       
             //flag如果是2，表示编辑原有帖子
-            if([_ED_FLAG isEqualToString:@"2"]){
+ //           if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
-                self.textcell.textview.text = _post_item.post_text;
-            }
+                self.textcell.textview.text = self.select_post_text;
+  //          }
  //               else{
 //                if(![self.select_post_text isEqualToString:@""]){
 //                self.textcell.textview.text = self.select_post_text;
@@ -294,10 +294,12 @@ bool edit;
                 cell.chainUrlLab.hidden = YES;
             }else{
                 if([self.select_chain isEqualToString:@"是"]){
-                cell.chainName.hidden =NO;
-                cell.chainNameLab.hidden = NO;
-                cell.chainUrl.hidden = NO;
-                cell.chainUrlLab.hidden = NO;
+                    if(self.select_chain_context!=nil&&![self.select_chain_context isEqualToString:@""]){
+                       cell.chainName.hidden =NO;
+                       cell.chainNameLab.hidden = NO;
+                       cell.chainUrl.hidden = NO;
+                       cell.chainUrlLab.hidden = NO;
+                    }
                 }else{
                     cell.chainName.hidden = YES;
                     cell.chainNameLab.hidden = YES;
@@ -308,10 +310,12 @@ bool edit;
             }
             }else{
                 if([self.select_chain isEqualToString:@"是"]){
+                  if(self.select_chain_context!=nil&&![self.select_chain_context isEqualToString:@""]){
                     cell.chainName.hidden =NO;
                     cell.chainNameLab.hidden = NO;
                     cell.chainUrl.hidden = NO;
                     cell.chainUrlLab.hidden = NO;
+                  }
                 }else{
                     cell.chainName.hidden = YES;
                     cell.chainNameLab.hidden = YES;
@@ -767,6 +771,8 @@ bool edit;
         self.select_forum_id = _forum_item.forum_id;
         self.select_forum_name = _forum_item.forum_name;
     }else{//编辑帖子
+        self.select_post_title = _post_item.title;
+        self.select_post_text = _post_item.post_text;
         self.select_forum_id = _post_item.belong_forum_id;
         self.select_post_id = _post_item.post_id;
         self.select_poster_id = _post_item.poster_id;
@@ -948,7 +954,7 @@ bool edit;
             }completionBlock:^{
                 [hud removeFromSuperview];
             }];
-
+            self.rightItem.enabled = YES;
         }else{
         
         TitleTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -966,6 +972,8 @@ bool edit;
             }completionBlock:^{
                 [hud removeFromSuperview];
             }];
+            
+            self.rightItem.enabled = YES;
 
         }else{
             TextTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];

@@ -41,6 +41,8 @@
 @property (strong,nonatomic) UILabel *chain_name;
 @property (strong,nonatomic) UILabel *chain_address;
 
+
+@property (nonatomic,strong)UIBarButtonItem *rightItem;
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 
 @property (strong,nonatomic)UIView *addchain;
@@ -446,8 +448,8 @@ NSString  *alert_flag;
     }else{
          self.navigationItem.title = @"提交报修";
     }
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"上报" style:UIBarButtonItemStyleBordered  target:self action:@selector(reqReportRepair)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    self.rightItem = [[UIBarButtonItem alloc]initWithTitle:@"上报" style:UIBarButtonItemStyleBordered  target:self action:@selector(reqReportRepair)];
+    self.navigationItem.rightBarButtonItem = self.rightItem;
 }
 
 #pragma mark------发帖前检查 lx 20150527
@@ -494,6 +496,8 @@ NSString  *alert_flag;
 
 #pragma mark------发帖
 - (void)reqReportRepair {
+    
+    self.rightItem.enabled = NO;
     NSString *post_title = [self getPostTitle];//帖子标题
     NSString *post_text = [self getPostText];//故障位置
     NSString *post_text_1 = [self getPostText1];//故障描述
@@ -531,6 +535,7 @@ NSString  *alert_flag;
                 alert2.delegate = self;
                 [alert2 show];
                 alert_flag = @"f";
+                self.rightItem.enabled = YES;
             }
 
         }failurs:^(NSError *error) {
@@ -538,6 +543,7 @@ NSString  *alert_flag;
             alert2.delegate = self;
             [alert2 show];
             alert_flag = @"f";
+            self.rightItem.enabled = YES;
         }];
         }else{
             [StatusTool statusToolEditPostWithPostInfo:postInfo Success:^(id object) {
@@ -556,6 +562,7 @@ NSString  *alert_flag;
                     alert2.delegate = self;
                     [alert2 show];
                     alert_flag = @"f";
+                    self.rightItem.enabled = YES;
                 }
 
             } failurs:^(NSError *error) {
@@ -563,6 +570,7 @@ NSString  *alert_flag;
                 alert2.delegate = self;
                 [alert2 show];
                 alert_flag = @"f";
+                self.rightItem.enabled = YES;
             }];
         }
     }else{
@@ -576,7 +584,7 @@ NSString  *alert_flag;
         }completionBlock:^{
             [hud removeFromSuperview];
         }];
-
+       self.rightItem.enabled = YES;
     }
 }
 

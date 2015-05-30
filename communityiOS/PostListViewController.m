@@ -568,7 +568,7 @@ NSInteger page_filter;
                //能否发帖
                if ([self.forum_set_item.site_name isEqualToString:site_newpost_user]) {
                     
-                    if([self.forum_set_item.site_value rangeOfString:user_status].location!=NSNotFound){
+                    if(![self.UserPermission isEqualToString:@""]&&[self.forum_set_item.site_value rangeOfString:user_status].location!=NSNotFound){
                          self.ISNEWPOST = @"Y";
                     //     break;
                     }
@@ -576,7 +576,7 @@ NSInteger page_filter;
                     //版主
                     else if(self.moderator!=nil){
                          for(int m=0;m<[self.moderator count];m++){
-                              if([[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
+                              if(![self.UserPermission isEqualToString:@""]&&[[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
                                    self.ISNEWPOST = @"Y";
                      //              break;
                               }
@@ -603,12 +603,12 @@ NSInteger page_filter;
 
                }
              //能否查看
-               if([self.forum_set_item.site_name isEqualToString:site_isbrowse]){
+               if(![self.UserPermission isEqualToString:@""]&&[self.forum_set_item.site_name isEqualToString:site_isbrowse]){
                     if([self.forum_set_item.site_value containsString:user_status]){
                          self.ISBrowse = @"Y";
                        //  break;
                     }
-                   else if(self.moderator!=nil){
+                   else if(self.moderator!=nil&&![self.UserPermission isEqualToString:@""]){
                          for(int m=0;m<[self.moderator count];m++){
                               if([[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
                                    self.ISBrowse = @"Y";
@@ -622,6 +622,8 @@ NSInteger page_filter;
                }
           }
           }
+          
+          
      }
 
 }
