@@ -35,6 +35,8 @@
 #import "ScoreTypeList.h"
 #import "EvaluateTableViewCell.h"
 #import "NewPostEditViewController.h"
+#import "PostText1TableViewCell.h"
+#import "PostText23TableViewCell.h"
 
 @interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 - (IBAction)replyAction:(id)sender;
@@ -70,6 +72,9 @@
 @property (weak,nonatomic) NSString* community_id;
 @property (weak,nonatomic) NSString* forum_id;
 @property (weak,nonatomic) NSString* post_text;
+@property (weak,nonatomic) NSString* post_text_1;
+@property (weak,nonatomic) NSString* post_text_2;
+@property (weak,nonatomic) NSString* post_text_3;
 @property (weak,nonatomic) NSString* post_title;
 @property (weak,nonatomic) NSString* post_date;
 @property (weak,nonatomic) NSString* post_overed;//是否结帖
@@ -84,8 +89,8 @@
 @property (weak,nonatomic) NSString* apply_flag;
 @property (weak,nonatomic) NSString* post_over;
 @property (weak,nonatomic) NSString* apply_enough;
-@property (weak,nonatomic) NSString* post_text4;
-@property (weak,nonatomic) NSString* post_text5;
+@property (weak,nonatomic) NSString* post_text_4;
+@property (weak,nonatomic) NSString* post_text_5;
 
 
 
@@ -94,6 +99,8 @@
 @property (strong,nonatomic) ChainTableViewCell * chainCell;
 @property (strong,nonatomic) PosterTableViewCell * posterCell;
 @property (strong,nonatomic) PostTextTableViewCell * postTextCell;
+@property (strong,nonatomic) PostText1TableViewCell * postTextCell1;
+@property (strong,nonatomic) PostText23TableViewCell * postTextCell23;
 @property (strong,nonatomic) PostImageTableViewCell * postImageCell;
 @property (strong,nonatomic) EvaluateTableViewCell * evaluateCell;
 @property (strong,nonatomic) UIBarButtonItem *rightItem;
@@ -134,6 +141,8 @@ int mend_pop_code;//用于跳转标志
 int mend_alert = 0;//用于警告框UIAlertView计数
 bool mend_alertcount=false;//用于菜单点击计数
 float mend_cellheight = 0;
+float mend_cellheight1 = 0;
+float mend_cellheight23 = 0;
 float mend_chainHeight = 0;
 float mend_applyHeight = 0;
 float mend_imageHeight = 0;
@@ -162,7 +171,7 @@ int starAmount = 0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.replyListArray.count + 6;
+    return self.replyListArray.count + 8;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -195,6 +204,7 @@ int starAmount = 0;
             if ([self.poster_auth isEqualToString:@"是"]) {
                 self.posterCell.posterAuth.hidden = NO;
             }
+        
             return self.posterCell;
 
         }else if(indexPath.row == 1){
@@ -209,10 +219,39 @@ int starAmount = 0;
             CGSize size = CGSizeMake(300, 1000);
             CGSize labelSize = [self.postTextCell.postText.text sizeWithFont:self.postTextCell.postText.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
             mend_cellheight = labelSize.height+10;
-            
             return self.postTextCell;
             
-        }else if(indexPath.row == 2){
+        }else if (indexPath.row == 2){
+            self.postTextCell1 = [tableView dequeueReusableCellWithIdentifier:nil];
+            self.postTextCell1.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (!self.postTextCell1) {
+                self.postTextCell1= [[[NSBundle mainBundle]loadNibNamed:@"PostText1TableViewCell" owner:nil options:nil]objectAtIndex:0];
+                self.postTextCell1.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            [self.postTextCell1.postText1 setText:self.post_text_1];
+            CGSize size = CGSizeMake(300, 1000);
+            CGSize labelSize = [self.postTextCell1.postText1.text sizeWithFont:self.postTextCell1.postText1.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+            mend_cellheight1 = labelSize.height+10;
+
+            return  self.postTextCell1;
+            
+        }else if (indexPath.row == 3){
+            self.postTextCell23 = [tableView dequeueReusableCellWithIdentifier:nil];
+            self.postTextCell23.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (!self.postTextCell23) {
+                self.postTextCell23= [[[NSBundle mainBundle]loadNibNamed:@"PostText23TableViewCell" owner:nil options:nil]objectAtIndex:0];
+                self.postTextCell23.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            self.postTextCell23.postText2.text = [NSString stringWithFormat:@"报修人：%@",self.post_text_2];
+            self.postTextCell23.postText3.text = [NSString stringWithFormat:@"联系电话：%@",self.post_text_3];
+            CGSize size = CGSizeMake(300, 1000);
+            CGSize labelSize = [self.postTextCell23.postText3.text sizeWithFont:self.postTextCell23.postText3.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
+            mend_cellheight23 = labelSize.height+10;
+            
+            return  self.postTextCell23;
+            
+        }
+        else if(indexPath.row == 4){
             self.postImageCell = [tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.postImageCell) {
                 self.postImageCell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -228,7 +267,7 @@ int starAmount = 0;
             
             return self.postImageCell;
             
-        }else if(indexPath.row == 3){
+        }else if(indexPath.row == 5){
             self.chainCell = [ tableView dequeueReusableCellWithIdentifier:nil];
             
             if (!self.chainCell) {
@@ -247,7 +286,7 @@ int starAmount = 0;
             
             return self.chainCell;
             
-        }else if(indexPath.row == 4){
+        }else if(indexPath.row == 6){
             self.applyCell = [tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.applyCell) {
                 self.applyCell= [[[NSBundle mainBundle]loadNibNamed:@"ApplyTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -302,15 +341,15 @@ int starAmount = 0;
             }
             return self.applyCell;
             
-        }else if (indexPath.row == 5){
+        }else if (indexPath.row == 7){
             
             self.evaluateCell = [ tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.evaluateCell) {
                 self.evaluateCell= [[[NSBundle mainBundle]loadNibNamed:@"EvaluateTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 self.evaluateCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 self.evaluateCell.hidden = YES;
-                self.evaluateCell.scoreLabel.text = self.post_text4;
-                self.evaluateCell.messageLabel.text = self.post_text5;
+                self.evaluateCell.scoreLabel.text = self.post_text_4;
+                self.evaluateCell.messageLabel.text = self.post_text_5;
 
             }
             if (![self.post_item.post_text_4 isEqualToString:@""]||![self.post_item.post_text_5 isEqualToString:@""]) {
@@ -318,25 +357,24 @@ int starAmount = 0;
             }
             
             return self.evaluateCell;
-        
             
         }else {
     
             if ([self.forum_item.display_type isEqualToString:@"横向"]) {
-                if ([[self.replyIDData objectAtIndex:indexPath.row - 6]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
+                if ([[self.replyIDData objectAtIndex:indexPath.row - 8]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
                     MyMendReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
                     if(!cell){
                         cell = [[[NSBundle mainBundle]loadNibNamed:@"MyMendReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
                     }
-
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     //填装数据
-                    cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-6];
-                    cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row-6];
-                    [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-6]];
+                    cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-8];
+                    cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row-8];
+                    [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-8]];
+
                     //图片
-                    NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-6]];
-                    NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
+                    NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-8]];
+                    NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,replyImage];
                     NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
                     NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
                     [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -362,27 +400,28 @@ int starAmount = 0;
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //填装数据
-            cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-6];
-            cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row-6];
-            [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-6]];
+            cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row-8];
+            cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row-8];
+            [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-8]];
             //图片
-            NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-6]];
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
+            NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-8]];
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,replyImage];
             NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
             NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
             [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if (image != nil) {
-                    cell.replyerHead.layer.masksToBounds =YES;
-                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-                    cell.replyerHead.image = image;
+                        cell.replyerHead.layer.masksToBounds =YES;
+                        [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+                        cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+                        cell.replyerHead.image = image;
                 }else{
-                    cell.replyerHead.layer.masksToBounds =YES;
-                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-                    cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
+                        cell.replyerHead.layer.masksToBounds =YES;
+                        [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+                        cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+                        cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
                 }
             }];
+
             return cell;
       }
 
@@ -394,14 +433,17 @@ int starAmount = 0;
             return 100;
         }else if(indexPath.row ==1){
             return mend_cellheight;
-        }else if(indexPath.row ==2){
-            return mend_imageHeight;
+        }else if (indexPath.row == 2){
+            return mend_cellheight1;
         }else if (indexPath.row == 3){
-            return mend_chainHeight ;
-            
-        }else if (indexPath.row == 4){
-            return mend_applyHeight ;
+            return mend_cellheight23;
+        }else if(indexPath.row ==4){
+            return mend_imageHeight;
         }else if (indexPath.row == 5){
+            return mend_chainHeight ;
+        }else if (indexPath.row == 6){
+            return mend_applyHeight ;
+        }else if (indexPath.row == 7){
             UITableViewCell *cell = [self tableView:self.tableview cellForRowAtIndexPath:indexPath];
             return cell.frame.size.height + 10;
         }else{
@@ -627,9 +669,13 @@ int starAmount = 0;
     self.poster_auth = self.post_item.poster_auth;
     self.post_over = self.post_item.post_overed;
     self.apply_enough = self.post_item.apply_enough;
-    self.post_text4 = self.post_item.post_text_4;
-    self.post_text5 = self.post_item.post_text_5;
-    
+    self.post_text_4 = self.post_item.post_text_4;
+    self.post_text_5 = self.post_item.post_text_5;
+    self.post_text_1 = self.post_item.post_text_1;
+    self.post_text_2 = self.post_item.post_text_2;
+    self.post_text_3 = self.post_item.post_text_3;
+
+
     for(int i=0; i<self.forumList.count; i++) {
         forumItem *forumitem = [self.forumList objectAtIndex:i];
         if ([forumitem.forum_id isEqualToString:self.forum_id] ) {
@@ -1019,7 +1065,7 @@ int starAmount = 0;
     [sureBtn setTitle: @"确定" forState: UIControlStateNormal];
     [sureBtn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
     sureBtn.backgroundColor = [UIColor lightGrayColor];
-    sureBtn.alpha = 0.5;
+    sureBtn.alpha = 0.8;
     [sureBtn.layer setMasksToBounds:YES];
     [sureBtn.layer setCornerRadius:5.0];
     [sureBtn addTarget:self action:@selector(assessAndClose) forControlEvents:UIControlEventTouchUpInside];
@@ -1029,7 +1075,7 @@ int starAmount = 0;
     [cancelBtn setTitle: @"取消" forState: UIControlStateNormal];
     [cancelBtn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
     cancelBtn.backgroundColor = [UIColor lightGrayColor];
-    cancelBtn.alpha = 0.5;
+    cancelBtn.alpha = 0.8;
     [cancelBtn.layer setMasksToBounds:YES];
     [cancelBtn.layer setCornerRadius:5.0];
     [cancelBtn addTarget:self action:@selector(justClose) forControlEvents:UIControlEventTouchUpInside];
@@ -1050,7 +1096,7 @@ int starAmount = 0;
         if (![[object valueForKey:@"status"] isEqualToString:@""]) {
              [self justClose];
         }
-    } failurs:^(NSError *error) {
+    } failurs:^(NSError *error){
         //
     }];
     
@@ -1199,7 +1245,7 @@ int starAmount = 0;
                 [self getReplyData];
                 [self.tableview reloadData];
             }else {
-                self.tableview.hidden = YES;
+               
             }
         }else{
             if (self.reply_list_item.contentList !=nil) {
