@@ -751,7 +751,7 @@ int starAmount = 0;
     self.editbutton.frame = CGRectMake(25, 0, 100, 50);
     self.editbutton.titleLabel.frame = CGRectMake(25, 0, 100, 50);
     [self.editbutton setTitle:@"编辑" forState:UIControlStateNormal];
-    self.editbutton.titleLabel.font = [UIFont systemFontOfSize: 13.0];
+    self.editbutton.titleLabel.font = [UIFont systemFontOfSize: 16.0];
     [self.editbutton addTarget:self action:@selector(EditPost) forControlEvents:UIControlEventTouchUpInside];
     [self.editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
@@ -760,7 +760,7 @@ int starAmount = 0;
     self.endMendBtn.frame = CGRectMake(25, 100, 100, 50);
     self.endMendBtn.titleLabel.frame = CGRectMake(25, 0, 100, 50);
     [self.endMendBtn setTitle: @"结束报修" forState: UIControlStateNormal];
-    self.endMendBtn.titleLabel.font = [UIFont systemFontOfSize: 13.0];
+    self.endMendBtn.titleLabel.font = [UIFont systemFontOfSize: 16.0];
     [self.endMendBtn addTarget:self action:@selector(endMend) forControlEvents:UIControlEventTouchUpInside];
     [self.endMendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
@@ -769,7 +769,7 @@ int starAmount = 0;
     self.delebutton.frame = CGRectMake(25, 50, 100, 50);
     self.delebutton.titleLabel.frame = CGRectMake(25, 0, 100, 50);
     [self.delebutton setTitle:@"删除" forState:UIControlStateNormal];
-    self.delebutton.titleLabel.font = [UIFont systemFontOfSize: 13.0];
+    self.delebutton.titleLabel.font = [UIFont systemFontOfSize: 16.0];
     [self.delebutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.delebutton addTarget:self action:@selector(DelePost) forControlEvents:UIControlEventTouchUpInside];
     
@@ -826,7 +826,7 @@ int starAmount = 0;
     //结束报修按钮
     if ([self.post_over isEqualToString:@"否"]) {
         [self.operlist addSubview:self.endMendBtn];
-        self.endMendBtn.frame = CGRectMake(25, 50*mend_menuHeight, 50, 50);
+        self.endMendBtn.frame = CGRectMake(0, 50*mend_menuHeight, 100, 50);
         mend_menuHeight++;
     }
     
@@ -976,6 +976,8 @@ int starAmount = 0;
 //}
 
 -(void)endMend{
+    
+    [self.operlist removeFromSuperview];
     
     //添加蒙版
     self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
