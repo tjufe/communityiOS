@@ -91,6 +91,9 @@ int screenHeight = 0;
         }
          
     }
+    if([self.UserPermission isEqualToString:@""]){
+        self.havePower = false;
+    }
     
     if(!self.havePower){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"对不起，您无权回复！" message:nil delegate:self cancelButtonTitle:@"去实名认证" otherButtonTitles:@"取消", nil];
@@ -228,43 +231,46 @@ int screenHeight = 0;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.replyListArray.count;
+    NSLog(@"%lu",(unsigned long)[self.replyListArray count]);
+    return [self.replyListArray count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if ([self.forum_item.display_type isEqualToString:@"横向"]) {
-        if ([[self.replyIDData objectAtIndex:indexPath.row]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
-            MyReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-            if(!cell){
-                cell = [[[NSBundle mainBundle]loadNibNamed:@"MyReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            //填装数据
-            cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row];
-            cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row];
-            [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
-            //图片
-            NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
-            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
-            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
-            [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (image != nil) {
-                    cell.replyerHead.layer.masksToBounds =YES;
-                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-                    cell.replyerHead.image = image;
-                }else{
-                    cell.replyerHead.layer.masksToBounds =YES;
-                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-                    cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
-                }
-            }];
-            return cell;
-          }
-    }
+
+    
+//    if ([self.forum_item.display_type isEqualToString:@"横向"]) {
+//        if ([[self.replyIDData objectAtIndex:indexPath.row]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
+//            MyReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+//            if(!cell){
+//                cell = [[[NSBundle mainBundle]loadNibNamed:@"MyReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
+//            }
+//            //填装数据
+//            cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row];
+//            cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row];
+//            [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
+//            //图片
+//            NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
+//            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
+//            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
+//            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
+//            [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                if (image != nil) {
+//                    cell.replyerHead.layer.masksToBounds =YES;
+//                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+//                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+//                    cell.replyerHead.image = image;
+//                }else{
+//                    cell.replyerHead.layer.masksToBounds =YES;
+//                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
+//                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
+//                    cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
+//                }
+//            }];
+//            return cell;
+//          }
+//    }
+
 
         ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if(!cell){
@@ -378,9 +384,9 @@ int screenHeight = 0;
                 [self.replyerHeadData removeAllObjects];
                 [self.replyContentData removeAllObjects];
                 [self getReplyData];
-                [self.replyListTable reloadData];
+ //               [self.replyListTable reloadData];
             }else {
-                self.replyListTable.hidden = YES;
+                
             }
         }else{
             if (self.reply_list_item.contentList !=nil) {
@@ -469,6 +475,8 @@ int screenHeight = 0;
     }else{
         [self.replyDateData addObject:@"00:00:00"];
     }
+    
+     [self.replyListTable reloadData];
     
 }
 #pragma mark-
@@ -573,11 +581,11 @@ int screenHeight = 0;
                     hud.mode = MBProgressHUDModeText;
                     [hud showAnimated:YES whileExecutingBlock:^{
                         sleep(1);
+                    } completionBlock:^{
+                        [hud removeFromSuperview];
                         reply_page = 1;
                         reply_page_filter = 0;
                         [self loadReplyListData];
-                    } completionBlock:^{
-                        [hud removeFromSuperview];
                     }];
                     
                     [self.replyContentField resignFirstResponder];

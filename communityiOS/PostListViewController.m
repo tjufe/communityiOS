@@ -278,6 +278,7 @@ NSInteger page_filter;
 //        cell.setTop.hidden = YES;
 //    }
 
+
     return cell;
 
 
@@ -396,7 +397,7 @@ NSInteger page_filter;
 -(void)viewWillAppear:(BOOL)animated{
      [super viewWillAppear:(BOOL)animated];
      page =1;
-     rows = 5;
+     rows = 10;
      page_filter = 0;
      [self.PostListArray removeAllObjects];
      [postDateData removeAllObjects];
@@ -415,7 +416,7 @@ NSInteger page_filter;
      }else{
           [self loadData2];
      }
-     
+     [self setupRefresh];
 }
 
 
@@ -566,7 +567,7 @@ NSInteger page_filter;
     self.Page = [[NSNumber alloc]init];
     self.Rows = [[NSNumber alloc]init];
   
-     [self setupRefresh];
+     
      
     //请求数据
      
@@ -601,7 +602,6 @@ NSInteger page_filter;
           
           NSString *user_status = @"/";
           user_status = [user_status stringByAppendingString:self.UserPermission];
-//          user_status = [user_status stringByAppendingString:self.UserPermission];
           if(_forum_item.ForumSetlist!=nil){
           for(int i=0;i < [_forum_item.ForumSetlist count];i++){
                self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];
@@ -609,7 +609,7 @@ NSInteger page_filter;
                //能否发帖
                if ([self.forum_set_item.site_name isEqualToString:site_newpost_user]) {
                     
-                    if([self.forum_set_item.site_value rangeOfString:user_status].location!=NSNotFound){
+                    if(![self.UserPermission isEqualToString:@""]&&[self.forum_set_item.site_value rangeOfString:user_status].location!=NSNotFound){
                          self.ISNEWPOST = @"Y";
                     //     break;
                     }
@@ -617,7 +617,7 @@ NSInteger page_filter;
                     //版主
                     else if(self.moderator!=nil){
                          for(int m=0;m<[self.moderator count];m++){
-                              if([[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
+                              if(![self.UserPermission isEqualToString:@""]&&[[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
                                    self.ISNEWPOST = @"Y";
                      //              break;
                               }
@@ -644,12 +644,12 @@ NSInteger page_filter;
 
                }
              //能否查看
-               if([self.forum_set_item.site_name isEqualToString:site_isbrowse]){
+               if(![self.UserPermission isEqualToString:@""]&&[self.forum_set_item.site_name isEqualToString:site_isbrowse]){
                     if([self.forum_set_item.site_value containsString:user_status]){
                          self.ISBrowse = @"Y";
                        //  break;
                     }
-                   else if(self.moderator!=nil){
+                   else if(self.moderator!=nil&&![self.UserPermission isEqualToString:@""]){
                          for(int m=0;m<[self.moderator count];m++){
                               if([[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
                                    self.ISBrowse = @"Y";
@@ -663,6 +663,8 @@ NSInteger page_filter;
                }
           }
           }
+          
+          
      }
 
 }

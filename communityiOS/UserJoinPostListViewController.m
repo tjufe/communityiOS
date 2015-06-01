@@ -58,7 +58,7 @@ NSInteger page1 ;//页数
 NSInteger rows1 ;//分页请求行数
 NSInteger page_filter1 ;
 
-int pop_code;
+//int pop_code;
 
 #pragma mark------切换我报名的
 - (IBAction)isApply:(id)sender {
@@ -335,15 +335,15 @@ int pop_code;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:(BOOL)animated];
-    if(pop_code==1){
+//    if(pop_code==1){
         [self loadData];
-    }
+//    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    pop_code = 1;
+//    pop_code = 1;
     //使下一页的导航栏左边没有文字
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";

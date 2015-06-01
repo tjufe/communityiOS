@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -73,12 +73,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="replyContent" destination="z3i-f8-ybf" id="kep-q2-Tmw"/>
-                <outlet property="replyTime" destination="FJH-5V-Ebe" id="vML-Yb-vSL"/>
-                <outlet property="replyerHead" destination="YVX-tr-Y24" id="tX0-Sc-VL2"/>
-                <outlet property="replyerNickName" destination="sFf-GJ-8Nd" id="3i7-uP-Fjg"/>
+                <outlet property="replyContent" destination="z3i-f8-ybf" id="7I5-gl-ZdZ"/>
+                <outlet property="replyTime" destination="FJH-5V-Ebe" id="jkq-4U-YQD"/>
+                <outlet property="replyerHead" destination="YVX-tr-Y24" id="F3v-wL-K3g"/>
+                <outlet property="replyerNickName" destination="sFf-GJ-8Nd" id="ZF0-Zv-Soo"/>
             </connections>
-            <point key="canvasLocation" x="575" y="944"/>
+            <point key="canvasLocation" x="438" y="709"/>
         </tableViewCell>
     </objects>
     <resources>

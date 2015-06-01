@@ -31,6 +31,8 @@
 #import "UIViewController+Create.h"
 #import "UIImageView+WebCache.h"//加载图片
 
+#define kANimationDuration 0.2 //动画时间
+
 
 @interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 
@@ -166,13 +168,13 @@ bool edit;
                 cell.backgroundColor = [UIColor colorWithRed:222.0/255 green:222.0/255 blue:222.0/255 alpha:1];
           self.title_tf = cell.Title;
           cell.Title.delegate = self;
-                if([_ED_FLAG isEqualToString:@"2"]){
+          //      if([_ED_FLAG isEqualToString:@"2"]){
                     //编辑帖子
-                   cell.Title.text = _post_item.title;
+                   cell.Title.text = self.select_post_title;
                     
-                }else{
-                    cell.Title.text = self.select_post_title;
-                }
+ //               }else{
+ //                   cell.Title.text = self.select_post_title;
+ //               }
           
 
           
@@ -188,7 +190,7 @@ bool edit;
         }
 
         self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.textcell.textview.delegate = self;
+//        self.textcell.textview.delegate = self;
         self.text_tv = self.textcell.textview;
         //定义一个toolBar
         UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
@@ -209,19 +211,26 @@ bool edit;
         
         [self.textcell.textview setInputAccessoryView:topView];
 
-        
+        if(![_ED_FLAG isEqualToString:@"2"]){
+            self.textcell.textview.textColor = [UIColor grayColor];
+        }
         
       
             //flag如果是2，表示编辑原有帖子
             if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
-                self.textcell.textview.text = _post_item.post_text;
+                self.textcell.textview.text = self.select_post_text;
+                if([self.select_post_text isEqualToString:@""]||self.select_post_text==nil){
+                     self.textcell.textview.text = @"请输入内容";
+                }
+                
+                
+            }else{
+                if( self.textcell.textview.text!=nil&& ![self.textcell.textview.text isEqualToString:@"请输入内容"]){
+                     self.textcell.textview.text = self.select_post_text;
+                }
             }
- //               else{
-//                if(![self.select_post_text isEqualToString:@""]){
-//                self.textcell.textview.text = self.select_post_text;
-//                }
-//            }
+ //
 
     //   cellHeight = self.textcell.textview.frame.size.height;
         
@@ -293,10 +302,12 @@ bool edit;
                 cell.chainUrlLab.hidden = YES;
             }else{
                 if([self.select_chain isEqualToString:@"是"]){
-                cell.chainName.hidden =NO;
-                cell.chainNameLab.hidden = NO;
-                cell.chainUrl.hidden = NO;
-                cell.chainUrlLab.hidden = NO;
+                    if(self.select_chain_context!=nil&&![self.select_chain_context isEqualToString:@""]){
+                       cell.chainName.hidden =NO;
+                       cell.chainNameLab.hidden = NO;
+                       cell.chainUrl.hidden = NO;
+                       cell.chainUrlLab.hidden = NO;
+                    }
                 }else{
                     cell.chainName.hidden = YES;
                     cell.chainNameLab.hidden = YES;
@@ -307,10 +318,12 @@ bool edit;
             }
             }else{
                 if([self.select_chain isEqualToString:@"是"]){
+                  if(self.select_chain_context!=nil&&![self.select_chain_context isEqualToString:@""]){
                     cell.chainName.hidden =NO;
                     cell.chainNameLab.hidden = NO;
                     cell.chainUrl.hidden = NO;
                     cell.chainUrlLab.hidden = NO;
+                  }
                 }else{
                     cell.chainName.hidden = YES;
                     cell.chainNameLab.hidden = YES;
@@ -519,7 +532,7 @@ bool edit;
     
 }
 - (void)textViewDidEndEditing:(UITextView *)textView{
-//    self.select_post_text = textView.text;
+    
 //    CGSize size = CGSizeMake(300, 1000);
 //    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateCellHeight" object:[NSString stringWithFormat:@"%f",labelSize.height]];
@@ -535,10 +548,12 @@ bool edit;
 //    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
 //    [self.PEtableview reloadData];
     if(![textView.text isEqualToString:@""]){
-    self.textcell.textview.text = textView.text;
+        self.textcell.textview.text = textView.text;
+        self.select_post_text = textView.text;
         edit = false;
     }else{
         self.textcell.textview.text = @"请输入内容";
+        self.select_post_text = @"";
         textView.textColor = [UIColor grayColor];
         edit =true;
     }
@@ -725,7 +740,7 @@ bool edit;
     
 }
 
-
+//
 //-(void)viewWillAppear:(BOOL)animated{
 //    [super viewWillAppear:YES];
 //    //注册通知，监听键盘出现
@@ -742,13 +757,23 @@ bool edit;
 //    NSValue *keyboardRectAsObject = [[paramNotification userInfo]objectForKey:UIKeyboardFrameEndUserInfoKey];
 //    CGRect keyboardRect;
 //    [keyboardRectAsObject getValue:&keyboardRect];
-//    self.textcell.textview.contentInset = UIEdgeInsetsMake(0, 0, keyboardRect.size.height, 0);
+////    self.textcell.textview.contentInset = UIEdgeInsetsMake(0, 0, keyboardRect.size.height, 0);
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:kANimationDuration];
+//    //上移
+//    [(UIView *)[self.view viewWithTag:1000]setFrame:CGRectMake(0, self.view.frame.size.height-keyboardRect.size.height, self.view.frame.size.width, 56)];
+//    [UIView commitAnimations];
 //}
 //
 //-(void)handleKeyboardDidHidden{
-//    self.textcell.textview.contentInset = UIEdgeInsetsZero;
+// //   self.textcell.textview.contentInset = UIEdgeInsetsZero;
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:kANimationDuration];
+//    //下移
+//    [(UIView *)[self.view viewWithTag:1000]setFrame:CGRectMake(0, self.view.frame.size.height-56, self.view.frame.size.width, 56)];
+//    [UIView commitAnimations];
 //}
-//#pragma mark-----
+#pragma mark-----
 
 -(void)viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self];
@@ -787,6 +812,8 @@ bool edit;
         self.select_forum_id = _forum_item.forum_id;
         self.select_forum_name = _forum_item.forum_name;
     }else{//编辑帖子
+        self.select_post_title = _post_item.title;
+        self.select_post_text = _post_item.post_text;
         self.select_forum_id = _post_item.belong_forum_id;
         self.select_post_id = _post_item.post_id;
         self.select_poster_id = _post_item.poster_id;
@@ -975,7 +1002,7 @@ bool edit;
             }completionBlock:^{
                 [hud removeFromSuperview];
             }];
-
+            self.rightItem.enabled = YES;
         }else{
         
         TitleTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -993,6 +1020,8 @@ bool edit;
             }completionBlock:^{
                 [hud removeFromSuperview];
             }];
+            
+            self.rightItem.enabled = YES;
 
         }else{
             TextTableViewCell *cell = [self.PEtableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
