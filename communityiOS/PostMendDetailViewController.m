@@ -45,6 +45,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
+@property (strong, nonatomic) IBOutlet UIImageView *endImage;
 
 @property (strong ,nonatomic) IBOutlet UIView *operlist;
 @property (strong,nonatomic) postItem *post_item ;
@@ -138,7 +139,7 @@
 
 @implementation PostMendDetailViewController
 int mend_count=0;//用于菜单点击计数
-int mend_pop_code;//用于跳转标志
+//int mend_pop_code;//用于跳转标志
 int mend_alert = 0;//用于警告框UIAlertView计数
 bool mend_alertcount=false;//用于菜单点击计数
 float mend_cellheight = 0;
@@ -250,7 +251,7 @@ bool isReply = false;
             self.postTextCell23.postText3.text = [NSString stringWithFormat:@"联系电话：%@",self.post_text_3];
             CGSize size = CGSizeMake(300, 1000);
             CGSize labelSize = [self.postTextCell23.postText3.text sizeWithFont:self.postTextCell23.postText3.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
-            mend_cellheight23 = labelSize.height+10;
+            mend_cellheight23 = labelSize.height+30;
             
             return  self.postTextCell23;
             
@@ -265,7 +266,7 @@ bool isReply = false;
             //主图显示情况
             if (self.main_image_url!=nil && ![self.main_image_url isEqualToString:@""]) {
                 [self loadMainImage];
-                mend_imageHeight = 150;
+                mend_imageHeight = self.postImageCell.MainImage.frame.size.height+10;
                 self.postImageCell.hidden = NO;
             }
             
@@ -358,6 +359,7 @@ bool isReply = false;
             }
             if (![self.post_item.post_text_4 isEqualToString:@""]||![self.post_item.post_text_5 isEqualToString:@""]) {
                 self.evaluateCell.hidden = NO;
+                self.endImage.hidden = NO;
             }
             
             return self.evaluateCell;
@@ -462,7 +464,6 @@ bool isReply = false;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.view endEditing:YES];
 }
-
 #pragma mark-
 #pragma mark------实现PostListViewControllerDelegate----------------------------
 -(void)addpostItem:(postItem *)PostItem{
@@ -492,12 +493,14 @@ bool isReply = false;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     if(mend_pop_code==1){
-        [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
-            self.post_item = (postItem *)object;
-            [self.tableview reloadData];
-        } failurs:^(NSError *error) {
-            //
-        }];
+//        [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
+//            self.post_item = (postItem *)object;
+//            
+//            [self.tableview reloadData];
+//        } failurs:^(NSError *error) {
+//            //
+//        }];
+        [self loadPostInfo:self.post_item.post_id];
     }
 }
 
@@ -608,7 +611,10 @@ bool isReply = false;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
-    
+    [self.operlist removeFromSuperview];
+    self.operlist = nil;
+    self.navigationItem.rightBarButtonItem = nil;
+
 }
 
 - (void)keyboardWillShow:(NSNotification *)aNotification{
@@ -765,6 +771,7 @@ bool isReply = false;
     [button addTarget:self action:@selector(MenuAppear) forControlEvents:UIControlEventTouchUpInside];
     
     self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 -(void)setMenu{
@@ -881,6 +888,7 @@ bool isReply = false;
     //    [self setMenu];
     self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 50*mend_menuHeight);
     //postdetailmenu显示情况
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
     self.user_auth =[defaults objectForKey:@"UserPermission"];
@@ -1510,4 +1518,6 @@ bool isReply = false;
     
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
+
+
 @end

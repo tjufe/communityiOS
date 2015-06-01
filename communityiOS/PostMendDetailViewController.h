@@ -10,7 +10,7 @@
 #import "forumItem.h"
 #import "postItem.h"
 #import "forumSetItem.h"
-
+int mend_pop_code;//用于跳转标志
 @interface PostMendDetailViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIView *PDview;

@@ -55,6 +55,13 @@
                                         <color key="textColor" red="1" green="0.079820001718195144" blue="0.185541206332553" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="end_repair" translatesAutoresizingMaskIntoConstraints="NO" id="4HR-3t-ijX">
+                                        <rect key="frame" x="180" y="20" width="70" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="TbD-LC-96k"/>
+                                            <constraint firstAttribute="height" constant="70" id="h4V-a4-pFC"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -64,8 +71,10 @@
                                     <constraint firstItem="8LJ-Pc-wdC" firstAttribute="top" secondItem="jPR-0J-Is6" secondAttribute="bottom" constant="15" id="MUx-rG-0pQ"/>
                                     <constraint firstItem="dZl-dA-zEw" firstAttribute="top" secondItem="jPR-0J-Is6" secondAttribute="bottom" constant="18" id="Shl-f0-FFa"/>
                                     <constraint firstAttribute="trailing" secondItem="dZl-dA-zEw" secondAttribute="trailing" constant="22" id="XPm-Ae-g3B"/>
+                                    <constraint firstItem="VBg-F6-adw" firstAttribute="leading" secondItem="4HR-3t-ijX" secondAttribute="trailing" constant="2" id="Yxw-RO-EK3"/>
                                     <constraint firstItem="dZl-dA-zEw" firstAttribute="leading" secondItem="VBg-F6-adw" secondAttribute="trailing" constant="5" id="erj-Ix-RAz"/>
                                     <constraint firstItem="jPR-0J-Is6" firstAttribute="leading" secondItem="kr7-t2-r31" secondAttribute="leading" constant="12" id="g3U-tZ-dhx"/>
+                                    <constraint firstItem="4HR-3t-ijX" firstAttribute="top" secondItem="kr7-t2-r31" secondAttribute="top" constant="20" id="glh-q3-EZ3"/>
                                     <constraint firstItem="8LJ-Pc-wdC" firstAttribute="leading" secondItem="kr7-t2-r31" secondAttribute="leading" constant="12" id="h5L-Qt-Mlb"/>
                                     <constraint firstAttribute="trailing" secondItem="jPR-0J-Is6" secondAttribute="trailing" constant="8" id="mGo-s0-Nx7"/>
                                     <constraint firstItem="VBg-F6-adw" firstAttribute="top" secondItem="jPR-0J-Is6" secondAttribute="bottom" constant="20" id="vUq-CZ-E31"/>
@@ -166,6 +175,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="PDview" destination="MHX-RP-wqF" id="67v-Fr-f2J"/>
+                        <outlet property="endImage" destination="4HR-3t-ijX" id="Za8-Vl-XyI"/>
                         <outlet property="forumTitle" destination="8LJ-Pc-wdC" id="vxq-3y-dBr"/>
                         <outlet property="postTitle" destination="jPR-0J-Is6" id="z8N-sv-ytZ"/>
                         <outlet property="replyContentField" destination="vjm-bU-eMr" id="knx-nu-e5T"/>
@@ -181,6 +191,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="end_repair" width="100" height="100"/>
         <image name="list_comment_nt" width="18" height="18"/>
     </resources>
 </document>
