@@ -1123,9 +1123,10 @@ bool isReply = false;
     [StatusTool statusToolPostMendScoreWithPostID:self.post_id User_ID:self.user_id Score:[NSString stringWithFormat:@"%d",mend_score] Evaluate:self.evaluateStr Success:^(id object) {
         if (![[object valueForKey:@"status"] isEqualToString:@""]) {
              [self justClose];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     } failurs:^(NSError *error){
-        //
+        
     }];
     
 }

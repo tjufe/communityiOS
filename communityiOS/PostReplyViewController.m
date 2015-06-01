@@ -236,41 +236,6 @@ int screenHeight = 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-
-    
-//    if ([self.forum_item.display_type isEqualToString:@"横向"]) {
-//        if ([[self.replyIDData objectAtIndex:indexPath.row]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
-//            MyReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-//            if(!cell){
-//                cell = [[[NSBundle mainBundle]loadNibNamed:@"MyReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
-//            }
-//            //填装数据
-//            cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row];
-//            cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row];
-//            [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
-//            //图片
-//            NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
-//            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
-//            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
-//            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
-//            [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                if (image != nil) {
-//                    cell.replyerHead.layer.masksToBounds =YES;
-//                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-//                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-//                    cell.replyerHead.image = image;
-//                }else{
-//                    cell.replyerHead.layer.masksToBounds =YES;
-//                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-//                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-//                    cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
-//                }
-//            }];
-//            return cell;
-//          }
-//    }
-
 
         ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if(!cell){

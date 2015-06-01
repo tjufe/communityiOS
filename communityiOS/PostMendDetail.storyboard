@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -40,10 +40,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_comment_nt" translatesAutoresizingMaskIntoConstraints="NO" id="VBg-F6-adw">
-                                        <rect key="frame" x="246" y="54" width="18" height="18"/>
+                                        <rect key="frame" x="252" y="56" width="15" height="15"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="LLN-TM-EEx"/>
-                                            <constraint firstAttribute="height" constant="18" id="oqN-Ng-Z8B"/>
+                                            <constraint firstAttribute="width" constant="15" id="LLN-TM-EEx"/>
+                                            <constraint firstAttribute="height" constant="15" id="oqN-Ng-Z8B"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教务报修" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LJ-Pc-wdC">
@@ -64,11 +64,11 @@
                                     <constraint firstItem="8LJ-Pc-wdC" firstAttribute="top" secondItem="jPR-0J-Is6" secondAttribute="bottom" constant="15" id="MUx-rG-0pQ"/>
                                     <constraint firstItem="dZl-dA-zEw" firstAttribute="top" secondItem="jPR-0J-Is6" secondAttribute="bottom" constant="18" id="Shl-f0-FFa"/>
                                     <constraint firstAttribute="trailing" secondItem="dZl-dA-zEw" secondAttribute="trailing" constant="22" id="XPm-Ae-g3B"/>
-                                    <constraint firstItem="dZl-dA-zEw" firstAttribute="leading" secondItem="VBg-F6-adw" secondAttribute="trailing" constant="8" id="erj-Ix-RAz"/>
+                                    <constraint firstItem="dZl-dA-zEw" firstAttribute="leading" secondItem="VBg-F6-adw" secondAttribute="trailing" constant="5" id="erj-Ix-RAz"/>
                                     <constraint firstItem="jPR-0J-Is6" firstAttribute="leading" secondItem="kr7-t2-r31" secondAttribute="leading" constant="12" id="g3U-tZ-dhx"/>
                                     <constraint firstItem="8LJ-Pc-wdC" firstAttribute="leading" secondItem="kr7-t2-r31" secondAttribute="leading" constant="12" id="h5L-Qt-Mlb"/>
                                     <constraint firstAttribute="trailing" secondItem="jPR-0J-Is6" secondAttribute="trailing" constant="8" id="mGo-s0-Nx7"/>
-                                    <constraint firstItem="VBg-F6-adw" firstAttribute="top" secondItem="jPR-0J-Is6" secondAttribute="bottom" constant="18" id="vUq-CZ-E31"/>
+                                    <constraint firstItem="VBg-F6-adw" firstAttribute="top" secondItem="jPR-0J-Is6" secondAttribute="bottom" constant="20" id="vUq-CZ-E31"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
