@@ -50,7 +50,7 @@
                             <constraint firstAttribute="width" constant="120" id="tnb-J9-qiz"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35N-US-QO6">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35N-US-QO6">
                         <rect key="frame" x="69" y="52" width="188" height="40"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -94,7 +94,7 @@
                 <outlet property="replyerHead" destination="r4c-kU-JOc" id="A4p-08-jde"/>
                 <outlet property="replyerNickName" destination="yep-GB-P4a" id="X7b-4Y-11M"/>
             </connections>
-            <point key="canvasLocation" x="344" y="526"/>
+            <point key="canvasLocation" x="262" y="642"/>
         </tableViewCell>
     </objects>
     <resources>

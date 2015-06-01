@@ -656,12 +656,12 @@ NSString  *alert_flag;
 }
 
 - (void)initForumName {
-    UIFont *font = [UIFont fontWithName:@"Arial" size:12.0f];
+    UIFont *font = [UIFont fontWithName:@"Arial" size:16.0f];
     self.forumNameLabel = [[UILabel alloc]init];
     self.forumNameLabel.text = _forum_item.forum_name;
     self.forumNameLabel.font = font;
     self.forumNameLabel.textAlignment = UITextAlignmentCenter;
-    self.forumNameLabel.frame = CGRectMake(0, 0, self.view.frame.size.width, 30);
+    self.forumNameLabel.frame = CGRectMake(0, 0, self.view.frame.size.width, 70);
 }
 
 - (void)initPostTitle {

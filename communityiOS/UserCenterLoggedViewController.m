@@ -62,7 +62,7 @@
 }
 
 #pragma mark------我参与的 lx20150505
-- (IBAction)go2myEnjoyPostList:(id)sender {
+- (IBAction)go2myEnjoyPostList:(id)sender{
 
     
     UserJoinPostListViewController *uj_PLVC = [UserJoinPostListViewController createFromStoryboardName:@"UserJoinPostList" withIdentifier:@"join"];
