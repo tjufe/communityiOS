@@ -37,7 +37,7 @@
     //绘制对话泡泡
     UIImage *bubble = [UIImage imageNamed:@"SenderTextNodeBkg"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
-    bubbleImageView.frame = CGRectMake(self.replyContent.frame.origin.x - 26, self.replyContent.frame.origin.y - 7, labelSize.width + 50, labelSize.height + 20);
+    bubbleImageView.frame = CGRectMake(self.replyContent.frame.origin.x - 26, self.replyContent.frame.origin.y - 10, labelSize.width + 100, labelSize.height + 20);
     [self.contentView insertSubview:bubbleImageView atIndex:0];
     
 }
