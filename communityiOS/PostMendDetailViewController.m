@@ -156,8 +156,9 @@ int mend_page_filter = 0;
 int mend_screenHeight = 0;
 int mend_score = 0;
 int starAmount = 0;
-
+int reply_flag = 0;
 bool isReply = false;
+
 
 #pragma mark-
 #pragma mark----------------当点击view的区域就会触发这个事件----------------------
@@ -1275,6 +1276,12 @@ bool isReply = false;
                 [self.replyContentData removeAllObjects];
                 [self getReplyData];
                 [self.tableview reloadData];
+                //用来滚回tableview底部
+                if(reply_flag ==1){
+                    [self.tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.replyListArray.count+8)-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                }
+
+                
             }else {
                
             }
@@ -1330,6 +1337,7 @@ bool isReply = false;
         }
         
     }
+    
 }
 
 -(void)getEveryPartData{
@@ -1443,11 +1451,18 @@ bool isReply = false;
         [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.post_item.belong_community_id ForumID:self.post_item.belong_forum_id PostID:self.post_item.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
             self.replyContentField.text =  @"";
             if (object != nil) {
+                //回复数+1
+                int num = [self.reply_num intValue];
+                num=num+1;
+                self.reply_num = [NSString stringWithFormat:@"%d",num];
+                self.replyNum.text = self.reply_num;
+                reply_flag = 1;
                 MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
                 [self.view addSubview:hud];
                 hud.labelText = @"回复成功";
                 hud.mode = MBProgressHUDModeText;
                 [hud showAnimated:YES whileExecutingBlock:^{
+                   
                     sleep(1);
                     mend_reply_page = 1;
                     mend_page_filter = 0;
@@ -1457,6 +1472,7 @@ bool isReply = false;
                 }];
                 
                 [self.replyContentField resignFirstResponder];
+                
                 
             }
             else{
