@@ -105,7 +105,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "508"
             endingLineNumber = "508"
-            landmarkName = "-textFieldShouldReturn:"
+            landmarkName = "-textFieldDidEndEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,7 +121,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "497"
             endingLineNumber = "497"
-            landmarkName = "-textFieldDidEndEditing:"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -94,7 +94,7 @@
                 <outlet property="replyerHead" destination="r4c-kU-JOc" id="A4p-08-jde"/>
                 <outlet property="replyerNickName" destination="yep-GB-P4a" id="X7b-4Y-11M"/>
             </connections>
-            <point key="canvasLocation" x="344" y="526"/>
+            <point key="canvasLocation" x="262" y="642"/>
         </tableViewCell>
     </objects>
     <resources>

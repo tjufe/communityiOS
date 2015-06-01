@@ -632,13 +632,16 @@ NSArray *forum;
             NSString *str = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,headPortraitUrl];
             NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)str, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
             NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
-            [self.avaterImageView sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (image != nil) {
-                    NSData *imageData = UIImageJPEGRepresentation(image, 1);
-                    [imageData writeToFile:fullPathToFile atomically:NO];
-                }
-                
-            }];
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                [self.avaterImageView sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if (image != nil) {
+                        NSData *imageData = UIImageJPEGRepresentation(image, 1);
+                        [imageData writeToFile:fullPathToFile atomically:NO];
+                    }
+                    
+                }];
+            });
             
         }
     }

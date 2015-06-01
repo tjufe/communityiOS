@@ -14,7 +14,7 @@
 @property (nonatomic,strong)NSString *forum_id;
 @property (nonatomic,strong)NSString *poster_id;
 @property (nonatomic,strong)NSString *post_title;
-@property (nonatomic,strong)NSString *post_text;
+@property (nonatomic,strong)NSString *post_text;         //故障位置
 @property (nonatomic,strong)NSString *main_image_url;
 @property (nonatomic,strong)NSString *chain;
 @property (nonatomic,strong)NSString *chain_name;
@@ -23,9 +23,9 @@
 @property (nonatomic,strong)NSString *limit_apply_num;
 @property (nonatomic,strong)NSString *need_check;
 @property (nonatomic,strong)NSString *checked;
-@property (nonatomic,strong)NSString *post_text_1;
-@property (nonatomic,strong)NSString *post_text_2;
-@property (nonatomic,strong)NSString *post_text_3;
+@property (nonatomic,strong)NSString *post_text_1;      //故障描述
+@property (nonatomic,strong)NSString *post_text_2;      //联系人
+@property (nonatomic,strong)NSString *post_text_3;      //联系电话
 
 
 @end

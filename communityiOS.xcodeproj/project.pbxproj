@@ -116,6 +116,10 @@
 		184B42AA1B098D2A004CD398 /* ReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184B42A81B098D2A004CD398 /* ReplyTableViewCell.xib */; };
 		18628CB81B10750D00E81A8B /* MyReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18628CB61B10750D00E81A8B /* MyReplyTableViewCell.m */; };
 		18628CB91B10750D00E81A8B /* MyReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18628CB71B10750D00E81A8B /* MyReplyTableViewCell.xib */; };
+		187A42A61B1C03E900DD8A50 /* PostText1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A42A41B1C03E900DD8A50 /* PostText1TableViewCell.m */; };
+		187A42A71B1C03E900DD8A50 /* PostText1TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187A42A51B1C03E900DD8A50 /* PostText1TableViewCell.xib */; };
+		187A42AB1B1C07FD00DD8A50 /* PostText23TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A42A91B1C07FD00DD8A50 /* PostText23TableViewCell.m */; };
+		187A42AC1B1C07FD00DD8A50 /* PostText23TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187A42AA1B1C07FD00DD8A50 /* PostText23TableViewCell.xib */; };
 		188160561B170F7600191342 /* ScoreTypeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 188160551B170F7600191342 /* ScoreTypeList.m */; };
 		188933871AFB57E8006329D8 /* AuthStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */; };
 		1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188933891AFB580F006329D8 /* AuthTableViewController.m */; };
@@ -344,6 +348,12 @@
 		18628CB51B10750D00E81A8B /* MyReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyReplyTableViewCell.h; sourceTree = "<group>"; };
 		18628CB61B10750D00E81A8B /* MyReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyReplyTableViewCell.m; sourceTree = "<group>"; };
 		18628CB71B10750D00E81A8B /* MyReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyReplyTableViewCell.xib; sourceTree = "<group>"; };
+		187A42A31B1C03E900DD8A50 /* PostText1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostText1TableViewCell.h; sourceTree = "<group>"; };
+		187A42A41B1C03E900DD8A50 /* PostText1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostText1TableViewCell.m; sourceTree = "<group>"; };
+		187A42A51B1C03E900DD8A50 /* PostText1TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostText1TableViewCell.xib; sourceTree = "<group>"; };
+		187A42A81B1C07FD00DD8A50 /* PostText23TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostText23TableViewCell.h; sourceTree = "<group>"; };
+		187A42A91B1C07FD00DD8A50 /* PostText23TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostText23TableViewCell.m; sourceTree = "<group>"; };
+		187A42AA1B1C07FD00DD8A50 /* PostText23TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostText23TableViewCell.xib; sourceTree = "<group>"; };
 		188160541B170F7600191342 /* ScoreTypeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreTypeList.h; sourceTree = "<group>"; };
 		188160551B170F7600191342 /* ScoreTypeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreTypeList.m; sourceTree = "<group>"; };
 		188933861AFB57E8006329D8 /* AuthStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStoryboard.storyboard; sourceTree = "<group>"; };
@@ -865,6 +875,12 @@
 				13B1C33C1AD4D6ED005C179C /* PostTextTableViewCell.h */,
 				13B1C33D1AD4D6ED005C179C /* PostTextTableViewCell.m */,
 				13B1C33E1AD4D6ED005C179C /* PostTextTableViewCell.xib */,
+				187A42A31B1C03E900DD8A50 /* PostText1TableViewCell.h */,
+				187A42A41B1C03E900DD8A50 /* PostText1TableViewCell.m */,
+				187A42A51B1C03E900DD8A50 /* PostText1TableViewCell.xib */,
+				187A42A81B1C07FD00DD8A50 /* PostText23TableViewCell.h */,
+				187A42A91B1C07FD00DD8A50 /* PostText23TableViewCell.m */,
+				187A42AA1B1C07FD00DD8A50 /* PostText23TableViewCell.xib */,
 				131A9EC81B03846700926D6F /* ChainTableViewCell.h */,
 				131A9EC91B03846700926D6F /* ChainTableViewCell.m */,
 				131A9ECA1B03846700926D6F /* ChainTableViewCell.xib */,
@@ -1095,6 +1111,7 @@
 				13B1C34C1AD4D6ED005C179C /* PostDetailStoryboard.storyboard in Resources */,
 				8EE5A4631B0ECE6A00F05A12 /* NewPostEditViewController.xib in Resources */,
 				13D247211B048CCE00717780 /* chainToWeb.storyboard in Resources */,
+				187A42A71B1C03E900DD8A50 /* PostText1TableViewCell.xib in Resources */,
 				13C58BEA1AB9550600090157 /* Images.xcassets in Resources */,
 				A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */,
 				13BE567A1ABA6FD800379ACD /* Login.storyboard in Resources */,
@@ -1109,6 +1126,7 @@
 				8EEC48931AD90B17002E70DA /* DChainTableViewCell.xib in Resources */,
 				13B1C3511AD4D6ED005C179C /* PosterTableViewCell.xib in Resources */,
 				13B1C2FE1ACBB56B005C179C /* Settings.storyboard in Resources */,
+				187A42AC1B1C07FD00DD8A50 /* PostText23TableViewCell.xib in Resources */,
 				18E6BCEE1B187860005B70F3 /* EvaluateTableViewCell.xib in Resources */,
 				13BE566E1ABA574700379ACD /* ForumTableViewCell.xib in Resources */,
 				137D80E41B06FD25001E8CDA /* EditChainTableViewCell.xib in Resources */,
@@ -1179,6 +1197,7 @@
 				13878AE51AD6260400658F21 /* AlterPasswordViewController.m in Sources */,
 				1892E3ED1ADBFAAD008A75B1 /* FirstSettingsViewController.m in Sources */,
 				13B1C2BE1ACA5A27005C179C /* KZPropertyMapper.m in Sources */,
+				187A42A61B1C03E900DD8A50 /* PostText1TableViewCell.m in Sources */,
 				13B1C35D1AD4D6ED005C179C /* TitleTableViewCell.m in Sources */,
 				13D2471F1B048C8C00717780 /* ChainToWebViewController.m in Sources */,
 				183FCD541B158AF80050D5B6 /* MyMendReplyTableViewCell.m in Sources */,
@@ -1195,6 +1214,7 @@
 				131A9ECB1B03846700926D6F /* ChainTableViewCell.m in Sources */,
 				13B1C3501AD4D6ED005C179C /* PosterTableViewCell.m in Sources */,
 				8EEC48871AD8BB11002E70DA /* replyInfoListItem.m in Sources */,
+				187A42AB1B1C07FD00DD8A50 /* PostText23TableViewCell.m in Sources */,
 				8EE9EE821AD653CD00377802 /* GCPlaceholderTextView.m in Sources */,
 				18E6BCED1B187860005B70F3 /* EvaluateTableViewCell.m in Sources */,
 				13BE567F1ABA70D800379ACD /* UIStoryboard+Addition.m in Sources */,
