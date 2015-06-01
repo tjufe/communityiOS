@@ -220,6 +220,11 @@ bool edit;
             if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
                 self.textcell.textview.text = self.select_post_text;
+                if([self.select_post_text isEqualToString:@""]||self.select_post_text==nil){
+                     self.textcell.textview.text = @"请输入内容";
+                }
+                
+                
             }else{
                 if( self.textcell.textview.text!=nil&& ![self.textcell.textview.text isEqualToString:@"请输入内容"]){
                      self.textcell.textview.text = self.select_post_text;
@@ -527,7 +532,7 @@ bool edit;
     
 }
 - (void)textViewDidEndEditing:(UITextView *)textView{
-//    self.select_post_text = textView.text;
+    
 //    CGSize size = CGSizeMake(300, 1000);
 //    CGSize labelSize = [textView.text sizeWithFont:textView.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateCellHeight" object:[NSString stringWithFormat:@"%f",labelSize.height]];
@@ -543,10 +548,12 @@ bool edit;
 //    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
 //    [self.PEtableview reloadData];
     if(![textView.text isEqualToString:@""]){
-    self.textcell.textview.text = textView.text;
+        self.textcell.textview.text = textView.text;
+        self.select_post_text = textView.text;
         edit = false;
     }else{
         self.textcell.textview.text = @"请输入内容";
+        self.select_post_text = @"";
         textView.textColor = [UIColor grayColor];
         edit =true;
     }
