@@ -31,6 +31,8 @@
 #import "UIViewController+Create.h"
 #import "UIImageView+WebCache.h"//加载图片
 
+#define kANimationDuration 0.2 //动画时间
+
 
 @interface PostEditViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
 
@@ -731,7 +733,7 @@ bool edit;
     
 }
 
-
+//
 //-(void)viewWillAppear:(BOOL)animated{
 //    [super viewWillAppear:YES];
 //    //注册通知，监听键盘出现
@@ -748,13 +750,23 @@ bool edit;
 //    NSValue *keyboardRectAsObject = [[paramNotification userInfo]objectForKey:UIKeyboardFrameEndUserInfoKey];
 //    CGRect keyboardRect;
 //    [keyboardRectAsObject getValue:&keyboardRect];
-//    self.textcell.textview.contentInset = UIEdgeInsetsMake(0, 0, keyboardRect.size.height, 0);
+////    self.textcell.textview.contentInset = UIEdgeInsetsMake(0, 0, keyboardRect.size.height, 0);
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:kANimationDuration];
+//    //上移
+//    [(UIView *)[self.view viewWithTag:1000]setFrame:CGRectMake(0, self.view.frame.size.height-keyboardRect.size.height, self.view.frame.size.width, 56)];
+//    [UIView commitAnimations];
 //}
 //
 //-(void)handleKeyboardDidHidden{
-//    self.textcell.textview.contentInset = UIEdgeInsetsZero;
+// //   self.textcell.textview.contentInset = UIEdgeInsetsZero;
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:kANimationDuration];
+//    //下移
+//    [(UIView *)[self.view viewWithTag:1000]setFrame:CGRectMake(0, self.view.frame.size.height-56, self.view.frame.size.width, 56)];
+//    [UIView commitAnimations];
 //}
-//#pragma mark-----
+#pragma mark-----
 
 -(void)viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]removeObserver:self];
