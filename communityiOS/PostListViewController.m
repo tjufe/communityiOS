@@ -397,7 +397,7 @@ NSInteger page_filter;
 -(void)viewWillAppear:(BOOL)animated{
      [super viewWillAppear:(BOOL)animated];
      page =1;
-     rows = 5;
+     rows = 10;
      page_filter = 0;
      [self.PostListArray removeAllObjects];
      [postDateData removeAllObjects];
@@ -416,7 +416,7 @@ NSInteger page_filter;
      }else{
           [self loadData2];
      }
-     
+     [self setupRefresh];
 }
 
 
@@ -567,7 +567,7 @@ NSInteger page_filter;
     self.Page = [[NSNumber alloc]init];
     self.Rows = [[NSNumber alloc]init];
   
-     [self setupRefresh];
+     
      
     //请求数据
      

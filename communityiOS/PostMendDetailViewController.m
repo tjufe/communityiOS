@@ -25,7 +25,7 @@
 #import "UserJoinPostListViewController.h"
 #import "ChainToWebViewController.h"
 #import "MBProgressHUD.h"
-
+#import "forumSetItem.h"
 #import "MendRplyTableViewCell.h"
 #import "MyMendReplyTableViewCell.h"
 #import "replyInfoListItem.h"
@@ -39,6 +39,7 @@
 @interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 - (IBAction)replyAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *replyContentField;
+@property (weak, nonatomic) IBOutlet UIButton *reply_btn;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
@@ -146,6 +147,8 @@ int mend_page_filter = 0;
 int mend_screenHeight = 0;
 int mend_score = 0;
 int starAmount = 0;
+
+bool isReply = false;
 
 #pragma mark-
 #pragma mark----------------当点击view的区域就会触发这个事件----------------------
@@ -650,6 +653,22 @@ int starAmount = 0;
     self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
     mend_menuHeight = 0;
     
+    //判断是否允许回帖 lx 0529
+    for(int i =0;i<[self.forum_item.ForumSetlist count];i++){
+       forumSetItem  *forum_set_item = [forumSetItem createItemWitparametes:[self.forum_item.ForumSetlist objectAtIndex:i]];
+        [self.forumSetArray addObject:forum_set_item];
+    }
+    for (int i = 0; i<[self.forumSetArray count]; i++) {
+        forumSetItem *tempItem = [self.forumSetArray objectAtIndex:i];
+        if ([tempItem.site_name isEqualToString:site_reply_user]) {
+            if ([tempItem.site_value containsString:[NSString stringWithFormat:@"/%@",self.user_auth]]&&![self.user_auth isEqualToString:@""]) {
+                isReply = true;
+                break;
+            }
+        }
+        
+    }
+    
     
 }
 #pragma mark-----------------------初始化界面------------------------------
@@ -666,7 +685,14 @@ int starAmount = 0;
     }else{
         [self setUserInit];
     }
-    
+    //是否可以回复
+    if([self.post_overed isEqualToString:@"是"]||!isReply){
+        self.replyContentField.enabled = NO;
+        self.reply_btn.enabled = NO;
+    }else{
+        self.replyContentField.enabled = YES;
+        self.reply_btn.enabled = YES;
+    }
 }
 
 -(void)setViewGone{
@@ -814,7 +840,7 @@ int starAmount = 0;
     self.user_id = [defaults objectForKey:@"UserID"];
     NSLog(@"^^%@ %@ %@ ",self.moderator_of_forum_list,self.user_auth,self.user_id);
 
-    if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] && ![self.user_auth isEqualToString:@""]) ){
+    if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] && ![self.user_auth isEqualToString:@""]&&![self.post_overed isEqualToString:@"是"]) ){
         //        [self.view addSubview:self.operlist];
         self.navigationItem.rightBarButtonItem = self.rightItem;
     }
@@ -974,7 +1000,7 @@ int starAmount = 0;
     
     //第一行评价语句
     self.assessLabel = [[UILabel alloc]initWithFrame:CGRectMake(tlabel.frame.origin.x+tlabel.frame.size.width+15, 65, 130, 15)];
-    self.assessLabel.text = @"Welcome!";
+    self.assessLabel.text = @"";
     self.assessLabel.textColor = [UIColor grayColor];
     self.assessLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [self.assessView addSubview:self.assessLabel];
@@ -1060,6 +1086,9 @@ int starAmount = 0;
 -(void)justClose{
     self.assessView.hidden =YES;
     [self.maskView removeFromSuperview];
+    //不可回复 lx
+    self.reply_btn.enabled = NO;
+    self.replyContentField.enabled = NO;
 }
 
 -(void)toReplyList{
