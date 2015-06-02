@@ -27,7 +27,7 @@
             <connections>
                 <outlet property="MainImage" destination="FYe-yj-II5" id="T62-Bz-Idk"/>
             </connections>
-            <point key="canvasLocation" x="218" y="246.5"/>
+            <point key="canvasLocation" x="418" y="375"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -18,6 +18,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "editPostItem.h"
 #import "newPostItem.h"
+#import "PostMendDetailViewController.h"
 
 
 
@@ -546,6 +547,7 @@ NSString  *alert_flag;
             self.rightItem.enabled = YES;
         }];
         }else{
+            postInfo.post_id = _post_item.post_id;
             [StatusTool statusToolEditPostWithPostInfo:postInfo Success:^(id object) {
                 editPostItem *new = (editPostItem *)object;
                 if([new.msg isEqualToString:@"编辑成功"]){
@@ -593,8 +595,8 @@ NSString  *alert_flag;
     
     if (buttonIndex ==0) {
         if([alert_flag isEqualToString:@"s"]){
-           
-                [self.navigationController popViewControllerAnimated:YES];
+            mend_pop_code = 1;
+            [self.navigationController popViewControllerAnimated:YES];
             
         }
     }else{

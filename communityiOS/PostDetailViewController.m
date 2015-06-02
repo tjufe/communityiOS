@@ -211,7 +211,7 @@ bool isModerator = NO;//是否是版主
             //主图显示情况
             if (self.main_image_url!=nil && ![self.main_image_url isEqualToString:@""]) {
                 [self loadMainImage];
-                imageHeight = 174;
+                imageHeight = self.postImageCell.MainImage.frame.size.height + 30;
                 self.postImageCell.hidden = NO;
 //                self.postImageCell.MainImage.contentMode=UIViewContentModeScaleAspectFill;
             }else{
@@ -369,6 +369,11 @@ bool isModerator = NO;//是否是版主
             //
         }];
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:(BOOL)animated];
+    [self.operlist removeFromSuperview];
 }
 
 
@@ -951,9 +956,10 @@ bool isModerator = NO;//是否是版主
     PEVC.ED_FLAG = @"2";//编辑帖子
     PEVC.post_item = self.post_item;//帖子详情
     PEVC.forum_item = _forum_item;
-    
-    [self.navigationController pushViewController:PEVC animated:YES];
     [self.operlist removeFromSuperview];
+    self.operlist = nil;
+    self.navigationItem.rightBarButtonItem= nil;
+    [self.navigationController pushViewController:PEVC animated:YES];
     count = 0;
 }
 
