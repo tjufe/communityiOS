@@ -212,7 +212,7 @@ bool isReply = false;
         
             return self.posterCell;
 
-        }else if(indexPath.row == 1){
+        }else if(indexPath.row == 1){     //故障地点单元格
             self.postTextCell = [tableView dequeueReusableCellWithIdentifier:nil];
             self.postTextCell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!self.postTextCell) {
@@ -226,7 +226,7 @@ bool isReply = false;
             mend_cellheight = labelSize.height+10;
             return self.postTextCell;
             
-        }else if (indexPath.row == 2){
+        }else if (indexPath.row == 2){   //故障描述单元格
             self.postTextCell1 = [tableView dequeueReusableCellWithIdentifier:nil];
             self.postTextCell1.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!self.postTextCell1) {
@@ -240,7 +240,7 @@ bool isReply = false;
 
             return  self.postTextCell1;
             
-        }else if (indexPath.row == 3){
+        }else if (indexPath.row == 3){       //保修人及联系方式单元格
             self.postTextCell23 = [tableView dequeueReusableCellWithIdentifier:nil];
             self.postTextCell23.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!self.postTextCell23) {
@@ -256,7 +256,7 @@ bool isReply = false;
             return  self.postTextCell23;
             
         }
-        else if(indexPath.row == 4){
+        else if(indexPath.row == 4){       //主图
             self.postImageCell = [tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.postImageCell) {
                 self.postImageCell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -272,7 +272,7 @@ bool isReply = false;
             
             return self.postImageCell;
             
-        }else if(indexPath.row == 5){
+        }else if(indexPath.row == 5){     //外链
             self.chainCell = [ tableView dequeueReusableCellWithIdentifier:nil];
             
             if (!self.chainCell) {
@@ -291,7 +291,7 @@ bool isReply = false;
             
             return self.chainCell;
             
-        }else if(indexPath.row == 6){
+        }else if(indexPath.row == 6){     //报名单元格
             self.applyCell = [tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.applyCell) {
                 self.applyCell= [[[NSBundle mainBundle]loadNibNamed:@"ApplyTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -346,7 +346,7 @@ bool isReply = false;
             }
             return self.applyCell;
             
-        }else if (indexPath.row == 7){
+        }else if (indexPath.row == 7){      // 评分单元格
             
             self.evaluateCell = [ tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.evaluateCell) {
@@ -493,14 +493,11 @@ bool isReply = false;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     if(mend_pop_code==1){
-//        [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
-//            self.post_item = (postItem *)object;
-//            
-//            [self.tableview reloadData];
-//        } failurs:^(NSError *error) {
-//            //
-//        }];
-        [self loadPostInfo:self.post_item.post_id];
+        // 从编辑页跳回来的时候重新请求数据
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            [self loadPostInfo:self.post_item.post_id];
+        });
     }
 }
 
@@ -611,9 +608,7 @@ bool isReply = false;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
-    [self.operlist removeFromSuperview];
-    self.operlist = nil;
-    self.navigationItem.rightBarButtonItem = nil;
+    
 
 }
 
@@ -893,7 +888,6 @@ bool isReply = false;
     self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
     self.user_auth =[defaults objectForKey:@"UserPermission"];
     self.user_id = [defaults objectForKey:@"UserID"];
-    NSLog(@"^^%@ %@ %@ ",self.moderator_of_forum_list,self.user_auth,self.user_id);
 
     if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] && ![self.user_auth isEqualToString:@""]&&![self.post_overed isEqualToString:@"是"]) ){
         //        [self.view addSubview:self.operlist];
@@ -1082,6 +1076,7 @@ bool isReply = false;
     //留言文本框
     self.messageField = [[UITextField alloc]init];
     self.messageField.frame = CGRectMake(flabel.frame.origin.x+flabel.frame.size.width, flabel.frame.origin.y, 180, 30);
+    self.messageField.delegate = self;
     [self.messageField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     // messageField.backgroundColor = [UIColor lightGrayColor];
     [self.assessView addSubview:self.messageField];
