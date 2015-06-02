@@ -11,7 +11,7 @@
 #import "regItem.h"
 #import "PPRevealSideViewController.h"
 
-@interface RegistViewController ()
+@interface RegistViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *resView;
 @property (weak, nonatomic) IBOutlet UIButton *resBtn;
 - (IBAction)regAction:(id)sender;
@@ -49,6 +49,14 @@ NSString *strSecondPassword;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.tfNickname) {
+        [self.tfNickname resignFirstResponder];
+        [self.tfPassword becomeFirstResponder];
+    }
+    return true;
 }
 
 /*

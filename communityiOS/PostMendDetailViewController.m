@@ -45,6 +45,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
+@property (strong, nonatomic) IBOutlet UIImageView *endImage;
 
 @property (strong ,nonatomic) IBOutlet UIView *operlist;
 @property (strong,nonatomic) postItem *post_item ;
@@ -138,7 +139,7 @@
 
 @implementation PostMendDetailViewController
 int mend_count=0;//用于菜单点击计数
-int mend_pop_code;//用于跳转标志
+//int mend_pop_code;//用于跳转标志
 int mend_alert = 0;//用于警告框UIAlertView计数
 bool mend_alertcount=false;//用于菜单点击计数
 float mend_cellheight = 0;
@@ -211,7 +212,7 @@ bool isReply = false;
         
             return self.posterCell;
 
-        }else if(indexPath.row == 1){
+        }else if(indexPath.row == 1){     //故障地点单元格
             self.postTextCell = [tableView dequeueReusableCellWithIdentifier:nil];
             self.postTextCell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!self.postTextCell) {
@@ -225,7 +226,7 @@ bool isReply = false;
             mend_cellheight = labelSize.height+10;
             return self.postTextCell;
             
-        }else if (indexPath.row == 2){
+        }else if (indexPath.row == 2){   //故障描述单元格
             self.postTextCell1 = [tableView dequeueReusableCellWithIdentifier:nil];
             self.postTextCell1.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!self.postTextCell1) {
@@ -239,7 +240,7 @@ bool isReply = false;
 
             return  self.postTextCell1;
             
-        }else if (indexPath.row == 3){
+        }else if (indexPath.row == 3){       //保修人及联系方式单元格
             self.postTextCell23 = [tableView dequeueReusableCellWithIdentifier:nil];
             self.postTextCell23.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!self.postTextCell23) {
@@ -250,12 +251,12 @@ bool isReply = false;
             self.postTextCell23.postText3.text = [NSString stringWithFormat:@"联系电话：%@",self.post_text_3];
             CGSize size = CGSizeMake(300, 1000);
             CGSize labelSize = [self.postTextCell23.postText3.text sizeWithFont:self.postTextCell23.postText3.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
-            mend_cellheight23 = labelSize.height+10;
+            mend_cellheight23 = labelSize.height+30;
             
             return  self.postTextCell23;
             
         }
-        else if(indexPath.row == 4){
+        else if(indexPath.row == 4){       //主图
             self.postImageCell = [tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.postImageCell) {
                 self.postImageCell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -265,13 +266,13 @@ bool isReply = false;
             //主图显示情况
             if (self.main_image_url!=nil && ![self.main_image_url isEqualToString:@""]) {
                 [self loadMainImage];
-                mend_imageHeight = 150;
+                mend_imageHeight = self.postImageCell.MainImage.frame.size.height+10;
                 self.postImageCell.hidden = NO;
             }
             
             return self.postImageCell;
             
-        }else if(indexPath.row == 5){
+        }else if(indexPath.row == 5){     //外链
             self.chainCell = [ tableView dequeueReusableCellWithIdentifier:nil];
             
             if (!self.chainCell) {
@@ -290,7 +291,7 @@ bool isReply = false;
             
             return self.chainCell;
             
-        }else if(indexPath.row == 6){
+        }else if(indexPath.row == 6){     //报名单元格
             self.applyCell = [tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.applyCell) {
                 self.applyCell= [[[NSBundle mainBundle]loadNibNamed:@"ApplyTableViewCell" owner:nil options:nil]objectAtIndex:0];
@@ -345,7 +346,7 @@ bool isReply = false;
             }
             return self.applyCell;
             
-        }else if (indexPath.row == 7){
+        }else if (indexPath.row == 7){      // 评分单元格
             
             self.evaluateCell = [ tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.evaluateCell) {
@@ -358,6 +359,7 @@ bool isReply = false;
             }
             if (![self.post_item.post_text_4 isEqualToString:@""]||![self.post_item.post_text_5 isEqualToString:@""]) {
                 self.evaluateCell.hidden = NO;
+                self.endImage.hidden = NO;
             }
             
             return self.evaluateCell;
@@ -462,7 +464,6 @@ bool isReply = false;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.view endEditing:YES];
 }
-
 #pragma mark-
 #pragma mark------实现PostListViewControllerDelegate----------------------------
 -(void)addpostItem:(postItem *)PostItem{
@@ -492,12 +493,11 @@ bool isReply = false;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     if(mend_pop_code==1){
-        [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
-            self.post_item = (postItem *)object;
-            [self.tableview reloadData];
-        } failurs:^(NSError *error) {
-            //
-        }];
+        // 从编辑页跳回来的时候重新请求数据
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            [self loadPostInfo:self.post_item.post_id];
+        });
     }
 }
 
@@ -609,6 +609,7 @@ bool isReply = false;
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
     
+
 }
 
 - (void)keyboardWillShow:(NSNotification *)aNotification{
@@ -765,6 +766,7 @@ bool isReply = false;
     [button addTarget:self action:@selector(MenuAppear) forControlEvents:UIControlEventTouchUpInside];
     
     self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 -(void)setMenu{
@@ -881,11 +883,11 @@ bool isReply = false;
     //    [self setMenu];
     self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 50*mend_menuHeight);
     //postdetailmenu显示情况
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
     self.user_auth =[defaults objectForKey:@"UserPermission"];
     self.user_id = [defaults objectForKey:@"UserID"];
-    NSLog(@"^^%@ %@ %@ ",self.moderator_of_forum_list,self.user_auth,self.user_id);
 
     if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] && ![self.user_auth isEqualToString:@""]&&![self.post_overed isEqualToString:@"是"]) ){
         //        [self.view addSubview:self.operlist];
@@ -1074,6 +1076,7 @@ bool isReply = false;
     //留言文本框
     self.messageField = [[UITextField alloc]init];
     self.messageField.frame = CGRectMake(flabel.frame.origin.x+flabel.frame.size.width, flabel.frame.origin.y, 180, 30);
+    self.messageField.delegate = self;
     [self.messageField addTarget:self action:@selector(textFieldEditChanged:) forControlEvents:UIControlEventEditingChanged];
     // messageField.backgroundColor = [UIColor lightGrayColor];
     [self.assessView addSubview:self.messageField];
@@ -1124,9 +1127,10 @@ bool isReply = false;
     [StatusTool statusToolPostMendScoreWithPostID:self.post_id User_ID:self.user_id Score:[NSString stringWithFormat:@"%d",mend_score] Evaluate:self.evaluateStr Success:^(id object) {
         if (![[object valueForKey:@"status"] isEqualToString:@""]) {
              [self justClose];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     } failurs:^(NSError *error){
-        //
+        
     }];
     
 }
@@ -1509,4 +1513,6 @@ bool isReply = false;
     
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
+
+
 @end

@@ -63,6 +63,7 @@
 @property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
 
 @property (nonatomic,strong) NSArray *listSlide;
+@property (nonatomic,strong) MBProgressHUD *hud;
 
 @end
 
@@ -136,10 +137,13 @@ NSArray *forum;
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
   
     self.navigationController.delegate=self;
-
+    
+    self.hud = [[MBProgressHUD alloc]initWithView:self.view];
+    [self.view addSubview:self.hud];
+    self.hud.dimBackground = YES;
+    [self.hud show:YES];
     [self initSlide];
     [self addTimer];
-//    [self reloadData];
     [self autoLogin];
     
     [self clearExtraLine:self.mainTableView];
@@ -326,7 +330,7 @@ NSArray *forum;
         _listForumItem = array;
         forum = array;
         [self.mainTableView reloadData];
-        
+        [self.hud hide:YES];
     } failurs:^(NSError *error) {
         NSLog(@"%@",error);
     }];
@@ -505,9 +509,12 @@ NSArray *forum;
 
 #pragma mark --在视图间切换时，并不会再次载入viewDidLoad方法，所以如果在调入视图时，需要对数据做更新，就只能在这个方法内实现了。所以这个方法也非常常用。hmx
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:(BOOL)animated];
-    [self reloadUserStateBarUI];//刷新用户状态栏UI
-    [self reloadData];
+        [super viewWillAppear:(BOOL)animated];
+
+        [self reloadUserStateBarUI];//刷新用户状态栏UI
+        [self reloadData];
+
+    
 }
 
 #pragma mark --处理自动登录hmx

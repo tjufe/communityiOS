@@ -17,7 +17,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    //Configure the view for the selected state
 }
 
 -(void)setReplyContentText:(NSString *)text{
@@ -37,7 +37,7 @@
     //绘制对话泡泡
     UIImage *bubble = [UIImage imageNamed:@"SenderTextNodeBkg"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
-    bubbleImageView.frame = CGRectMake(self.replyContent.frame.origin.x - 26, self.replyContent.frame.origin.y - 10, labelSize.width + 100, labelSize.height + 20);
+    bubbleImageView.frame = CGRectMake(self.contentView.frame.size.width - labelSize.width - self.replyerHead.frame.size.width - 30, self.replyContent.frame.origin.y - 10, labelSize.width + 75, labelSize.height + 20);
     [self.contentView insertSubview:bubbleImageView atIndex:0];
     
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -82,7 +82,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="登录密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WzH-bz-7tT">
                                         <rect key="frame" x="12" y="46" width="276" height="45"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="lOJ-nz-sfY" id="CIc-bp-Fa6"/>
                                         </connections>
@@ -196,9 +196,9 @@
                                             <constraint firstAttribute="height" constant="45" id="ePH-IU-Gfw"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                         <connections>
-                                            <outlet property="delegate" destination="lOJ-nz-sfY" id="O7Q-AS-7cO"/>
+                                            <outlet property="delegate" destination="j4W-6T-2TF" id="rQ0-j0-Gef"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GTN-pl-nXs">
@@ -214,9 +214,9 @@
                                             <constraint firstAttribute="height" constant="45" id="oBF-gu-uk7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                         <connections>
-                                            <outlet property="delegate" destination="lOJ-nz-sfY" id="YuL-vJ-plx"/>
+                                            <outlet property="delegate" destination="j4W-6T-2TF" id="Aez-Vt-9gb"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VuT-dh-u2e">
@@ -232,9 +232,9 @@
                                             <constraint firstAttribute="height" constant="45" id="z6s-xQ-bGq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" secureTextEntry="YES"/>
                                         <connections>
-                                            <outlet property="delegate" destination="lOJ-nz-sfY" id="gDu-ag-qAy"/>
+                                            <outlet property="delegate" destination="j4W-6T-2TF" id="rci-pQ-HNa"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9PB-1f-edl">
@@ -250,9 +250,9 @@
                                             <constraint firstAttribute="height" constant="45" id="bKj-sJ-naX"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                         <connections>
-                                            <outlet property="delegate" destination="lOJ-nz-sfY" id="IND-1i-BC6"/>
+                                            <outlet property="delegate" destination="j4W-6T-2TF" id="VpQ-vR-rSA"/>
                                         </connections>
                                     </textField>
                                 </subviews>

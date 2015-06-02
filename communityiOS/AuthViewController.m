@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "StatusTool.h"
 
-@interface AuthViewController ()
+@interface AuthViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *roomField;
 @property (strong, nonatomic) IBOutlet UITextField *hostField;
 @property (strong, nonatomic) IBOutlet UITextField *phoneField;
@@ -40,6 +40,16 @@
     self.phoneField.text = strPhoneNumber;
 
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.roomField) {
+        [self.hostField becomeFirstResponder];
+    }else if (textField == self.hostField){
+        [self.phoneField becomeFirstResponder];
+    }
+    return true;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
