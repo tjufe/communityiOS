@@ -20,9 +20,6 @@
 @property (strong, nonatomic) NSDictionary *inactiveRemoteNotificationInfo;
 @property (assign, nonatomic) BOOL shouldRefreshUserInfo;
 @property (assign, nonatomic) BOOL shouldJumpToPostDetail;
-@property (assign, nonatomic) BOOL shouldJumpToPostReply;
-
-
 
 @end
 
@@ -50,9 +47,7 @@
                                            categories:nil];
     } else {
         //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                       UIRemoteNotificationTypeSound |
-                                                       UIRemoteNotificationTypeAlert)
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)
                                            categories:nil];
     }
 #else
@@ -82,8 +77,6 @@
     }else{
         NSString *type = userInfo[@"type"];
         self.shouldJumpToPostDetail = ([type isEqualToString:@"000"]);
-        self.shouldJumpToPostReply = ([type isEqualToString:@"001"]);
-        
         [self handleInactiveRemoteNotification:userInfo];
     }
     

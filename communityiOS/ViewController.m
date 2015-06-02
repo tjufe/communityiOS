@@ -241,7 +241,6 @@ NSArray *forum;
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
     PDVC.postIDFromOutside = s.post_id;
 
-    NSString *str = s.post_id;
     [self.navigationController pushViewController:PDVC animated:YES];
 
 }

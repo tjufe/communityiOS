@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kr7-t2-r31">
                                 <rect key="frame" x="0.0" y="60" width="320" height="90"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是保修的帖子的标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPR-0J-Is6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPR-0J-Is6">
                                         <rect key="frame" x="12" y="15" width="300" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="12H-iT-N7J"/>
@@ -29,7 +29,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="219" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZl-dA-zEw">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZl-dA-zEw">
                                         <rect key="frame" x="272" y="54" width="26" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="Wa8-lF-xOm"/>
@@ -46,7 +46,7 @@
                                             <constraint firstAttribute="height" constant="15" id="oqN-Ng-Z8B"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教务报修" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LJ-Pc-wdC">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LJ-Pc-wdC">
                                         <rect key="frame" x="12" y="51" width="68" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="NDh-Sz-X8X"/>
@@ -181,6 +181,7 @@
                         <outlet property="replyContentField" destination="vjm-bU-eMr" id="knx-nu-e5T"/>
                         <outlet property="replyImage" destination="VBg-F6-adw" id="uyX-th-fjK"/>
                         <outlet property="replyNum" destination="dZl-dA-zEw" id="CKU-Oe-pJE"/>
+                        <outlet property="replyView" destination="Iaf-KS-dXV" id="a34-a4-Rqo"/>
                         <outlet property="reply_btn" destination="ijs-p2-Fo8" id="IGX-8s-Mb7"/>
                         <outlet property="tableview" destination="ii0-YQ-wbY" id="tTU-WZ-M7o"/>
                     </connections>

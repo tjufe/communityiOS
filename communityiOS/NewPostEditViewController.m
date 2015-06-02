@@ -55,7 +55,7 @@
 @property (strong,nonatomic) NSString *select_chain;//上传的外链状态
 @property (strong,nonatomic) NSString *select_chain_context;//上传的外链内容
 @property (strong,nonatomic) NSString *select_chain_address;//上传的外链地址
-@property (strong,nonatomic) NSString *select_img;//上传的图片
+@property (strong,nonatomic) UIImage *select_img;//上传的图片
 @property (strong,nonatomic) NSString *select_img_name;//上传的图片名称
 @property (strong,nonatomic) NSMutableDictionary *inputArray;//用来存放输入的控件
 
@@ -82,14 +82,15 @@ NSString  *alert_flag;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     //获得编辑过的图片
     UIImage* chosenImage = [info objectForKey: @"UIImagePickerControllerEditedImage"];
-    self.select_img = chosenImage;
+    CGSize size = CGSizeMake(300, 150);
+    self.select_img = [self scaleToSize:chosenImage size:size];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
     //显示在UI中
-    self.postMainPicImageView.image = chosenImage;
+    self.postMainPicImageView.image = self.select_img;
     self.postMainPicImageView.hidden = NO;
     //上传图片
-    [self uploadinitWithImage:chosenImage];
+    [self uploadinitWithImage:self.select_img];
     
 }
 
@@ -106,6 +107,16 @@ NSString  *alert_flag;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark---------------剪裁图片
+-(UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size
+{
+    
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *endImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return endImage;
+}
 
 #pragma mark--------------上传图片
 -(void)uploadinitWithImage:(UIImage *)image{
