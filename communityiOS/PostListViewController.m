@@ -673,8 +673,15 @@ NSInteger page_filter;
 -(void)loadData{
      self.Page = [NSNumber numberWithInteger:page];
      self.Rows = [NSNumber numberWithInteger:rows];
+     
+     NSString *user_id;
+     if([self.ISBrowse isEqualToString:@"Y"]){
+          user_id = @"";
+     }else{
+          user_id = self.UserID;//只查本人和置顶的
+     }
 
-     [StatusTool statusToolGetPostListWithbfID:self.forumID bcID:self.communityID userID:self.UserID filter:_filter_flag page:self.Page rows:self.Rows Success:^(id object) {
+     [StatusTool statusToolGetPostListWithbfID:self.forumID bcID:self.communityID userID:user_id filter:_filter_flag page:self.Page rows:self.Rows Success:^(id object) {
         
         self.post_list_item = (postListItem *)object;
           if(page_filter==0){//刚开始第一次加载
