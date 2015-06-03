@@ -237,10 +237,22 @@ NSArray *forum;
     UIImageView *view = [gestureRecognizer view];
     NSInteger *index = view.tag;
     SlideInfoItem *s = [self.listSlide objectAtIndex:index];
+    //查找所属forum lx 20150603
+    forumItem *f1;
+    for(int i=0;i<[self.listForumItem count];i++){
+        forumItem *f = [self.listForumItem objectAtIndex:i];
+        if([s.belong_forum_id isEqualToString:f.forum_id]){
+            f1 = f;
+            break;
+        }
+    }
+    
     //往帖子详情页跳转
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
     PDVC.postIDFromOutside = s.post_id;
 
+    PDVC.forum_item = f1;
+    NSString *str = s.post_id;
     [self.navigationController pushViewController:PDVC animated:YES];
 
 }
