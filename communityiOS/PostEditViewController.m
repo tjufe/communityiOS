@@ -1127,6 +1127,8 @@ bool edit;
         self.select_chain_address = @"";
         self.select_chain_context = @"";
     }
+    
+    if(![self.select_chain isEqualToString:@"否"]){
     if(!self.select_chain_context){
         self.select_chain = @"否";
         self.select_chain_address = @"";
@@ -1135,6 +1137,10 @@ bool edit;
         self.select_chain = @"是";
         if(!self.select_chain_address)
             self.select_chain_address=@"";
+    }
+    }else{
+        self.select_chain_address = @"";
+        self.select_chain_context = @"";
     }
     //图片
     if(!self.select_image_name){
@@ -1168,9 +1174,12 @@ bool edit;
         self.select_chain_address = @"";
         self.select_chain_context = @"";
     }else{
-        self.select_chain = @"是";
-        if(!self.select_chain_address)
-            self.select_chain_address=@"";
+        if(![self.select_chain isEqualToString:@"否"]){
+                self.select_chain = @"是";
+            if(!self.select_chain_address){
+                self.select_chain_address=@"";
+            }
+        }
     }
     //审核
     if([ISCheck isEqualToString:@"Y"]){
@@ -1552,7 +1561,7 @@ bool edit;
         self.select_chain_context = chainName.text;
         
         if([self.select_chain isEqualToString:@"否"]){//排除原来有外链又修改的情况
-        if(!self.select_chain_context){
+        if(!self.select_chain_context||([self.select_chain_context isEqualToString:@""]&&[self.select_chain_address isEqualToString:@""])){
             self.select_chain = @"否";
             self.select_chain_address = @"";
             self.select_chain_context = @"";
@@ -1562,6 +1571,12 @@ bool edit;
                 self.select_chain_address = @"";
             }
         }
+        }else{//原来有外链，又修改
+            if([self.select_chain_context isEqualToString:@""]&&
+               [self.select_chain_address isEqualToString:@""]){
+                self.select_chain = @"否";
+            }
+            
         }
     }
     //显示在UI中

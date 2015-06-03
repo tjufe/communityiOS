@@ -346,8 +346,8 @@ NSString  *alert_flag;
         self.select_chain_address = chainText.text;
         self.select_chain_context = chainName.text;
         
-        if([self.select_chain isEqualToString:@"否"]){//排除原来有外链又修改的情况
-            if(!self.select_chain_context){
+        if([self.select_chain isEqualToString:@"否"]||!self.select_chain){//排除原来有外链又修改的情况
+            if(!self.select_chain_context||([self.select_chain_context isEqualToString:@""]&&[self.select_chain_address isEqualToString:@""])){
                 self.select_chain = @"否";
                 self.select_chain_address = @"";
                 self.select_chain_context = @"";
@@ -357,6 +357,12 @@ NSString  *alert_flag;
                     self.select_chain_address = @"";
                 }
             }
+        }else{//原来有外链，又修改
+            if([self.select_chain_context isEqualToString:@""]&&
+               [self.select_chain_address isEqualToString:@""]){
+                self.select_chain = @"否";
+            }
+            
         }
     }
     //显示在UI中
@@ -364,6 +370,8 @@ NSString  *alert_flag;
         self.v4.hidden = NO;
         self.chain_name.text =chainName.text;
         self.chain_address.text = chainText.text;
+    }else{
+        self.v4.hidden = YES;
     }
 
 }
@@ -476,9 +484,12 @@ NSString  *alert_flag;
         self.select_chain_address = @"";
         self.select_chain_context = @"";
     }else{
-        self.select_chain = @"是";
-        if(!self.select_chain_address)
-            self.select_chain_address=@"";
+        if(![self.select_chain isEqualToString:@"否"]){
+            self.select_chain = @"是";
+            if(!self.select_chain_address){
+                self.select_chain_address=@"";
+            }
+        }
     }
     postInfo.chain = self.select_chain;
     postInfo.chain_name = self.select_chain_context;
