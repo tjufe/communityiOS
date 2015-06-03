@@ -993,6 +993,8 @@ bool edit;
 -(void)NewPost2Web{
     
     self.rightItem.enabled = NO;//点完后不可点击
+    [self.textcell.textview resignFirstResponder];
+    [self.title_tf resignFirstResponder];
     if([_ED_FLAG isEqualToString:@"0"]){//首页直接发帖
         //版块号
         self.select_forum_id = self.fs.select_forum_id;
