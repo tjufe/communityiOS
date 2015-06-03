@@ -611,6 +611,8 @@ bool mend_kbHaveShown = false;
                                                     name:UIKeyboardDidShowNotification
                                                   object:nil];
     
+    [self.operlist removeFromSuperview];
+    self.operlist = nil;
 
 }
 

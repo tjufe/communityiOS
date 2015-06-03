@@ -181,6 +181,7 @@ NSString  *alert_flag;
         self.select_chain_context = _post_item.chain_name;
         self.select_img_name = _post_item.main_image_url;
     }
+    self.inputArray = [[NSMutableDictionary alloc]init];
     
     [self initNavigationBar];
     [self initMainScrollView];
@@ -370,7 +371,7 @@ NSString  *alert_flag;
         }
     }
     //显示在UI中
-    if(self.select_chain_context){
+    if(![self.select_chain_context isEqualToString:@""]){
         self.v4.hidden = NO;
         self.chain_name.text =chainName.text;
         self.chain_address.text = chainText.text;
@@ -490,6 +491,9 @@ NSString  *alert_flag;
         if(!self.select_chain_address)
             self.select_chain_address=@"";
     }
+    postInfo.chain = self.select_chain;
+    postInfo.chain_name = self.select_chain_context;
+    postInfo.chain_url = self.select_chain_address;
     
     //图片
     if([self.isMainImg isEqualToString:@"Y"]){
@@ -880,7 +884,7 @@ NSString  *alert_flag;
     chain_name_label.font = self.forumNameLabel.font;
     [self.v4 addSubview:chain_name_label];
     self.chain_name = [[UILabel alloc]init];
-    self.chain_name.frame = CGRectMake(72, 0, self.view.frame.size.width-70, 30);
+    self.chain_name.frame = CGRectMake(80, 0, self.view.frame.size.width-70, 30);
     self.chain_name.font = self.forumNameLabel.font;
     [self.v4 addSubview:self.chain_name];
     
@@ -888,7 +892,7 @@ NSString  *alert_flag;
     chain_address_label.text = @"外链地址:";
     chain_address_label.font = self.forumNameLabel.font;
     [self.v4 addSubview:chain_address_label];
-    self.chain_address = [[UILabel alloc]initWithFrame:CGRectMake(72, 30, self.view.frame.size.width-70, 30)];
+    self.chain_address = [[UILabel alloc]initWithFrame:CGRectMake(80, 30, self.view.frame.size.width-70, 30)];
     self.chain_address.font = self.forumNameLabel.font;
     [self.v4 addSubview:self.chain_address];
     
@@ -896,6 +900,7 @@ NSString  *alert_flag;
         if([_post_item.chain isEqualToString:@"是"]){
             self.chain_name.text = self.select_chain_context;
             self.chain_address.text = self.select_chain_address;
+            self.v4.hidden = NO;
         }else{
             self.v4.hidden = YES;
         }
@@ -911,7 +916,7 @@ NSString  *alert_flag;
 #pragma mark------删除外链
 -(void)deleteChain{
     
-    if(self.v4.hidden){
+    if(self.v4.hidden==NO){
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除外链？" message:@"您确定删除该外链吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alert show];
     alert_flag = @"delete_chain";
