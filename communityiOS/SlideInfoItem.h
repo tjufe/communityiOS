@@ -12,6 +12,7 @@
 @interface SlideInfoItem : NSObject
 
 @property (nonatomic,strong)NSString *belong_community_id;
+@property (nonatomic,strong)NSString *belong_forum_id;
 @property (nonatomic,strong)NSString *post_id;
 @property (nonatomic,strong)NSString *title;
 @property (nonatomic,strong)NSString *main_image_url;

@@ -22,6 +22,7 @@
     return @{
              
              @"belong_community_id":@"belong_community_id",
+             @"belong_forum_id":@"belong_forum_id",
              @"post_id":@"post_id",
              @"title":@"title",
              @"main_image_url":@"main_image_url",

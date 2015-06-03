@@ -116,7 +116,7 @@ bool isModerator = NO;//是否是版主
     
     PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
     PEVC.postItem = self.post_item;
-    PEVC.forum_set_item = self.forum_item;
+//    PEVC.forum_set_item = self.forum_item;
     PEVC.forum_item = self.forum_item;
     [self.navigationController pushViewController:PEVC animated:YES];
     
