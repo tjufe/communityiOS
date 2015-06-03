@@ -659,9 +659,11 @@ bool isModerator = NO;//是否是版主
 
     //postdetailmenu显示情况
     
-    if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] && ![self.user_auth isEqualToString:@""]) ){
+    if(![self.user_auth isEqualToString:@""]){
+    if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] ||[self.user_id isEqualToString:self.poster_id]){
         //        [self.view addSubview:self.operlist];
         self.navigationItem.rightBarButtonItem = self.rightItem;
+    }
     }
 
     //评论（）人
