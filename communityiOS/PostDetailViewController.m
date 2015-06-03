@@ -530,10 +530,12 @@ bool isModerator = NO;//是否是版主
    
     self.menuHeight = 0;
     //下拉菜单
+    if(!self.operlist){
     self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 50*self.menuHeight)];
 
     self.operlist.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     self.operlist.alpha=0;
+    }
     //编辑 按钮
     self.editbutton = [[UIButton alloc]init];
     self.editbutton.frame = CGRectMake(25, 0, 50, 50);

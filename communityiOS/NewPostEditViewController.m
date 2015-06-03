@@ -525,6 +525,7 @@ NSString  *alert_flag;
 - (void)reqReportRepair {
     
     self.rightItem.enabled = NO;
+    [self hidenKeyboard];
     NSString *post_title = [self getPostTitle];//帖子标题
     NSString *post_text = [self getPostText];//故障位置
     NSString *post_text_1 = [self getPostText1];//故障描述
