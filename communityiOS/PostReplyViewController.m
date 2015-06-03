@@ -283,7 +283,7 @@ int screenHeight = 0;
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         replyInfoItem *delete_item = [self.replyListArray objectAtIndex:indexPath.row];
-        if (![delete_item.post_reply_man_id isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
+        if (![delete_item.post_reply_man_id isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]||[self.UserPermission isEqualToString:@""]) {
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
             hud.labelText = @"您只能删除自己的回复";
