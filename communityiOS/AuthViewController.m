@@ -26,6 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view.
     self.inputView.layer.masksToBounds = YES;
     self.inputView.layer.cornerRadius = 6.0;
@@ -38,6 +40,9 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *strPhoneNumber = [defaults valueForKey:@"PhoneNumber"];
     self.phoneField.text = strPhoneNumber;
+    self.roomField.text = [defaults valueForKey:@"RoomNumber"];
+    self.hostField.text = [defaults valueForKey:@"HostName"];
+    self.nameField.text = [defaults valueForKey:@"RealName"];
 
 }
 
@@ -69,6 +74,10 @@
 - (IBAction)saveAction:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *user_id = [NSString stringWithString:[defaults valueForKey:@"UserID"]];
+    [defaults setObject:self.hostField.text forKey:@"HostName"];
+    [defaults setObject:self.nameField.text forKey:@"RealName"];
+    [defaults setObject:self.roomField.text forKey:@"RoomNumber"];
+    [defaults synchronize];
     [StatusTool statusToolUserAuthWithRealName:self.nameField.text HostName:self.hostField.text ID:user_id HouseNumber:self.roomField.text Phone:self.phoneField.text Success:^(id object) {
         //提交表单，不做处理
     } failurs:^(NSError *error) {
