@@ -160,7 +160,8 @@ int mend_score = 0;
 int starAmount = 0;
 int reply_flag = 0;
 bool isReply = false;
-bool mend_kbHaveShown = false;
+float assessViewX = 0;
+float assessViewY = 0;
 
 #pragma mark-
 #pragma mark----------------当点击view的区域就会触发这个事件----------------------
@@ -546,6 +547,8 @@ bool mend_kbHaveShown = false;
     self.replyContentField.delegate = self;
     //获取屏幕高度
     mend_screenHeight = self.view.frame.size.height;
+    assessViewX = self.view.center.x - 150;
+    assessViewY = self.view.center.y - 150;
     self.replyView.backgroundColor = [UIColor whiteColor];
     //清楚多余的表
     [self clearExtraLine:self.tableview];
@@ -618,24 +621,36 @@ bool mend_kbHaveShown = false;
 
 - (void)keyboardWillShow:(NSNotification *)aNotification{
 
-        NSDictionary *userInfo = [aNotification userInfo];
-        NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-        CGRect keyboardRect = [aValue CGRectValue];
-        id d = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-        NSTimeInterval animationDuration = [d doubleValue] ;
-        [UIView beginAnimations:@"ResizeTextView" context:nil];
-        [UIView setAnimationDuration:animationDuration];
-        self.replyView.frame = CGRectMake(0, mend_screenHeight- keyboardRect.size.height - self.replyView.frame.size.height, self.replyView.frame.size.width, self.replyView.frame.size.height);
-        [UIView commitAnimations];
-
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    id d = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration = [d doubleValue] ;
+    [UIView beginAnimations:@"ResizeTextView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.replyView.frame = CGRectMake(0, mend_screenHeight- keyboardRect.size.height - self.replyView.frame.size.height, self.replyView.frame.size.width, self.replyView.frame.size.height);
+    [UIView commitAnimations];
+    float assessViewBottom = mend_screenHeight - self.assessView.frame.size.height - self.assessView.frame.origin.y;
+    float temp = assessViewBottom - keyboardRect.size.height;
+    if (temp < 0) {
+        [UIView animateWithDuration:0.25f animations:^{
+            self.assessView.frame = CGRectMake(assessViewX, assessViewY+temp - 5, 300, 220);
+        }];
+    }
+    
+    
 
 }
 - (void)keyboardWillHide:(NSNotification *)aNotification{
-        NSTimeInterval animationDuration = 0.25f;
-        [UIView beginAnimations:@"ResizeTextView" context:nil];
-        [UIView setAnimationDuration:animationDuration];
-         self.replyView.frame = CGRectMake(0, mend_screenHeight-self.replyView.frame.size.height, self.replyView.frame.size.width, self.replyView.frame.size.height);
-        [UIView commitAnimations];
+    NSTimeInterval animationDuration = 0.25f;
+    [UIView beginAnimations:@"ResizeTextView" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+     self.replyView.frame = CGRectMake(0, mend_screenHeight-self.replyView.frame.size.height, self.replyView.frame.size.width, self.replyView.frame.size.height);
+    [UIView commitAnimations];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        self.assessView.frame = CGRectMake(assessViewX, assessViewY, 300, 220);
+    }];
 
 }
 
@@ -1011,7 +1026,7 @@ bool mend_kbHaveShown = false;
 //}
 
 -(void)endMend{
-    
+    self.replyView.hidden = YES;
     [self.operlist removeFromSuperview];
     
     //添加蒙版
@@ -1026,7 +1041,7 @@ bool mend_kbHaveShown = false;
     self.assessView.backgroundColor = [UIColor whiteColor];
     [UIView animateWithDuration:0.3 animations:^{
         self.assessView.alpha = 1;
-        self.assessView.frame = CGRectMake(self.view.center.x-150, self.view.center.y-150, 300, 220);
+        self.assessView.frame = CGRectMake(assessViewX, assessViewY, 300, 220);
         [self.assessView.layer setCornerRadius:self.assessView.frame.size.height/20];
     }];
     [self.view addSubview:self.assessView];
@@ -1055,13 +1070,14 @@ bool mend_kbHaveShown = false;
     
     //第一行评价语句
     self.assessLabel = [[UILabel alloc]initWithFrame:CGRectMake(tlabel.frame.origin.x+tlabel.frame.size.width+15, 65, 130, 15)];
-    self.assessLabel.text = @"";
+    self.assessLabel.text = @"非常满意";
     self.assessLabel.textColor = [UIColor grayColor];
     self.assessLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [self.assessView addSubview:self.assessLabel];
     
     //星星
     self.ratingBar = [[RatingBar alloc] initWithFrame:CGRectMake(tlabel.frame.origin.x+tlabel.frame.size.width-16, self.assessLabel.frame.origin.y+self.assessLabel.frame.size.height, 180, 35) WithStarAmount:starAmount];
+    self.ratingBar.starNumber = starAmount;
     [self.assessView addSubview:self.ratingBar];
     
     //红线2
@@ -1144,6 +1160,7 @@ bool mend_kbHaveShown = false;
     
 }
 -(void)justClose{
+    self.replyView.hidden = NO;
     self.assessView.hidden =YES;
     [self.maskView removeFromSuperview];
 }

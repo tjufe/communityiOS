@@ -360,14 +360,17 @@ bool isModerator = NO;//是否是版主
     [super viewWillAppear:(BOOL)animated];
     count = 0;
     if(pop_code==1){
-        [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
-            self.post_item = (postItem *)object;
-            [self setData_2];
-            [self.tableview reloadData];
-            [self initUI];
-        } failurs:^(NSError *error) {
-            //
-        }];
+        if (self.postIDFromOutside == nil) {
+            [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
+                self.post_item = (postItem *)object;
+                [self setData_2];
+                [self.tableview reloadData];
+                [self initUI];
+            } failurs:^(NSError *error) {
+                //
+            }];
+        }
+        
     }
 }
 
@@ -385,7 +388,6 @@ bool isModerator = NO;//是否是版主
     //start by wangyao 0513
     //
     if(self.post_item == nil){
-        
         [self loadPostInfo:self.postIDFromOutside];
 
     }else{
