@@ -374,6 +374,7 @@ bool isModerator = NO;//是否是版主
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:(BOOL)animated];
     [self.operlist removeFromSuperview];
+    self.operlist = nil;
 }
 
 

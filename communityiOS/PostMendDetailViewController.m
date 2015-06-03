@@ -609,6 +609,8 @@ bool isReply = false;
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
     
+    [self.operlist removeFromSuperview];
+    self.operlist = nil;
 
 }
 
