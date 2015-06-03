@@ -38,6 +38,9 @@
     [defaults setObject:@"" forKey:@"UserPermission"];
     [defaults setObject:nil forKey:@"LoginPassword"];
     [defaults setBool:NO forKey:@"Logged"];
+    [defaults setObject:nil forKey:@"RoomNumber"];
+    [defaults setObject:nil forKey:@"HostName"];
+    [defaults setObject:nil forKey:@"RealName"];
     [defaults synchronize];  //保持同步
 }
 
