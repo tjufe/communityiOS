@@ -663,7 +663,8 @@ bool edit;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     //获得编辑过的图片
     UIImage* chosenImage = [info objectForKey: @"UIImagePickerControllerEditedImage"];
-    self.select_image = chosenImage;
+    CGSize size = CGSizeMake(300, 150);
+    self.select_image = [self scaleToSize:chosenImage size:size];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
     //显示在UI中
@@ -673,7 +674,7 @@ bool edit;
 //    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.PEtableview reloadData];
     //上传图片
-    [self uploadinitWithImage:chosenImage];
+    [self uploadinitWithImage:self.select_image];
     
 }
 
@@ -690,6 +691,16 @@ bool edit;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark---------------剪裁图片
+-(UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size
+{
+    
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *endImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return endImage;
+}
 
 #pragma mark--------------上传图片
 -(void)uploadinitWithImage:(UIImage *)image{
@@ -701,7 +712,7 @@ bool edit;
     [manager POST:API_UPLOAD_HOST parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         //上传时使用当前的系统事件作为文件名
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
+        NSData *imageData = UIImageJPEGRepresentation(image, 1);
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];

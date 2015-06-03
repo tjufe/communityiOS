@@ -11,6 +11,8 @@
 #import "regItem.h"
 #import "PPRevealSideViewController.h"
 
+#define NUMBERS @"0123456789\n"
+
 @interface RegistViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *resView;
 @property (weak, nonatomic) IBOutlet UIButton *resBtn;
@@ -31,25 +33,47 @@ NSString *strSecondPassword;
     // Do any additional setup after loading the view.
     [self.resView.layer setCornerRadius:4];
     [self.resBtn.layer setCornerRadius:4];
+    //验证两次密码输入是否正确
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pwdCheckAlert) name:UITextFieldTextDidEndEditingNotification object:self.tfSecondPassword];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(pwdCheck) name:UITextFieldTextDidChangeNotification object:self.tfSecondPassword];
-    
+     //验证第一次密码是否少于6位
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(ifPwdCorrect) name:UITextFieldTextDidEndEditingNotification object:self.tfPassword];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(ifPhoneCorrect) name:UITextFieldTextDidEndEditingNotification object:self.tfPhoneNumber];
 }
+
+#pragma mark-
+#pragma mark-----------------------监听的回调方法----------------------
 -(void)pwdCheckAlert{
     if (![self.tfPassword.text isEqualToString:self.tfSecondPassword.text ]) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认密码与密码不匹配" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"重新输入", nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示 " message:@"确认密码与密码不匹配" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }
 }
 
 -(void)pwdCheck{
-    self.resBtn.enabled = ([self.tfPassword.text isEqualToString:self.tfSecondPassword.text]);
+    self.resBtn.enabled = ([self.tfPassword.text isEqualToString:self.tfSecondPassword.text]&&![self.tfPhoneNumber.text isEqualToString:@""]);
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)ifPwdCorrect{
+    if (self.tfPassword.text.length < 6) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码不应少于6位" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }
 }
+
+-(void)ifPhoneCorrect{
+    if (self.tfPhoneNumber.text.length != 11 && ![self.tfPhoneNumber.text isEqualToString:@""] ) {
+        self.resBtn.enabled = NO;
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入11位有效手机号码" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }else{
+        self.resBtn.enabled = YES ;
+    }
+}
+
+
+#pragma mark-
+#pragma mark---------------------textfield delegate------------
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField == self.tfNickname) {
@@ -58,6 +82,35 @@ NSString *strSecondPassword;
     }
     return true;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs;
+    if(textField == self.tfPhoneNumber)
+    {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        BOOL basicTest = [string isEqualToString:filtered];
+        if(!basicTest)
+        {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"请输入数字"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+            
+            [alert show];
+            return NO;
+        }
+    }
+    
+    //其他的类型不需要检测，直接写入
+    return YES;
+}
+
+
+#pragma mark-
+
 
 /*
  #pragma mark - Navigation
@@ -70,6 +123,16 @@ NSString *strSecondPassword;
  */
 
 - (IBAction)regAction:(id)sender {
+    if ([self.tfNickname.text isEqualToString:@""]||[self.tfPhoneNumber.text isEqualToString:@""]||[self.tfPassword.text isEqualToString:@""]||[self.tfSecondPassword.text isEqualToString:@""]) {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"请完善个人信息"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        
+    }
     strPhoneNumber=[_tfPhoneNumber.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     strNickname=[_tfNickname.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     strPassword=[_tfPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -131,6 +194,12 @@ NSString *strSecondPassword;
 - (void) showErrMsg: (NSString *)loginErrorMessage {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册失败" message:loginErrorMessage delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
     [alert show];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

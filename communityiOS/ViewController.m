@@ -250,6 +250,7 @@ NSArray *forum;
     //往帖子详情页跳转
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
     PDVC.postIDFromOutside = s.post_id;
+
     PDVC.forum_item = f1;
     NSString *str = s.post_id;
     [self.navigationController pushViewController:PDVC animated:YES];

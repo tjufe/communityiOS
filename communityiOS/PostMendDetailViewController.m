@@ -38,7 +38,7 @@
 #import "PostText1TableViewCell.h"
 #import "PostText23TableViewCell.h"
 
-@interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
+@interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate,UITextFieldDelegate>
 - (IBAction)replyAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *replyContentField;
 @property (weak, nonatomic) IBOutlet UIButton *reply_btn;
@@ -132,6 +132,7 @@
 @property (strong,nonatomic)UILabel *assessLabel;
 @property (strong,nonatomic)UITextField *messageField;
 
+@property (strong, nonatomic) IBOutlet UIView *replyView;
 - (IBAction)ViewTouchDown:(id)sender;
 
 
@@ -159,7 +160,8 @@ int mend_score = 0;
 int starAmount = 0;
 int reply_flag = 0;
 bool isReply = false;
-
+float assessViewX = 0;
+float assessViewY = 0;
 
 #pragma mark-
 #pragma mark----------------当点击view的区域就会触发这个事件----------------------
@@ -257,7 +259,7 @@ bool isReply = false;
             
         }
         else if(indexPath.row == 4){       //主图
-            self.postImageCell = [tableView dequeueReusableCellWithIdentifier:nil];
+//            self.postImageCell = [tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.postImageCell) {
                 self.postImageCell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 self.postImageCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -486,11 +488,11 @@ bool isReply = false;
     //注册监听,实现上推和收起键盘
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
+                                                 name:UIKeyboardDidShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
+                                                 name:UIKeyboardDidHideNotification
                                                object:nil];
     if(mend_pop_code==1){
         // 从编辑页跳回来的时候重新请求数据
@@ -545,6 +547,9 @@ bool isReply = false;
     self.replyContentField.delegate = self;
     //获取屏幕高度
     mend_screenHeight = self.view.frame.size.height;
+    assessViewX = self.view.center.x - 150;
+    assessViewY = self.view.center.y - 150;
+    self.replyView.backgroundColor = [UIColor whiteColor];
     //清楚多余的表
     [self clearExtraLine:self.tableview];
     
@@ -603,10 +608,10 @@ bool isReply = false;
     
     [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
+                                                    name:UIKeyboardDidHideNotification
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
+                                                    name:UIKeyboardDidShowNotification
                                                   object:nil];
     
     [self.operlist removeFromSuperview];
@@ -615,24 +620,38 @@ bool isReply = false;
 }
 
 - (void)keyboardWillShow:(NSNotification *)aNotification{
-    //获取键盘的高度
+
     NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
-    CGRect newFrame = self.view.frame;
-    newFrame.size.height = mend_screenHeight - keyboardRect.size.height;
-    NSTimeInterval animationDuration = 0.50f;
+    id d = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration = [d doubleValue] ;
     [UIView beginAnimations:@"ResizeTextView" context:nil];
     [UIView setAnimationDuration:animationDuration];
-    self.view.frame = newFrame;
+    self.replyView.frame = CGRectMake(0, mend_screenHeight- keyboardRect.size.height - self.replyView.frame.size.height, self.replyView.frame.size.width, self.replyView.frame.size.height);
     [UIView commitAnimations];
+    float assessViewBottom = mend_screenHeight - self.assessView.frame.size.height - self.assessView.frame.origin.y;
+    float temp = assessViewBottom - keyboardRect.size.height;
+    if (temp < 0) {
+        [UIView animateWithDuration:0.25f animations:^{
+            self.assessView.frame = CGRectMake(assessViewX, assessViewY+temp - 5, 300, 220);
+        }];
+    }
+    
+    
+
 }
 - (void)keyboardWillHide:(NSNotification *)aNotification{
-    NSTimeInterval animationDuration = 0.20f;
+    NSTimeInterval animationDuration = 0.25f;
     [UIView beginAnimations:@"ResizeTextView" context:nil];
     [UIView setAnimationDuration:animationDuration];
-    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, mend_screenHeight);
+     self.replyView.frame = CGRectMake(0, mend_screenHeight-self.replyView.frame.size.height, self.replyView.frame.size.width, self.replyView.frame.size.height);
     [UIView commitAnimations];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        self.assessView.frame = CGRectMake(assessViewX, assessViewY, 300, 220);
+    }];
+
 }
 
 
@@ -1007,7 +1026,7 @@ bool isReply = false;
 //}
 
 -(void)endMend{
-    
+    self.replyView.hidden = YES;
     [self.operlist removeFromSuperview];
     
     //添加蒙版
@@ -1022,7 +1041,7 @@ bool isReply = false;
     self.assessView.backgroundColor = [UIColor whiteColor];
     [UIView animateWithDuration:0.3 animations:^{
         self.assessView.alpha = 1;
-        self.assessView.frame = CGRectMake(self.tableview.center.x-150, self.tableview.center.y-150, 300, 220);
+        self.assessView.frame = CGRectMake(assessViewX, assessViewY, 300, 220);
         [self.assessView.layer setCornerRadius:self.assessView.frame.size.height/20];
     }];
     [self.view addSubview:self.assessView];
@@ -1051,13 +1070,14 @@ bool isReply = false;
     
     //第一行评价语句
     self.assessLabel = [[UILabel alloc]initWithFrame:CGRectMake(tlabel.frame.origin.x+tlabel.frame.size.width+15, 65, 130, 15)];
-    self.assessLabel.text = @"";
+    self.assessLabel.text = @"非常满意";
     self.assessLabel.textColor = [UIColor grayColor];
     self.assessLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:14];
     [self.assessView addSubview:self.assessLabel];
     
     //星星
     self.ratingBar = [[RatingBar alloc] initWithFrame:CGRectMake(tlabel.frame.origin.x+tlabel.frame.size.width-16, self.assessLabel.frame.origin.y+self.assessLabel.frame.size.height, 180, 35) WithStarAmount:starAmount];
+    self.ratingBar.starNumber = starAmount;
     [self.assessView addSubview:self.ratingBar];
     
     //红线2
@@ -1128,7 +1148,10 @@ bool isReply = false;
     //发送评分
     [StatusTool statusToolPostMendScoreWithPostID:self.post_id User_ID:self.user_id Score:[NSString stringWithFormat:@"%d",mend_score] Evaluate:self.evaluateStr Success:^(id object) {
         if (![[object valueForKey:@"status"] isEqualToString:@""]) {
-             [self justClose];
+            //不可回复 lx
+            self.reply_btn.enabled = NO;
+            self.replyContentField.enabled = NO;
+            [self justClose];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failurs:^(NSError *error){
@@ -1137,11 +1160,9 @@ bool isReply = false;
     
 }
 -(void)justClose{
+    self.replyView.hidden = NO;
     self.assessView.hidden =YES;
     [self.maskView removeFromSuperview];
-    //不可回复 lx
-    self.reply_btn.enabled = NO;
-    self.replyContentField.enabled = NO;
 }
 
 -(void)toReplyList{
