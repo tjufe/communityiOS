@@ -404,6 +404,7 @@
 		A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserJoinPostList.storyboard; sourceTree = "<group>"; };
 		A0CA6DED1AFC5E3400F88237 /* UserJoinPostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserJoinPostListViewController.h; sourceTree = "<group>"; };
 		A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserJoinPostListViewController.m; sourceTree = "<group>"; };
+		A0CA86D31B1D83EF00726CA5 /* JpushConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JpushConfig.h; sourceTree = "<group>"; };
 		A0CB29091B09BB2900082FF0 /* editPostItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editPostItem.h; sourceTree = "<group>"; };
 		A0CB290A1B09BB2900082FF0 /* editPostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editPostItem.m; sourceTree = "<group>"; };
 		A0CB9D4F1ADBB36B00F421E1 /* deletepostItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deletepostItem.h; sourceTree = "<group>"; };
@@ -535,6 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				13B1C2BF1ACA5B11005C179C /* APIAddress.h */,
+				A0CA86D31B1D83EF00726CA5 /* JpushConfig.h */,
 			);
 			name = config;
 			sourceTree = "<group>";

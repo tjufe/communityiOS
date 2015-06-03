@@ -9,9 +9,11 @@
 #import "AppDelegate.h"
 #import "PPRevealSideViewController.h"
 #import "PostDetailViewController.h"
+#import "PostMendDetailViewController.h"
 #import "UIViewController+Create.h"
 #import "APService.h"
 #import "PostReplyViewController.h"
+#import "JpushConfig.h"
 
 #import "DemoViewController.h"
 
@@ -20,6 +22,10 @@
 @property (strong, nonatomic) NSDictionary *inactiveRemoteNotificationInfo;
 @property (assign, nonatomic) BOOL shouldRefreshUserInfo;
 @property (assign, nonatomic) BOOL shouldJumpToPostDetail;
+@property (assign, nonatomic) BOOL shouldJumpToPostMendDetail;
+@property (assign, nonatomic) BOOL shouldJumpToPostMendReply;
+@property (assign, nonatomic) BOOL shouldAlertRefuse;
+
 
 @end
 
@@ -75,8 +81,13 @@
     if (application.applicationState == UIApplicationStateActive) {
         [self handleActiveRemoteNotification:userInfo shouldShowAlert:YES];
     }else{
-        NSString *type = userInfo[@"type"];
-        self.shouldJumpToPostDetail = ([type isEqualToString:@"000"]);
+
+        NSDictionary *extras = [userInfo valueForKey:@"extras"];
+        NSString *type = [extras valueForKey:@"notifytype"];
+        self.shouldJumpToPostDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_POST]);
+        self.shouldJumpToPostMendDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]);
+        self.shouldJumpToPostMendReply = ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]);
+        self.shouldAlertRefuse = ([type isEqualToString:NOTIFY_TYPE_REFUSE]);
         [self handleInactiveRemoteNotification:userInfo];
     }
     
@@ -88,15 +99,43 @@
 
 - (void)handleActiveRemoteNotification:(NSDictionary *)userInfo shouldShowAlert:(BOOL)showAlert{
     
-    NSString *type = userInfo[@"type"];
-    if ([type isEqualToString:@"000"]) {
+    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+    NSString *type = [extras valueForKey:@"notifytype"];
+    
+    if ([type isEqualToString:NOTIFY_TYPE_NEW_POST]) {
         if (self.shouldJumpToPostDetail) {
-            NSString *post_id = [[NSString alloc] initWithString:userInfo[@"post_id"]];
+            NSString *post_id = [[NSString alloc] initWithString:extras[@"post_id"]];
             PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
             postVc.postIDFromOutside = post_id;
             [self.window.rootViewController.navigationController pushViewController:postVc animated:YES];
         }
         self.shouldJumpToPostDetail = NO;
+    }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_POST]) {
+        if (self.shouldJumpToPostMendDetail) {
+            NSString *post_id = [[NSString alloc]initWithString:extras[@"post_id"]];
+            PostMendDetailViewController *postMendVC = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
+            postMendVC.postIDFromOutside = post_id;
+            [self.window.rootViewController.navigationController pushViewController:postMendVC animated:YES];
+        }
+        self.shouldJumpToPostMendDetail = NO;
+    }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]) {
+        if (self.shouldJumpToPostMendReply) {
+            NSString *post_id = [[NSString alloc]initWithString:extras[@"post_id"]];
+            PostMendDetailViewController *postMendVC = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
+            postMendVC.postIDFromOutside = post_id;
+            [self.window.rootViewController.navigationController pushViewController:postMendVC animated:YES];
+        }
+        self.shouldJumpToPostMendReply = NO;
+    }if ([type isEqualToString:NOTIFY_TYPE_REFUSE]) {
+        if (self.shouldAlertRefuse) {
+            UIAlertView*alert = [[UIAlertView alloc]initWithTitle:@"提示"
+                                                          message:@"您的实名认证请求被驳回"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"确定"
+                                                otherButtonTitles:nil];  
+            
+            [alert show];
+        }
     }
     
     
