@@ -86,7 +86,7 @@
 @property (strong,nonatomic) UIButton * editbutton;
 @property (strong,nonatomic) UIButton * endApplyButton;
 @property (strong,nonatomic) UIButton * delebutton;
-@property (assign ,nonatomic) int  menuHeight;
+//@property (assign ,nonatomic) int  menuHeight;
 
 
 
@@ -104,7 +104,7 @@ float cellheight = 0;
 float chainHeight = 0;
 float applyHeight = 0;
 float imageHeight = 0;
-//NSInteger menuHeight ;//menu的高度
+NSInteger menuHeight ;//menu的高度
 
 bool isModerator = NO;//是否是版主
 
@@ -377,7 +377,10 @@ bool isModerator = NO;//是否是版主
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:(BOOL)animated];
     [self.operlist removeFromSuperview];
-    self.operlist = nil;
+    count = 0;
+    //self.menuHeight = 0;
+    
+    
 }
 
 
@@ -528,14 +531,14 @@ bool isModerator = NO;//是否是版主
 
 -(void)setMenu{
    
-    self.menuHeight = 0;
+    menuHeight = 0;
     //下拉菜单
-    if(!self.operlist){
-    self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 50*self.menuHeight)];
+//    if(!self.operlist){
+    self.operlist = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-100, 0, 100, 50*menuHeight)];
 
     self.operlist.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     self.operlist.alpha=0;
-    }
+//    }
     //编辑 按钮
     self.editbutton = [[UIButton alloc]init];
     self.editbutton.frame = CGRectMake(25, 0, 50, 50);
@@ -569,7 +572,7 @@ bool isModerator = NO;//是否是版主
 //    if(!self.operlist.hidden){//已显示,关上
         [UIView animateWithDuration:0.3 animations:^{
 
-            self.operlist.frame = CGRectMake(self.view.frame.size.width-100, -90, 100, 50*self.menuHeight);
+            self.operlist.frame = CGRectMake(self.view.frame.size.width-100, -90, 100, 50*menuHeight);
 
             self.operlist.alpha = 1;
         }];
@@ -578,12 +581,12 @@ bool isModerator = NO;//是否是版主
         
     }else{ //未显示，弹出
             [UIView animateWithDuration:0.3 animations:^{
-                self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 60, 100, 50*self.menuHeight);
+                self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 60, 100, 50*menuHeight);
 
                 self.operlist.alpha = 1;
             }];
             [self.view addSubview:self.operlist];
-  //         self.operlist.hidden = NO;
+           self.operlist.hidden = NO;
         count=1;
     }
 //    NSLog(@"~~~~~~~~~~~~~~~~~~~~~~~~%d",count);
@@ -628,8 +631,8 @@ bool isModerator = NO;//是否是版主
     if([self.user_id isEqualToString:self.poster_id]){
         [self.operlist addSubview:self.editbutton];
 
-        self.editbutton.frame = CGRectMake(25, 50*self.menuHeight, 50, 50);
-        self.menuHeight++;
+        self.editbutton.frame = CGRectMake(25, 50*menuHeight, 50, 50);
+        menuHeight++;
 
         
     }
@@ -640,8 +643,8 @@ bool isModerator = NO;//是否是版主
             if ([forumset.site_value isEqualToString:@"是"]) {
                 if ([self.open_apply isEqualToString:@"是"] && [self.user_id isEqualToString:self.poster_id] && [self.post_over isEqualToString:@"否"]) {
                     [self.operlist addSubview:self.endApplyButton];
-                     self.endApplyButton.frame = CGRectMake(0, 50*self.menuHeight, 100, 50);
-                    self.menuHeight++;
+                     self.endApplyButton.frame = CGRectMake(0, 50*menuHeight, 100, 50);
+                    menuHeight++;
 
                 }
                 
@@ -653,11 +656,11 @@ bool isModerator = NO;//是否是版主
     //delete button
     if ([self.user_auth containsString:@"/系统管理员/"] || [self.moderator_of_forum_list containsObject:self.forum_id] || [self.user_id isEqualToString:self.poster_id]) {
          [self.operlist addSubview:self.delebutton];
-         self.delebutton.frame = CGRectMake(25, 50*self.menuHeight, 50, 50);
-            self.menuHeight++;
+         self.delebutton.frame = CGRectMake(25, 50*menuHeight, 50, 50);
+            menuHeight++;
     }
 //    [self setMenu];
-    self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 50*self.menuHeight);
+    self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 50*menuHeight);
 
     //postdetailmenu显示情况
     

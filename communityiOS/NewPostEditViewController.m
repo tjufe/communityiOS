@@ -840,7 +840,7 @@ NSString  *alert_flag;
         
     }else{//发帖
     
-    self.reporterPhoneTextField.placeholder = @"请输入联系人电话……";
+      self.reporterPhoneTextField.placeholder = @"请输入联系人电话……";
     }
     self.reporterPhoneTextField.font = self.forumNameLabel.font;
     self.reporterPhoneTextField.textAlignment = UITextAlignmentLeft;

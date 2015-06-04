@@ -616,6 +616,8 @@ float assessViewY = 0;
     
     [self.operlist removeFromSuperview];
     self.operlist = nil;
+    mend_menuHeight = 0;
+    mend_count = 0;
 
 }
 
