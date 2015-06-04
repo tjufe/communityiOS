@@ -84,16 +84,16 @@ int screenHeight = 0;
     for (int i = 0; i<[self.forumSetArray count]; i++) {
         forumSetItem *tempItem = [self.forumSetArray objectAtIndex:i];
         if ([tempItem.site_name isEqualToString:site_reply_user]) {
-            if ([tempItem.site_value containsString:[NSString stringWithFormat:@"/%@",self.UserPermission]]) {
+            if ([tempItem.site_value containsString:[NSString stringWithFormat:@"/%@%@",self.UserPermission,@"/"]]) {
                 self.havePower = true;
                 break;
             }
         }
          
     }
-    if([self.UserPermission isEqualToString:@""]){
-        self.havePower = false;
-    }
+//    if([self.UserPermission isEqualToString:@""]){
+//        self.havePower = false;
+//    }
     
     if(!self.havePower){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"对不起，您无权回复！" message:nil delegate:self cancelButtonTitle:@"去实名认证" otherButtonTitles:@"取消", nil];
