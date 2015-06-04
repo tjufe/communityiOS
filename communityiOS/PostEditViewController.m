@@ -955,6 +955,7 @@ bool edit;
     //判断当前用户选择的版块能否发帖
     NSString *user_status = @"/";
     user_status = [user_status stringByAppendingString:self.UserPermission];
+    user_status = [user_status stringByAppendingString:@"/"];
         for(int j=0;j<[_forum_list_item count];j++){
             forumItem *fitem = [_forum_list_item objectAtIndex:j];
             if([fitem.display_type isEqualToString:@"纵向"]){
