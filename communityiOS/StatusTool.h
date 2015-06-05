@@ -104,4 +104,8 @@ typedef void(^StatusFailurs)(NSError * error);
 //修改报修帖子 lx20150527
 +(void)statusToolEditPostWithPostInfo:(PostInfo *)postInfo Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
+//获取手机验证码
++(void)statusToolGetSMSCodeWithPhoneNumber:(NSString *)phone_number Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
+
+
 @end

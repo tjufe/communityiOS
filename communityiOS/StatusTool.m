@@ -18,7 +18,7 @@
 #import "deletepostItem.h"
 #import "uncheckPostListItem.h"
 #import "newPostItem.h"
-
+#import "getSMSCodeItem.h"
 #import "SlideInfoList.h"
 #import "SlideInfoItem.h"
 #import "RepairList.h"
@@ -842,5 +842,29 @@
     }];
     
 }
+//获取手机验证码
++(void)statusToolGetSMSCodeWithPhoneNumber:(NSString *)phone_number Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    NSMutableDictionary *fir = [[NSMutableDictionary alloc]init];
+    [fir setObject:phone_number forKey:@"phone_number"];
+    NSMutableDictionary *sec = [[NSMutableDictionary alloc]init];
+    [sec setObject:fir forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:sec forKey:@"param"];
+    [thirdDic setObject:@"GetSMSCode" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        getSMSCodeItem *result = [getSMSCodeItem createItemWitparametes:dic];
+        success(result);
+        
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
+
+}
+
+
+
 @end
 

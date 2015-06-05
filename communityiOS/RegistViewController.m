@@ -10,12 +10,17 @@
 #import "StatusTool.h"
 #import "regItem.h"
 #import "PPRevealSideViewController.h"
+#import "getSMSCodeItem.h"
+#import "MBProgressHUD.h"
 
 #define NUMBERS @"0123456789\n"
 
 @interface RegistViewController ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *sms_btn;
 @property (weak, nonatomic) IBOutlet UIView *resView;
 @property (weak, nonatomic) IBOutlet UIButton *resBtn;
+@property (strong,nonatomic) NSString *SMS_code;
+@property (nonatomic, strong) NSTimer *timer;//验证码定时器
 - (IBAction)regAction:(id)sender;
 
 
@@ -27,6 +32,77 @@ NSString *strPhoneNumber;
 NSString *strNickname;
 NSString *strPassword;
 NSString *strSecondPassword;
+int total_sec = 60;
+
+- (IBAction)GetSMScode:(id)sender {//获取手机验证码
+    NSCharacterSet  *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS] invertedSet];
+    NSString *filtered = [[self.tfPhoneNumber.text componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [self.tfPhoneNumber.text isEqualToString:filtered];
+    if (self.tfPhoneNumber.text.length != 11 || [self.tfPhoneNumber.text isEqualToString:@""] || !basicTest) {
+        self.resBtn.enabled = NO;
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入11位有效手机号码" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }else{
+        [self getSMS];
+        [self addTimer];
+        
+   }
+    
+}
+
+-(void)addTimer{
+    [self.tfPhoneNumber resignFirstResponder];
+    self.sms_btn.enabled = NO;
+    self.sms_btn.hidden = YES;
+    self.ltime.hidden = NO;
+    self.ltime.text = [NSString stringWithFormat:@"%d秒后重试",total_sec];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
+    
+}
+
+-(void)changeTime{
+    if(total_sec == 0){
+        total_sec = 60;
+        self.sms_btn.hidden = NO;
+        self.sms_btn.enabled = YES;
+        self.ltime.text = @"";
+        self.ltime.hidden = YES;
+        //取消定时器
+        [self.timer invalidate];
+        self.timer = nil;
+    }else{
+        total_sec=total_sec-1;
+        self.ltime.text = [NSString stringWithFormat:@"%d秒后重试",total_sec];
+
+    }
+}
+
+
+#pragma mark-----发送获取验证码
+-(void)getSMS{
+    [StatusTool statusToolGetSMSCodeWithPhoneNumber:self.tfPhoneNumber.text Success:^(id object) {
+        getSMSCodeItem *item = (getSMSCodeItem *)object;
+        self.SMS_code = item.code;
+    } failurs:^(NSError *error) {
+        MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+        [self.view addSubview:hud];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"网络不给力，请稍后重试！";
+        hud.dimBackground = YES;
+        [hud showAnimated:YES whileExecutingBlock:^{
+            sleep(1);
+        }completionBlock:^{
+            [hud removeFromSuperview];
+        }];
+
+    }];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:(BOOL)animated];
+    total_sec = 60;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -64,10 +140,12 @@ NSString *strSecondPassword;
 -(void)ifPhoneCorrect{
     if (self.tfPhoneNumber.text.length != 11 && ![self.tfPhoneNumber.text isEqualToString:@""] ) {
         self.resBtn.enabled = NO;
+ //       self.sms_btn.enabled = NO;
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入11位有效手机号码" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }else{
         self.resBtn.enabled = YES ;
+ //       self.sms_btn.enabled = YES;
     }
 }
 
@@ -139,6 +217,24 @@ NSString *strSecondPassword;
     strSecondPassword=[_tfSecondPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userID = [defaults valueForKey:@"UserID"];
+    if([self.tfSMSCode.text isEqualToString:@""]){
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"请输入验证码"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+    }else if(![self.tfSMSCode.text isEqualToString:self.SMS_code]){
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"验证码错误，请重新输入"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+    }else{
+
     if([self checkAllowedRegWithPhoneNumber:strPhoneNumber nickName:strNickname password:strPassword secPassword:strSecondPassword]){
         [StatusTool statusToolGetUserRegWithName:strNickname
                                         PassWord:strPassword
@@ -150,6 +246,8 @@ NSString *strSecondPassword;
                                          failurs:^(NSError *error) {
                                              NSLog(@"%@",error);
                                          }];
+    }
+        
     }
     
 }
