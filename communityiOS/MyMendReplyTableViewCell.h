@@ -16,5 +16,5 @@
 @property (strong, nonatomic) IBOutlet UIView *backBubble;
 
 -(void)setReplyContentText:(NSString *)text;
-
+-(void)setBubble:(CGRect)frame;
 @end
