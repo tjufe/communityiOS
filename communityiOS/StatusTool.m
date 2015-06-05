@@ -23,6 +23,7 @@
 #import "SlideInfoItem.h"
 #import "RepairList.h"
 #import "RepairInfo.h"
+#import "findPassword.h"
 
 #import "replyInfoListItem.h"
 #import "editPostItem.h"
@@ -863,7 +864,32 @@
     }];
 
 }
+//获取手机验证码
++(void)statusToolFindPasswordWithPhone:(NSString *)phone Id:(NSString *)user_id Password:(NSString *)password ConfirmPassword:(NSString *)confirm_password Success:(StatusSuccess)success failurs:(StatusFailurs)failure{
+    
+    NSMutableDictionary *fir = [[NSMutableDictionary alloc]init];
+    [fir setObject:phone forKey:@"phone"];
+    [fir setObject:user_id forKey:@"user_id"];
+    [fir setObject:password  forKey:@"password1"];
+    [fir setObject:confirm_password   forKey:@"confirm_password"];
+    NSMutableDictionary *sec = [[NSMutableDictionary alloc]init];
+    [sec setObject:fir forKey:@"Data"];
+    NSMutableDictionary *thirdDic = [[NSMutableDictionary  alloc] init];
+    [thirdDic setObject:sec forKey:@"param"];
+    [thirdDic setObject:@"FindPassword" forKey:@"method"];
+    [HttpTool postWithparams:thirdDic success:^(id responseObject) {
+        NSData *data = [[NSData alloc] initWithData:responseObject];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        findPassword *result = [findPassword createItemWitparametes:dic];
+        success(result);
+        
+    } failure:^(NSError *error) {
+        if (failure == nil) return ;
+        failure(error);
+    }];
 
+
+}
 
 
 @end
