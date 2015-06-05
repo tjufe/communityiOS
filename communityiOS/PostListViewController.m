@@ -602,6 +602,7 @@ NSInteger page_filter;
           
           NSString *user_status = @"/";
           user_status = [user_status stringByAppendingString:self.UserPermission];
+          user_status = [user_status stringByAppendingString:@"/"];
           if(_forum_item.ForumSetlist!=nil){
           for(int i=0;i < [_forum_item.ForumSetlist count];i++){
                self.forum_set_item  = [forumSetItem createItemWitparametes:[_forum_item.ForumSetlist objectAtIndex:i]];
@@ -609,7 +610,7 @@ NSInteger page_filter;
                //能否发帖
                if ([self.forum_set_item.site_name isEqualToString:site_newpost_user]) {
                     
-                    if(![self.UserPermission isEqualToString:@""]&&[self.forum_set_item.site_value rangeOfString:user_status].location!=NSNotFound){
+                    if([self.forum_set_item.site_value rangeOfString:user_status].location!=NSNotFound){
                          self.ISNEWPOST = @"Y";
                     //     break;
                     }
@@ -617,7 +618,7 @@ NSInteger page_filter;
                     //版主
                     else if(self.moderator!=nil){
                          for(int m=0;m<[self.moderator count];m++){
-                              if(![self.UserPermission isEqualToString:@""]&&[[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
+                              if([[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
                                    self.ISNEWPOST = @"Y";
                      //              break;
                               }
@@ -644,12 +645,12 @@ NSInteger page_filter;
 
                }
              //能否查看
-               if(![self.UserPermission isEqualToString:@""]&&[self.forum_set_item.site_name isEqualToString:site_isbrowse]){
+               if([self.forum_set_item.site_name isEqualToString:site_isbrowse]){
                     if([self.forum_set_item.site_value containsString:user_status]){
                          self.ISBrowse = @"Y";
                        //  break;
                     }
-                   else if(self.moderator!=nil&&![self.UserPermission isEqualToString:@""]){
+                   else if(self.moderator!=nil){
                          for(int m=0;m<[self.moderator count];m++){
                               if([[self.moderator objectAtIndex:m] isEqualToString:_forum_item.forum_id]){
                                    self.ISBrowse = @"Y";
@@ -678,7 +679,11 @@ NSInteger page_filter;
      if([self.ISBrowse isEqualToString:@"Y"]){
           user_id = @"";
      }else{
-          user_id = self.UserID;//只查本人和置顶的
+          if([self.UserPermission isEqualToString:@""]){//防止退出登录变成游客的情况，只能查到置顶的
+               user_id = @"1";
+          }else{
+              user_id = self.UserID;//只查本人和置顶的
+          }
      }
 
      [StatusTool statusToolGetPostListWithbfID:self.forumID bcID:self.communityID userID:user_id filter:_filter_flag page:self.Page rows:self.Rows Success:^(id object) {

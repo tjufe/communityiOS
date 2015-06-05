@@ -732,7 +732,7 @@ float assessViewY = 0;
     for (int i = 0; i<[self.forumSetArray count]; i++) {
         forumSetItem *tempItem = [self.forumSetArray objectAtIndex:i];
         if ([tempItem.site_name isEqualToString:site_reply_user]) {
-            if ([tempItem.site_value containsString:[NSString stringWithFormat:@"/%@",self.user_auth]]&&![self.user_auth isEqualToString:@""]) {
+            if ([tempItem.site_value containsString:[NSString stringWithFormat:@"/%@%@",self.user_auth,@"/"]]) {
                 isReply = true;
                 break;
             }
