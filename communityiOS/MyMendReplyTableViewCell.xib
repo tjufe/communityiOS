@@ -50,13 +50,6 @@
                             <constraint firstAttribute="width" constant="120" id="tnb-J9-qiz"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35N-US-QO6">
-                        <rect key="frame" x="69" y="52" width="183" height="40"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_acatar_default_r" translatesAutoresizingMaskIntoConstraints="NO" id="r4c-kU-JOc">
                         <rect key="frame" x="272" y="42" width="40" height="40"/>
                         <constraints>
@@ -70,15 +63,12 @@
                     <constraint firstItem="Nwq-cS-da1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="4QU-YG-oV8"/>
                     <constraint firstItem="Nwq-cS-da1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="7sc-z8-EHv"/>
                     <constraint firstItem="yep-GB-P4a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="29" id="ANl-oU-5WA"/>
-                    <constraint firstItem="35N-US-QO6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="69" id="DgJ-Bu-pI0"/>
                     <constraint firstItem="r4c-kU-JOc" firstAttribute="top" secondItem="gO2-sE-rr9" secondAttribute="bottom" constant="30" id="I4i-su-VRn"/>
                     <constraint firstAttribute="centerX" secondItem="BPx-5M-mkM" secondAttribute="centerX" id="IjJ-Yg-gNk"/>
                     <constraint firstItem="gO2-sE-rr9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="JTK-9N-sPn"/>
                     <constraint firstAttribute="trailing" secondItem="r4c-kU-JOc" secondAttribute="trailing" constant="8" id="LKV-Wo-uU9"/>
-                    <constraint firstItem="35N-US-QO6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="52" id="Yp7-v1-P78"/>
                     <constraint firstItem="yep-GB-P4a" firstAttribute="top" secondItem="BPx-5M-mkM" secondAttribute="bottom" constant="8" id="bKj-Wt-e5G"/>
                     <constraint firstAttribute="trailing" secondItem="gO2-sE-rr9" secondAttribute="trailing" constant="14" id="bPL-Yh-Ba6"/>
-                    <constraint firstItem="r4c-kU-JOc" firstAttribute="leading" secondItem="35N-US-QO6" secondAttribute="trailing" constant="20" id="oWs-K0-65L"/>
                     <constraint firstItem="yep-GB-P4a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="pzi-sG-4WK"/>
                     <constraint firstItem="r4c-kU-JOc" firstAttribute="leading" secondItem="yep-GB-P4a" secondAttribute="trailing" constant="11" id="ypw-rW-5J8"/>
                 </constraints>
@@ -89,7 +79,6 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="replyContent" destination="35N-US-QO6" id="LF0-14-Qxc"/>
                 <outlet property="replyTime" destination="BPx-5M-mkM" id="B3z-CS-2uu"/>
                 <outlet property="replyerHead" destination="r4c-kU-JOc" id="A4p-08-jde"/>
                 <outlet property="replyerNickName" destination="yep-GB-P4a" id="X7b-4Y-11M"/>

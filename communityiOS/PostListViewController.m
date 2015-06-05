@@ -411,8 +411,11 @@ NSInteger page_filter;
      [self.Reply removeAllObjects];
      
      if(![_filter_flag isEqualToString:@"待审核"]){
+          dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+          dispatch_async(queue, ^{
+               [self loadData];
+          });
           
-          [self loadData];
      }else{
           [self loadData2];
      }

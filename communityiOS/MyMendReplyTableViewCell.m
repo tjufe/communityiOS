@@ -21,34 +21,25 @@
 }
 
 -(void)setReplyContentText:(NSString *)text{
+    
+    //绘制label
+    UILabel *replyContent = [[UILabel alloc]initWithFrame:CGRectMake(208, 51, 42, 30)];
+    replyContent.text = text;
+    replyContent.numberOfLines = 10;
+    replyContent.lineBreakMode = NSLineBreakByWordWrapping;
+    replyContent.font = [UIFont systemFontOfSize:15.0];
+    replyContent.textAlignment = NSTextAlignmentLeft;
     //获得当前cell高度
     CGRect frame = [self frame];
-    //文本赋值
-    self.replyContent.text = text;
-    //设置label的最大行数
-    self.replyContent.numberOfLines = 10;
     CGSize size = CGSizeMake(200, 1000);
-    CGSize labelSize = [self.replyContent.text sizeWithFont:self.replyContent.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
-    if (labelSize.width < 190) {
-        self.replyContent.textAlignment = UITextAlignmentRight;
-        self.replyContent.frame = CGRectMake(self.frame.size.width - labelSize.width - self.replyerHead.frame.size.width+15 , self.replyContent.frame.origin.y, labelSize.width, labelSize.height);
-        
-        NSLog(@"%f",self.replyContent.frame.size.width);
-        NSLog(@"%f",self.replyContent.frame.origin.x);
-        NSLog(@"%f",self.frame.size.width - labelSize.width - self.replyerHead.frame.size.width );
-        NSLog(@"%f",labelSize.width );
-    }else{
-        self.replyContent.textAlignment = UITextAlignmentLeft;
-        self.replyContent.frame = CGRectMake(self.replyContent.frame.origin.x , self.replyContent.frame.origin.y, labelSize.width, labelSize.height);
-        
-        NSLog(@"%f",self.replyContent.frame.size.width);
-        NSLog(@"%f",self.replyContent.frame.origin.x);
-        NSLog(@"%f",self.frame.size.width - labelSize.width - self.replyerHead.frame.size.width );
-        NSLog(@"%f",labelSize.width );
-
-
+    CGSize labelSize = [replyContent.text sizeWithFont:replyContent.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    if ( [ UIScreen mainScreen ].bounds.size.width < 375) {
+        replyContent.frame = CGRectMake(self.frame.size.width-labelSize.width-self.replyerHead.frame.size.width-25, replyContent.frame.origin.y, labelSize.width , labelSize.height);
+    }else if([ UIScreen mainScreen ].bounds.size.width == 375){
+        replyContent.frame = CGRectMake(self.frame.size.width-labelSize.width-self.replyerHead.frame.size.width + 33, replyContent.frame.origin.y, labelSize.width , labelSize.height);
+    }else if([ UIScreen mainScreen ].bounds.size.width == 414){
+        replyContent.frame = CGRectMake(self.frame.size.width-labelSize.width-self.replyerHead.frame.size.width + 68, replyContent.frame.origin.y, labelSize.width , labelSize.height);
     }
-   
     //计算出自适应高度
     frame.size.height = labelSize.height + 50;
     self.frame = frame;
@@ -56,8 +47,9 @@
     //绘制对话泡泡
     UIImage *bubble = [UIImage imageNamed:@"SenderTextNodeBkg"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
-    bubbleImageView.frame = CGRectMake(self.replyContent.frame.origin.x - 7, self.replyContent.frame.origin.y - 7, labelSize.width+15 , labelSize.height + 20);
+    bubbleImageView.frame = CGRectMake(replyContent.frame.origin.x - 10 , replyContent.frame.origin.y - 7,replyContent.frame.size.width +27,replyContent.frame.size.height + 15);
     [self.contentView insertSubview:bubbleImageView atIndex:0];
+    [self.contentView addSubview:replyContent];
     
 }
 

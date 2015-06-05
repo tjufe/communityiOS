@@ -12,8 +12,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *replyerHead;
 @property (strong, nonatomic) IBOutlet UILabel *replyerNickName;
 @property (strong, nonatomic) IBOutlet UILabel *replyTime;
-@property (strong, nonatomic) IBOutlet UILabel *replyContent;
-@property (strong, nonatomic) IBOutlet UIView *backBubble;
 
 -(void)setReplyContentText:(NSString *)text;
 -(void)setBubble:(CGRect)frame;

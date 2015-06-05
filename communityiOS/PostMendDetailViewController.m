@@ -253,7 +253,7 @@ float assessViewY = 0;
             self.postTextCell23.postText3.text = [NSString stringWithFormat:@"联系电话：%@",self.post_text_3];
             CGSize size = CGSizeMake(300, 1000);
             CGSize labelSize = [self.postTextCell23.postText3.text sizeWithFont:self.postTextCell23.postText3.font constrainedToSize:size lineBreakMode:NSLineBreakByClipping];
-            mend_cellheight23 = labelSize.height+30;
+            mend_cellheight23 = labelSize.height+25;
             
             return  self.postTextCell23;
             
@@ -268,8 +268,11 @@ float assessViewY = 0;
             //主图显示情况
             if (self.main_image_url!=nil && ![self.main_image_url isEqualToString:@""]) {
                 [self loadMainImage];
-                mend_imageHeight = self.postImageCell.MainImage.frame.size.height+10;
+//                mend_imageHeight = self.postImageCell.MainImage.frame.size.height+10;
                 self.postImageCell.hidden = NO;
+            }else{
+                mend_imageHeight = 0;
+                self.postImageCell.hidden = YES;
             }
             
             return self.postImageCell;
@@ -618,6 +621,7 @@ float assessViewY = 0;
     self.operlist = nil;
     mend_menuHeight = 0;
     mend_count = 0;
+    mend_imageHeight = 0;
 
 }
 
@@ -702,6 +706,7 @@ float assessViewY = 0;
     self.post_text_1 = self.post_item.post_text_1;
     self.post_text_2 = self.post_item.post_text_2;
     self.post_text_3 = self.post_item.post_text_3;
+    mend_imageHeight = 150;
 
 
     for(int i=0; i<self.forumList.count; i++) {
@@ -857,6 +862,7 @@ float assessViewY = 0;
 }
 
 -(void)setUserInit{
+    mend_menuHeight = 0;
     [self.postTitle setText:self.post_title];
     
     if(![self.reply_num isEqualToString:@""]){
