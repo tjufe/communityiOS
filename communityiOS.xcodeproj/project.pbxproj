@@ -151,6 +151,8 @@
 		A0CB9D511ADBB3AE00F421E1 /* deletepostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CB9D501ADBB3AE00F421E1 /* deletepostItem.m */; };
 		A0D39DFA1AF76419007DEFA0 /* uncheckPostListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D39DF91AF76419007DEFA0 /* uncheckPostListItem.m */; };
 		A0D401FB1B213FCC0033F45D /* getSMSCodeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D401FA1B213FCC0033F45D /* getSMSCodeItem.m */; };
+		A0D401FE1B2186440033F45D /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D401FD1B2186440033F45D /* FindPasswordViewController.m */; };
+		A0D402011B2192A80033F45D /* findPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D402001B2192A80033F45D /* findPassword.m */; };
 		A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */; };
 		A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DD19111ABB1E8F00E34E8C /* PostTableViewCell.m */; };
 		A0DD19141ABB1E8F00E34E8C /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0DD19121ABB1E8F00E34E8C /* PostTableViewCell.xib */; };
@@ -414,6 +416,10 @@
 		A0D39DF91AF76419007DEFA0 /* uncheckPostListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uncheckPostListItem.m; sourceTree = "<group>"; };
 		A0D401F91B213FCC0033F45D /* getSMSCodeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getSMSCodeItem.h; sourceTree = "<group>"; };
 		A0D401FA1B213FCC0033F45D /* getSMSCodeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getSMSCodeItem.m; sourceTree = "<group>"; };
+		A0D401FC1B2186440033F45D /* FindPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordViewController.h; sourceTree = "<group>"; };
+		A0D401FD1B2186440033F45D /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
+		A0D401FF1B2192A80033F45D /* findPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findPassword.h; sourceTree = "<group>"; };
+		A0D402001B2192A80033F45D /* findPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findPassword.m; sourceTree = "<group>"; };
 		A0DD190D1ABB1BF300E34E8C /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
 		A0DD190E1ABB1BF300E34E8C /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 5; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
 		A0DD19101ABB1E8F00E34E8C /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
@@ -681,6 +687,8 @@
 				13BE56811ABA7F3D00379ACD /* LoginViewController.m */,
 				13B1C2EC1ACB8994005C179C /* RegistViewController.h */,
 				13B1C2ED1ACB8994005C179C /* RegistViewController.m */,
+				A0D401FC1B2186440033F45D /* FindPasswordViewController.h */,
+				A0D401FD1B2186440033F45D /* FindPasswordViewController.m */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -835,6 +843,8 @@
 				188160551B170F7600191342 /* ScoreTypeList.m */,
 				A0D401F91B213FCC0033F45D /* getSMSCodeItem.h */,
 				A0D401FA1B213FCC0033F45D /* getSMSCodeItem.m */,
+				A0D401FF1B2192A80033F45D /* findPassword.h */,
+				A0D402001B2192A80033F45D /* findPassword.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -1241,6 +1251,7 @@
 				183FCD481B1483AB0050D5B6 /* PostMendDetailViewController.m in Sources */,
 				8EEB4BF61B098F7D00B77265 /* SlideInfoList.m in Sources */,
 				13B1C3201AD4D6B3005C179C /* FSCollectionView.m in Sources */,
+				A0D402011B2192A80033F45D /* findPassword.m in Sources */,
 				13B1C2F91ACB9BF6005C179C /* UserCenterLoggedViewController.m in Sources */,
 				188160561B170F7600191342 /* ScoreTypeList.m in Sources */,
 				1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */,
@@ -1273,6 +1284,7 @@
 				A0DD190F1ABB1BF300E34E8C /* PostListViewController.m in Sources */,
 				181D10EE1B174AD9003DC04A /* RatingBar.m in Sources */,
 				13C865E71B05D4A0001D34B4 /* endApplyItem.m in Sources */,
+				A0D401FE1B2186440033F45D /* FindPasswordViewController.m in Sources */,
 				8EEC48811AD8BA3F002E70DA /* postInfoItem.m in Sources */,
 				A0DD19131ABB1E8F00E34E8C /* PostTableViewCell.m in Sources */,
 				8EEC487E1AD8B9CF002E70DA /* ifApplyItem.m in Sources */,
