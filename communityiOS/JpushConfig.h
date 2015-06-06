@@ -9,6 +9,8 @@
 #ifndef communityiOS_JpushConfig_h
 #define communityiOS_JpushConfig_h
 
+#define KEY_NOTIFY_TYPE @"notifyType";
+
 #define NOTIFY_TYPE_REFUSE @"20150001"         //驳回实名认证
 
 #define NOTIFY_TYPE_NEW_POST @"20150002"       //新帖推送

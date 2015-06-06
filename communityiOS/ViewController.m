@@ -147,7 +147,19 @@ NSArray *forum;
     [self autoLogin];
     
     [self clearExtraLine:self.mainTableView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpToPostDetail:) name:@"JumpToPostDetail" object:nil];
 }
+
+-(void)jumpToPostDetail:(NSNotification *)notification{
+    
+    id post_id = notification.object;
+    PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+    postVc.postIDFromOutside = post_id;
+    [self.navigationController pushViewController:postVc animated:YES];
+    
+}
+
 #pragma mark-
 #pragma mark--------------------去掉多余的线----------------------------
 -(void)clearExtraLine:(UITableView *)tableView{

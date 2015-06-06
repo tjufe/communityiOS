@@ -37,11 +37,14 @@
     // Override point for customization after application launch.
     
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
-//    self.window.rootViewController=nav;
+//    self.window.rootViewController= nav;
     
-//    //新建PPRevealSideViewController,并设置根视图（主页面的导航视图）
+//    新建PPRevealSideViewController,并设置根视图（主页面的导航视图）
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
+    
+
+    
     
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
@@ -65,15 +68,43 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
-
+    
+    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+//    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+//    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
 
     
     return YES;
 }
 
+
 #pragma mark-
 #pragma mark-----------------------JPush------------------------------------------
 
+
+//- (void)networkDidReceiveMessage:(NSNotification *)notification {
+//    NSDictionary * userInfo = [notification userInfo];
+//    NSString *content = [userInfo valueForKey:@"content"];
+//    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+//    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
+//    
+//}
+//
+//-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+//    // 取得 APNs 标准信息内容
+//    NSDictionary *aps = [userInfo valueForKey:@"aps"];
+//    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
+//    NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
+//    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
+//    
+//    // 取得自定义字段内容
+//    NSString *extras = [userInfo valueForKey:@"extras"]; //自定义参数，key是自己定义的
+//    NSLog(@"content =[%@], badge=[%ld], sound=[%@], customize field =[%@]",content,(long)badge,sound,extras);
+//    
+//    // Required
+//    [APService handleRemoteNotification:userInfo];
+//}
 
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -82,12 +113,13 @@
         [self handleActiveRemoteNotification:userInfo shouldShowAlert:YES];
     }else{
 
-        NSDictionary *extras = [userInfo valueForKey:@"extras"];
-        NSString *type = [extras valueForKey:@"notifytype"];
-        self.shouldJumpToPostDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_POST]);
-        self.shouldJumpToPostMendDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]);
-        self.shouldJumpToPostMendReply = ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]);
-        self.shouldAlertRefuse = ([type isEqualToString:NOTIFY_TYPE_REFUSE]);
+//        NSDictionary *extras = [userInfo valueForKey:@"extras"];
+//        NSString *type = [userInfo valueForKey:@"notifyType"];
+//        self.shouldJumpToPostDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_POST]);
+//        self.shouldJumpToPostMendDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]);
+//        self.shouldJumpToPostMendReply = ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]);
+//        self.shouldAlertRefuse = ([type isEqualToString:NOTIFY_TYPE_REFUSE]);
+        [self handleActiveRemoteNotification:userInfo shouldShowAlert:YES];
         [self handleInactiveRemoteNotification:userInfo];
     }
     
@@ -99,35 +131,44 @@
 
 - (void)handleActiveRemoteNotification:(NSDictionary *)userInfo shouldShowAlert:(BOOL)showAlert{
     
-    NSDictionary *extras = [userInfo valueForKey:@"extras"];
-    NSString *type = [extras valueForKey:@"notifytype"];
+    NSLog(@"%@",userInfo);
+//    NSDictionary *extras = [userInfo valueForKey:@"extras"];
+    NSString *type = [userInfo valueForKey:@"notifyType"];
     
     if ([type isEqualToString:NOTIFY_TYPE_NEW_POST]) {
-        if (self.shouldJumpToPostDetail) {
-            NSString *post_id = [[NSString alloc] initWithString:extras[@"post_id"]];
-            PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-            postVc.postIDFromOutside = post_id;
-            [self.window.rootViewController.navigationController pushViewController:postVc animated:YES];
-        }
-        self.shouldJumpToPostDetail = NO;
+//        if (!self.shouldJumpToPostDetail) {
+        
+            NSString *post_id = [[NSString alloc] initWithString:userInfo[@"postID"]];
+//            PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+//            postVc.postIDFromOutside = post_id;
+//            UINavigationController *nav = [[UINavigationController alloc]init];
+//            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self.window.rootViewController];
+//        [self.window.rootViewController.navigationController pushViewController:nav animated:YES];
+//            [self.window.rootViewController.navigationController pushViewController:postVc animated:YES];
+//        [self.window.rootViewController.revealSideViewController.navigationController pushViewController:postVc animated:YES];
+//            [nav pushViewController:postVc animated:YES];
+//        }
+//        self.shouldJumpToPostDetail = NO;
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"JumpToPostDetail" object:post_id];
+        
     }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_POST]) {
-        if (self.shouldJumpToPostMendDetail) {
-            NSString *post_id = [[NSString alloc]initWithString:extras[@"post_id"]];
+//        if (!self.shouldJumpToPostMendDetail) {
+            NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
             PostMendDetailViewController *postMendVC = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
             postMendVC.postIDFromOutside = post_id;
             [self.window.rootViewController.navigationController pushViewController:postMendVC animated:YES];
-        }
-        self.shouldJumpToPostMendDetail = NO;
+//        }
+//        self.shouldJumpToPostMendDetail = NO;
     }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]) {
-        if (self.shouldJumpToPostMendReply) {
-            NSString *post_id = [[NSString alloc]initWithString:extras[@"post_id"]];
+//        if (!self.shouldJumpToPostMendReply) {
+            NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
             PostMendDetailViewController *postMendVC = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
             postMendVC.postIDFromOutside = post_id;
             [self.window.rootViewController.navigationController pushViewController:postMendVC animated:YES];
-        }
-        self.shouldJumpToPostMendReply = NO;
+//        }
+//        self.shouldJumpToPostMendReply = NO;
     }if ([type isEqualToString:NOTIFY_TYPE_REFUSE]) {
-        if (self.shouldAlertRefuse) {
+//        if (!self.shouldAlertRefuse) {
             UIAlertView*alert = [[UIAlertView alloc]initWithTitle:@"提示"
                                                           message:@"您的实名认证请求被驳回"
                                                          delegate:nil
@@ -135,7 +176,7 @@
                                                 otherButtonTitles:nil];  
             
             [alert show];
-        }
+//        }
     }
     
     

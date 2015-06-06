@@ -25,6 +25,7 @@
 #import "UserJoinPostListViewController.h"
 #import "ChainToWebViewController.h"
 #import "MBProgressHUD.h"
+#import "ViewController.h"
 
 
 
@@ -424,8 +425,9 @@ bool isModerator = NO;//是否是版主
     [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
         self.post_item = (postItem *)object;
         [self setData_2];
-        [self.tableview reloadData];
+        
         [self initUI];
+        [self.tableview reloadData];
     } failurs:^(NSError *error) {
         //to do
     }];
@@ -465,6 +467,10 @@ bool isModerator = NO;//是否是版主
     self.post_over = self.post_item.post_overed;
     self.apply_enough = self.post_item.apply_enough;
     imageHeight = 150;
+    
+    if(self.forumList==nil){
+        self.forumList = [ViewController getForumList];
+    }
     
     for(int i=0; i<self.forumList.count; i++) {
         forumItem *forumitem = [self.forumList objectAtIndex:i];

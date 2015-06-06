@@ -107,9 +107,12 @@ NSInteger page_filter1 ;
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"PostTableViewCell" owner:nil options:nil] objectAtIndex:0];
     }
+    postItem *ptiem1;
 
-    postItem *ptiem1 = [postListArray objectAtIndex:indexPath.row];
-
+    if ([postListArray count] != 0) {
+        ptiem1 = [postListArray objectAtIndex:indexPath.row];
+    }
+   
     
     //title
     if(ptiem1.title!=nil){
@@ -371,8 +374,19 @@ NSInteger page_filter1 ;
     [self setupRefresh];
     //请求table数据
 //    [self loadData];
+    //去掉多余的线
+     [self clearExtraLine:self.table];
 
 }
+
+#pragma mark-
+#pragma mark--------------------去掉多余的线----------------------------
+-(void)clearExtraLine:(UITableView *)tableView{
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [self.table setTableFooterView:view];
+}
+#pragma mark-
 
 #pragma mark-------请求加载帖子列表数据(我报名的，我回复的)
 -(void)loadData{
