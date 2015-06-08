@@ -521,7 +521,10 @@ float assessViewY = 0;
     self.scoreTypeList = [[NSMutableArray alloc]init];
 
     if(self.post_item == nil){
-        
+//        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//        dispatch_async(queue, ^{
+//            [self loadPostInfo:self.postIDFromOutside];
+//        });
         [self loadPostInfo:self.postIDFromOutside];
         
     }else{
@@ -665,14 +668,18 @@ float assessViewY = 0;
 
 
 -(void)loadPostInfo:(NSString *)postID{
-    [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
-        self.post_item = (postItem *)object;
-        [self setData_2];
-        [self.tableview reloadData];
-        [self initUI];
-    } failurs:^(NSError *error) {
-        //to do
-    }];
+    
+        [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
+            self.post_item = (postItem *)object;
+            [self setData_2];
+            [self.tableview reloadData];
+            [self initUI];
+            
+            //        [self loadReplyListData];
+        } failurs:^(NSError *error) {
+            //to do
+        }];
+    
 }
 
 #pragma mark------------------------赋值函数------------------------------

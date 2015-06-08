@@ -16,6 +16,11 @@
 #import "JpushConfig.h"
 
 #import "DemoViewController.h"
+#import "JpushJump.h"
+#import "Reachability.h"
+#import "MBProgressHUD.h"
+#import "UIAlertView+Blocks.h"
+
 
 
 @interface AppDelegate ()
@@ -43,6 +48,21 @@
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
     
+//    [[Reachability reachabilityForLocalWiFi] startNotifier];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserverForName:kReachabilityChangedNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+//        
+//        Reachability *reachDetector = note.object;
+//        if (reachDetector.currentReachabilityStatus == NotReachable) {
+//            [MBProgressHUD hideAllHUDsForView:self.window animated:NO];
+//            MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.window animated:NO];
+//            HUD.mode = MBProgressHUDModeText;
+//            [HUD hide:YES afterDelay:2];
+//            HUD.labelText = @"网络已断开";
+//        }
+//        
+//    }];
+    
 
     
     
@@ -69,42 +89,58 @@
     // Required
     [APService setupWithOption:launchOptions];
     
-    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+//    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
     
-//    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-//    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
-
     
     return YES;
 }
 
 
+
 #pragma mark-
 #pragma mark-----------------------JPush------------------------------------------
 
+-(void)Jump2PostdetailWithPostID:(NSString *)post_id{
+    if (post_id.length > 0) {
+        PostDetailViewController *pdVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+        pdVc.postIDFromOutside = post_id;
+        UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
+        btn.frame = CGRectMake(0, 20, 10, 20);
+        [btn setImage:[UIImage imageNamed:@"back"] forState: UIControlStateNormal];
+        [btn addTarget:self action:@selector(GoBack) forControlEvents:UIControlEventTouchUpInside];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:pdVc];
+        UIBarButtonItem *leftBtn =[[UIBarButtonItem alloc]initWithCustomView:btn];
+        pdVc.navigationItem.leftBarButtonItem =leftBtn;
+        nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.window.rootViewController presentViewController:nav animated:YES completion:^{
+            
+        }];
+    }
+}
 
-//- (void)networkDidReceiveMessage:(NSNotification *)notification {
-//    NSDictionary * userInfo = [notification userInfo];
-//    NSString *content = [userInfo valueForKey:@"content"];
-//    NSDictionary *extras = [userInfo valueForKey:@"extras"];
-//    NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
-//    
-//}
-//
-//-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-//    // 取得 APNs 标准信息内容
-//    NSDictionary *aps = [userInfo valueForKey:@"aps"];
-//    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
-//    NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
-//    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
-//    
-//    // 取得自定义字段内容
-//    NSString *extras = [userInfo valueForKey:@"extras"]; //自定义参数，key是自己定义的
-//    NSLog(@"content =[%@], badge=[%ld], sound=[%@], customize field =[%@]",content,(long)badge,sound,extras);
-//    
-//    // Required
-//    [APService handleRemoteNotification:userInfo];
-//}
+-(void)GoBack{
+    [self.window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+-(void)jump2PostMenddetailWithPostID:(NSString *)post_id{
+    if (post_id > 0) {
+        PostMendDetailViewController *pmdVc = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
+        pmdVc.postIDFromOutside = post_id;
+        UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
+        btn.frame = CGRectMake(0, 20, 10, 20);
+        [btn setImage:[UIImage imageNamed:@"back"] forState: UIControlStateNormal];
+        [btn addTarget:self action:@selector(GoBack) forControlEvents:UIControlEventTouchUpInside];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:pmdVc];
+        UIBarButtonItem *leftBtn =[[UIBarButtonItem alloc]initWithCustomView:btn];
+        pmdVc.navigationItem.leftBarButtonItem =leftBtn;
+        nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.window.rootViewController presentViewController:nav animated:YES completion:^{
+            
+        }];
+    }
+}
 
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -124,63 +160,93 @@
     }
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
+    
 }
 
 - (void)handleActiveRemoteNotification:(NSDictionary *)userInfo shouldShowAlert:(BOOL)showAlert{
     
     NSLog(@"%@",userInfo);
-//    NSDictionary *extras = [userInfo valueForKey:@"extras"];
     NSString *type = [userInfo valueForKey:@"notifyType"];
-    
-    if ([type isEqualToString:NOTIFY_TYPE_NEW_POST]) {
-//        if (!self.shouldJumpToPostDetail) {
-        
-            NSString *post_id = [[NSString alloc] initWithString:userInfo[@"postID"]];
-//            PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-//            postVc.postIDFromOutside = post_id;
-//            UINavigationController *nav = [[UINavigationController alloc]init];
-//            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self.window.rootViewController];
-//        [self.window.rootViewController.navigationController pushViewController:nav animated:YES];
-//            [self.window.rootViewController.navigationController pushViewController:postVc animated:YES];
-//        [self.window.rootViewController.revealSideViewController.navigationController pushViewController:postVc animated:YES];
-//            [nav pushViewController:postVc animated:YES];
-//        }
-//        self.shouldJumpToPostDetail = NO;
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"JumpToPostDetail" object:post_id];
-        
-    }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_POST]) {
-//        if (!self.shouldJumpToPostMendDetail) {
-            NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
-            PostMendDetailViewController *postMendVC = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
-            postMendVC.postIDFromOutside = post_id;
-            [self.window.rootViewController.navigationController pushViewController:postMendVC animated:YES];
-//        }
-//        self.shouldJumpToPostMendDetail = NO;
-    }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]) {
-//        if (!self.shouldJumpToPostMendReply) {
-            NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
-            PostMendDetailViewController *postMendVC = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
-            postMendVC.postIDFromOutside = post_id;
-            [self.window.rootViewController.navigationController pushViewController:postMendVC animated:YES];
-//        }
-//        self.shouldJumpToPostMendReply = NO;
-    }if ([type isEqualToString:NOTIFY_TYPE_REFUSE]) {
-//        if (!self.shouldAlertRefuse) {
-            UIAlertView*alert = [[UIAlertView alloc]initWithTitle:@"提示"
-                                                          message:@"您的实名认证请求被驳回"
-                                                         delegate:nil
-                                                cancelButtonTitle:@"确定"
-                                                otherButtonTitles:nil];  
+    NSString *alert = userInfo[@"aps"][@"alert"];
+    if (showAlert) {
+        [UIAlertView showAlertViewWithTitle:@"提示" message:alert cancelButtonTitle:@"取消"otherButtonTitles:@[@"确定前往"] onDismiss:^(int buttonIndex) {
+            if (buttonIndex == 0) {
+                
+                if ([type isEqualToString:NOTIFY_TYPE_NEW_POST]) {
+                    //        if (!self.shouldJumpToPostDetail) {
+                    
+                    NSString *post_id = [[NSString alloc] initWithString:userInfo[@"postID"]];
+                    [self Jump2PostdetailWithPostID:post_id];
+                    
+                }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_POST]) {
+                    //        if (!self.shouldJumpToPostMendDetail) {
+                    NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
+                    [self jump2PostMenddetailWithPostID:post_id];
+                    //        }
+                    //        self.shouldJumpToPostMendDetail = NO;
+                }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]) {
+                    //        if (!self.shouldJumpToPostMendReply) {
+                    NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
+                    [self jump2PostMenddetailWithPostID:post_id];
+                    //        }
+                    //        self.shouldJumpToPostMendReply = NO;
+                }if ([type isEqualToString:NOTIFY_TYPE_REFUSE]){
+                    //        if (!self.shouldAlertRefuse) {
+                    UIAlertView*alert = [[UIAlertView alloc]initWithTitle:@"提示"
+                                                                  message:@"您的实名认证请求被驳回"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"确定"
+                                                        otherButtonTitles:nil];
+                    
+                    [alert show];
+                    //        }
+                }
+
+            }else{
+                
+                
+            }
             
-            [alert show];
-//        }
+        } onCancel:^{
+            
+        }];
     }
-    
-    
 }
+        
+    
+    
+    
+
+//- (UIViewController *)getCurrentVC
+//{
+//    UIViewController *result = nil;
+//    
+//    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+//    if (window.windowLevel != UIWindowLevelNormal)
+//    {
+//        NSArray *windows = [[UIApplication sharedApplication] windows];
+//        for(UIWindow * tmpWin in windows)
+//        {
+//            if (tmpWin.windowLevel == UIWindowLevelNormal)
+//            {
+//                window = tmpWin;
+//                break;
+//            }
+//        }
+//    }
+//    
+//    UIView *frontView = [[window subviews] objectAtIndex:0];
+//    id nextResponder = [frontView nextResponder];
+//    
+//    if ([nextResponder isKindOfClass:[UIViewController class]])
+//        result = nextResponder;
+//    else
+//        result = window.rootViewController;
+//    
+//    return result;
+//}
 
 /**
  *  保存通知的数据、或者处理非激活状态下的数据。
@@ -218,6 +284,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

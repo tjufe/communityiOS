@@ -425,7 +425,6 @@ bool isModerator = NO;//是否是版主
     [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
         self.post_item = (postItem *)object;
         [self setData_2];
-        
         [self initUI];
         [self.tableview reloadData];
     } failurs:^(NSError *error) {

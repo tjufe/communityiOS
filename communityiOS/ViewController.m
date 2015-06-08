@@ -30,6 +30,9 @@
 #import "SlideInfoItem.h"
 #import "PostDetailViewController.h"
 #import "MainTableViewHeaderCell.h"
+#import "JpushConfig.h"
+#import "PostMendDetailViewController.h"
+#import "APService.h"
 
 
 
@@ -148,15 +151,38 @@ NSArray *forum;
     
     [self clearExtraLine:self.mainTableView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpToPostDetail:) name:@"JumpToPostDetail" object:nil];
+    [APService setTags:nil alias:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpToPostDetail:) name:@"JpushJump" object:nil];
+}
+
+-(void)tagsAliasCallback:(int)iResCode
+                    tags:(NSSet*)tags
+                   alias:(NSString*)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
 -(void)jumpToPostDetail:(NSNotification *)notification{
     
-    id post_id = notification.object;
-    PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-    postVc.postIDFromOutside = post_id;
-    [self.navigationController pushViewController:postVc animated:YES];
+    id userInfo = notification.object;
+    NSString *type = [userInfo valueForKey:@"notifyType"];
+    NSString *post_id = [userInfo valueForKey:@"postID"];
+    if ([type isEqualToString:NOTIFY_TYPE_NEW_POST]) {
+        PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+        postVc.postIDFromOutside = post_id;
+        [self.navigationController pushViewController:postVc animated:YES];
+    }else if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_POST]||[type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]){
+        PostMendDetailViewController *pmVc = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
+        pmVc.postIDFromOutside = post_id;
+        [self.navigationController pushViewController:pmVc animated:YES];
+    }
+        
+
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"JpushJump" object:nil];
     
 }
 
