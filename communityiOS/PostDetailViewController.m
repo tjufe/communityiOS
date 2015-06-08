@@ -25,6 +25,7 @@
 #import "UserJoinPostListViewController.h"
 #import "ChainToWebViewController.h"
 #import "MBProgressHUD.h"
+#import "ViewController.h"
 
 
 
@@ -211,7 +212,7 @@ bool isModerator = NO;//是否是版主
             //主图显示情况
             if (self.main_image_url!=nil && ![self.main_image_url isEqualToString:@""]) {
                 [self loadMainImage];
-                imageHeight = 180;
+//                imageHeight = 180;
                 self.postImageCell.hidden = NO;
 //                self.postImageCell.MainImage.contentMode=UIViewContentModeScaleAspectFill;
             }else{
@@ -361,14 +362,19 @@ bool isModerator = NO;//是否是版主
     count = 0;
     if(pop_code==1){
         if (self.postIDFromOutside == nil) {
-            [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
-                self.post_item = (postItem *)object;
-                [self setData_2];
-                [self.tableview reloadData];
-                [self initUI];
-            } failurs:^(NSError *error) {
-                //
-            }];
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                [StatusTool statusToolGetPostInfoWithPostID:self.post_item.post_id Success:^(id object) {
+                    self.post_item = (postItem *)object;
+                    [self setData_2];
+                    [self.tableview reloadData];
+                    [self initUI];
+                } failurs:^(NSError *error) {
+                    //
+                }];
+                
+            });
+            
         }
         
     }
@@ -379,6 +385,7 @@ bool isModerator = NO;//是否是版主
     [self.operlist removeFromSuperview];
     count = 0;
     //self.menuHeight = 0;
+    imageHeight = 0;
     
     
 }
@@ -418,8 +425,8 @@ bool isModerator = NO;//是否是版主
     [StatusTool statusToolGetPostInfoWithPostID:postID Success:^(id object) {
         self.post_item = (postItem *)object;
         [self setData_2];
-        [self.tableview reloadData];
         [self initUI];
+        [self.tableview reloadData];
     } failurs:^(NSError *error) {
         //to do
     }];
@@ -458,6 +465,11 @@ bool isModerator = NO;//是否是版主
     self.poster_auth = self.post_item.poster_auth;
     self.post_over = self.post_item.post_overed;
     self.apply_enough = self.post_item.apply_enough;
+    imageHeight = 150;
+    
+    if(self.forumList==nil){
+        self.forumList = [ViewController getForumList];
+    }
     
     for(int i=0; i<self.forumList.count; i++) {
         forumItem *forumitem = [self.forumList objectAtIndex:i];
@@ -603,6 +615,7 @@ bool isModerator = NO;//是否是版主
 }
 
 -(void)setUserInit{
+    menuHeight = 0;
     [self.postTitle setText:self.post_title];
     self.postTitle .numberOfLines = 0;
 //    [label setFrame:CGRectMake(10,50, size01.width, size01.height)];
