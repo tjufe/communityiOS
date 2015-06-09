@@ -42,24 +42,18 @@
 - (IBAction)replyAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *replyContentField;
 @property (weak, nonatomic) IBOutlet UIButton *reply_btn;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
 @property (strong, nonatomic) IBOutlet UIImageView *endImage;
-
 @property (strong ,nonatomic) IBOutlet UIView *operlist;
 @property (strong,nonatomic) postItem *post_item ;
-
 @property (strong,nonatomic) ifApplyItem *if_apply_item ;
-
 @property (strong,nonatomic) NSString *HeadPortraitUrl;//当前用户头像
 @property (strong,nonatomic) NSString *UserPermission;//当前用户身份
 @property (strong,nonatomic) NSString *UserID;//当前用户id
 @property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
 @property (strong,nonatomic) NSArray *moderator_of_forum_list;//版块版主信息
 @property (weak,nonatomic) deletepostItem *delete;
-
-
 @property (weak,nonatomic) NSString* post_id;//当前帖子的id号码
 @property (weak,nonatomic) NSString* head_portrait_url;//发帖人头像url
 @property (weak,nonatomic) NSString* poster_nickname;//发帖人昵称
@@ -93,10 +87,6 @@
 @property (weak,nonatomic) NSString* apply_enough;
 @property (weak,nonatomic) NSString* post_text_4;
 @property (weak,nonatomic) NSString* post_text_5;
-
-
-
-
 @property (strong,nonatomic) ApplyTableViewCell * applyCell;
 @property (strong,nonatomic) ChainTableViewCell * chainCell;
 @property (strong,nonatomic) PosterTableViewCell * posterCell;
@@ -106,11 +96,9 @@
 @property (strong,nonatomic) PostImageTableViewCell * postImageCell;
 @property (strong,nonatomic) EvaluateTableViewCell * evaluateCell;
 @property (strong,nonatomic) UIBarButtonItem *rightItem;
-
 @property (strong,nonatomic) UIButton * editbutton;
 @property (strong,nonatomic) UIButton * delebutton;
 @property (strong,nonatomic) UIButton * endMendBtn;
-
 @property (strong,nonatomic) NSMutableArray *replyListArray;
 //cell数据源
 @property (strong,nonatomic) NSMutableArray *replyIDData;
@@ -123,7 +111,6 @@
 @property (strong,nonatomic) NSNumber *Page;
 @property (strong,nonatomic) NSNumber *Rows;
 @property (nonatomic,strong) NSMutableArray *forumSetArray;
-
 @property (strong,nonatomic)UIView *maskView;
 @property (strong,nonatomic)UIView *assessView;
 @property (strong,nonatomic)NSString *evaluateStr;
@@ -131,7 +118,6 @@
 @property (strong,nonatomic)RatingBar *ratingBar;
 @property (strong,nonatomic)UILabel *assessLabel;
 @property (strong,nonatomic)UITextField *messageField;
-
 @property (strong, nonatomic) IBOutlet UIView *replyView;
 - (IBAction)ViewTouchDown:(id)sender;
 
@@ -139,6 +125,7 @@
 @end
 
 @implementation PostMendDetailViewController
+
 int mend_count=0;//用于菜单点击计数
 //int mend_pop_code;//用于跳转标志
 int mend_alert = 0;//用于警告框UIAlertView计数
@@ -151,7 +138,6 @@ float mend_applyHeight = 0;
 float mend_imageHeight = 0;
 NSInteger mend_menuHeight ;//menu的高度
 bool mend_isModerator = NO;//是否是版主
-
 int mend_reply_page = 1;
 int mend_reply_rows = 1000;
 int mend_page_filter = 0;
@@ -259,7 +245,6 @@ float assessViewY = 0;
             
         }
         else if(indexPath.row == 4){       //主图
-//            self.postImageCell = [tableView dequeueReusableCellWithIdentifier:nil];
             if (!self.postImageCell) {
                 self.postImageCell= [[[NSBundle mainBundle]loadNibNamed:@"PostImageTableViewCell" owner:nil options:nil]objectAtIndex:0];
                 self.postImageCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -268,7 +253,6 @@ float assessViewY = 0;
             //主图显示情况
             if (self.main_image_url!=nil && ![self.main_image_url isEqualToString:@""]) {
                 [self loadMainImage];
-//                mend_imageHeight = self.postImageCell.MainImage.frame.size.height+10;
                 self.postImageCell.hidden = NO;
             }else{
                 mend_imageHeight = 0;
@@ -287,7 +271,6 @@ float assessViewY = 0;
             }
             //外链层
             if ([self.chain isEqualToString:@"是"]) {
-                //        self.chainCell.btChain.hidden = NO;
                 [self.chainCell.btChain setTitle:self.chain_name forState:UIControlStateNormal];
                 [self.chainCell.btChain addTarget:self action:@selector(ChainToWeb) forControlEvents:UIControlEventTouchUpInside];
                 mend_chainHeight = 40;
@@ -521,15 +504,11 @@ float assessViewY = 0;
     self.scoreTypeList = [[NSMutableArray alloc]init];
 
     if(self.post_item == nil){
-//        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//        dispatch_async(queue, ^{
-//            [self loadPostInfo:self.postIDFromOutside];
-//        });
+
         [self loadPostInfo:self.postIDFromOutside];
         
     }else{
         [self setData_2];
-        //        [self.tableview reloadData];
         [self initUI];
         
     }
@@ -541,7 +520,6 @@ float assessViewY = 0;
     
     [self.tableview.tableHeaderView setHidden:YES];
 
-  //  [self setupRefreshing];
     [self loadReplyListData];
     
     //添加手势，点击屏幕其他区域关闭键盘的操作
@@ -674,8 +652,6 @@ float assessViewY = 0;
             [self setData_2];
             [self.tableview reloadData];
             [self initUI];
-            
-            //        [self loadReplyListData];
         } failurs:^(NSError *error) {
             //to do
         }];
@@ -790,18 +766,13 @@ float assessViewY = 0;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *image = [UIImage imageNamed:@"菜单"];
-    
     button.frame = CGRectMake(self.view.frame.size.width-30, 20, 20, 5);
-    
     // 这里需要注意：由于是想让图片右移，所以left需要设置为正，right需要设置为负。正在是相反的。
     // 让按钮图片右移15
     //    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, -15)];
-    
     [button setImage:image forState:UIControlStateNormal];
     [button addTarget:self action:@selector(MenuAppear) forControlEvents:UIControlEventTouchUpInside];
-    
     self.rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 -(void)setMenu{
@@ -818,7 +789,6 @@ float assessViewY = 0;
     self.editbutton.titleLabel.font = [UIFont systemFontOfSize: 16.0];
     [self.editbutton addTarget:self action:@selector(EditPost) forControlEvents:UIControlEventTouchUpInside];
     [self.editbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    
     //结束保修按钮
     self.endMendBtn = [[UIButton alloc]init];
     self.endMendBtn.frame = CGRectMake(25, 100, 100, 50);
@@ -827,7 +797,6 @@ float assessViewY = 0;
     self.endMendBtn.titleLabel.font = [UIFont systemFontOfSize: 16.0];
     [self.endMendBtn addTarget:self action:@selector(endMend) forControlEvents:UIControlEventTouchUpInside];
     [self.endMendBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    
     //删除按钮
     self.delebutton = [[UIButton alloc]init];
     self.delebutton.frame = CGRectMake(25, 50, 100, 50);
@@ -836,7 +805,6 @@ float assessViewY = 0;
     self.delebutton.titleLabel.font = [UIFont systemFontOfSize: 16.0];
     [self.delebutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.delebutton addTarget:self action:@selector(DelePost) forControlEvents:UIControlEventTouchUpInside];
-    
     
 }
 -(void)MenuAppear{
@@ -871,13 +839,11 @@ float assessViewY = 0;
 -(void)setUserInit{
     mend_menuHeight = 0;
     [self.postTitle setText:self.post_title];
-    
     if(![self.reply_num isEqualToString:@""]){
         [self.replyNum setText:self.reply_num];
     }else{
         [self.replyNum setText:@"0"];
     }
-    //    [self.posterCell.posterNickname setText:self.poster_nickname];
     [self.forumTitle setText:self.forum_title];
     //postdetailmenu里面按钮的显示情况
     //编辑按钮
@@ -887,51 +853,29 @@ float assessViewY = 0;
         mend_menuHeight++;
         
     }
-    
     //结束报修按钮
     if ([self.post_over isEqualToString:@"否"]) {
         [self.operlist addSubview:self.endMendBtn];
         self.endMendBtn.frame = CGRectMake(0, 50*mend_menuHeight, 100, 50);
         mend_menuHeight++;
     }
-    
-    //结束报名
-//    for(int i=0 ; i< self.forum_item.ForumSetlist.count ; i++){
-//        forumSetItem *forumset = [forumSetItem createItemWitparametes:[self.forum_item.ForumSetlist objectAtIndex:i]];
-//        if ([forumset.site_name isEqualToString:@"是否提供报名功能"]) {
-//            if ([forumset.site_value isEqualToString:@"是"]) {
-//                if ([self.open_apply isEqualToString:@"是"] && [self.user_id isEqualToString:self.poster_id] && [self.post_over isEqualToString:@"否"]) {
-//                    [self.operlist addSubview:self.endApplyButton];
-//                    self.endApplyButton.frame = CGRectMake(25, 50*mend_menuHeight, 50, 50);
-//                    mend_menuHeight++;
-//                }
-//                
-//            }
-//            break;
-//        }
-//    }
     //delete button
     if ([self.user_auth containsString:@"/系统管理员/"] || [self.moderator_of_forum_list containsObject:self.forum_id] || [self.user_id isEqualToString:self.poster_id]) {
         [self.operlist addSubview:self.delebutton];
         self.delebutton.frame = CGRectMake(25, 50*mend_menuHeight, 50, 50);
         mend_menuHeight++;
     }
-    //    [self setMenu];
     self.operlist.frame = CGRectMake(self.view.frame.size.width-100, 0, 100, 50*mend_menuHeight);
     //postdetailmenu显示情况
-
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.moderator_of_forum_list = [defaults objectForKey:@"moderator_of_forum_list"];
     self.user_auth =[defaults objectForKey:@"UserPermission"];
     self.user_id = [defaults objectForKey:@"UserID"];
-
     if(![self.user_auth isEqualToString:@""]){
-    if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] &&![self.post_overed isEqualToString:@"是"]) ){
-        //        [self.view addSubview:self.operlist];
-        self.navigationItem.rightBarButtonItem = self.rightItem;
+        if([self.moderator_of_forum_list containsObject:self.forum_id] ||[self.user_auth containsString:@"/系统管理员/"] || ([self.user_id isEqualToString:self.poster_id] &&![self.post_overed isEqualToString:@"是"]) ){
+            self.navigationItem.rightBarButtonItem = self.rightItem;
+        }
     }
-    }
-    
     //评论（）人
     for(int i=0; i< self.forum_item.ForumSetlist.count; i++){
         forumSetItem *forumset = [forumSetItem createItemWitparametes:[self.forum_item.ForumSetlist objectAtIndex:i]];
@@ -950,16 +894,13 @@ float assessViewY = 0;
     NSString *url = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,self.head_portrait_url];
     
     [self.posterCell.headPortrait sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
         self.posterCell.headPortrait.image = image;
         
     }];
 }
 -(void)loadMainImage{
     NSString *url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.main_image_url];
-    
     [self.postImageCell.MainImage sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
         self.postImageCell.MainImage.image = image;
         
     }];
@@ -1019,28 +960,7 @@ float assessViewY = 0;
     
     
 }
-//-(void)endapply{
-//    [StatusTool statusToolEndApplyWithcommunity_id:self.community_id forum_id:self.forum_id post_id:self.post_id user_id:self.user_id Success:^(id object) {
-//        //提示结束报名成功
-//        MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
-//        [self.view addSubview:hud];
-//        hud.labelText = @"结束报名成功！";
-//        hud.mode = MBProgressHUDModeText;
-//        [hud showAnimated:YES whileExecutingBlock:^{
-//            sleep(1);
-//        } completionBlock:^{
-//            [hud removeFromSuperview];
-//        }];
-//        [self.operlist removeFromSuperview];
-//        mend_count = 0;
-//        
-//    } failurs:^(NSError *error) {
-//        NSLog(@"%@",error);
-//        [self.operlist removeFromSuperview];
-//        
-//    }];
-//    
-//}
+
 
 -(void)endMend{
     self.replyView.hidden = YES;
@@ -1212,7 +1132,6 @@ float assessViewY = 0;
         [self.navigationController pushViewController:NPEVC animated:YES];
     }
    
-    
     [self.operlist removeFromSuperview];
     mend_count = 0;
 }
@@ -1243,10 +1162,6 @@ float assessViewY = 0;
     }
     if(mend_alert==1){
         if (buttonIndex==0) {
-            //        PostListViewController *PLVC=[PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
-            //            PLVC.forum_item = _forum_item;
-            
-            //        [self.navigationController pushViewController:PLVC animated:YES];
             
             //0527 lx
             [self.navigationController popViewControllerAnimated:YES];
@@ -1548,7 +1463,7 @@ float assessViewY = 0;
     return uuid;
 }
 
-
+#pragma mark -----------------------------点击屏幕别处收起键盘-----------------------
 - (IBAction)ViewTouchDown:(id)sender {
     
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];

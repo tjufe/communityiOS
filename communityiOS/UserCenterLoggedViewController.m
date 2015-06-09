@@ -17,7 +17,6 @@
 #import "FirstSettingsViewController.h"
 #import "PostListViewController.h"
 #import "UserJoinPostListViewController.h"
-
 #import "APIClient.h"
 #import "AuthTableViewController.h"
 #import "APIAddress.h"
@@ -35,12 +34,6 @@
 - (IBAction)go2myPostList:(id)sender {
     PostListViewController *poLVC = [PostListViewController createFromStoryboardName:@"PostList" withIdentifier:@"PostListID"];
     poLVC.filter_flag = @"我发起的";
-
- //   poLVC.pl_go = @"2";//从我的话题页跳转
-
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:poLVC];
-//    UIBarButtonItem *leftBtn=[[UIBarButtonItem alloc]initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(go2main)];
-//    poLVC.navigationItem.leftBarButtonItem=leftBtn;
     
     UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 20, 10, 20);
@@ -100,9 +93,6 @@
 
 - (IBAction)go2settings:(id)sender {
     UINavigationController *vc=[UINavigationController createFromStoryboardName:@"Settings" withIdentifier:@"Settings"];
-    
-    //    [self presentModalViewController:vc animated:YES];
-    
     [self.revealSideViewController popViewControllerWithNewCenterController:vc animated:YES];
 }
 
@@ -148,15 +138,6 @@
         self.imgAvatar.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleOnClick)];
         [self.imgAvatar addGestureRecognizer:tap];
-        
-
-        
-        
-        //判断是否是管理员，显示“实名认证”图标
-//        if ([[NSString stringWithString:[defaults valueForKey:@"UserPermission"]]isEqualToString:@"管理员"]) {
-//            self.authIcon.hidden = NO;
-//            self.authBtn.hidden = NO;
-//        }
 
     }
 }

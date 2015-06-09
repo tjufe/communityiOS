@@ -728,8 +728,6 @@
 		13C58BDB1AB9550600090157 /* communityiOS */ = {
 			isa = PBXGroup;
 			children = (
-				1842ADF31ADB5FEE0022D2CB /* APService.h */,
-				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
 				13B1C2A51ACA4A93005C179C /* app */,
 				13B1C2B01ACA5833005C179C /* vendor */,
 				13B1C2AF1ACA57FD005C179C /* resource */,
@@ -888,6 +886,8 @@
 		18AF2A2F1AFE626200CCCDBB /* JPush */ = {
 			isa = PBXGroup;
 			children = (
+				1842ADF31ADB5FEE0022D2CB /* APService.h */,
+				1842ADF41ADB5FEE0022D2CB /* libPushSDK-1.8.3.a */,
 			);
 			name = JPush;
 			sourceTree = "<group>";

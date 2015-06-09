@@ -72,26 +72,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.loimage = [UIImage imageNamed:@"ic_default_avater@2x"];
-    
-//    //读取上次存储的数据
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    self.phoneTextField.text = [defaults valueForKey:UserNameKey];
-//    self.passwordTextField.text = [defaults valueForKey:PwdKey];
-    
-    
-    // Do any additional setup after loading the view.
-//    BOOL didRemeber=[[[NSUserDefaults standardUserDefaults] objectForKey:@"didRemeber" ] boolValue];
-//    [self.remberSwitch setOn:didRemeber];
-//    [self.loginButton.layer setMasksToBounds:YES];
-//    [self.loginButton.layer setCornerRadius:self.loginButton.frame.size.height/2]; //设置矩形四个圆角半径
 
     [self.loginButton.layer setCornerRadius:4];
     [self.uiViewLogin.layer setCornerRadius:4];
-    
-//    [self.loginButton setBackgroundColor:[UIColor grayColor]];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
-//    NSLog(@"^^^^%@",self.remberSwitch.on);
 }
 
 -(void)setLoimage:(UIImage *)loimage{
@@ -100,9 +83,7 @@
     _LoginImage.layer.masksToBounds = YES ;
     [_LoginImage.layer setCornerRadius:_LoginImage.frame.size.width/2];
     _LoginImage.contentMode = UIViewContentModeScaleAspectFill;
-    
-//    self.loimage = [UIImage imageNamed:@"ic_default_avater@2x"];
-    
+        
 
 }
 
@@ -124,11 +105,6 @@
 
 
 - (IBAction)loginAction {
-    //存储数据
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:self.phoneTextField.text forKey:UserNameKey];
-//    [defaults setObject:self.passwordTextField.text forKey:PwdKey];
-//    [defaults synchronize];
     
     [StatusTool statusToolGetUserLoginWithName:[self.phoneTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
                                       PassWord:[self.passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
@@ -140,19 +116,7 @@
                                        } failurs:^(NSError *error) {
                                            NSLog(@"%@",error);
                                        }];
-    
-    
-    
-    
-    
-    
-//    //关闭当前视图控制器
-//    [self.navigationController popViewControllerAnimated:YES];
-//    //代理传值
-//    if ([self.delegate respondsToSelector:@selector(addUser:didAddUser:)]) {
-//        NSString * checkin_community_id= [[NSString alloc]initWithString:self.loginItem.checkin_community_id];
-//        [self.delegate addUser:self didAddUser:checkin_community_id];
-//    }
+ 
 }
 
 #pragma mark --检查登录结果hmx

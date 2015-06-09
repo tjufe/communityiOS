@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,8 +13,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="sunxiaoyuan" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yep-GB-P4a">
-                        <rect key="frame" x="14" y="29" width="247" height="22"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sunxiaoyuan" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yep-GB-P4a">
+                        <rect key="frame" x="14" y="31" width="247" height="14"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="247" id="Yni-XM-JJg"/>
@@ -62,7 +62,7 @@
                     <constraint firstItem="BPx-5M-mkM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="2Lo-I8-zgV"/>
                     <constraint firstItem="Nwq-cS-da1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="4QU-YG-oV8"/>
                     <constraint firstItem="Nwq-cS-da1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="7sc-z8-EHv"/>
-                    <constraint firstItem="yep-GB-P4a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="29" id="ANl-oU-5WA"/>
+                    <constraint firstItem="yep-GB-P4a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="31" id="ANl-oU-5WA"/>
                     <constraint firstItem="r4c-kU-JOc" firstAttribute="top" secondItem="gO2-sE-rr9" secondAttribute="bottom" constant="30" id="I4i-su-VRn"/>
                     <constraint firstAttribute="centerX" secondItem="BPx-5M-mkM" secondAttribute="centerX" id="IjJ-Yg-gNk"/>
                     <constraint firstItem="gO2-sE-rr9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="JTK-9N-sPn"/>
