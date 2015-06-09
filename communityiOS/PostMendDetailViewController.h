@@ -27,7 +27,7 @@ int mend_pop_code;//用于跳转标志
 //@property (strong,nonatomic) NSString *poster_nickname; //用户昵称
 //@property (strong,nonatomic) NSString *Phead_portrait_url; //用户头像
 //@property (strong,nonatomic) NSString *reply_num; //评论数
-
+@property(strong,nonatomic) postItem *postitem;//版块列表
 @property (nonatomic,strong) NSString *postIDFromOutside;//从轮播图或者推送传来的post_id
 
 

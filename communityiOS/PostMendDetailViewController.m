@@ -37,6 +37,7 @@
 #import "NewPostEditViewController.h"
 #import "PostText1TableViewCell.h"
 #import "PostText23TableViewCell.h"
+#import "ViewController.h"
 
 @interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate,UITextFieldDelegate>
 - (IBAction)replyAction:(id)sender;
@@ -504,8 +505,15 @@ float assessViewY = 0;
     self.scoreTypeList = [[NSMutableArray alloc]init];
 
     if(self.post_item == nil){
-
-        [self loadPostInfo:self.postIDFromOutside];
+        if(_postitem!=nil){
+            self.post_item = _postitem;
+            [self setData_2];
+            [self.tableview reloadData];
+            [self initUI];
+        }else{
+           [self loadPostInfo:self.postIDFromOutside];
+        }
+        
         
     }else{
         [self setData_2];
@@ -690,6 +698,11 @@ float assessViewY = 0;
     self.post_text_2 = self.post_item.post_text_2;
     self.post_text_3 = self.post_item.post_text_3;
     mend_imageHeight = 150;
+    
+    
+    if(self.forumList==nil){
+        self.forumList = [ViewController getForumList];
+    }
 
 
     for(int i=0; i<self.forumList.count; i++) {
@@ -1195,29 +1208,29 @@ float assessViewY = 0;
 
 #pragma mark-
 #pragma mark---------------------------------设置刷新控件---------------------------
--(void)setupRefreshing{
-    [self.tableview addHeaderWithTarget:self action:@selector(headerRefreshing)];
-    [self.tableview addFooterWithTarget:self action:@selector(footerRefreshing)];
-}
-
--(void)headerRefreshing{//下拉
-    mend_page_filter = 1;
-    mend_reply_page =1;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int16_t)(2.0*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self loadReplyListData];
-        [self.tableview headerEndRefreshing];
-    });
-}
-
--(void)footerRefreshing{//上拉
-    mend_page_filter = 2;
-    mend_reply_page++;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int16_t)(2.0*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self loadReplyListData];
-        [self.tableview footerEndRefreshing];
-    });
-    
-}
+//-(void)setupRefreshing{
+//    [self.tableview addHeaderWithTarget:self action:@selector(headerRefreshing)];
+//    [self.tableview addFooterWithTarget:self action:@selector(footerRefreshing)];
+//}
+//
+//-(void)headerRefreshing{//下拉
+//    mend_page_filter = 1;
+//    mend_reply_page =1;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int16_t)(2.0*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self loadReplyListData];
+//        [self.tableview headerEndRefreshing];
+//    });
+//}
+//
+//-(void)footerRefreshing{//上拉
+//    mend_page_filter = 2;
+//    mend_reply_page++;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int16_t)(2.0*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self loadReplyListData];
+//        [self.tableview footerEndRefreshing];
+//    });
+//    
+//}
 #pragma mark-
 #pragma mark------------------------------加载回复列表的数据----------------------
 -(void)loadReplyListData{

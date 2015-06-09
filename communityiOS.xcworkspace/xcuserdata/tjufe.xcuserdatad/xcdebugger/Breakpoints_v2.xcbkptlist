@@ -6,79 +6,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "communityiOS/NewPostEditViewController.m"
-            timestampString = "454991757.645351"
+            filePath = "communityiOS/PostMendDetailViewController.m"
+            timestampString = "455536706.268992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
-            landmarkName = "-showLink"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "communityiOS/NewPostEditViewController.m"
-            timestampString = "454991757.645351"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
-            landmarkName = "-showLink"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "communityiOS/NewPostEditViewController.m"
-            timestampString = "454991757.645351"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
-            landmarkName = "-selectLink"
+            startingLineNumber = "658"
+            endingLineNumber = "658"
+            landmarkName = "-loadPostInfo:"
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__39-[NewPostEditViewController selectLink]_block_invoke"
+                  symbolName = "-[PostMendDetailViewController loadPostInfo:]"
                   moduleName = "communityiOS"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/NewPostEditViewController.m"
-                  timestampString = "455526405.78627"
+                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/PostMendDetailViewController.m"
+                  timestampString = "455527584.324972"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "351"
-                  endingLineNumber = "351"
-                  offsetFromSymbolStart = "32">
+                  startingLineNumber = "650"
+                  endingLineNumber = "650"
+                  offsetFromSymbolStart = "84">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__39-[NewPostEditViewController selectLink]_block_invoke_2"
+                  symbolName = "__45-[PostMendDetailViewController loadPostInfo:]_block_invoke"
                   moduleName = "communityiOS"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/NewPostEditViewController.m"
-                  timestampString = "455526405.786419"
+                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/PostMendDetailViewController.m"
+                  timestampString = "455527584.325104"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "351"
-                  endingLineNumber = "351"
-                  offsetFromSymbolStart = "24">
+                  startingLineNumber = "650"
+                  endingLineNumber = "650"
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -86,62 +54,126 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "communityiOS/NewPostEditViewController.m"
-            timestampString = "454991757.645351"
+            filePath = "communityiOS/PostMendDetailViewController.m"
+            timestampString = "455536706.268992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
-            landmarkName = "-selectLink"
+            startingLineNumber = "667"
+            endingLineNumber = "667"
+            landmarkName = "-loadPostInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "communityiOS/NewPostEditViewController.m"
-            timestampString = "454992192.264989"
+            filePath = "communityiOS/PostMendDetailViewController.m"
+            timestampString = "455536706.268992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
-            landmarkName = "-selectLink"
+            startingLineNumber = "661"
+            endingLineNumber = "661"
+            landmarkName = "-loadPostInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "communityiOS/StatusTool.m"
+            timestampString = "455527771.935731"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "660"
+            endingLineNumber = "660"
+            landmarkName = "+statusToolGetPostInfoWithPostID:Success:failurs:"
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[NewPostEditViewController selectLink]"
+                  symbolName = "+[StatusTool statusToolGetPostInfoWithPostID:Success:failurs:]"
                   moduleName = "communityiOS"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/NewPostEditViewController.m"
-                  timestampString = "455526405.787577"
+                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/StatusTool.m"
+                  timestampString = "455535986.553403"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "349"
-                  endingLineNumber = "349"
-                  offsetFromSymbolStart = "764">
+                  startingLineNumber = "660"
+                  endingLineNumber = "660"
+                  offsetFromSymbolStart = "508">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__39-[NewPostEditViewController selectLink]_block_invoke"
+                  symbolName = "__62+[StatusTool statusToolGetPostInfoWithPostID:Success:failurs:]_block_invoke"
                   moduleName = "communityiOS"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/NewPostEditViewController.m"
-                  timestampString = "455526405.787719"
+                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/StatusTool.m"
+                  timestampString = "455535986.553602"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "350"
-                  endingLineNumber = "350"
+                  startingLineNumber = "660"
+                  endingLineNumber = "660"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/AFNetworking/AFNetworking/AFHTTPRequestOperation.m"
+            timestampString = "455529060.507652"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-setCompletionBlockWithSuccess:failure:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AFHTTPRequestOperation setCompletionBlockWithSuccess:failure:]"
+                  moduleName = "communityiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/Pods/AFNetworking/AFNetworking/AFHTTPRequestOperation.m"
+                  timestampString = "455530593.59026"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[AFHTTPRequestOperation setCompletionBlockWithSuccess:failure:]_block_invoke"
+                  moduleName = "communityiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/Pods/AFNetworking/AFNetworking/AFHTTPRequestOperation.m"
+                  timestampString = "455530593.590514"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
@@ -153,29 +185,135 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "communityiOS/RegistViewController.m"
-            timestampString = "455178262.217892"
+            filePath = "communityiOS/PostDetailViewController.m"
+            timestampString = "455533372.980854"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "-changeTime"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "communityiOS/PostDetailViewController.m"
+            timestampString = "455533382.645127"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
+            landmarkName = "-loadPostInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "communityiOS/RegistViewController.m"
-            timestampString = "455186685.922225"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "communityiOS/StatusTool.m"
+            timestampString = "455534920.654012"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "-textFieldShouldReturn:"
+            startingLineNumber = "662"
+            endingLineNumber = "662"
+            landmarkName = "+statusToolGetPostInfoWithPostID:Success:failurs:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "communityiOS/PostMendDetailViewController.m"
+            timestampString = "455536706.268992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "communityiOS/PostMendDetailViewController.m"
+            timestampString = "455536706.268992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1239"
+            endingLineNumber = "1239"
+            landmarkName = "-loadReplyListData"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PostMendDetailViewController loadReplyListData]"
+                  moduleName = "communityiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/PostMendDetailViewController.m"
+                  timestampString = "455535986.591038"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1230"
+                  endingLineNumber = "1230"
+                  offsetFromSymbolStart = "244">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__49-[PostMendDetailViewController loadReplyListData]_block_invoke"
+                  moduleName = "communityiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/PostMendDetailViewController.m"
+                  timestampString = "455535986.591142"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1230"
+                  endingLineNumber = "1230"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "communityiOS/PostMendDetailViewController.m"
+            timestampString = "455536706.268992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "518"
+            endingLineNumber = "518"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

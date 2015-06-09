@@ -19,6 +19,10 @@
 #import "Reachability.h"
 #import "MBProgressHUD.h"
 #import "UIAlertView+Blocks.h"
+#import "StatusTool.h"
+#import "postItem.h"
+#import "APIClient.h"
+#import "APIAddress.h"
 
 
 
@@ -29,7 +33,7 @@
 @property (assign, nonatomic) BOOL shouldJumpToPostMendDetail;
 @property (assign, nonatomic) BOOL shouldJumpToPostMendReply;
 @property (assign, nonatomic) BOOL shouldAlertRefuse;
-
+@property (strong,nonatomic) postItem *post_item;
 
 @end
 
@@ -39,6 +43,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    [self getMainDomain];
     
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
     
@@ -68,11 +75,16 @@
     // Required
     [APService setupWithOption:launchOptions];
     
-    
     return YES;
 }
 
-
+-(void)getMainDomain{
+    [[APIClient sharedClient]POST:API_HOST parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+    }];
+}
 
 #pragma mark-
 #pragma mark-----------------------JPush------------------------------------------
@@ -102,9 +114,10 @@
 }
 
 -(void)jump2PostMenddetailWithPostID:(NSString *)post_id{
-    if (post_id > 0) {
+    if (post_id.length > 0) {
         PostMendDetailViewController *pmdVc = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
         pmdVc.postIDFromOutside = post_id;
+        pmdVc.postitem = self.post_item;
         UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
         btn.frame = CGRectMake(0, 20, 10, 20);
         [btn setImage:[UIImage imageNamed:@"back"] forState: UIControlStateNormal];
@@ -140,6 +153,14 @@
     NSLog(@"%@",userInfo);
     NSString *type = [userInfo valueForKey:@"notifyType"];
     NSString *alert = userInfo[@"aps"][@"alert"];
+    NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
+    [StatusTool statusToolGetPostInfoWithPostID:post_id Success:^(id object) {
+        
+        self.post_item = (postItem *)object;
+        
+    } failurs:^(NSError *error) {
+        //
+    }];
     if (showAlert) {
         [UIAlertView showAlertViewWithTitle:@"提示" message:alert cancelButtonTitle:@"取消"otherButtonTitles:@[@"确定前往"] onDismiss:^(int buttonIndex) {
             if (buttonIndex == 0) {
@@ -158,7 +179,7 @@
                     //        self.shouldJumpToPostMendDetail = NO;
                 }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]) {
                     //        if (!self.shouldJumpToPostMendReply) {
-                    NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
+                   
                     [self jump2PostMenddetailWithPostID:post_id];
                     //        }
                     //        self.shouldJumpToPostMendReply = NO;
@@ -182,6 +203,7 @@
         } onCancel:^{
             
         }];
+        [APService resetBadge];
     }
 }
     

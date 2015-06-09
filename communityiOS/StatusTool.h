@@ -110,4 +110,5 @@ typedef void(^StatusFailurs)(NSError * error);
 //获取手机验证码
 +(void)statusToolFindPasswordWithPhone:(NSString *)phone Id:(NSString *)user_id Password:(NSString *)password ConfirmPassword:(NSString *)confirm_password Success:(StatusSuccess)success failurs:(StatusFailurs)failure;
 
+
 @end
