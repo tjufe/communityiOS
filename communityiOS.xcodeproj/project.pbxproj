@@ -1442,7 +1442,7 @@
 					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6612689e-84bc-42df-8327-5d4adb8654b4";
+				PROVISIONING_PROFILE = "ccb61301-df09-4f32-b1da-3f53ec4f91dc";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1464,7 +1464,7 @@
 					"$(PROJECT_DIR)/communityiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6612689e-84bc-42df-8327-5d4adb8654b4";
+				PROVISIONING_PROFILE = "ccb61301-df09-4f32-b1da-3f53ec4f91dc";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

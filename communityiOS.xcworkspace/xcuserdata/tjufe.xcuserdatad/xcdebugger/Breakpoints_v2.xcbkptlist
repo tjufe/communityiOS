@@ -56,13 +56,14 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__39-[NewPostEditViewController selectLink]_block_invoke"
                   moduleName = "communityiOS"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/NewPostEditViewController.m"
-                  timestampString = "455446989.990921"
+                  timestampString = "455526405.78627"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "351"
                   endingLineNumber = "351"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "32">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -70,13 +71,14 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__39-[NewPostEditViewController selectLink]_block_invoke_2"
                   moduleName = "communityiOS"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/NewPostEditViewController.m"
-                  timestampString = "455446989.991029"
+                  timestampString = "455526405.786419"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "351"
                   endingLineNumber = "351"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -118,13 +120,14 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[NewPostEditViewController selectLink]"
                   moduleName = "communityiOS"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/NewPostEditViewController.m"
-                  timestampString = "455446989.991984"
+                  timestampString = "455526405.787577"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "349"
                   endingLineNumber = "349"
-                  offsetFromSymbolStart = "860">
+                  offsetFromSymbolStart = "764">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -132,13 +135,14 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__39-[NewPostEditViewController selectLink]_block_invoke"
                   moduleName = "communityiOS"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tjufe/Desktop/communityiOS_04080529/communityiOS/NewPostEditViewController.m"
-                  timestampString = "455446989.99209"
+                  timestampString = "455526405.787719"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "350"
                   endingLineNumber = "350"
-                  offsetFromSymbolStart = "21">
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>
