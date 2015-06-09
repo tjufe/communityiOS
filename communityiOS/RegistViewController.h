@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfPassword;
 @property (weak, nonatomic) IBOutlet UITextField *tfSecondPassword;
 - (IBAction)View_TouchDown:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *tfSMSCode;
+@property (weak, nonatomic) IBOutlet UILabel *ltime;
 
 @end

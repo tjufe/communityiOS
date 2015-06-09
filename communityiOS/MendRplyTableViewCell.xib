@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -47,13 +47,6 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="没有修好啊" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mh8-ne-gPD">
-                        <rect key="frame" x="69" y="50" width="190" height="40"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="sunxiaoyuan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4N2-cV-g1N">
                         <rect key="frame" x="66" y="29" width="240" height="22"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -66,16 +59,13 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="mh8-ne-gPD" secondAttribute="trailing" constant="61" id="4Q3-cQ-pbE"/>
                     <constraint firstItem="2RV-n8-o2s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="4mk-51-zBZ"/>
                     <constraint firstItem="hB8-ym-g8s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="6dU-dP-2tE"/>
                     <constraint firstItem="BJP-NC-Lla" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="42" id="7rE-y3-DyC"/>
                     <constraint firstItem="4N2-cV-g1N" firstAttribute="top" secondItem="oVQ-FE-rD8" secondAttribute="bottom" constant="8" id="RG2-Nn-P4x"/>
                     <constraint firstItem="4N2-cV-g1N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="29" id="UAk-2A-sNX"/>
-                    <constraint firstItem="mh8-ne-gPD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="50" id="ZyD-lC-zo8"/>
                     <constraint firstAttribute="trailing" secondItem="hB8-ym-g8s" secondAttribute="trailing" constant="14" id="bC6-dI-paG"/>
                     <constraint firstItem="BJP-NC-Lla" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="cig-qZ-8Lu"/>
-                    <constraint firstItem="mh8-ne-gPD" firstAttribute="leading" secondItem="BJP-NC-Lla" secondAttribute="trailing" constant="21" id="fii-jR-rP8"/>
                     <constraint firstItem="oVQ-FE-rD8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="g6X-yj-dax"/>
                     <constraint firstAttribute="centerX" secondItem="oVQ-FE-rD8" secondAttribute="centerX" id="hpG-EK-mVq"/>
                     <constraint firstItem="BJP-NC-Lla" firstAttribute="top" secondItem="2RV-n8-o2s" secondAttribute="bottom" constant="30" id="hs3-EV-CLw"/>
@@ -91,7 +81,6 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="replyContent" destination="mh8-ne-gPD" id="qZi-Jn-poQ"/>
                 <outlet property="replyTime" destination="oVQ-FE-rD8" id="tXt-K2-nYG"/>
                 <outlet property="replyerHead" destination="BJP-NC-Lla" id="JkU-eG-EI8"/>
                 <outlet property="replyerNickName" destination="4N2-cV-g1N" id="Dio-Hl-gOy"/>

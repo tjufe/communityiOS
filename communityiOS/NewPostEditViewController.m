@@ -623,7 +623,7 @@ NSString  *alert_flag;
     if (buttonIndex ==0) {
         if([alert_flag isEqualToString:@"s"]){
             mend_pop_code = 1;
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:NO];
             
         }
     }else{
@@ -798,8 +798,11 @@ NSString  *alert_flag;
     self.postContentTextView.delegate = self;
     self.postContentTextView.text = @"其他故障类型描述：";
     if(flag==1){
-        [self.postContentTextView.text stringByAppendingString:_post_item.post_text_1];
-        [self.postContentTextView setEditable:YES];
+        if (_post_item.post_text_1 !=nil) {
+            [self.postContentTextView.text stringByAppendingString:_post_item.post_text_1];
+            [self.postContentTextView setEditable:YES];
+        }
+        
     }else{
         [self.postContentTextView setEditable:NO];
     }
