@@ -33,20 +33,15 @@
 @interface PostDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UILabel *postTitle;
-
 @property (strong ,nonatomic) IBOutlet UIView *operlist;
 @property (strong,nonatomic) postItem *post_item ;
-
 @property (strong,nonatomic) ifApplyItem *if_apply_item ;
-
 @property (strong,nonatomic) NSString *HeadPortraitUrl;//当前用户头像
 @property (strong,nonatomic) NSString *UserPermission;//当前用户身份
 @property (strong,nonatomic) NSString *UserID;//当前用户id
 @property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
 @property (strong,nonatomic) NSArray *moderator_of_forum_list;//版块版主信息
 @property (weak,nonatomic) deletepostItem *delete;
-
-
 @property (weak,nonatomic) NSString* post_id;//当前帖子的id号码
 @property (weak,nonatomic) NSString* head_portrait_url;//发帖人头像url
 @property (weak,nonatomic) NSString* poster_nickname;//发帖人昵称
@@ -75,49 +70,35 @@
 @property (weak,nonatomic) NSString* apply_flag;
 @property (weak,nonatomic) NSString* post_over;
 @property (weak,nonatomic) NSString* apply_enough;
-
-
 @property (strong,nonatomic) ApplyTableViewCell * applyCell;
 @property (strong,nonatomic) ChainTableViewCell * chainCell;
 @property (strong,nonatomic) PosterTableViewCell * posterCell;
 @property (strong,nonatomic) PostTextTableViewCell * postTextCell;
 @property (strong,nonatomic) PostImageTableViewCell * postImageCell;
 @property (strong,nonatomic) UIBarButtonItem *rightItem;
-
 @property (strong,nonatomic) UIButton * editbutton;
 @property (strong,nonatomic) UIButton * endApplyButton;
 @property (strong,nonatomic) UIButton * delebutton;
-//@property (assign ,nonatomic) int  menuHeight;
-
-
 
 @end
 
 @implementation PostDetailViewController
+
 int count;//用于菜单点击计数
-
-
 int alert = 0;//用于警告框UIAlertView计数
-
 bool alertcount=false;//用于菜单点击计数
-
 float cellheight = 0;
 float chainHeight = 0;
 float applyHeight = 0;
 float imageHeight = 0;
 NSInteger menuHeight ;//menu的高度
-
 bool isModerator = NO;//是否是版主
-
-
-
 
 #pragma mark------下方快速回复
 - (IBAction)SendOnClick:(id)sender {
     
     PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
     PEVC.postItem = self.post_item;
-//    PEVC.forum_set_item = self.forum_item;
     PEVC.forum_item = self.forum_item;
     [self.navigationController pushViewController:PEVC animated:YES];
     
@@ -127,8 +108,6 @@ bool isModerator = NO;//是否是版主
     PostReplyViewController *PEVC = [ PostReplyViewController createFromStoryboardName:@"PostReply" withIdentifier:@"postreply"];
     PEVC.forum_item = _forum_item;
     PEVC.postItem = self.post_item;
-    
-    
     [self.navigationController pushViewController:PEVC animated:YES];
 
 }
@@ -136,7 +115,6 @@ bool isModerator = NO;//是否是版主
 
 #pragma mark------当点击view的区域就会触发这个事件
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-  //  [self.reply_text resignFirstResponder];
     [self.view endEditing:YES];
     
 }
@@ -165,13 +143,10 @@ bool isModerator = NO;//是否是版主
         if(self.head_portrait_url==nil || [self.head_portrait_url isEqualToString:@"''"] ){
             self.head_portrait_url=@"";
         }
-        
         if(![self.head_portrait_url isEqualToString:@""]){
             [self loadPosterHead];
             
         }else{
-
-            
             self.posterCell.headPortrait.image = [UIImage imageNamed:@"默认小头像"];
         }
         self.posterCell.headPortrait.contentMode=UIViewContentModeScaleAspectFill;
@@ -180,9 +155,7 @@ bool isModerator = NO;//是否是版主
         //认证图标
         if ([self.poster_auth isEqualToString:@"是"]) {
             self.posterCell.posterAuth.hidden = NO;
-        }
-        
-    
+        }    
         return self.posterCell;
     }else if(indexPath.row == 1){
            self.postTextCell = [tableView dequeueReusableCellWithIdentifier:nil];
@@ -392,7 +365,6 @@ bool isModerator = NO;//是否是版主
 
 
 - (void)viewDidLoad {
-//    self.scrollview.frame.size.width = self.view.frame.size.width;
     [super viewDidLoad];
     //start by wangyao 0513
     //
@@ -401,21 +373,15 @@ bool isModerator = NO;//是否是版主
 
     }else{
         [self setData_2];
-//        [self.tableview reloadData];
         [self initUI];
     
     }
-    
 
-    
-    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划线
-    
+    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;//取消下划线    
     self.navigationItem.title = @"详情";
        UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-    
-    
 
     
 }

@@ -41,30 +41,10 @@
     // Override point for customization after application launch.
     
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
-//    self.window.rootViewController= nav;
     
-//    新建PPRevealSideViewController,并设置根视图（主页面的导航视图）
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
-    
-//    [[Reachability reachabilityForLocalWiFi] startNotifier];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserverForName:kReachabilityChangedNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//        
-//        Reachability *reachDetector = note.object;
-//        if (reachDetector.currentReachabilityStatus == NotReachable) {
-//            [MBProgressHUD hideAllHUDsForView:self.window animated:NO];
-//            MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.window animated:NO];
-//            HUD.mode = MBProgressHUDModeText;
-//            [HUD hide:YES afterDelay:2];
-//            HUD.labelText = @"网络已断开";
-//        }
-//        
-//    }];
-    
 
-    
-    
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
@@ -87,8 +67,6 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
-    
-//    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
     
     
     return YES;
@@ -147,13 +125,6 @@
     if (application.applicationState == UIApplicationStateActive) {
         [self handleActiveRemoteNotification:userInfo shouldShowAlert:YES];
     }else{
-
-//        NSDictionary *extras = [userInfo valueForKey:@"extras"];
-//        NSString *type = [userInfo valueForKey:@"notifyType"];
-//        self.shouldJumpToPostDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_POST]);
-//        self.shouldJumpToPostMendDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]);
-//        self.shouldJumpToPostMendReply = ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]);
-//        self.shouldAlertRefuse = ([type isEqualToString:NOTIFY_TYPE_REFUSE]);
         [self handleActiveRemoteNotification:userInfo shouldShowAlert:YES];
         [self handleInactiveRemoteNotification:userInfo];
     }
@@ -213,39 +184,7 @@
         }];
     }
 }
-        
     
-    
-    
-
-//- (UIViewController *)getCurrentVC
-//{
-//    UIViewController *result = nil;
-//    
-//    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-//    if (window.windowLevel != UIWindowLevelNormal)
-//    {
-//        NSArray *windows = [[UIApplication sharedApplication] windows];
-//        for(UIWindow * tmpWin in windows)
-//        {
-//            if (tmpWin.windowLevel == UIWindowLevelNormal)
-//            {
-//                window = tmpWin;
-//                break;
-//            }
-//        }
-//    }
-//    
-//    UIView *frontView = [[window subviews] objectAtIndex:0];
-//    id nextResponder = [frontView nextResponder];
-//    
-//    if ([nextResponder isKindOfClass:[UIViewController class]])
-//        result = nextResponder;
-//    else
-//        result = window.rootViewController;
-//    
-//    return result;
-//}
 
 /**
  *  保存通知的数据、或者处理非激活状态下的数据。

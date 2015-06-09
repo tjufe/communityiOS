@@ -140,12 +140,10 @@ int total_sec = 60;
 -(void)ifPhoneCorrect{
     if (self.tfPhoneNumber.text.length != 11 && ![self.tfPhoneNumber.text isEqualToString:@""] ) {
         self.resBtn.enabled = NO;
- //       self.sms_btn.enabled = NO;
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入11位有效手机号码" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }else{
         self.resBtn.enabled = YES ;
- //       self.sms_btn.enabled = YES;
     }
 }
 

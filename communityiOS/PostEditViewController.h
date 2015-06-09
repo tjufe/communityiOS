@@ -19,8 +19,7 @@ extern NSString *const site_newpost_user;
 extern NSString *const site_isreply;
 extern NSString *const site_ischeck;
 extern NSString *const site_isbrowse;
-
-bool select_forum_dropdown_isonshowing;//选择板块下拉列表处于正在显示状态 
+bool select_forum_dropdown_isonshowing;//选择板块下拉列表处于正在显示状态
 
 @protocol PostEditViewControllerDelegate <NSObject>
 
@@ -34,8 +33,6 @@ bool select_forum_dropdown_isonshowing;//选择板块下拉列表处于正在显
 @property (weak, nonatomic) IBOutlet UIButton *push;
 @property (weak, nonatomic) IBOutlet UIButton *apply;
 @property (weak, nonatomic) IBOutlet UIButton *addpic;
-
-
 @property (strong,nonatomic) NSArray *forum_list_item;
 @property(strong,nonatomic)forumItem *forum_item;
 @property(strong,nonatomic)postItem *post_item ;
