@@ -663,7 +663,8 @@ bool edit;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     //获得编辑过的图片
     UIImage* chosenImage = [info objectForKey: @"UIImagePickerControllerEditedImage"];
-    self.select_image = chosenImage;
+    CGSize size = CGSizeMake(300, 150);
+    self.select_image = [self scaleToSize:chosenImage size:size];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
     //显示在UI中
@@ -673,7 +674,7 @@ bool edit;
 //    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.PEtableview reloadData];
     //上传图片
-    [self uploadinitWithImage:chosenImage];
+    [self uploadinitWithImage:self.select_image];
     
 }
 
@@ -690,6 +691,16 @@ bool edit;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark---------------剪裁图片
+-(UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size
+{
+    
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *endImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return endImage;
+}
 
 #pragma mark--------------上传图片
 -(void)uploadinitWithImage:(UIImage *)image{
@@ -701,7 +712,7 @@ bool edit;
     [manager POST:API_UPLOAD_HOST parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         //上传时使用当前的系统事件作为文件名
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
+        NSData *imageData = UIImageJPEGRepresentation(image, 1);
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];
@@ -982,6 +993,8 @@ bool edit;
 -(void)NewPost2Web{
     
     self.rightItem.enabled = NO;//点完后不可点击
+    [self.textcell.textview resignFirstResponder];
+    [self.title_tf resignFirstResponder];
     if([_ED_FLAG isEqualToString:@"0"]){//首页直接发帖
         //版块号
         self.select_forum_id = self.fs.select_forum_id;
@@ -1127,6 +1140,8 @@ bool edit;
         self.select_chain_address = @"";
         self.select_chain_context = @"";
     }
+    
+    if(![self.select_chain isEqualToString:@"否"]){
     if(!self.select_chain_context){
         self.select_chain = @"否";
         self.select_chain_address = @"";
@@ -1135,6 +1150,10 @@ bool edit;
         self.select_chain = @"是";
         if(!self.select_chain_address)
             self.select_chain_address=@"";
+    }
+    }else{
+        self.select_chain_address = @"";
+        self.select_chain_context = @"";
     }
     //图片
     if(!self.select_image_name){
@@ -1168,9 +1187,12 @@ bool edit;
         self.select_chain_address = @"";
         self.select_chain_context = @"";
     }else{
-        self.select_chain = @"是";
-        if(!self.select_chain_address)
-            self.select_chain_address=@"";
+        if(![self.select_chain isEqualToString:@"否"]){
+                self.select_chain = @"是";
+            if(!self.select_chain_address){
+                self.select_chain_address=@"";
+            }
+        }
     }
     //审核
     if([ISCheck isEqualToString:@"Y"]){
@@ -1552,7 +1574,7 @@ bool edit;
         self.select_chain_context = chainName.text;
         
         if([self.select_chain isEqualToString:@"否"]){//排除原来有外链又修改的情况
-        if(!self.select_chain_context){
+        if(!self.select_chain_context||([self.select_chain_context isEqualToString:@""]&&[self.select_chain_address isEqualToString:@""])){
             self.select_chain = @"否";
             self.select_chain_address = @"";
             self.select_chain_context = @"";
@@ -1562,6 +1584,12 @@ bool edit;
                 self.select_chain_address = @"";
             }
         }
+        }else{//原来有外链，又修改
+            if([self.select_chain_context isEqualToString:@""]&&
+               [self.select_chain_address isEqualToString:@""]){
+                self.select_chain = @"否";
+            }
+            
         }
     }
     //显示在UI中

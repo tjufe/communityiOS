@@ -27,9 +27,6 @@
 @property (assign, nonatomic) BOOL shouldAlertRefuse;
 
 
-
-
-
 @end
 
 
@@ -56,9 +53,7 @@
                                            categories:nil];
     } else {
         //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                       UIRemoteNotificationTypeSound |
-                                                       UIRemoteNotificationTypeAlert)
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)
                                            categories:nil];
     }
 #else
@@ -86,6 +81,7 @@
     if (application.applicationState == UIApplicationStateActive) {
         [self handleActiveRemoteNotification:userInfo shouldShowAlert:YES];
     }else{
+
         NSDictionary *extras = [userInfo valueForKey:@"extras"];
         NSString *type = [extras valueForKey:@"notifytype"];
         self.shouldJumpToPostDetail = ([type isEqualToString:NOTIFY_TYPE_NEW_POST]);
