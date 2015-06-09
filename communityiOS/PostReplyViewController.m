@@ -84,16 +84,16 @@ int screenHeight = 0;
     for (int i = 0; i<[self.forumSetArray count]; i++) {
         forumSetItem *tempItem = [self.forumSetArray objectAtIndex:i];
         if ([tempItem.site_name isEqualToString:site_reply_user]) {
-            if ([tempItem.site_value containsString:[NSString stringWithFormat:@"/%@",self.UserPermission]]) {
+            if ([tempItem.site_value containsString:[NSString stringWithFormat:@"/%@%@",self.UserPermission,@"/"]]) {
                 self.havePower = true;
                 break;
             }
         }
          
     }
-    if([self.UserPermission isEqualToString:@""]){
-        self.havePower = false;
-    }
+//    if([self.UserPermission isEqualToString:@""]){
+//        self.havePower = false;
+//    }
     
     if(!self.havePower){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"对不起，您无权回复！" message:nil delegate:self cancelButtonTitle:@"去实名认证" otherButtonTitles:@"取消", nil];
@@ -236,41 +236,6 @@ int screenHeight = 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-
-    
-//    if ([self.forum_item.display_type isEqualToString:@"横向"]) {
-//        if ([[self.replyIDData objectAtIndex:indexPath.row]isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
-//            MyReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-//            if(!cell){
-//                cell = [[[NSBundle mainBundle]loadNibNamed:@"MyReplyTableViewCell" owner:nil options:nil] objectAtIndex:0];
-//            }
-//            //填装数据
-//            cell.replyerNickName.text = [self.replyerNickNameData objectAtIndex:indexPath.row];
-//            cell.replyTime.text = [self.replyDateData objectAtIndex:indexPath.row];
-//            [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
-//            //图片
-//            NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
-//            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
-//            NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
-//            NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
-//            [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                if (image != nil) {
-//                    cell.replyerHead.layer.masksToBounds =YES;
-//                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-//                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-//                    cell.replyerHead.image = image;
-//                }else{
-//                    cell.replyerHead.layer.masksToBounds =YES;
-//                    [cell.replyerHead.layer setCornerRadius:cell.replyerHead.frame.size.width/2];
-//                    cell.replyerHead.contentMode = UIViewContentModeScaleAspectFill;
-//                    cell.replyerHead.image = [UIImage imageNamed:@"icon_acatar_default_r"];
-//                }
-//            }];
-//            return cell;
-//          }
-//    }
-
 
         ReplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if(!cell){
@@ -282,7 +247,7 @@ int screenHeight = 0;
         [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
         //图片
         NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_PROTRAIT_DOWNLOAD,replyImage];
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,replyImage];
         NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
         NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
         [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -318,7 +283,7 @@ int screenHeight = 0;
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         replyInfoItem *delete_item = [self.replyListArray objectAtIndex:indexPath.row];
-        if (![delete_item.post_reply_man_id isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]) {
+        if (![delete_item.post_reply_man_id isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]||[self.UserPermission isEqualToString:@""]) {
             MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
             [self.view addSubview:hud];
             hud.labelText = @"您只能删除自己的回复";

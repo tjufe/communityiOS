@@ -11,6 +11,7 @@
 @interface PostInfo : NSObject
 
 @property (nonatomic,strong)NSString *community_id;
+@property (nonatomic,strong)NSString *post_id;
 @property (nonatomic,strong)NSString *forum_id;
 @property (nonatomic,strong)NSString *poster_id;
 @property (nonatomic,strong)NSString *post_title;

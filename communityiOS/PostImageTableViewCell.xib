@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_01" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-yj-II5">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_01" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-yj-II5">
                         <rect key="frame" x="10" y="10" width="300" height="137"/>
                     </imageView>
                 </subviews>
@@ -27,7 +27,7 @@
             <connections>
                 <outlet property="MainImage" destination="FYe-yj-II5" id="T62-Bz-Idk"/>
             </connections>
-            <point key="canvasLocation" x="218" y="246.5"/>
+            <point key="canvasLocation" x="418" y="375"/>
         </tableViewCell>
     </objects>
     <resources>

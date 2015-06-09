@@ -25,15 +25,15 @@
 #import "APIClient.h"
 #import "loginItem.h"
 #import "UIImageView+WebCache.h"
-//#import "RegistViewController.h"
-
 #import "SlideInfoItem.h"
 #import "PostDetailViewController.h"
 #import "MainTableViewHeaderCell.h"
+#import "JpushConfig.h"
+#import "PostMendDetailViewController.h"
+#import "APService.h"
 
 
 
-//NSString const *
 
 @interface ViewController () <UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,LoginViewControllerDelegate>{
     NSMutableArray *tableData;  //表格数据
@@ -50,33 +50,25 @@
 @property NSInteger *currentPage;
 @property (weak, nonatomic) IBOutlet UISwitch *testSwitch;
 @property (nonatomic ,strong) forumItem *forum_item;
-//@property (nonatomic ,strong) NSMutableArray *forum_list_item;
-
 @property (nonatomic,strong) NSMutableArray *forumName;
 @property (nonatomic,strong) NSMutableArray *forumImage;
-
-
 @property (nonatomic,strong) NSArray *listForumItem;
-
 @property (strong,nonatomic) NSString *UserPermission;//当前用户身份
 @property (strong,nonatomic) NSString *UserID;//当前用户id
 @property (strong,nonatomic) NSString *AccountStatus;//当前用户账号状态
-
 @property (nonatomic,strong) NSArray *listSlide;
+@property (nonatomic,strong) MBProgressHUD *hud;
 
 @end
 
 @implementation ViewController
 
 NSArray *forum;
-//@synthesize btnNickname;
-
 
 #pragma mark----获取版块信息
 +(NSArray *)getForumList{
     return forum;
 }
-
 
 -(void) setupRefresh {
     //    1.下拉刷新（进入刷新状态就会调用self的headerRereshing）
@@ -99,30 +91,19 @@ NSArray *forum;
 -(void) getData {
     //显示／隐藏等待进度条
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 -(void) loadNextPage {
-    //    @{
-    //      @"pageSize":@(20),
-    //      @"pageNumber":@(self.currentPage),
-    //      }
-    //    [[APIClient sharedClient] POST:<#(NSString *)#> parameters:<#(id)#> constructingBodyWithBlock:<#^(id<AFMultipartFormData> formData)block#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, NSError *error)failure#>]
+    
 }
 
-
 - (void)initTableData {
-    //    tableData = [[NSMutableArray alloc] initWithObjects:
-    //                 self.forumName,[NSMutableArray arrayWithObjects:@"……",@"……",@"……",@"……",@"……",@"……",@"……", nil],
-    //                 self.forumImage,nil];
-    //    [self.mainTableView reloadData];
+
 }
 
 - (IBAction)go2Login:(id)sender {
     
     LoginNavigationController *vc=[LoginNavigationController createFromStoryboardName:@"Login" withIdentifier:@"loginACT"];
-    //    [self.navigationController pushViewController:vc animated:YES];
-    
     [self presentModalViewController:vc animated:YES];
 }
 
@@ -136,14 +117,52 @@ NSArray *forum;
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
   
     self.navigationController.delegate=self;
-
+    
+    self.hud = [[MBProgressHUD alloc]initWithView:self.view];
+    [self.view addSubview:self.hud];
+    self.hud.dimBackground = YES;
+    [self.hud show:YES];
     [self initSlide];
     [self addTimer];
-//    [self reloadData];
     [self autoLogin];
     
     [self clearExtraLine:self.mainTableView];
+    
+    [APService setTags:nil alias:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpToPostDetail:) name:@"JpushJump" object:nil];
 }
+
+-(void)tagsAliasCallback:(int)iResCode
+                    tags:(NSSet*)tags
+                   alias:(NSString*)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
+}
+
+-(void)jumpToPostDetail:(NSNotification *)notification{
+    
+    id userInfo = notification.object;
+    NSString *type = [userInfo valueForKey:@"notifyType"];
+    NSString *post_id = [userInfo valueForKey:@"postID"];
+    if ([type isEqualToString:NOTIFY_TYPE_NEW_POST]) {
+        PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+        postVc.postIDFromOutside = post_id;
+        [self.navigationController pushViewController:postVc animated:YES];
+    }else if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_POST]||[type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]){
+        PostMendDetailViewController *pmVc = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
+        pmVc.postIDFromOutside = post_id;
+        [self.navigationController pushViewController:pmVc animated:YES];
+    }
+        
+
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"JpushJump" object:nil];
+    
+}
+
 #pragma mark-
 #pragma mark--------------------去掉多余的线----------------------------
 -(void)clearExtraLine:(UITableView *)tableView{
@@ -179,8 +198,6 @@ NSArray *forum;
                 //        设置frame
                 imageView.frame = CGRectMake(imageX, imageY, imageW, imageH);
                 //        设置图片
-//                NSString *name = [NSString stringWithFormat:@"image_0%d", i + 1];
-//                imageView.image = [UIImage imageNamed:name];
                 NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,row.main_image_url];
                 NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
                 NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
@@ -233,10 +250,21 @@ NSArray *forum;
     UIImageView *view = [gestureRecognizer view];
     NSInteger *index = view.tag;
     SlideInfoItem *s = [self.listSlide objectAtIndex:index];
+    //查找所属forum lx 20150603
+    forumItem *f1;
+    for(int i=0;i<[self.listForumItem count];i++){
+        forumItem *f = [self.listForumItem objectAtIndex:i];
+        if([s.belong_forum_id isEqualToString:f.forum_id]){
+            f1 = f;
+            break;
+        }
+    }
+    
     //往帖子详情页跳转
     PostDetailViewController *PDVC = [ PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
     PDVC.postIDFromOutside = s.post_id;
 
+    PDVC.forum_item = f1;
     NSString *str = s.post_id;
     [self.navigationController pushViewController:PDVC animated:YES];
 
@@ -281,7 +309,6 @@ NSArray *forum;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     //    关闭定时器(注意点; 定时器一旦被关闭,无法再开启)
-    //    [self.timer invalidate];
     [self removeTimer];
 }
 
@@ -326,7 +353,7 @@ NSArray *forum;
         _listForumItem = array;
         forum = array;
         [self.mainTableView reloadData];
-        
+        [self.hud hide:YES];
     } failurs:^(NSError *error) {
         NSLog(@"%@",error);
     }];
@@ -438,10 +465,6 @@ NSArray *forum;
     poLVC.forumlist = self.listForumItem;
     poLVC.forum_item = [self.listForumItem objectAtIndex:indexPath.row];
     poLVC.filter_flag = @"全部";
-
-  //  poLVC.pl_go = @"1";//从首页跳转
-
-    
     
     [self.navigationController pushViewController:poLVC animated:YES];
     
@@ -505,9 +528,12 @@ NSArray *forum;
 
 #pragma mark --在视图间切换时，并不会再次载入viewDidLoad方法，所以如果在调入视图时，需要对数据做更新，就只能在这个方法内实现了。所以这个方法也非常常用。hmx
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:(BOOL)animated];
-    [self reloadUserStateBarUI];//刷新用户状态栏UI
-    [self reloadData];
+        [super viewWillAppear:(BOOL)animated];
+
+        [self reloadUserStateBarUI];//刷新用户状态栏UI
+        [self reloadData];
+
+    
 }
 
 #pragma mark --处理自动登录hmx
@@ -676,15 +702,8 @@ NSArray *forum;
     if(!cell){
         cell =[[[NSBundle mainBundle] loadNibNamed:@"ForumTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
-    //    [cell setForumIconImage:[_forumImage objectAtIndex:indexPath.row]];
-    //    [cell setForumName:[[tableData objectAtIndex:0] objectAtIndex:indexPath.row]];
-    //    [cell setLastNewContent:[[tableData objectAtIndex:1] objectAtIndex:indexPath.row]];
     forumItem *item = [_listForumItem objectAtIndex:indexPath.row];
     [cell setForumName:item.forum_name];
-    //lx 20150508
-    //    NSString *main_img_url = [URL_SERVICE stringByAppendingString:TOPIC_PIC_PATH];
-    //    main_img_url = [main_img_url stringByAppendingString:@"/"];
-    //    main_img_url = [main_img_url stringByAppendingString:item.image_url];
     
     NSString *main_img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,item.image_url];//字符串拼接
     [cell setForumIconImage:main_img_url];

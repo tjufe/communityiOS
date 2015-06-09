@@ -187,38 +187,35 @@ bool edit;
             self.textcell= [[[NSBundle mainBundle]loadNibNamed:@"TextTableViewCell" owner:nil options:nil]objectAtIndex:0];
             self.textcell.textview.delegate = self;
             self.textcell.textview.scrollEnabled = NO;
-        }
-
-        self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        self.textcell.textview.delegate = self;
-        self.text_tv = self.textcell.textview;
-        //定义一个toolBar
-        UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-        //设置style
-        [topView setBarStyle:UIBarStyleDefault];
-        
-        //定义两个flexibleSpace的butto，放在toolbar上，这样完成按钮就会在最右边
-        UIBarButtonItem * btn1 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-        UIBarButtonItem * btn2 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-        
-        //定义完成按钮
-        UIBarButtonItem *donebtn = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(resignKeyboard)];
-        
-        //在toolBar上加上这些按钮
-        NSArray *btnArray = [NSArray arrayWithObjects:btn1,btn2,donebtn,nil];
-        [topView setItems:btnArray];
-        
-        
-        [self.textcell.textview setInputAccessoryView:topView];
-
-        if(![_ED_FLAG isEqualToString:@"2"]){
-            self.textcell.textview.textColor = [UIColor grayColor];
-        }
-        
-      
+            self.textcell.selectionStyle = UITableViewCellSelectionStyleNone;
+            self.textcell.textview.delegate = self;
+            self.text_tv = self.textcell.textview;
+            //定义一个toolBar
+            UIToolbar *topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+            //设置style
+            [topView setBarStyle:UIBarStyleDefault];
+            
+            //定义两个flexibleSpace的butto，放在toolbar上，这样完成按钮就会在最右边
+            UIBarButtonItem * btn1 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            UIBarButtonItem * btn2 = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            
+            //定义完成按钮
+            UIBarButtonItem *donebtn = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(resignKeyboard)];
+            
+            //在toolBar上加上这些按钮
+            NSArray *btnArray = [NSArray arrayWithObjects:btn1,btn2,donebtn,nil];
+            [topView setItems:btnArray];
+            
+            
+            [self.textcell.textview setInputAccessoryView:topView];
+            
+            
+            
+            
             //flag如果是2，表示编辑原有帖子
             if([_ED_FLAG isEqualToString:@"2"]){
                 //编辑帖子
+
                 self.textcell.textview.text = self.select_post_text;
                 if([self.select_post_text isEqualToString:@""]||self.select_post_text==nil){
                      self.textcell.textview.text = @"请输入内容";
@@ -230,10 +227,15 @@ bool edit;
                      self.textcell.textview.text = self.select_post_text;
                 }
             }
- //
+            //               else{
+            //                if(![self.select_post_text isEqualToString:@""]){
+            //                self.textcell.textview.text = self.select_post_text;
+            //                }
+            //            }
+            
+            //   cellHeight = self.textcell.textview.frame.size.height;
+        }
 
-    //   cellHeight = self.textcell.textview.frame.size.height;
-        
         return self.textcell;
 
     }else if(indexPath.row==3){
@@ -661,7 +663,8 @@ bool edit;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     //获得编辑过的图片
     UIImage* chosenImage = [info objectForKey: @"UIImagePickerControllerEditedImage"];
-    self.select_image = chosenImage;
+    CGSize size = CGSizeMake(300, 150);
+    self.select_image = [self scaleToSize:chosenImage size:size];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
     //显示在UI中
@@ -671,7 +674,7 @@ bool edit;
 //    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.PEtableview reloadData];
     //上传图片
-    [self uploadinitWithImage:chosenImage];
+    [self uploadinitWithImage:self.select_image];
     
 }
 
@@ -688,6 +691,16 @@ bool edit;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark---------------剪裁图片
+-(UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size
+{
+    
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *endImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return endImage;
+}
 
 #pragma mark--------------上传图片
 -(void)uploadinitWithImage:(UIImage *)image{
@@ -699,7 +712,7 @@ bool edit;
     [manager POST:API_UPLOAD_HOST parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         //上传时使用当前的系统事件作为文件名
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
+        NSData *imageData = UIImageJPEGRepresentation(image, 1);
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];
@@ -781,7 +794,7 @@ bool edit;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    cellHeight = self.PEtableview.frame.size.height - 160;
+//    cellHeight = self.PEtableview.frame.size.height - 160;
     //初始化
     self.select_image = [[UIImage alloc]init];
     self.select_open_apply = [[NSString alloc]init];
@@ -877,16 +890,16 @@ bool edit;
     
     [self.PEtableview reloadData];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCellHeight:) name:@"UpdateCellHeight" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCellHeight:) name:@"UpdateCellHeight" object:nil];
     
 }
 
-//-(void)updateCellHeight:(NSNotification *)notification{
-//    id height = notification.object;
-//    cellHeight = [height intValue]+10;
-//    [self.PEtableview beginUpdates];
-//    [self.PEtableview endUpdates];
-//}
+-(void)updateCellHeight:(NSNotification *)notification{
+    id height = notification.object;
+    cellHeight = [height intValue]+10;
+    [self.PEtableview beginUpdates];
+    [self.PEtableview endUpdates];
+}
 
 
 #pragma mark-------获取版块设置
@@ -942,6 +955,7 @@ bool edit;
     //判断当前用户选择的版块能否发帖
     NSString *user_status = @"/";
     user_status = [user_status stringByAppendingString:self.UserPermission];
+    user_status = [user_status stringByAppendingString:@"/"];
         for(int j=0;j<[_forum_list_item count];j++){
             forumItem *fitem = [_forum_list_item objectAtIndex:j];
             if([fitem.display_type isEqualToString:@"纵向"]){
@@ -980,6 +994,8 @@ bool edit;
 -(void)NewPost2Web{
     
     self.rightItem.enabled = NO;//点完后不可点击
+    [self.textcell.textview resignFirstResponder];
+    [self.title_tf resignFirstResponder];
     if([_ED_FLAG isEqualToString:@"0"]){//首页直接发帖
         //版块号
         self.select_forum_id = self.fs.select_forum_id;
@@ -1125,6 +1141,8 @@ bool edit;
         self.select_chain_address = @"";
         self.select_chain_context = @"";
     }
+    
+    if(![self.select_chain isEqualToString:@"否"]){
     if(!self.select_chain_context){
         self.select_chain = @"否";
         self.select_chain_address = @"";
@@ -1133,6 +1151,10 @@ bool edit;
         self.select_chain = @"是";
         if(!self.select_chain_address)
             self.select_chain_address=@"";
+    }
+    }else{
+        self.select_chain_address = @"";
+        self.select_chain_context = @"";
     }
     //图片
     if(!self.select_image_name){
@@ -1166,9 +1188,12 @@ bool edit;
         self.select_chain_address = @"";
         self.select_chain_context = @"";
     }else{
-        self.select_chain = @"是";
-        if(!self.select_chain_address)
-            self.select_chain_address=@"";
+        if(![self.select_chain isEqualToString:@"否"]){
+                self.select_chain = @"是";
+            if(!self.select_chain_address){
+                self.select_chain_address=@"";
+            }
+        }
     }
     //审核
     if([ISCheck isEqualToString:@"Y"]){
@@ -1550,7 +1575,7 @@ bool edit;
         self.select_chain_context = chainName.text;
         
         if([self.select_chain isEqualToString:@"否"]){//排除原来有外链又修改的情况
-        if(!self.select_chain_context){
+        if(!self.select_chain_context||([self.select_chain_context isEqualToString:@""]&&[self.select_chain_address isEqualToString:@""])){
             self.select_chain = @"否";
             self.select_chain_address = @"";
             self.select_chain_context = @"";
@@ -1560,6 +1585,12 @@ bool edit;
                 self.select_chain_address = @"";
             }
         }
+        }else{//原来有外链，又修改
+            if([self.select_chain_context isEqualToString:@""]&&
+               [self.select_chain_address isEqualToString:@""]){
+                self.select_chain = @"否";
+            }
+            
         }
     }
     //显示在UI中

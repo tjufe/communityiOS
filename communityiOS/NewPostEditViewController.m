@@ -18,6 +18,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "editPostItem.h"
 #import "newPostItem.h"
+#import "PostMendDetailViewController.h"
 
 
 
@@ -54,7 +55,7 @@
 @property (strong,nonatomic) NSString *select_chain;//上传的外链状态
 @property (strong,nonatomic) NSString *select_chain_context;//上传的外链内容
 @property (strong,nonatomic) NSString *select_chain_address;//上传的外链地址
-@property (strong,nonatomic) NSString *select_img;//上传的图片
+@property (strong,nonatomic) UIImage *select_img;//上传的图片
 @property (strong,nonatomic) NSString *select_img_name;//上传的图片名称
 @property (strong,nonatomic) NSMutableDictionary *inputArray;//用来存放输入的控件
 
@@ -81,14 +82,15 @@ NSString  *alert_flag;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     //获得编辑过的图片
     UIImage* chosenImage = [info objectForKey: @"UIImagePickerControllerEditedImage"];
-    self.select_img = chosenImage;
+    CGSize size = CGSizeMake(300, 150);
+    self.select_img = [self scaleToSize:chosenImage size:size];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
     //显示在UI中
-    self.postMainPicImageView.image = chosenImage;
+    self.postMainPicImageView.image = self.select_img;
     self.postMainPicImageView.hidden = NO;
     //上传图片
-    [self uploadinitWithImage:chosenImage];
+    [self uploadinitWithImage:self.select_img];
     
 }
 
@@ -105,6 +107,16 @@ NSString  *alert_flag;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark---------------剪裁图片
+-(UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size
+{
+    
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *endImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return endImage;
+}
 
 #pragma mark--------------上传图片
 -(void)uploadinitWithImage:(UIImage *)image{
@@ -169,6 +181,7 @@ NSString  *alert_flag;
         self.select_chain_context = _post_item.chain_name;
         self.select_img_name = _post_item.main_image_url;
     }
+    self.inputArray = [[NSMutableDictionary alloc]init];
     
     [self initNavigationBar];
     [self initMainScrollView];
@@ -344,8 +357,8 @@ NSString  *alert_flag;
         self.select_chain_address = chainText.text;
         self.select_chain_context = chainName.text;
         
-        if([self.select_chain isEqualToString:@"否"]){//排除原来有外链又修改的情况
-            if(!self.select_chain_context){
+        if([self.select_chain isEqualToString:@"否"]||!self.select_chain){//排除原来有外链又修改的情况
+            if(!self.select_chain_context||([self.select_chain_context isEqualToString:@""]&&[self.select_chain_address isEqualToString:@""])){
                 self.select_chain = @"否";
                 self.select_chain_address = @"";
                 self.select_chain_context = @"";
@@ -355,13 +368,21 @@ NSString  *alert_flag;
                     self.select_chain_address = @"";
                 }
             }
+        }else{//原来有外链，又修改
+            if([self.select_chain_context isEqualToString:@""]&&
+               [self.select_chain_address isEqualToString:@""]){
+                self.select_chain = @"否";
+            }
+            
         }
     }
     //显示在UI中
-    if(self.select_chain_context){
+    if(![self.select_chain_context isEqualToString:@""]){
         self.v4.hidden = NO;
         self.chain_name.text =chainName.text;
         self.chain_address.text = chainText.text;
+    }else{
+        self.v4.hidden = YES;
     }
 
 }
@@ -474,10 +495,16 @@ NSString  *alert_flag;
         self.select_chain_address = @"";
         self.select_chain_context = @"";
     }else{
-        self.select_chain = @"是";
-        if(!self.select_chain_address)
-            self.select_chain_address=@"";
+        if(![self.select_chain isEqualToString:@"否"]){
+            self.select_chain = @"是";
+            if(!self.select_chain_address){
+                self.select_chain_address=@"";
+            }
+        }
     }
+    postInfo.chain = self.select_chain;
+    postInfo.chain_name = self.select_chain_context;
+    postInfo.chain_url = self.select_chain_address;
     
     //图片
     if([self.isMainImg isEqualToString:@"Y"]){
@@ -498,6 +525,7 @@ NSString  *alert_flag;
 - (void)reqReportRepair {
     
     self.rightItem.enabled = NO;
+    [self hidenKeyboard];
     NSString *post_title = [self getPostTitle];//帖子标题
     NSString *post_text = [self getPostText];//故障位置
     NSString *post_text_1 = [self getPostText1];//故障描述
@@ -546,6 +574,7 @@ NSString  *alert_flag;
             self.rightItem.enabled = YES;
         }];
         }else{
+            postInfo.post_id = _post_item.post_id;
             [StatusTool statusToolEditPostWithPostInfo:postInfo Success:^(id object) {
                 editPostItem *new = (editPostItem *)object;
                 if([new.msg isEqualToString:@"编辑成功"]){
@@ -593,8 +622,8 @@ NSString  *alert_flag;
     
     if (buttonIndex ==0) {
         if([alert_flag isEqualToString:@"s"]){
-           
-                [self.navigationController popViewControllerAnimated:YES];
+            mend_pop_code = 1;
+            [self.navigationController popViewControllerAnimated:NO];
             
         }
     }else{
@@ -769,8 +798,11 @@ NSString  *alert_flag;
     self.postContentTextView.delegate = self;
     self.postContentTextView.text = @"其他故障类型描述：";
     if(flag==1){
-        [self.postContentTextView.text stringByAppendingString:_post_item.post_text_1];
-        [self.postContentTextView setEditable:YES];
+        if (_post_item.post_text_1 !=nil) {
+            [self.postContentTextView.text stringByAppendingString:_post_item.post_text_1];
+            [self.postContentTextView setEditable:YES];
+        }
+        
     }else{
         [self.postContentTextView setEditable:NO];
     }
@@ -811,7 +843,7 @@ NSString  *alert_flag;
         
     }else{//发帖
     
-    self.reporterPhoneTextField.placeholder = @"请输入联系人电话……";
+      self.reporterPhoneTextField.placeholder = @"请输入联系人电话……";
     }
     self.reporterPhoneTextField.font = self.forumNameLabel.font;
     self.reporterPhoneTextField.textAlignment = UITextAlignmentLeft;
@@ -867,7 +899,7 @@ NSString  *alert_flag;
     chain_name_label.font = self.forumNameLabel.font;
     [self.v4 addSubview:chain_name_label];
     self.chain_name = [[UILabel alloc]init];
-    self.chain_name.frame = CGRectMake(72, 0, self.view.frame.size.width-70, 30);
+    self.chain_name.frame = CGRectMake(80, 0, self.view.frame.size.width-70, 30);
     self.chain_name.font = self.forumNameLabel.font;
     [self.v4 addSubview:self.chain_name];
     
@@ -875,7 +907,7 @@ NSString  *alert_flag;
     chain_address_label.text = @"外链地址:";
     chain_address_label.font = self.forumNameLabel.font;
     [self.v4 addSubview:chain_address_label];
-    self.chain_address = [[UILabel alloc]initWithFrame:CGRectMake(72, 30, self.view.frame.size.width-70, 30)];
+    self.chain_address = [[UILabel alloc]initWithFrame:CGRectMake(80, 30, self.view.frame.size.width-70, 30)];
     self.chain_address.font = self.forumNameLabel.font;
     [self.v4 addSubview:self.chain_address];
     
@@ -883,6 +915,7 @@ NSString  *alert_flag;
         if([_post_item.chain isEqualToString:@"是"]){
             self.chain_name.text = self.select_chain_context;
             self.chain_address.text = self.select_chain_address;
+            self.v4.hidden = NO;
         }else{
             self.v4.hidden = YES;
         }
@@ -898,7 +931,7 @@ NSString  *alert_flag;
 #pragma mark------删除外链
 -(void)deleteChain{
     
-    if(self.v4.hidden){
+    if(self.v4.hidden==NO){
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"删除外链？" message:@"您确定删除该外链吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alert show];
     alert_flag = @"delete_chain";

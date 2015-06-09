@@ -21,15 +21,19 @@
 }
 
 -(void)setReplyContentText:(NSString *)text{
+    
+    //绘制label
+    UILabel *replyContent = [[UILabel alloc]init];
+    replyContent.text = text;
+    replyContent.numberOfLines = 10;
+    replyContent.lineBreakMode = NSLineBreakByWordWrapping;
+    replyContent.font = [UIFont systemFontOfSize:15.0];
+    replyContent.textAlignment = NSTextAlignmentLeft;
     //获得当前cell高度
     CGRect frame = [self frame];
-    //文本赋值
-    self.replyContent.text = text;
-    //设置label的最大行数
-    self.replyContent.numberOfLines = 10;
     CGSize size = CGSizeMake(200, 1000);
-    CGSize labelSize = [self.replyContent.text sizeWithFont:self.replyContent.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
-    self.replyContent.frame = CGRectMake(self.replyContent.frame.origin.x, self.replyContent.frame.origin.y, labelSize.width, labelSize.height);
+    CGSize labelSize = [replyContent.text sizeWithFont:replyContent.font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+    replyContent.frame = CGRectMake(65, 51, labelSize.width, labelSize.height);
     //计算出自适应高度
     frame.size.height = labelSize.height + 50;
     self.frame = frame;
@@ -37,8 +41,9 @@
     //绘制对话泡泡
     UIImage *bubble = [UIImage imageNamed:@"ReceiverVoiceNodeDownloading"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:floorf(bubble.size.width/2) topCapHeight:floorf(bubble.size.height/2)]];
-    bubbleImageView.frame = CGRectMake(self.replyContent.frame.origin.x - 15, self.replyContent.frame.origin.y - 10, labelSize.width + 75, labelSize.height + 20);
+    bubbleImageView.frame = CGRectMake(replyContent.frame.origin.x - 15,replyContent.frame.origin.y - 7, labelSize.width + 20, labelSize.height + 20);
     [self.contentView insertSubview:bubbleImageView atIndex:0];
+    [self.contentView addSubview:replyContent];
    
 }
 
