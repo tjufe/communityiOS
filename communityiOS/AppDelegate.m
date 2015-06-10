@@ -15,7 +15,6 @@
 #import "PostReplyViewController.h"
 #import "JpushConfig.h"
 #import "DemoViewController.h"
-#import "JpushJump.h"
 #import "Reachability.h"
 #import "MBProgressHUD.h"
 #import "UIAlertView+Blocks.h"
@@ -23,7 +22,8 @@
 #import "postItem.h"
 #import "APIClient.h"
 #import "APIAddress.h"
-
+#import "AFHTTPRequestOperationManager.h"
+#import "AddressGetter.h"
 
 
 @interface AppDelegate ()
@@ -48,7 +48,6 @@
     [self getMainDomain];
     
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
-    
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
 
@@ -79,11 +78,18 @@
 }
 
 -(void)getMainDomain{
-    [[APIClient sharedClient]POST:API_HOST parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",responseObject);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:API_ROOT_HOST parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [AddressGetter sharedGetter].address = [NSString stringWithFormat:@"%@/",responseObject[@"com.communityservice"]];
+        AddressGetter *s = [AddressGetter sharedGetter];
+        NSLog(@"^^^^^^%@",s);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //
+        NSLog(@"Error: %@", error);
     }];
+    
 }
 
 #pragma mark-

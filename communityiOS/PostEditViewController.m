@@ -30,6 +30,7 @@
 #import "EditChainTableViewCell.h"
 #import "UIViewController+Create.h"
 #import "UIImageView+WebCache.h"//加载图片
+#import "AddressGetter.h"
 
 #define kANimationDuration 0.2 //动画时间
 
@@ -705,7 +706,7 @@ bool edit;
 #pragma mark--------------上传图片
 -(void)uploadinitWithImage:(UIImage *)image{
     
-    NSURL *baseUrl = [NSURL URLWithString:API_HOST];
+    NSURL *baseUrl = [NSURL URLWithString:[AddressGetter sharedGetter].address];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];

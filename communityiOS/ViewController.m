@@ -31,6 +31,7 @@
 #import "JpushConfig.h"
 #import "PostMendDetailViewController.h"
 #import "APService.h"
+#import "AddressGetter.h"
 
 
 

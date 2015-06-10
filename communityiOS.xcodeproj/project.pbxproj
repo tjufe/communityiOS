@@ -128,7 +128,6 @@
 		8E4FA7471B1F0E1900561AEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E4FA7461B1F0E1900561AEB /* Images.xcassets */; };
 		8ED353121B0D87280017F2F6 /* MainTableViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED353101B0D87280017F2F6 /* MainTableViewHeaderCell.m */; };
 		8ED353131B0D87280017F2F6 /* MainTableViewHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ED353111B0D87280017F2F6 /* MainTableViewHeaderCell.xib */; };
-		8ED385AF1B254B6800E57F30 /* JpushJump.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED385AE1B254B6800E57F30 /* JpushJump.m */; };
 		8ED385B31B25740300E57F30 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED385B21B25740300E57F30 /* UIAlertView+Blocks.m */; };
 		8EE5A4621B0ECE6A00F05A12 /* NewPostEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE5A4601B0ECE6A00F05A12 /* NewPostEditViewController.m */; };
 		8EE5A4631B0ECE6A00F05A12 /* NewPostEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE5A4611B0ECE6A00F05A12 /* NewPostEditViewController.xib */; };
@@ -146,6 +145,7 @@
 		8EF3F74F1AD54F1D00924975 /* PostReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF3F74E1AD54F1D00924975 /* PostReplyViewController.m */; };
 		8EF3F7511AD54F5400924975 /* PostReply.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF3F7501AD54F5400924975 /* PostReply.storyboard */; };
 		8EF6F38B1B12DE2D00ABAEF9 /* PostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF6F38A1B12DE2D00ABAEF9 /* PostInfo.m */; };
+		A02842D81B2745A1002EC4DB /* AddressGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = A02842D71B2745A1002EC4DB /* AddressGetter.m */; };
 		A0539A641B05E65800DC33BB /* newPostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0539A631B05E65800DC33BB /* newPostItem.m */; };
 		A05C7D3A1AF86D7400838247 /* UserJoinPostList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */; };
 		A0CA6DEF1AFC5E3400F88237 /* UserJoinPostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CA6DEE1AFC5E3400F88237 /* UserJoinPostListViewController.m */; };
@@ -375,8 +375,6 @@
 		8ED3530F1B0D87280017F2F6 /* MainTableViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewHeaderCell.h; sourceTree = "<group>"; };
 		8ED353101B0D87280017F2F6 /* MainTableViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewHeaderCell.m; sourceTree = "<group>"; };
 		8ED353111B0D87280017F2F6 /* MainTableViewHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewHeaderCell.xib; sourceTree = "<group>"; };
-		8ED385AD1B254B6800E57F30 /* JpushJump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JpushJump.h; sourceTree = "<group>"; };
-		8ED385AE1B254B6800E57F30 /* JpushJump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JpushJump.m; sourceTree = "<group>"; };
 		8ED385B01B256CFF00E57F30 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8ED385B11B25740300E57F30 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		8ED385B21B25740300E57F30 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
@@ -409,6 +407,8 @@
 		8EF3F7501AD54F5400924975 /* PostReply.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostReply.storyboard; sourceTree = "<group>"; };
 		8EF6F3891B12DE2D00ABAEF9 /* PostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostInfo.h; sourceTree = "<group>"; };
 		8EF6F38A1B12DE2D00ABAEF9 /* PostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostInfo.m; sourceTree = "<group>"; };
+		A02842D61B2745A1002EC4DB /* AddressGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressGetter.h; sourceTree = "<group>"; };
+		A02842D71B2745A1002EC4DB /* AddressGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressGetter.m; sourceTree = "<group>"; };
 		A0539A621B05E65800DC33BB /* newPostItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newPostItem.h; sourceTree = "<group>"; };
 		A0539A631B05E65800DC33BB /* newPostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newPostItem.m; sourceTree = "<group>"; };
 		A05C7D391AF86D7400838247 /* UserJoinPostList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserJoinPostList.storyboard; sourceTree = "<group>"; };
@@ -534,8 +534,6 @@
 			children = (
 				13C58BE01AB9550600090157 /* AppDelegate.h */,
 				13C58BE11AB9550600090157 /* AppDelegate.m */,
-				8ED385AD1B254B6800E57F30 /* JpushJump.h */,
-				8ED385AE1B254B6800E57F30 /* JpushJump.m */,
 				13C58BE31AB9550600090157 /* ViewController.h */,
 				13C58BE41AB9550600090157 /* ViewController.m */,
 				8EEC488F1AD90B17002E70DA /* DChainTableViewCell.h */,
@@ -868,6 +866,8 @@
 				13B1C3661AD4D80B005C179C /* HttpTool.m */,
 				13B1C2B41ACA58B5005C179C /* APIClient.m */,
 				13B1C2B51ACA58B5005C179C /* APIClient.h */,
+				A02842D61B2745A1002EC4DB /* AddressGetter.h */,
+				A02842D71B2745A1002EC4DB /* AddressGetter.m */,
 			);
 			name = APITools;
 			sourceTree = "<group>";
@@ -1229,7 +1229,6 @@
 				13B1C2BE1ACA5A27005C179C /* KZPropertyMapper.m in Sources */,
 				187A42A61B1C03E900DD8A50 /* PostText1TableViewCell.m in Sources */,
 				13B1C35D1AD4D6ED005C179C /* TitleTableViewCell.m in Sources */,
-				8ED385AF1B254B6800E57F30 /* JpushJump.m in Sources */,
 				13D2471F1B048C8C00717780 /* ChainToWebViewController.m in Sources */,
 				183FCD541B158AF80050D5B6 /* MyMendReplyTableViewCell.m in Sources */,
 				13B1C35B1AD4D6ED005C179C /* TextTableViewCell.m in Sources */,
@@ -1270,6 +1269,7 @@
 				188160561B170F7600191342 /* ScoreTypeList.m in Sources */,
 				1889338A1AFB580F006329D8 /* AuthTableViewController.m in Sources */,
 				8EE5A4691B0F2CA900F05A12 /* RepairInfo.m in Sources */,
+				A02842D81B2745A1002EC4DB /* AddressGetter.m in Sources */,
 				13B1C37A1AD4D817005C179C /* regItem.m in Sources */,
 				A0D39DFA1AF76419007DEFA0 /* uncheckPostListItem.m in Sources */,
 				13BE56721ABA6F0E00379ACD /* UIViewController+Create.m in Sources */,

@@ -13,6 +13,7 @@
 #import "StatusTool.h"
 #import "APIAddress.h"
 #import "MBProgressHUD.h"
+#import "AddressGetter.h"
 
 @interface FirstSettingsViewController ()<UIImagePickerControllerDelegate>
 
@@ -199,7 +200,7 @@
 #pragma mark--------------    上传头像图片
 -(void)uploadPersonImginitWithImage:(UIImage *)image{
     
-        NSURL *baseUrl = [NSURL URLWithString:API_HOST];
+        NSURL *baseUrl = [NSURL URLWithString:[AddressGetter sharedGetter].address];
         AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];

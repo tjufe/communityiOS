@@ -19,7 +19,7 @@
 #import "editPostItem.h"
 #import "newPostItem.h"
 #import "PostMendDetailViewController.h"
-
+#import "AddressGetter.h"
 
 
 @interface NewPostEditViewController ()<UIImagePickerControllerDelegate,UITextFieldDelegate>
@@ -41,14 +41,10 @@
 @property (strong,nonatomic) UIView *v4;//外链层
 @property (strong,nonatomic) UILabel *chain_name;
 @property (strong,nonatomic) UILabel *chain_address;
-
-
 @property (nonatomic,strong)UIBarButtonItem *rightItem;
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
-
 @property (strong,nonatomic)UIView *addchain;
 @property (strong,nonatomic)UIView *maskview;
-
 @property (strong,nonatomic) NSString * isCheck;
 @property (strong,nonatomic) NSString * isMainImg;
 @property (strong,nonatomic) NSString * isChain;
@@ -121,7 +117,7 @@ NSString  *alert_flag;
 #pragma mark--------------上传图片
 -(void)uploadinitWithImage:(UIImage *)image{
     
-    NSURL *baseUrl = [NSURL URLWithString:API_HOST];
+    NSURL *baseUrl = [NSURL URLWithString:[AddressGetter sharedGetter].address];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
