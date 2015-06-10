@@ -19,7 +19,6 @@
 #import "UIImageView+WebCache.h"//加载图片
 #import "StatusTool.h"
 #import "deletepostItem.h"
-#import "APIAddress.h"
 #import "ifApplyItem.h"
 #import "ChainToWebView.h"
 #import "UserJoinPostListViewController.h"
@@ -38,6 +37,9 @@
 #import "PostText1TableViewCell.h"
 #import "PostText23TableViewCell.h"
 #import "ViewController.h"
+#import "AppDelegate.h"
+#import "APIAddress.h"
+
 
 @interface PostMendDetailViewController ()<UITableViewDataSource,UITableViewDelegate,PostListViewControllerDelegate,UITextViewDelegate,UIAlertViewDelegate,UserJoinPostListViewControllerDelegate,PostEditViewControllerDelegate,UITextFieldDelegate>
 - (IBAction)replyAction:(id)sender;
@@ -120,6 +122,8 @@
 @property (strong,nonatomic)UILabel *assessLabel;
 @property (strong,nonatomic)UITextField *messageField;
 @property (strong, nonatomic) IBOutlet UIView *replyView;
+@property (nonatomic,strong) MBProgressHUD *hud;
+
 - (IBAction)ViewTouchDown:(id)sender;
 
 
@@ -369,7 +373,7 @@ float assessViewY = 0;
 
                     //图片
                     NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-8]];
-                    NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,replyImage];
+                    NSString *urlStr = [NSString stringWithFormat:@"%@/uploadimg/%@",API_HOST,replyImage];
                     NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
                     NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
                     [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -400,7 +404,7 @@ float assessViewY = 0;
             [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row-8]];
             //图片
             NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row-8]];
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,replyImage];
+            NSString *urlStr = [NSString stringWithFormat:@"%@/uploadimg/%@",API_HOST,replyImage];
             NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
             NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
             [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -485,6 +489,10 @@ float assessViewY = 0;
         // 从编辑页跳回来的时候重新请求数据
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue, ^{
+            self.hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:self.hud];
+            self.hud.dimBackground = YES;
+            [self.hud show:YES];
             [self loadPostInfo:self.post_item.post_id];
         });
     }
@@ -511,7 +519,12 @@ float assessViewY = 0;
             [self.tableview reloadData];
             [self initUI];
         }else{
-           [self loadPostInfo:self.postIDFromOutside];
+            self.hud = [[MBProgressHUD alloc]initWithView:self.view];
+            [self.view addSubview:self.hud];
+            self.hud.dimBackground = YES;
+            [self.hud show:YES];
+            
+            [self loadPostInfo:self.postIDFromOutside];
         }
         
         
@@ -660,6 +673,8 @@ float assessViewY = 0;
             [self setData_2];
             [self.tableview reloadData];
             [self initUI];
+            
+            [self.hud hide:YES];
         } failurs:^(NSError *error) {
             //to do
         }];
@@ -904,7 +919,7 @@ float assessViewY = 0;
     
 }
 -(void)loadPosterHead{
-    NSString *url = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,self.head_portrait_url];
+    NSString *url = [NSString stringWithFormat:@"%@/uploadimg/%@",API_HOST,self.head_portrait_url];
     
     [self.posterCell.headPortrait sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         self.posterCell.headPortrait.image = image;
@@ -912,7 +927,7 @@ float assessViewY = 0;
     }];
 }
 -(void)loadMainImage{
-    NSString *url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.main_image_url];
+    NSString *url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,self.main_image_url];
     [self.postImageCell.MainImage sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         self.postImageCell.MainImage.image = image;
         
@@ -1402,7 +1417,7 @@ float assessViewY = 0;
 #pragma mark----------------------------发送回复--------------------------------------
 
 - (IBAction)replyAction:(id)sender {
-    
+    self.reply_btn.enabled = NO;
     //获取当前时间
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -1418,6 +1433,7 @@ float assessViewY = 0;
             sleep(1);
         } completionBlock:^{
             [hud removeFromSuperview];
+            self.reply_btn.enabled = YES;
         }];
     }else{
         [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.post_item.belong_community_id ForumID:self.post_item.belong_forum_id PostID:self.post_item.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
@@ -1441,6 +1457,7 @@ float assessViewY = 0;
                     [self loadReplyListData];
                 } completionBlock:^{
                     [hud removeFromSuperview];
+                    self.reply_btn.enabled = YES;
                 }];
                 
                 [self.replyContentField resignFirstResponder];
@@ -1456,12 +1473,14 @@ float assessViewY = 0;
                     sleep(1);
                 } completionBlock:^{
                     [hud removeFromSuperview];
+                    self.reply_btn.enabled = YES;
                 }];
                 
             }
             
         } failurs:^(NSError *error) {
             //to do
+            self.reply_btn.enabled = YES;
         }];
     }
 }

@@ -20,6 +20,8 @@
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 #import "APIAddress.h"
+#import "AppDelegate.h"
+
 
 
 
@@ -247,7 +249,7 @@ int screenHeight = 0;
         [cell setReplyContentText:[self.replyContentData objectAtIndex:indexPath.row]];
         //图片
         NSString *replyImage = [NSString stringWithString:[self.replyerHeadData objectAtIndex:indexPath.row]];
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,replyImage];
+        NSString *urlStr = [NSString stringWithFormat:@"%@/uploadimg/%@",API_HOST,replyImage];
         NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
         NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
         [cell.replyerHead sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"icon_acatar_default_r"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -517,7 +519,7 @@ int screenHeight = 0;
 #pragma mark----------------------------发送回复--------------------------------------
 
 - (IBAction)replyAction:(id)sender {
-    
+        self.reply_btn.enabled = NO;
         //获取当前时间
         NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -531,8 +533,10 @@ int screenHeight = 0;
             hud.mode = MBProgressHUDModeText;
             [hud showAnimated:YES whileExecutingBlock:^{
                 sleep(1);
+                
             } completionBlock:^{
                 [hud removeFromSuperview];
+                self.reply_btn.enabled = YES;
             }];
         }else{
             [StatusTool statusToolPostReplyWithReplyText:self.replyContentField.text CommunityID:self.postItem.belong_community_id ForumID:self.postItem.belong_forum_id PostID:self.postItem.post_id UserID:[defaults valueForKey:@"UserID"] Date:curDate ReplyID:[self genUUID] Success:^(id object) {
@@ -551,6 +555,7 @@ int screenHeight = 0;
                         reply_page = 1;
                         reply_page_filter = 0;
                         [self loadReplyListData];
+                        self.reply_btn.enabled = YES;
                     }];
                     
                     [self.replyContentField resignFirstResponder];
@@ -565,12 +570,14 @@ int screenHeight = 0;
                         sleep(1);
                     } completionBlock:^{
                         [hud removeFromSuperview];
+                        self.reply_btn.enabled = YES;
                     }];
                     
                 }
 
             } failurs:^(NSError *error) {
                 //to do
+                self.reply_btn.enabled = YES;
             }];
         }
 }

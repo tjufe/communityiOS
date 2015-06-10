@@ -19,7 +19,7 @@
 #import "editPostItem.h"
 #import "newPostItem.h"
 #import "PostMendDetailViewController.h"
-#import "AddressGetter.h"
+#import "AppDelegate.h"
 
 
 @interface NewPostEditViewController ()<UIImagePickerControllerDelegate,UITextFieldDelegate>
@@ -117,7 +117,7 @@ NSString  *alert_flag;
 #pragma mark--------------上传图片
 -(void)uploadinitWithImage:(UIImage *)image{
     
-    NSURL *baseUrl = [NSURL URLWithString:[AddressGetter sharedGetter].address];
+    NSURL *baseUrl = [NSURL URLWithString:API_HOST];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
@@ -852,7 +852,7 @@ NSString  *alert_flag;
     self.postMainPicImageView.frame = CGRectMake(0, self.v2.frame.origin.y+self.v2.frame.size.height, self.view.frame.size.width, 158);
     if([_ED_FLAG isEqualToString:@"2"]){
         if(![_post_item.main_image_url isEqualToString:@""]&&_post_item.main_image_url!=nil){
-            NSString *img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.select_img_name];
+            NSString *img_url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,self.select_img_name];
             
             //包含中文字符的string转换为nsurl
             NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

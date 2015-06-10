@@ -33,7 +33,8 @@
 @property (assign, nonatomic) BOOL shouldJumpToPostMendDetail;
 @property (assign, nonatomic) BOOL shouldJumpToPostMendReply;
 @property (assign, nonatomic) BOOL shouldAlertRefuse;
-@property (strong,nonatomic) postItem *post_item;
+@property (strong, nonatomic) postItem *post_item;
+
 
 @end
 
@@ -41,17 +42,20 @@
 @implementation AppDelegate
 
 
++(NSString *)getServerAddress {
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSLog(@"^^^^^%@",[NSString stringWithFormat:@"http://%@",myDelegate.address ]);
+    return [NSString stringWithFormat:@"http://%@",myDelegate.address ];
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    
-    [self getMainDomain];
-    
+
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
 
-    
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
@@ -75,21 +79,6 @@
     [APService setupWithOption:launchOptions];
     
     return YES;
-}
-
--(void)getMainDomain{
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:API_ROOT_HOST parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        [AddressGetter sharedGetter].address = [NSString stringWithFormat:@"%@/",responseObject[@"com.communityservice"]];
-        AddressGetter *s = [AddressGetter sharedGetter];
-        NSLog(@"^^^^^^%@",s);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-    
 }
 
 #pragma mark-

@@ -15,7 +15,7 @@
 //数据请求方法
 + (void)postWithparams:(NSDictionary *)params success:(Success)success failure:(Failure)failure{
     
-    [[APIClient sharedClient] POST:@"index.php/Home/Index/index4ios/"
+    [[APIClient sharedClient] POST:@"/index.php/Home/Index/index4ios/"
                   parameters:params
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 
