@@ -148,14 +148,18 @@
     NSLog(@"%@",userInfo);
     NSString *type = [userInfo valueForKey:@"notifyType"];
     NSString *alert = userInfo[@"aps"][@"alert"];
-    NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
-    [StatusTool statusToolGetPostInfoWithPostID:post_id Success:^(id object) {
-        
-        self.post_item = (postItem *)object;
-        
-    } failurs:^(NSError *error) {
-        //
-    }];
+    NSString *post_id;
+    if (![type isEqualToString:NOTIFY_TYPE_REFUSE]) {
+        post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
+        [StatusTool statusToolGetPostInfoWithPostID:post_id Success:^(id object) {
+            
+            self.post_item = (postItem *)object;
+            
+        } failurs:^(NSError *error) {
+            //
+        }];
+    }
+
     if (showAlert) {
         [UIAlertView showAlertViewWithTitle:@"提示" message:alert cancelButtonTitle:@"取消"otherButtonTitles:@[@"确定前往"] onDismiss:^(int buttonIndex) {
             if (buttonIndex == 0) {

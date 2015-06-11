@@ -106,7 +106,8 @@
      self.imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
      self.imagePicker.allowsEditing = YES;
      [[UIApplication sharedApplication]setStatusBarHidden:YES];
-     [self presentModalViewController:self.imagePicker animated:YES];
+//     [self presentModalViewController:self.imagePicker animated:YES];
+    [self presentViewController:self.imagePicker  animated:YES completion:nil];
    }
 
 #pragma mark--------从摄像头获取活动图片
@@ -118,7 +119,9 @@
         self.imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         self.imagePicker.allowsEditing = YES;
         [[UIApplication sharedApplication]setStatusBarHidden:YES];
-        [self presentModalViewController:self.imagePicker animated:YES];
+//        [self presentModalViewController:self.imagePicker animated:YES];
+        [self presentViewController:self.imagePicker  animated:YES completion:nil];
+
 }
 
 
@@ -142,7 +145,8 @@
     [self uploadPersonImginitWithImage:chosenImage];
     
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
-    [self dismissModalViewControllerAnimated:YES];
+    //[self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
     
 }
@@ -158,7 +162,9 @@
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 #pragma mark---------------保存图片到document

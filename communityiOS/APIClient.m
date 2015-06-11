@@ -16,8 +16,6 @@
 +(instancetype)sharedClient{
     static APIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
-    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
-    NSLog(@"^^^^^^^^^^%@",myDelegate.address);
     dispatch_once(&onceToken, ^{
         _sharedClient = [[APIClient alloc]initWithBaseURL:
                          [NSURL URLWithString:API_HOST]];

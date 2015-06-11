@@ -12,15 +12,10 @@
 #import "forumSetItem.h"
 int mend_pop_code;//用于跳转标志
 @interface PostMendDetailViewController : UIViewController
-
 @property (strong, nonatomic) IBOutlet UIView *PDview;
 @property (weak, nonatomic) IBOutlet UILabel *forumTitle;
-- (IBAction)ReplyNumOnClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btReplyNum;
-
-
 @property(strong,nonatomic)forumItem *forum_item;
-
 @property (weak, nonatomic) IBOutlet UILabel *replyNum;
 @property (weak, nonatomic) IBOutlet UIImageView *replyImage;
 @property(strong,nonatomic) NSArray *forumList;//版块列表
@@ -29,6 +24,5 @@ int mend_pop_code;//用于跳转标志
 //@property (strong,nonatomic) NSString *reply_num; //评论数
 @property(strong,nonatomic) postItem *postitem;//版块列表
 @property (nonatomic,strong) NSString *postIDFromOutside;//从轮播图或者推送传来的post_id
-
 
 @end

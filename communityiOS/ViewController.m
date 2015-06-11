@@ -108,7 +108,8 @@ bool alreadyGetAddress = NO;
 - (IBAction)go2Login:(id)sender {
     
     LoginNavigationController *vc=[LoginNavigationController createFromStoryboardName:@"Login" withIdentifier:@"loginACT"];
-    [self presentModalViewController:vc animated:YES];
+//    [self presentModalViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 
@@ -267,7 +268,7 @@ bool alreadyGetAddress = NO;
 -(void)GoThisPost:(UIGestureRecognizer *)gestureRecognizer
 {
     UIImageView *view = [gestureRecognizer view];
-    NSInteger *index = view.tag;
+    NSInteger index = view.tag;
     SlideInfoItem *s = [self.listSlide objectAtIndex:index];
     //查找所属forum lx 20150603
     forumItem *f1;

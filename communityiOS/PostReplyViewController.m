@@ -286,15 +286,15 @@ int screenHeight = 0;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         replyInfoItem *delete_item = [self.replyListArray objectAtIndex:indexPath.row];
         if (![delete_item.post_reply_man_id isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"]]||[self.UserPermission isEqualToString:@""]) {
-            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
-            [self.view addSubview:hud];
-            hud.labelText = @"您只能删除自己的回复";
-            hud.mode = MBProgressHUDModeText;
-            [hud showAnimated:YES whileExecutingBlock:^{
-                sleep(1);
-            } completionBlock:^{
-                [hud removeFromSuperview];
-            }];
+//            MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:self.view];
+//            [self.view addSubview:hud];
+//            hud.labelText = @"您只能删除自己的回复";
+//            hud.mode = MBProgressHUDModeText;
+//            [hud showAnimated:YES whileExecutingBlock:^{
+//                sleep(1);
+//            } completionBlock:^{
+//                [hud removeFromSuperview];
+//            }];
         }else{
             [self.replyListArray removeObjectAtIndex:indexPath.row];
             [self.replyListTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];

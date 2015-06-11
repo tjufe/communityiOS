@@ -38,7 +38,6 @@
 }
 
 -(void)textDidChange:(NSNotification *)notification{
-    UITextField *t=notification.object;
     if(self.phoneTextField.text.length==11){
         [self.loginButton setBackgroundColor:[UIColor redColor]];
         [self.loginButton setEnabled:YES];
@@ -99,7 +98,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UIViewController *mainVc = segue.destinationViewController;
 
 }
 

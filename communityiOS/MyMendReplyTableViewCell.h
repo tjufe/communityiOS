@@ -14,5 +14,4 @@
 @property (strong, nonatomic) IBOutlet UILabel *replyTime;
 
 -(void)setReplyContentText:(NSString *)text;
--(void)setBubble:(CGRect)frame;
 @end
