@@ -37,7 +37,6 @@ bool select_forum_dropdown_isonshowing;//选择板块下拉列表处于正在显
 @property(strong,nonatomic)forumItem *forum_item;
 @property(strong,nonatomic)postItem *post_item ;
 @property(strong,nonatomic)NSString *ED_FLAG;
--(NSString*)getcell;
 @property (assign) id<PostEditViewControllerDelegate>delegate;
 
 @end

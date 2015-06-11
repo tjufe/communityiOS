@@ -30,6 +30,7 @@
 #import "EditChainTableViewCell.h"
 #import "UIViewController+Create.h"
 #import "UIImageView+WebCache.h"//加载图片
+#import "AppDelegate.h"
 
 #define kANimationDuration 0.2 //动画时间
 
@@ -247,7 +248,7 @@ bool edit;
             }
             //编辑原帖
             if([_ED_FLAG isEqualToString:@"2"]){
-                NSString *img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.select_image_name];
+                NSString *img_url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,self.select_image_name];
                 
                 //包含中文字符的string转换为nsurl
                 NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -666,12 +667,13 @@ bool edit;
     CGSize size = CGSizeMake(300, 150);
     self.select_image = [self scaleToSize:chosenImage size:size];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
-    [self dismissModalViewControllerAnimated:YES];
-    //显示在UI中
-    NSIndexPath *index = [NSIndexPath indexPathForRow:3 inSection:0];
-    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
-    //刷新指定行
-//    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
+    //[self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    //显示在UI中
+//    NSIndexPath *index = [NSIndexPath indexPathForRow:3 inSection:0];
+//    NSArray *indexArrary = [NSArray arrayWithObjects:index,nil];
+//    //刷新指定行
+////    [self.PEtableview reloadRowsAtIndexPaths:indexArrary withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.PEtableview reloadData];
     //上传图片
     [self uploadinitWithImage:self.select_image];
@@ -688,7 +690,8 @@ bool edit;
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark---------------剪裁图片
@@ -1270,7 +1273,8 @@ bool edit;
     self.imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     self.imagePicker.allowsEditing = YES;
     [[UIApplication sharedApplication]setStatusBarHidden:YES];
-    [self presentModalViewController:self.imagePicker animated:YES];
+   // [self presentModalViewController:self.imagePicker animated:YES];
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
 
 }
 - (IBAction)AddChainOnClick:(id)sender {

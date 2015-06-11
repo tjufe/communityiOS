@@ -10,7 +10,7 @@
 
 #import "UIViewController+Create.h"
 #import "APIAddress.h"
-
+#import "AppDelegate.h"
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
 #import "StatusTool.h"
@@ -178,7 +178,7 @@ NSInteger page_filter1 ;
     //imge
     NSString* URL=[[NSString alloc]init];
     URL =ptiem1.main_image_url;
-    NSString *img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,URL];
+    NSString *img_url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,URL];
     //包含中文字符的string转换为nsurl
     NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     if([URL isEqualToString:@""] ||[URL isEqualToString:@"''"]){

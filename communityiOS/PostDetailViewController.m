@@ -26,6 +26,7 @@
 #import "ChainToWebViewController.h"
 #import "MBProgressHUD.h"
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 
 
@@ -761,7 +762,7 @@ bool isModerator = NO;//是否是版主
 
 }
 -(void)loadPosterHead{
-    NSString *url = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,self.head_portrait_url];
+    NSString *url = [NSString stringWithFormat:@"%@/uploadimg/%@",API_HOST,self.head_portrait_url];
     
     [self.posterCell.headPortrait sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
@@ -770,7 +771,7 @@ bool isModerator = NO;//是否是版主
     }];
 }
 -(void)loadMainImage{
-    NSString *url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.main_image_url];
+    NSString *url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,self.main_image_url];
     
     [self.postImageCell.MainImage sd_setImageWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         

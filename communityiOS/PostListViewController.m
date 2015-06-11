@@ -25,6 +25,7 @@
 
 #import "NewPostEditViewController.h"
 #import "PostMendDetailViewController.h"
+#import "AppDelegate.h"
 
 
 
@@ -254,7 +255,7 @@ NSInteger page_filter;
     NSString* URL=[[NSString alloc]init];
     URL =[postImageData objectAtIndex:indexPath.row];
 
-    NSString *img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,URL];
+    NSString *img_url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,URL];
 
      //包含中文字符的string转换为nsurl
      NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

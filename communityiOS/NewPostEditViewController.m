@@ -19,7 +19,7 @@
 #import "editPostItem.h"
 #import "newPostItem.h"
 #import "PostMendDetailViewController.h"
-
+#import "AppDelegate.h"
 
 
 @interface NewPostEditViewController ()<UIImagePickerControllerDelegate,UITextFieldDelegate>
@@ -30,7 +30,7 @@
 @property(strong,nonatomic) UIView *v;
 @property(strong,nonatomic) UITextField *postLocationTextField;
 @property(strong,nonatomic) UIView *v3;
-@property(strong,nonatomic) UITextView *postContentTextView;
+@property(retain,nonatomic) UITextView *postContentTextView;
 @property(strong,nonatomic) UITextField *reporterNameTextField;
 @property(strong,nonatomic) UITextField *reporterPhoneTextField;
 @property(strong,nonatomic) UIView *v2;
@@ -41,14 +41,10 @@
 @property (strong,nonatomic) UIView *v4;//外链层
 @property (strong,nonatomic) UILabel *chain_name;
 @property (strong,nonatomic) UILabel *chain_address;
-
-
 @property (nonatomic,strong)UIBarButtonItem *rightItem;
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
-
 @property (strong,nonatomic)UIView *addchain;
 @property (strong,nonatomic)UIView *maskview;
-
 @property (strong,nonatomic) NSString * isCheck;
 @property (strong,nonatomic) NSString * isMainImg;
 @property (strong,nonatomic) NSString * isChain;
@@ -85,7 +81,8 @@ NSString  *alert_flag;
     CGSize size = CGSizeMake(300, 150);
     self.select_img = [self scaleToSize:chosenImage size:size];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     //显示在UI中
     self.postMainPicImageView.image = self.select_img;
     self.postMainPicImageView.hidden = NO;
@@ -104,7 +101,8 @@ NSString  *alert_flag;
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark---------------剪裁图片
@@ -406,7 +404,8 @@ NSString  *alert_flag;
     self.imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     self.imagePicker.allowsEditing = YES;
     [[UIApplication sharedApplication]setStatusBarHidden:YES];
-    [self presentModalViewController:self.imagePicker animated:YES];
+//    [self presentModalViewController:self.imagePicker animated:YES];
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
 
 }
 
@@ -689,7 +688,7 @@ NSString  *alert_flag;
     self.forumNameLabel = [[UILabel alloc]init];
     self.forumNameLabel.text = _forum_item.forum_name;
     self.forumNameLabel.font = font;
-    self.forumNameLabel.textAlignment = UITextAlignmentCenter;
+    self.forumNameLabel.textAlignment = NSTextAlignmentCenter;
     self.forumNameLabel.frame = CGRectMake(0, 0, self.view.frame.size.width, 70);
 }
 
@@ -704,7 +703,7 @@ NSString  *alert_flag;
     self.postTitleTextField.placeholder = @"请输入标题……";
     }
     self.postTitleTextField.font = self.forumNameLabel.font;
-    self.postTitleTextField.textAlignment = UITextAlignmentLeft;
+    self.postTitleTextField.textAlignment = NSTextAlignmentLeft;
     self.postTitleTextField.frame = CGRectMake(8, 0, self.view.frame.size.width-8, 30);
     self.v= [[UIView alloc]init];
     self.v.frame = CGRectMake(0, self.forumNameLabel.frame.size.height, self.view.frame.size.width, self.postTitleTextField.frame.size.height);
@@ -729,7 +728,7 @@ NSString  *alert_flag;
     self.postLocationTextField.placeholder = @"请输入故障地点……";
     }
     self.postLocationTextField.font = self.forumNameLabel.font;
-    self.postLocationTextField.textAlignment = UITextAlignmentLeft;
+    self.postLocationTextField.textAlignment = NSTextAlignmentLeft;
     self.postLocationTextField.frame = CGRectMake(8, 0, self.view.frame.size.width-8, 30);
     self.v3= [[UIView alloc]init];
     self.v3.frame = CGRectMake(0, self.v.frame.origin.y+self.v.frame.size.height, self.view.frame.size.width, self.postLocationTextField.frame.size.height);
@@ -793,7 +792,7 @@ NSString  *alert_flag;
     self.postContentTextView = [[UITextView alloc]init];
     self.postContentTextView.delegate = self;
     self.postContentTextView.font = self.forumNameLabel.font;
-    self.postContentTextView.textAlignment = UITextAlignmentLeft;
+    self.postContentTextView.textAlignment = NSTextAlignmentLeft;
     self.postContentTextView.frame = CGRectMake(4,self.sv.frame.origin.y+self.sv.frame.size.height, self.view.frame.size.width-4, 30);
     self.postContentTextView.delegate = self;
     self.postContentTextView.text = @"其他故障类型描述：";
@@ -822,7 +821,7 @@ NSString  *alert_flag;
     self.reporterNameTextField.placeholder = @"请输入联系人姓名……";
     }
     self.reporterNameTextField.font = self.forumNameLabel.font;
-    self.reporterNameTextField.textAlignment = UITextAlignmentLeft;
+    self.reporterNameTextField.textAlignment = NSTextAlignmentLeft;
     self.reporterNameTextField.frame = CGRectMake(8, 0, self.view.frame.size.width-8, 30);
     self.v2= [[UIView alloc]init];
     self.v2.frame = CGRectMake(0,self.postContentTextView.frame.origin.y+self.postContentTextView.frame.size.height, self.view.frame.size.width, 60);
@@ -846,7 +845,7 @@ NSString  *alert_flag;
       self.reporterPhoneTextField.placeholder = @"请输入联系人电话……";
     }
     self.reporterPhoneTextField.font = self.forumNameLabel.font;
-    self.reporterPhoneTextField.textAlignment = UITextAlignmentLeft;
+    self.reporterPhoneTextField.textAlignment = NSTextAlignmentLeft;
     self.reporterPhoneTextField.frame = CGRectMake(8, 30, self.view.frame.size.width-8, 30);
     [self.v2 addSubview:self.reporterPhoneTextField];
 }
@@ -856,7 +855,7 @@ NSString  *alert_flag;
     self.postMainPicImageView.frame = CGRectMake(0, self.v2.frame.origin.y+self.v2.frame.size.height, self.view.frame.size.width, 158);
     if([_ED_FLAG isEqualToString:@"2"]){
         if(![_post_item.main_image_url isEqualToString:@""]&&_post_item.main_image_url!=nil){
-            NSString *img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,self.select_img_name];
+            NSString *img_url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,self.select_img_name];
             
             //包含中文字符的string转换为nsurl
             NSURL *iurl = [NSURL URLWithString:[img_url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

@@ -1,4 +1,5 @@
 
+
 //
 //  ViewController.m
 //  communityiOS
@@ -31,6 +32,8 @@
 #import "JpushConfig.h"
 #import "PostMendDetailViewController.h"
 #import "APService.h"
+#import "AddressGetter.h"
+#import "AppDelegate.h"
 
 
 
@@ -64,6 +67,7 @@
 @implementation ViewController
 
 NSArray *forum;
+bool alreadyGetAddress = NO;
 
 #pragma mark----获取版块信息
 +(NSArray *)getForumList{
@@ -104,32 +108,48 @@ NSArray *forum;
 - (IBAction)go2Login:(id)sender {
     
     LoginNavigationController *vc=[LoginNavigationController createFromStoryboardName:@"Login" withIdentifier:@"loginACT"];
-    [self presentModalViewController:vc animated:YES];
+//    [self presentModalViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.navigationController.delegate=self;
     UIBarButtonItem *temporaryBarButtonItem=[[UIBarButtonItem alloc] init];
     temporaryBarButtonItem.title=@"";
     self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-  
     self.navigationController.delegate=self;
-    
     self.hud = [[MBProgressHUD alloc]initWithView:self.view];
     [self.view addSubview:self.hud];
     self.hud.dimBackground = YES;
     [self.hud show:YES];
-    [self initSlide];
-    [self addTimer];
-    [self autoLogin];
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:API_ROOT_HOST parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+        myDelegate.address = [NSString stringWithFormat:@"%@",responseObject[@"com.communityservice"]];
+        alreadyGetAddress =YES;
+
+        
+        [self initSlide];
+        [self addTimer];
+        [self autoLogin];
+        //
+        [self clearExtraLine:self.mainTableView];
+        
+        [self reloadUserStateBarUI];//刷新用户状态栏UI
+        [self reloadData];
     
-    [self clearExtraLine:self.mainTableView];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    
     
     [APService setTags:nil alias:[[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpToPostDetail:) name:@"JpushJump" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jumpToPostDetail:) name:@"JpushJump" object:nil];
 }
 
 -(void)tagsAliasCallback:(int)iResCode
@@ -139,23 +159,23 @@ NSArray *forum;
     NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
--(void)jumpToPostDetail:(NSNotification *)notification{
-    
-    id userInfo = notification.object;
-    NSString *type = [userInfo valueForKey:@"notifyType"];
-    NSString *post_id = [userInfo valueForKey:@"postID"];
-    if ([type isEqualToString:NOTIFY_TYPE_NEW_POST]) {
-        PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
-        postVc.postIDFromOutside = post_id;
-        [self.navigationController pushViewController:postVc animated:YES];
-    }else if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_POST]||[type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]){
-        PostMendDetailViewController *pmVc = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
-        pmVc.postIDFromOutside = post_id;
-        [self.navigationController pushViewController:pmVc animated:YES];
-    }
-        
-
-}
+//-(void)jumpToPostDetail:(NSNotification *)notification{
+//    
+//    id userInfo = notification.object;
+//    NSString *type = [userInfo valueForKey:@"notifyType"];
+//    NSString *post_id = [userInfo valueForKey:@"postID"];
+//    if ([type isEqualToString:NOTIFY_TYPE_NEW_POST]) {
+//        PostDetailViewController *postVc = [PostDetailViewController createFromStoryboardName:@"PostDetailStoryboard" withIdentifier:@"postDetail"];
+//        postVc.postIDFromOutside = post_id;
+//        [self.navigationController pushViewController:postVc animated:YES];
+//    }else if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_POST]||[type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]){
+//        PostMendDetailViewController *pmVc = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
+//        pmVc.postIDFromOutside = post_id;
+//        [self.navigationController pushViewController:pmVc animated:YES];
+//    }
+//        
+//
+//}
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -198,7 +218,7 @@ NSArray *forum;
                 //        设置frame
                 imageView.frame = CGRectMake(imageX, imageY, imageW, imageH);
                 //        设置图片
-                NSString *urlStr = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,row.main_image_url];
+                NSString *urlStr = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,row.main_image_url];
                 NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)urlStr, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
                 NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
                 [imageView sd_setImageWithURL:portraitDownLoadUrl placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -248,7 +268,7 @@ NSArray *forum;
 -(void)GoThisPost:(UIGestureRecognizer *)gestureRecognizer
 {
     UIImageView *view = [gestureRecognizer view];
-    NSInteger *index = view.tag;
+    NSInteger index = view.tag;
     SlideInfoItem *s = [self.listSlide objectAtIndex:index];
     //查找所属forum lx 20150603
     forumItem *f1;
@@ -529,9 +549,10 @@ NSArray *forum;
 #pragma mark --在视图间切换时，并不会再次载入viewDidLoad方法，所以如果在调入视图时，需要对数据做更新，就只能在这个方法内实现了。所以这个方法也非常常用。hmx
 - (void)viewWillAppear:(BOOL)animated {
         [super viewWillAppear:(BOOL)animated];
-
+    if(alreadyGetAddress){
         [self reloadUserStateBarUI];//刷新用户状态栏UI
         [self reloadData];
+    }
 
     
 }
@@ -655,7 +676,7 @@ NSArray *forum;
         if (fileExits) {
             self.avaterImageView.image = [UIImage imageWithContentsOfFile:fullPathToFile];
         } else {
-            NSString *str = [NSString stringWithFormat:@"%@%@",API_HEAD_PIC_PATH,headPortraitUrl];
+            NSString *str = [NSString stringWithFormat:@"%@/uploadimg/%@",API_HOST,headPortraitUrl];
             NSString* escapedUrlString= (NSString*) CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)str, NULL,CFSTR("!*'();@&=+$,?%#[]-"), kCFStringEncodingUTF8 ));
             NSURL *portraitDownLoadUrl = [NSURL URLWithString:escapedUrlString];
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -705,7 +726,7 @@ NSArray *forum;
     forumItem *item = [_listForumItem objectAtIndex:indexPath.row];
     [cell setForumName:item.forum_name];
     
-    NSString *main_img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,item.image_url];//字符串拼接
+    NSString *main_img_url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,item.image_url];//字符串拼接
     [cell setForumIconImage:main_img_url];
     
     //lx 20150513
@@ -751,7 +772,7 @@ NSArray *forum;
             cell.forumNameLabel.text = row.forum_name;
             
             //设置版块主图URL
-            NSString *main_img_url = [NSString stringWithFormat:@"%@%@",API_TOPIC_PIC_PATH,row.image_url];//字符串拼接
+            NSString *main_img_url = [NSString stringWithFormat:@"%@/topicpic/%@",API_HOST,row.image_url];//字符串拼接
             cell.forumIconURLStr = main_img_url;
             
             [scrollView addSubview:cell];

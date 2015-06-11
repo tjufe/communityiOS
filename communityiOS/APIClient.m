@@ -7,6 +7,8 @@
 //
 
 #import "APIClient.h"
+#import "AddressGetter.h"
+#import "AppDelegate.h"
 
 
 @implementation APIClient
@@ -22,6 +24,7 @@
         [_sharedClient.requestSerializer setValue:@"2" forHTTPHeaderField:@"Accept"];
     });
     return _sharedClient;
+    
 }
 
 @end

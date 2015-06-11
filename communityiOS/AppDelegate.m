@@ -15,11 +15,15 @@
 #import "PostReplyViewController.h"
 #import "JpushConfig.h"
 #import "DemoViewController.h"
-#import "JpushJump.h"
 #import "Reachability.h"
 #import "MBProgressHUD.h"
 #import "UIAlertView+Blocks.h"
-
+#import "StatusTool.h"
+#import "postItem.h"
+#import "APIClient.h"
+#import "APIAddress.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "AddressGetter.h"
 
 
 @interface AppDelegate ()
@@ -29,6 +33,7 @@
 @property (assign, nonatomic) BOOL shouldJumpToPostMendDetail;
 @property (assign, nonatomic) BOOL shouldJumpToPostMendReply;
 @property (assign, nonatomic) BOOL shouldAlertRefuse;
+@property (strong, nonatomic) postItem *post_item;
 
 
 @end
@@ -37,15 +42,20 @@
 @implementation AppDelegate
 
 
++(NSString *)getServerAddress {
+    AppDelegate *myDelegate = [[UIApplication sharedApplication] delegate];
+    NSLog(@"^^^^^%@",[NSString stringWithFormat:@"http://%@",myDelegate.address ]);
+    return [NSString stringWithFormat:@"http://%@",myDelegate.address ];
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+
     UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:self.window.rootViewController];
-    
     PPRevealSideViewController *sideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
     self.window.rootViewController = sideViewController;
 
-    
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
@@ -68,11 +78,8 @@
     // Required
     [APService setupWithOption:launchOptions];
     
-    
     return YES;
 }
-
-
 
 #pragma mark-
 #pragma mark-----------------------JPush------------------------------------------
@@ -102,9 +109,10 @@
 }
 
 -(void)jump2PostMenddetailWithPostID:(NSString *)post_id{
-    if (post_id > 0) {
+    if (post_id.length > 0) {
         PostMendDetailViewController *pmdVc = [PostMendDetailViewController createFromStoryboardName:@"PostMendDetail" withIdentifier:@"postMendDetail"];
         pmdVc.postIDFromOutside = post_id;
+        pmdVc.postitem = self.post_item;
         UIButton *btn = [UIButton buttonWithType: UIButtonTypeCustom];
         btn.frame = CGRectMake(0, 20, 10, 20);
         [btn setImage:[UIImage imageNamed:@"back"] forState: UIControlStateNormal];
@@ -140,6 +148,18 @@
     NSLog(@"%@",userInfo);
     NSString *type = [userInfo valueForKey:@"notifyType"];
     NSString *alert = userInfo[@"aps"][@"alert"];
+    NSString *post_id;
+    if (![type isEqualToString:NOTIFY_TYPE_REFUSE]) {
+        post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
+        [StatusTool statusToolGetPostInfoWithPostID:post_id Success:^(id object) {
+            
+            self.post_item = (postItem *)object;
+            
+        } failurs:^(NSError *error) {
+            //
+        }];
+    }
+
     if (showAlert) {
         [UIAlertView showAlertViewWithTitle:@"提示" message:alert cancelButtonTitle:@"取消"otherButtonTitles:@[@"确定前往"] onDismiss:^(int buttonIndex) {
             if (buttonIndex == 0) {
@@ -158,7 +178,7 @@
                     //        self.shouldJumpToPostMendDetail = NO;
                 }if ([type isEqualToString:NOTIFY_TYPE_NEW_REPAIR_REPLY]) {
                     //        if (!self.shouldJumpToPostMendReply) {
-                    NSString *post_id = [[NSString alloc]initWithString:userInfo[@"postID"]];
+                   
                     [self jump2PostMenddetailWithPostID:post_id];
                     //        }
                     //        self.shouldJumpToPostMendReply = NO;
@@ -182,6 +202,7 @@
         } onCancel:^{
             
         }];
+        [APService resetBadge];
     }
 }
     

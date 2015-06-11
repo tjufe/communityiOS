@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ChainTableViewCell : UITableViewCell
-- (IBAction)chainOnclick:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btChain;
 
 @end
