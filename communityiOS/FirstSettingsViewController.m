@@ -40,7 +40,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *strUserPermission = [defaults valueForKey:@"UserPermission"];
     if(strUserPermission!=nil){
-        if([strUserPermission compare:@"认证用户"] == NSOrderedSame){
+        if([strUserPermission compare:@"认证用户"] == NSOrderedSame){//两个字符串一样
             self.authLabel.text = @"已认证";
             [self.authButton setEnabled:NO];
         }
@@ -170,10 +170,10 @@
 #pragma mark -------------------------从本地读取头像图片
 -(UIImage *)loadImageOfDoc{
     
-    NSString *user_id = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    NSString *user_id = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];//获取user－id
     NSString * userPortraitImage = [[NSString alloc]initWithFormat:@"%@.jpg",user_id ];
     NSString* documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:userPortraitImage];//附加路径成分，在documentsDirectory后面加一个字符串
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL fileExits = [fileManager fileExistsAtPath:fullPathToFile];
     if (fileExits) {
